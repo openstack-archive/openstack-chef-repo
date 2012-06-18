@@ -2,7 +2,7 @@ Description
 ===========
 This repository will soon contain the documentation, roles, environments and data bags for deploying the OpenStack reference architecture using Chef. Please refer to the `essex` branch for work being done the current stable release.
 
-This Chef repository is intended for deploying stable releases and will initially only support `Essex`, but `Folsom` support will be worked on once the `essex` branch is fairly stable and supporting milestone releases becomes practical.
+This Chef repository is intended for deploying stable releases and will initially only support **Essex**, but **Folsom** support will be worked on once the `essex` branch is fairly stable and supporting milestone releases becomes practical.
 
 License
 =======
