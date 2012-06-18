@@ -1,12 +1,12 @@
 Description
 ===========
-This repository will soon contain the documentation, roles, environments and data bags for deploying an OpenStack `Essex` reference architecture using Chef.
+This repository contains documentation, roles, environments and data bags for deploying an OpenStack `Essex` reference architecture using Chef.
 
-There will be a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (and their versions), roles, data bags and environments required to deploy OpenStack. The intention is to only depend on publicly available community versions of cookbooks so the openstack-chef-repo will not contain any cookbooks (it is possible we will temporarily keep patched versions waiting for upstream to publish). The manifest will also document a variety of deployment techniques for single-node, small and large deployments.
+Please use this `essex` branch to get the latest stable release. The `master` branch will remain empty until work begins on the `Folsom` pre-release. After `Folsom` is branched in OpenStack, it will get its own Git branch as well.
+
+There is a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (and their versions), roles, data bags and environments required to deploy OpenStack. The intention is to only depend on publicly available community versions of cookbooks so the openstack-chef-repo will not contain any cookbooks (it is possible we will temporarily keep patched versions waiting for upstream to publish). The manifest will also document a variety of deployment techniques for single-node, small and large deployments.
 
 This README.md will become a canonical source of documentation and there will be an additional `documentation` directory in the repository with more detailed instructions.
-
-This Chef repository is intended for deploying stable releases and will initially only support `Essex`, but `Folsom` support will be worked on once `Essex` is fairly stable and supporting milestone releases becomes practical.
 
 License
 =======
