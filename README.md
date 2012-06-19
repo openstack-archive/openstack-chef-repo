@@ -12,31 +12,36 @@ Cookbooks
 =========
 The cookbooks have been designed and written in such a way that they can be used to deploy individual service components on _any_ of the nodes in the infrastructure; in short they can be used for single node 'all-in-one' installs (for testing), right up to multi/many node production installs. In order to achieve this flexibility, they make use of the [chef search](http://wiki.opscode.com/display/chef/Search) functionality, and therefore require that if you are deploying anything larger than a single node deployment, you use [chef server](http://wiki.opscode.com/display/chef/Chef+Server) to host your cookbooks rather than using Chef Solo.
 
-Each of the OpenStack services has its own cookbook and is available on the Chef Community site and on GitHub. Please refer to the [documentation](documentation/) directory for more details on each.
+Each of the OpenStack services has its own cookbook and is available on the Chef Community site and on GitHub. Please refer to the `documentation` directory for more details on each.
 
 Nova
 ----
 http://community.opscode.com/cookbooks/nova
+
 http://github.com/mattray/nova
 
 Glance
 ------
 http://community.opscode.com/cookbooks/glance
+
 http://github.com/mattray/glance
 
 Keystone
 --------
 http://community.opscode.com/cookbooks/keystone
+
 http://github.com/mattray/keystone
 
 Horizon
 --------
 http://community.opscode.com/cookbooks/horizon
+
 http://github.com/mattray/horizon
 
 Swift
 -----
 http://community.opscode.com/cookbooks/swift
+
 http://github.com/mattray/swift
 
 License
