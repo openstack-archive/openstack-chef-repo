@@ -1,10 +1,26 @@
 cookbooks:
-- openssh:
-  - 0.8.0
+- chef_handler: #used by windows
+  - 1.0.6
 - ntp:
   - 1.1.8
+- openssh:
+  - 0.8.0
+- openssl: #used by mysql
+  - 1.0.0
+- windows: #used by mysql
+  - 1.3.0
+- mysql:
+  - 1.2.6
+
 environments:
+
 data bags:
+
 roles:
   - base:
+  - allinone:
+  - mysql-master:
+  - single-compute:
+  - single-controller:
+
 nodes:
