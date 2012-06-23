@@ -1,24 +1,38 @@
 cookbooks:
-- apt: #used by erlang
-  - 1.4.2
-- yum: #used by erlang
-  - 0.6.2
-- chef_handler: #used by windows
-  - 1.0.6
 - ntp: #used by base role
   - 1.1.8
 - openssh: #used by base role
   - 0.8.0
+- apt: #used by erlang
+  - 1.4.2
+- yum: #used by erlang
+  - 0.6.2
+- build-essential: # http://tickets.opscode.com/browse/COOK-1296 for building 'mysql'
+  - 1.0.2
+- erlang: #used by rabbitmq-server role
+  - 1.0.0
+- rabbitmq: #used by rabbitmq-server role
+  - 1.4.1
 - openssl: #used by mysql
   - 1.0.0
+- chef_handler: #used by windows
+  - 1.0.6
 - windows: #used by mysql
   - 1.3.0
 - mysql: #used by mysql-master role
   - 1.2.6
-- erlang: #used by rabbitmq
+- postgresql: #required by database
+  - 0.99.4
+- aws: #required by database
+  - 0.99.1
+- xfs: #required by database
   - 1.0.0
-- rabbitmq: #used by rabbitmq-server role
-  - 1.4.0
+- database: #required by keystone
+  - 1.2.0
+- osops-utils: #required by keystone
+  - 1.0.2
+- keystone: #used by keystone role
+  - 5.0.0
 
 environments:
 
@@ -26,8 +40,11 @@ data bags:
 
 roles:
   - base:
+  - os-database:
+  - os-networks:
   - mysql-master:
   - rabbitmq-server:
+  - keystone:
   - single-compute:
   - single-controller:
   - allinone:

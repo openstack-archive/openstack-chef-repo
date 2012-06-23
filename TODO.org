@@ -1,9 +1,11 @@
-# TODO #
-* branches for Essex, metadata.rb
 * roles
 ** base
-** start with database, mysql
-** messaging-> rabbitmq
+   remove validator.pem
+   chef-client?
+** rabbitmq-server
+   switch to "messaging" role
+** mysql-master
+   need to switch to using a database role and the database cookbook
 ** keystone
 ** glance
 ** nova config/setup
@@ -15,10 +17,31 @@
 ** nova::volume
 ** nova::project
 ** horizon
+* cookbooks
+** RabbitMQ
+   http://tickets.opscode.com/browse/COOK-1386
+   in the repo until this gets merged and released upstream
+** MySQL
+   since we're using the chef-full installer, we ran into the inability to use the mysql gem properly
+   http://tickets.opscode.com/browse/COOK-1009
+** Keystone
+   remove monitoring
+   understand use of osops
+   why is there a sleep?
+   gotta think Fog is a better solution to some of the Keystone manipulations
+   switch default to client and move client code from nova/swift/glance/horizon
+** OSOps
+   should this be a data bag?
+   need to read through this thoroughly to understand purpose
+** Nova
+  rabbit setup seems naive
+   Break out hypervisor support into separate cookbooks
+* cleanup
+  Rackspace->Rackspace Hosting, Inc.
+  merge RabbitMQ upstream
+  merge MySQL upstream
 * Document source of packages for all repos
 * Diagram for Role/Cookbook relationships
-* rabbit setup seems naive
-* Break out hypervisor support into separate cookbooks
 * XenServer support
 * LXC support
 * Hyper-V support

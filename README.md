@@ -4,9 +4,9 @@ This repository contains documentation, roles, environments and data bags for de
 
 Please use this `essex` branch to get the latest stable release. The `master` branch will remain empty until work begins on the **Folsom** pre-release. After **Folsom** is branched in OpenStack, it will get its own `folsom` Git branch as well.
 
-This will be a canonical source of documentation and there will be an additional `documentation` directory in the repository with more detailed instructions.
+This is a canonical source of documentation and there is additional content in the `documentation` directory in this repository.
 
-There is a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (and their versions), roles, data bags and environments required to deploy OpenStack. The intention is to only depend on publicly available community versions of cookbooks so the openstack-chef-repo will not contain any cookbooks (it is possible we will temporarily keep patched versions waiting for upstream to publish). The manifest will also document a variety of deployment techniques for single-node, small and large deployments.
+There is a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (and their versions), roles, data bags and environments required to deploy OpenStack. The intention is to only depend on publicly available community versions of cookbooks so the openstack-chef-repo will not contain any cookbooks (there may temporarily be patched versions waiting for upstream to publish). The manifest will also document a variety of deployment techniques for single-node, small and large deployments.
 
 Cookbooks
 =========
