@@ -2,8 +2,12 @@
 ** base
    remove validator.pem
    chef-client?
+** os-database
+   document this
+** os-networks
+   document this
 ** rabbitmq-server
-   switch to "messaging" role
+   rename to "messaging" role
 ** mysql-master
    need to switch to using a database role and the database cookbook
 ** keystone
@@ -28,25 +32,44 @@
    remove monitoring
    understand use of osops
    why is there a sleep?
+   tag and release 5.0.0
    gotta think Fog is a better solution to some of the Keystone manipulations
    switch default to client and move client code from nova/swift/glance/horizon
 ** OSOps
    should this be a data bag?
    need to read through this thoroughly to understand purpose
+** Glance
 ** Nova
-  rabbit setup seems naive
+   rabbit setup seems naive
    Break out hypervisor support into separate cookbooks
-* cleanup
+   tag and release 5.0.0
+** Horizon
+** Swift
+* Document source of packages for all repos
+* Diagrams for Role/Cookbook relationships
+* Technical Debt
   Rackspace->Rackspace Hosting, Inc.
   merge RabbitMQ upstream
   merge MySQL upstream
-* Document source of packages for all repos
-* Diagram for Role/Cookbook relationships
-* XenServer support
-* LXC support
-* Hyper-V support
-* PostgreSQL support
-* RHEL support
-* Debian support
-* OpenSuSE/SLES support
-* Test IPv6 support
+  release and merge osops-utils
+  there are a lot of :upgrades for packages rather than :install, let's clean that up.
+* Open Questions
+** Do we planning on sticking with distro-repos and for how long? When and how do we start supporting Folsom milestones or source builds?
+** Are we deprecating supporting anything before Ubuntu 12.04/Debian 6/RHEL 6.2/Fedora 17?
+** Do we want to use Environments for anything?
+** Should we add kong and exerstack to the repo so people can validate their deployments?
+** How agressive should we be on not supporting earlier versions of Chef and Chef Solo?
+** Is there interest in supporting the EC2 API?
+** What features do we NOT plan on supporting?
+** We're going to want some CI and more testing for sure. FoodCritic, TravisCI and Jenkins?
+** should we be using Chef-Librarian?
+* Roadmap
+** XenServer support
+** LXC support
+** Hyper-V support
+** PostgreSQL support
+** Fedora support
+** RHEL support
+** Debian support
+** OpenSuSE/SLES support
+** IPv6 support
