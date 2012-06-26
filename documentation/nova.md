@@ -1,25 +1,61 @@
-base
-database
-rabbitmq
-keystone
-glance
-nova::setup
-    nova::common : packages, /etc/nova/ nova.conf .novarc
-    configure DB connection, create networks
-nova::scheduler
-nova::api
-nova::volume
-nova::vncproxy
-horizon
+Description
+===========
+The following roles are used in the deployment of the OpenStack Compute service **Nova** as part of the OpenStack **Essex** reference deployment using Chef.
 
-     "recipe[nova::config]",
-     "recipe[nova::mysql]",
-          "recipe[rabbitmq]",
-         "recipe[nova::rabbit]",
-         "recipe[nova::api]",
-         "recipe[nova::network]",
-         "recipe[nova::scheduler]",
-         "recipe[nova::vncproxy]",
-         "recipe[nova::volume]",
-         "recipe[nova::project]",
-         "recipe[nova::monitor]"
+Dependency Roles
+================
+
+base
+----
+Every Nova role depends on the `base` role included in the repository to ensure essential services (ntp, openssh, etc.).
+
+mysql-master
+------------
+roles and underlying recipes providing database services through MySQL required for Nova (and Keystone, Glance and Horizon).
+
+rabbitmq-server
+---------------
+roles and underlying recipes providing messaging services through RabbitMQ required for Nova (and Glance).
+
+os-database
+-----------
+expose and provide the attributes used for configuring Nova's database.
+
+os-network
+----------
+expose and provide the attributes used for configuring and defining Nova's network.
+
+Nova Roles
+==========
+
+allinone
+--------
+
+
+single-compute
+--------------
+
+
+single-controller
+-----------------
+
+
+nova-scheduler
+--------------
+
+
+nova-api-ec2
+------------
+
+
+nova-os-compute
+---------------
+
+
+nova-vncproxy
+-------------
+
+
+nova-volume
+-----------
+
