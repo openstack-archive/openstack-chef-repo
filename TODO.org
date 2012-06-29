@@ -9,7 +9,7 @@
 ** rabbitmq-server
    rename to "messaging" role
 ** mysql-master
-   need to switch to using a database role and the database cookbook
+   need to switch to using a "database" role and the database cookbook
 ** keystone
 ** glance
 ** nova config/setup
@@ -39,14 +39,24 @@
    should this be a data bag?
    need to read through this thoroughly to understand purpose
 ** Glance
+   make a glance::client for other cookbooks
 ** Nova
    rabbit setup seems naive
    Break out hypervisor support into separate cookbooks
    tag and release 5.0.0
 ** Horizon
+   tag and release 5.0.0
 ** Swift
-* Document source of packages for all repos
+   compare with Dell's implementation
+   make documentation more consistent with other cookbooks
+   tag and release 5.0.0
+* foodcritic all the cookbooks
+  bring in Etsy's rules too?
+* Document source of packages for all repos and break out to make them interchangeable
 * Diagrams for Role/Cookbook relationships
+  Keystone
+  Glance
+  Nova
 * Technical Debt
   Rackspace->Rackspace Hosting, Inc.
   merge RabbitMQ upstream
@@ -59,11 +69,15 @@
 ** Do we want to use Environments for anything?
 ** Should we add kong and exerstack to the repo so people can validate their deployments?
 ** How agressive should we be on not supporting earlier versions of Chef and Chef Solo?
-** Is there interest in supporting the EC2 API?
 ** What features do we NOT plan on supporting?
 ** We're going to want some CI and more testing for sure. FoodCritic, TravisCI and Jenkins?
 ** should we be using Chef-Librarian?
+** does search make sense for things like nova::common if you have 1000 compute nodes?
+   would a data bag be cleaner? perhaps a notification handler that automatically updates it?
+   as soon as the new search syntax is supported, switch to that
 * Roadmap
+** first 5.0.0 tagged cookbooks
+** QuickStart for Chef & OpenStack
 ** XenServer support
 ** LXC support
 ** Hyper-V support
