@@ -4,15 +4,15 @@ cookbooks:
 - openssh: #used by base role
   - 0.8.0
 - apt: #used by erlang
-  - 1.4.2
+  - 1.4.4
 - yum: #used by erlang
   - 0.6.2
-- build-essential: # http://tickets.opscode.com/browse/COOK-1296 for building 'mysql'
-  - 1.0.2
+- build-essential: # used by mysql
+  - 1.1.0
 - erlang: #used by rabbitmq-server role
   - 1.0.0
 - rabbitmq: #used by rabbitmq-server role
-  - 1.4.1
+  - 1.5.0
 - openssl: #used by mysql
   - 1.0.0
 - chef_handler: #used by windows
