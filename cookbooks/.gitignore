@@ -1,0 +1,14 @@
+ntp
+openssh
+apt
+yum
+build-essential
+erlang
+rabbitmq
+openssl
+chef_handler
+windows
+postgresql
+aws
+xfs
+database
