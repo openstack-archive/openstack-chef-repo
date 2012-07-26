@@ -2,7 +2,8 @@ name "base"
 description "Base role for a server"
 run_list(
   "recipe[openssh]",
-  "recipe[ntp]"
+  "recipe[ntp]",
+  "recipe[build-essential]"
 )
 default_attributes(
   "ntp" => {
