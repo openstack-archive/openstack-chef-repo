@@ -1,83 +1,86 @@
-* roles
-** base
-   remove validator.pem
-   chef-client?
-** os-database
-   document this
-** os-networks
-   document this
-** rabbitmq-server
-   rename to "messaging" role
-** mysql-master
-   need to switch to using a "database" role and the database cookbook
-** keystone
-** glance
-** nova config/setup
-** nova::compute
-** nova::scheduler
-** nova::api
-** nova::network
-** nova::vncproxy
-** nova::volume
-** nova::project
-** horizon
-* cookbooks
-** RabbitMQ
-   http://tickets.opscode.com/browse/COOK-1386
-   in the repo until this gets merged and released upstream
-** MySQL
-   since we're using the chef-full installer, we ran into the inability to use the mysql gem properly
-   http://tickets.opscode.com/browse/COOK-1009
-** Keystone
-   remove monitoring
-   understand use of osops
-   why is there a sleep?
-   tag and release 5.0.0
-   gotta think Fog is a better solution to some of the Keystone manipulations
-   switch default to client and move client code from nova/swift/glance/horizon
-** OSOps
-   should this be a data bag?
-   need to read through this thoroughly to understand purpose
-** Glance
-   make a glance::client for other cookbooks
-** Nova
-   rabbit setup seems naive
-   Break out hypervisor support into separate cookbooks
-   tag and release 5.0.0
-** Horizon
-   tag and release 5.0.0
-** Swift
-   compare with Dell's implementation
-   make documentation more consistent with other cookbooks
-   tag and release 5.0.0
-* foodcritic all the cookbooks
-  bring in Etsy's rules too?
-* Document source of packages for all repos and break out to make them interchangeable
-* Diagrams for Role/Cookbook relationships
-  Keystone
-  Glance
-  Nova
-* Technical Debt
-  Rackspace->Rackspace Hosting, Inc.
-  merge RabbitMQ upstream
-  merge MySQL upstream
-  release and merge osops-utils
-  there are a lot of :upgrades for packages rather than :install, let's clean that up.
-* Open Questions
-** Do we planning on sticking with distro-repos and for how long? When and how do we start supporting Folsom milestones or source builds?
-** Are we deprecating supporting anything before Ubuntu 12.04/Debian 6/RHEL 6.2/Fedora 17?
-** Do we want to use Environments for anything?
-** Should we add kong and exerstack to the repo so people can validate their deployments?
-** How agressive should we be on not supporting earlier versions of Chef and Chef Solo?
-** What features do we NOT plan on supporting?
-** We're going to want some CI and more testing for sure. FoodCritic, TravisCI and Jenkins?
-** should we be using Chef-Librarian?
-** does search make sense for things like nova::common if you have 1000 compute nodes?
-   would a data bag be cleaner? perhaps a notification handler that automatically updates it?
-   as soon as the new search syntax is supported, switch to that
+* CURRENT: QuickStart for Chef & OpenStack
+** add chefignore for .gitignores
+** rebase rcbops and compare
+** osops-utils
+** nova!
+** librarian-chef for spiceweasel
+** weekly status emails
+** sync with Calxeda Monday
+** QuickStart
+* backlog
+** remotefilemirror->pxe_dust and others?
+** checkout knife spaghetti-roles
+** roles
+*** base
+    remove validator.pem?
+    chef-client?
+*** os-database
+    document this
+*** os-networks
+    document this
+*** rabbitmq-server
+    http://tickets.opscode.com/browse/COOK-1496 drop the recipe[apt] once that's merged and released
+    rename to "messaging" role
+*** mysql-master
+    need to switch to using a "database" role and the database cookbook
+*** keystone
+*** nova config/setup
+*** nova::compute
+*** nova::scheduler
+*** nova::api
+*** nova::network
+*** nova::vncproxy
+*** nova::volume
+*** nova::project
+*** horizon
+
+** cookbooks
+*** rabbitmq
+    waiting on 1.5.1 with http://tickets.opscode.com/browse/COOK-1496
+*** build-essential
+    here for mysql
+*** mysql
+    since we're using the chef-full installer, we ran into the inability to use the mysql gem properly
+    http://tickets.opscode.com/browse/COOK-1009
+*** keystone
+    removed monitoring
+    understand use of osops
+    why is there a sleep?
+    tag and release 5.0.0
+    gotta think Fog is a better solution to some of the Keystone manipulations
+    need a keystone:client to wrap
+    package "python-keystone" do
+    action :install
+    end
+*** osops-utils
+    should this be a data bag?
+    need to read through this thoroughly to understand purpose
+*** glance
+    make a glance::client for other cookbooks
+*** nova
+    rabbit setup seems naive
+    Break out hypervisor support into separate cookbooks
+    tag and release 5.0.0
+*** horizon
+    tag and release 5.0.0
+*** swift
+    compare with Dell's implementation
+    make documentation more consistent with other cookbooks
+    tag and release 5.0.0
+** foodcritic all the cookbooks
+   bring in Etsy's rules too?
+** Document source of packages for all repos and break out to make them interchangeable
+** Diagrams for Role/Cookbook relationships
+   knife-spaghetti-roles
+   Keystone
+   Glance
+   Nova
 * Roadmap
-** first 5.0.0 tagged cookbooks
-** QuickStart for Chef & OpenStack
+** knife-rackspace v2, via fog or openstack
+** knife-hp, via fog or openstack
+
+** Testing, testing, testing
+** Folsom milestones
 ** XenServer support
 ** LXC support
 ** Hyper-V support
@@ -87,3 +90,42 @@
 ** Debian support
 ** OpenSuSE/SLES support
 ** IPv6 support
+* Open Questions
+** Do we planning on sticking with distro-repos and for how long? When and how do we start supporting Folsom milestones or source builds?
+** Are we deprecating supporting anything before Ubuntu 12.04/Debian 6/RHEL 6.2/Fedora 17?
+** Do we want to use Environments for anything?
+** Should we add kong and exerstack to the repo so people can validate their deployments?
+** How agressive should we be on not supporting earlier versions of Chef and Chef Solo?
+** What features do we NOT plan on supporting?
+** We're going to want some CI and more testing for sure. FoodCritic, Test-Kitchen and TravisCI?
+** does search make sense for things like nova::common if you have 1000 compute nodes?
+   would a data bag be cleaner? perhaps a notification handler that automatically updates it?
+   as soon as the new search syntax is supported, switch to that (available now)
+* Technical Debt
+  Rackspace->Rackspace Hosting, Inc.
+  there are a lot of :upgrades for packages rather than :install, let's clean that up.
+  release and merge osops-utils
+  osops-utils as a stand-alone cookbook just for managing networks with Chef? LWRPs driven by a cookbook?
+* Weekly Status 7/27
+** Commiting to writing up the state of affairs and what's new.
+** Several conversations about future contributors, hoping to add them soon.
+** Engineering resources being dedicated to the work.
+** Crowbar meetings last week, should be helping them upstream supporting cookbooks.
+** Piston Computing verified that knife-openstack works with their solution.
+** OSCON presentation from last week.
+** potential DreamHost Chef for OpenStack Hackday?
+** potential Rackspace Chef for OpenStack Hackday?
+** Cookbook dependency updates
+*** apt 1.4.4 for automatic repo updates when adding
+*** build-essential 1.10 for compile-time installation of packages (used by mysql)
+*** rabbitmq 1.5.0 proper deps, daemonizing and future clustering
+*** mysql - still forked, waiting on new release with patch fixed
+*** osops-utils - still forked, merging up waiting on license clarification
+** Current state
+*** Keystone
+    essentially working, pretty straight port from Rackspace's set with monitoring and rsyslog removed
+*** Glance
+    essentially working, pretty straight port from Rackspace's set with monitoring and rsyslog removed
+*** rsyslog
+    temporarily removed for now, need to get with rcbops about upstreaming their patches since they're substantial
+    probably create an openstack-rsyslog cookbook and move everything into it

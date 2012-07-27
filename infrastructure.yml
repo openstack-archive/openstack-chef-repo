@@ -30,8 +30,10 @@ cookbooks:
 - database: #required by keystone
   - 1.2.0
 - osops-utils: #required by keystone
-  - 1.0.2
+  - 1.0.3
 - keystone: #used by keystone role
+  - 5.0.0
+- glance: #used by glance role
   - 5.0.0
 
 environments:
@@ -45,6 +47,9 @@ roles:
   - mysql-master:
   - rabbitmq-server:
   - keystone:
+  - glance-api:
+  - glance-registry:
+  - glance:
   - single-compute:
   - single-controller:
   - allinone:

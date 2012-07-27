@@ -27,6 +27,7 @@ expose and provide the attributes used for configuring and defining glance's net
 
 Glance Roles
 ============
+These roles are utilized by the osops-utils package for mapping ip addresses to services via search.
 
 glance-api
 ----------
