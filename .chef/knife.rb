@@ -4,12 +4,12 @@ user = ENV['OPSCODE_USER'] || ENV['USER']
 log_level                :info
 log_location             STDOUT
 node_name                user
-client_key               "#{ENV['HOME']}/.chef/#{user}.pem"
+client_key               "#{current_dir}/#{user}.pem"
 validation_client_name   "#{ENV['ORGNAME']}-validator"
-validation_key           "#{ENV['HOME']}/.chef/#{ENV['ORGNAME']}-validator.pem"
+validation_key           "#{current_dir}/#{ENV['ORGNAME']}-validator.pem"
 chef_server_url          "https://api.opscode.com/organizations/#{ENV['ORGNAME']}"
 cache_type               'BasicFile'
-cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
+cache_options( :path => "#{current_dir}/checksums" )
 cookbook_path            ["#{current_dir}/../cookbooks"]
 
 role_path                ["#{current_dir}/../roles"]
