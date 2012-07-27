@@ -1,3 +1,4 @@
+.chef/checksums/
 *.pem
 *.swo
 *.swp
