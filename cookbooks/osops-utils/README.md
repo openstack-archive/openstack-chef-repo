@@ -4,6 +4,7 @@ Description
 Miscellaneous library functions for OpenStack. This currently includes:
 
  * ip address location
+ * simple /etc/hosts manipulation
 
 Requirements
 ============
@@ -25,6 +26,18 @@ node['osops_networks']['management'] = 10.0.1.0/24
 ip = get_ip_for_net("localnet")  # returns 127.0.0.1
 
 ip = get_ip_for_net("management") # returns the address on management, or error
+
+autoetchosts
+
+Attributes
+==========
+
+none
+
+Usage
+=====
+
+include_recipe "osops::autoetchosts"
 
 License and Author
 ==================

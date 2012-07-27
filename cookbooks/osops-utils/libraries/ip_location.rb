@@ -1,5 +1,24 @@
 #!/usr/bin/env ruby
 
+#
+# Cookbook Name:: osops-utils
+# library:: ip_location
+#
+# Copyright 2012, Rackspace Hosting, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 require "chef/search/query"
 require "ipaddr"
 require "uri"
@@ -92,15 +111,15 @@ module RCB
     raise error
   end
 
-  def get_bind_endpoint(server, service, nodeish=nil)
+  def get_config_endpoint(server, service, nodeish=nil, partial = false)
     retval = {}
     nodeish = node unless nodeish
-
     if svc = rcb_safe_deref(nodeish, "#{server}.services.#{service}")
+      retval["network"] = svc["network"]
       retval["path"] = svc["path"] || "/"
       retval["scheme"] = svc["scheme"] || "http"
       retval["port"] = svc["port"] || "80"
-
+      
       # if we have an endpoint, we'll just parse the pieces
       if svc.has_key?("uri")
         uri = URI(svc["uri"])
@@ -111,13 +130,23 @@ module RCB
         retval["host"] = svc["host"]
         retval["uri"] = "#{retval['scheme']}://#{retval['host']}:#{retval['port']}"
         retval["uri"] += retval["path"]
-      else
-        # we'll get the network from the osops network
-        retval["host"] = Chef::Recipe::IPManagement.get_ip_for_net(svc["network"], nodeish)
-        retval["uri"] = "#{retval['scheme']}://#{retval['host']}:#{retval['port']}"
-        retval["uri"] += retval["path"]
       end
+    else
+      Chef::Log.info("No configured endpoint for #{server}/#{service}")
+      retval = nil unless partial
+    end
+    retval
+  end
+  
+  def get_bind_endpoint(server, service, nodeish=nil)
+    nodeish = node unless nodeish
+    retval = get_config_endpoint(server, service, nodeish, partial=true)
 
+    if not retval.empty?
+      # we'll get the network from the osops network
+      retval["host"] = Chef::Recipe::IPManagement.get_ip_for_net(retval["network"], nodeish)
+      retval["uri"] = "#{retval['scheme']}://#{retval['host']}:#{retval['port']}"
+      retval["uri"] += retval["path"]
       retval
     else
       Chef::Log.warn("Cannot find server/service #{server}/#{service}")
@@ -224,7 +253,11 @@ module RCB
   end
 
   def get_lb_endpoint(server, service)
-    rcb_exit_error("LB endpoints not yet defined")
+    if retval = get_config_endpoint(server,service)
+      retval
+    else
+      rcb_exit_error("No valid explicit configuration found for #{server}/#{service}")
+    end
   end
 end
 
@@ -258,11 +291,13 @@ class Chef::Recipe::IPManagement
 
     net = IPAddr.new(node["osops_networks"][network])
     node["network"]["interfaces"].each do |interface|
-      interface[1]["addresses"].each do |k,v|
-        if v["family"] == "inet6" or v["family"] == "inet" then
-          addr=IPAddr.new(k)
-          if net.include?(addr) then
-            return k
+      if interface[1].has_key?("addresses") then
+        interface[1]["addresses"].each do |k,v|
+          if v["family"] == "inet6" or v["family"] == "inet" then
+            addr=IPAddr.new(k)
+            if net.include?(addr) then
+              return k
+            end
           end
         end
       end
