@@ -78,7 +78,6 @@
 * Roadmap
 ** knife-rackspace v2, via fog or openstack
 ** knife-hp, via fog or openstack
-
 ** Testing, testing, testing
 ** Folsom milestones
 ** XenServer support
@@ -92,6 +91,8 @@
 ** IPv6 support
 * Open Questions
 ** Do we planning on sticking with distro-repos and for how long? When and how do we start supporting Folsom milestones or source builds?
+   move packages into nova-install recipe, key off of attribute to determine which technique to use to get all binaries in place used by other nova-* recipes (nova as example), source can be a version of this
+   keep a node['openstack']['version'] and node['openstack']['previous_version'] for upgrades, also node['nova']['version'] and node['nova']['previous_version'] for component-specific versioning
 ** Are we deprecating supporting anything before Ubuntu 12.04/Debian 6/RHEL 6.2/Fedora 17?
 ** Do we want to use Environments for anything?
 ** Should we add kong and exerstack to the repo so people can validate their deployments?
@@ -104,28 +105,19 @@
 * Technical Debt
   Rackspace->Rackspace Hosting, Inc.
   there are a lot of :upgrades for packages rather than :install, let's clean that up.
-  release and merge osops-utils
   osops-utils as a stand-alone cookbook just for managing networks with Chef? LWRPs driven by a cookbook?
-* Weekly Status 7/27
-** Commiting to writing up the state of affairs and what's new.
-** Several conversations about future contributors, hoping to add them soon.
-** Engineering resources being dedicated to the work.
-** Crowbar meetings last week, should be helping them upstream supporting cookbooks.
-** Piston Computing verified that knife-openstack works with their solution.
-** OSCON presentation from last week.
-** potential DreamHost Chef for OpenStack Hackday?
+* Weekly Status 8/3
+**  Goals for next week:
+*** nova deployed and working
+*** test using librarian-chef to manage mix of community and github-based cookbooks https://github.com/applicationsonline/librarian
+*** push openstack cookbooks to community site and Opscode github repos
+*** start on the Quick Start for Chef and OpenStack
+** DreamHost Chef for OpenStack Hackday August 21 in Los Angeles
 ** potential Rackspace Chef for OpenStack Hackday?
-** Cookbook dependency updates
-*** apt 1.4.4 for automatic repo updates when adding
-*** build-essential 1.10 for compile-time installation of packages (used by mysql)
-*** rabbitmq 1.5.0 proper deps, daemonizing and future clustering
+** onsite with Calxeda
+** Hyper-V support coming soon
+   http://eavesdrop.openstack.org/meetings/openstack-meeting/2012/openstack-meeting.2012-07-31-15.00.html
+** cookbooks
 *** mysql - still forked, waiting on new release with patch fixed
 *** osops-utils - still forked, merging up waiting on license clarification
-** Current state
-*** Keystone
-    essentially working, pretty straight port from Rackspace's set with monitoring and rsyslog removed
-*** Glance
-    essentially working, pretty straight port from Rackspace's set with monitoring and rsyslog removed
-*** rsyslog
-    temporarily removed for now, need to get with rcbops about upstreaming their patches since they're substantial
-    probably create an openstack-rsyslog cookbook and move everything into it
+*** sysctl
