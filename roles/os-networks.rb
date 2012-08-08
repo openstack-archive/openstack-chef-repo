@@ -4,14 +4,14 @@ description "Define the networks you're going to use with OpenStack. These will 
 override_attributes(
   "osops_networks" => {
     "public" => "10.0.111.0/24",
-    "management" => "192.168.1.0/24",
+    "management" => "10.0.200.0/24",
     "nova" => "10.0.111.0/24"
   },
   "nova" => {
     "networks" => [
       {
         "label" => "public",
-        "ipv4_cidr" => "10.0.100.0/24",
+        "ipv4_cidr" => "192.168.100.0/24",
         "num_networks" => "1",
         "network_size" => "255",
         "bridge" => "br100",
@@ -21,7 +21,7 @@ override_attributes(
       },
       {
         "label" => "private",
-        "ipv4_cidr" => "10.0.200.0/24",
+        "ipv4_cidr" => "192.168.200.0/24",
         "num_networks" => "1",
         "network_size" => "255",
         "bridge" => "br101",
