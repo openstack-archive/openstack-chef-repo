@@ -1,0 +1,117 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    aws (0.99.1)
+    build-essential (1.1.0)
+    database (1.2.0)
+      aws (>= 0.0.0)
+      mysql (>= 1.2.0)
+      postgresql (>= 0.0.0)
+      xfs (>= 0.0.0)
+    erlang (1.0.0)
+      yum (>= 0.5.0)
+    ntp (1.1.8)
+    openssh (0.8.0)
+    openssl (1.0.0)
+    postgresql (0.99.4)
+      openssl (>= 0.0.0)
+    xfs (1.0.0)
+    yum (0.6.2)
+
+GIT
+  remote: https://github.com/mattray/apt.git
+  ref: COOK-1530
+  sha: 743989eb614d55b5561671911d669d3bff66920e
+  specs:
+    apt (1.4.5)
+
+GIT
+  remote: https://github.com/mattray/glance.git
+  ref: essex
+  sha: 6903b45981d3b6b8785bae6c17117aed48e8b02f
+  specs:
+    glance (5.0.0)
+      database (>= 0.0.0)
+      keystone (>= 0.0.0)
+      mysql (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/keystone.git
+  ref: essex
+  sha: 40ddc3852c17a48e514ee7e161a5b936c1f08f37
+  specs:
+    keystone (5.0.0)
+      database (>= 0.0.0)
+      mysql (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/mysql.git
+  ref: COOK-1384
+  sha: e02a5c1f9a167db5759932b7d36da4138e577570
+  specs:
+    mysql (1.2.7)
+      build-essential (>= 0.0.0)
+      openssl (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/nova.git
+  ref: essex
+  sha: fb6e2cb61862e3f02fa11cad77475a1127a4bfcc
+  specs:
+    nova (5.0.0)
+      apt (>= 0.0.0)
+      database (>= 0.0.0)
+      glance (>= 0.0.0)
+      keystone (>= 0.0.0)
+      mysql (>= 0.0.0)
+      openssh (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+      rabbitmq (>= 0.0.0)
+      sysctl (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/osops-utils.git
+  ref: master
+  sha: faa8cb943bfbf17d9cefd2df4826fa9601b1eaef
+  specs:
+    osops-utils (1.0.3)
+
+GIT
+  remote: https://github.com/mattray/rabbitmq.git
+  ref: COOK-1496
+  sha: 2502f5ebc172861c188b3988c0ddaec3cc5f2d2e
+  specs:
+    rabbitmq (1.5.1)
+      apt (>= 1.4.4)
+      erlang (>= 0.9)
+      yum (>= 0.5.0)
+
+GIT
+  remote: https://github.com/mattray/sysctl.git
+  ref: master
+  sha: 16f300b62e6e0158fe075c875c94c4d5fb835b5d
+  specs:
+    sysctl (0.1.0)
+
+DEPENDENCIES
+  apt (>= 0)
+  aws (= 0.99.1)
+  build-essential (= 1.1.0)
+  database (= 1.2.0)
+  erlang (= 1.0.0)
+  glance (>= 0)
+  keystone (>= 0)
+  mysql (>= 0)
+  nova (>= 0)
+  ntp (= 1.1.8)
+  openssh (= 0.8.0)
+  openssl (= 1.0.0)
+  osops-utils (>= 0)
+  postgresql (= 0.99.4)
+  rabbitmq (>= 0)
+  sysctl (>= 0)
+  xfs (= 1.0.0)
+  yum (= 0.6.2)
+
