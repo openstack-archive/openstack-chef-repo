@@ -21,6 +21,10 @@
 # to debian_before_squeeze? and ubuntu_before_lucid?
 ::Chef::Recipe.send(:include, Opscode::Mysql::Helpers)
 
+#install the mysql gem for the Chef Ruby used by the database cookbook LWRPs
+node.set['build_essential']['compiletime'] = true
+include_recipe "build-essential"
+
 mysql_packages = case node['platform']
 when "centos", "redhat", "suse", "fedora", "scientific", "amazon"
   %w{mysql mysql-devel}
@@ -49,6 +53,9 @@ when "windows"
     windows_package(*args, &blk)
   end
   [node['mysql']['client']['package_name']]
+when "mac_os_x"
+  include_recipe 'homebrew'
+  %w{mysql-connector-c}
 else
   %w{mysql-client libmysqlclient-dev}
 end
@@ -59,9 +66,19 @@ mysql_packages.each do |mysql_pack|
   end
 end
 
-gem_package "mysql" do
-  gem_binary = node['mysql']['gem_binary']
-  action :install
+chef_gem "mysql" do
+  action :nothing
+  subscribes :install, resources(:package => mysql_packages.last), :immediately
+end
+
+if platform?(%w{ redhat centos fedora suse scientific amazon })
+  package 'ruby-mysql'
+elsif platform?(%w{ debian ubuntu })
+  package "libmysql-ruby"
+else
+  gem_package "mysql" do
+    action :install
+  end
 end
 
 if platform? 'windows'

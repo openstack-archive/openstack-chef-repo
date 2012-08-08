@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-default['mysql']['gem_binary']               = nil
-
 case node["platform"]
 when "windows"
   default['mysql']['client']['version']      = "6.0.2"

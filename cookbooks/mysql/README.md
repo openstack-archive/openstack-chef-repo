@@ -11,12 +11,14 @@ Platform
 
 * Debian, Ubuntu
 * CentOS, Red Hat, Fedora
+* Mac OS X (Using homebrew)
 
 Tested on:
 
 * Debian 5.0
 * Ubuntu 10.04
 * CentOS 5.5
+* Mac OS X 10.7.2
 
 Cookbooks
 ---------
@@ -24,6 +26,8 @@ Cookbooks
 Requires Opscode's openssl cookbook for secure password generation. See _Attributes_ and _Usage_ for more information.
 
 Requires a C compiler and Ruby development package in order to build mysql gem with native extensions. On Debian and Ubuntu systems this is satisfied by installing the "build-essential" and "ruby-dev" packages before running Chef. See USAGE below for information on how to handle this during a Chef run.
+
+Requires homebrew cookbook on Mac OS X.
 
 Resources and Providers
 =======================
@@ -40,6 +44,8 @@ Attributes
 * `mysql['data_dir']` - Location for mysql data directory, default is "/var/lib/mysql"
 * `mysql['conf_dir']` - Location for mysql conf directory, default is "/etc/mysql"
 * `mysql['ec2_path']` - location of mysql data_dir on EC2 nodes, default "/mnt/mysql"
+* `mysql['reload_action']` - Action to take when mysql conf files are modified, default "restart". Also allows "reload" and "none".
+
 
 Performance tuning attributes, each corresponds to the same-named parameter in my.cnf; default values listed
 
