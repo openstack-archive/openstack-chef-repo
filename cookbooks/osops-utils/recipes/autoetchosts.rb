@@ -19,7 +19,7 @@
 
 require 'tempfile'
 require 'fileutils'
- 
+
 # Find all nodes, sorting by Chef ID so their
 # order doesn't change between runs.
 if Chef::Config[:solo]
@@ -28,7 +28,7 @@ else
   hosts = search(:node, "chef_environment:#{node.chef_environment}")
 
   Chef::Log.info("osops-utils/autoetchosts: Setting up /etc/hosts for #{hosts.length} entries")
-  
+
   Chef::Log.info("osops-utils/autoetchosts: reading /etc/hosts")
   hostsfile = Array.new
   File.open("/etc/hosts", "r") do |infile|
@@ -65,7 +65,7 @@ else
   end
   hostsfile << "# *** END CHEF MANAGED HOSTS - DO NOT DELETE THIS MARKER***\n"
 
-  f = Tempfile.new('hosts','/tmp')
+  f = Tempfile.new('hosts', Chef::Config[:file_cache_path])
   tmppath = f.path
   Chef::Log.info("osops-utils/autoetchosts: writing #{tmppath}")
   hostsfile.each do |line|
