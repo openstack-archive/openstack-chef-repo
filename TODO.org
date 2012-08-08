@@ -5,7 +5,6 @@
 ** nova!
 ** librarian-chef for spiceweasel
 ** weekly status emails
-** sync with Calxeda Monday
 ** QuickStart
 * backlog
 ** remotefilemirror->pxe_dust and others?
@@ -53,13 +52,16 @@
     action :install
     end
 *** osops-utils
-    should this be a data bag?
+    should this be a data bag or partial search
     need to read through this thoroughly to understand purpose
+    fix writing of etc/hosts to be idempotent
+    remove database stuff, just use the database cookbook (extraneous abstaction)
 *** glance
     make a glance::client for other cookbooks
 *** nova
     rabbit setup seems naive
     Break out hypervisor support into separate cookbooks
+    nova-common should pass hashes instead of so many attributes, that would make conditional rendering blocks simpler
     tag and release 5.0.0
 *** horizon
     tag and release 5.0.0
@@ -103,21 +105,21 @@
    would a data bag be cleaner? perhaps a notification handler that automatically updates it?
    as soon as the new search syntax is supported, switch to that (available now)
 * Technical Debt
-  Rackspace->Rackspace Hosting, Inc.
+  Rackspace->Rackspace US, Inc.
   there are a lot of :upgrades for packages rather than :install, let's clean that up.
   osops-utils as a stand-alone cookbook just for managing networks with Chef? LWRPs driven by a cookbook?
-* Weekly Status 8/3
-**  Goals for next week:
+  osops-utils is heavily dependent on searching by roles... should we use recipes instead?
+* Weekly Status 8/10
+** Goals for next week:
 *** nova deployed and working
 *** test using librarian-chef to manage mix of community and github-based cookbooks https://github.com/applicationsonline/librarian
 *** push openstack cookbooks to community site and Opscode github repos
 *** start on the Quick Start for Chef and OpenStack
 ** DreamHost Chef for OpenStack Hackday August 21 in Los Angeles
-** potential Rackspace Chef for OpenStack Hackday?
-** onsite with Calxeda
-** Hyper-V support coming soon
-   http://eavesdrop.openstack.org/meetings/openstack-meeting/2012/openstack-meeting.2012-07-31-15.00.html
+** visit Rackspace Wednesday
 ** cookbooks
-*** mysql - still forked, waiting on new release with patch fixed
-*** osops-utils - still forked, merging up waiting on license clarification
-*** sysctl
+*** mysql - fork updated, waiting on new release with 12.04 omnibus well-supported COOK-1384
+*** osops-utils - merged upstream, a few minor patches ahead for debugging
+*** sysctl - new dep, need to get upstreamed
+*** apt - waiting on COOK-1530
+*** rabbitmq - fix for COOK-1496
