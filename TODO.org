@@ -1,15 +1,12 @@
 * CURRENT: QuickStart for Chef & OpenStack
-** add chefignore for .gitignores
 ** rebase rcbops and compare
-** osops-utils
 ** nova!
 ** librarian-chef for spiceweasel
 ** weekly status emails
 ** QuickStart
 * backlog
 ** remotefilemirror->pxe_dust and others?
-** checkout knife spaghetti-roles
-** roles
+** roles/cookbooks
 *** base
     remove validator.pem?
     chef-client?
@@ -17,30 +14,19 @@
     document this
 *** os-networks
     document this
+*** osops-utils
+    waiting for partial search
+    need to document this thoroughly to explain purpose
+    fix writing of etc/hosts to be idempotent
 *** rabbitmq-server
-    http://tickets.opscode.com/browse/COOK-1496 drop the recipe[apt] once that's merged and released
     rename to "messaging" role
+    waiting on 1.5.2 with http://tickets.opscode.com/browse/COOK-1496
+    is rabbit too brittle? Is Qpid a better longterm solution?
+    rackspace is sending a rabbitmq::distro recipe
 *** mysql-master
     need to switch to using a "database" role and the database cookbook
-*** keystone
-*** nova config/setup
-*** nova::compute
-*** nova::scheduler
-*** nova::api
-*** nova::network
-*** nova::vncproxy
-*** nova::volume
-*** nova::project
-*** horizon
-
-** cookbooks
-*** rabbitmq
-    waiting on 1.5.1 with http://tickets.opscode.com/browse/COOK-1496
-*** build-essential
-    here for mysql
-*** mysql
-    since we're using the chef-full installer, we ran into the inability to use the mysql gem properly
-    http://tickets.opscode.com/browse/COOK-1009
+    mysql having issues with 12.04 and omnibus
+    is the cookbook too brittle? rackspace proposes a simplified replacement
 *** keystone
     removed monitoring
     understand use of osops
@@ -51,26 +37,27 @@
     package "python-keystone" do
     action :install
     end
-*** osops-utils
-    should this be a data bag or partial search
-    need to read through this thoroughly to understand purpose
-    fix writing of etc/hosts to be idempotent
-    remove database stuff, just use the database cookbook (extraneous abstaction)
 *** glance
     make a glance::client for other cookbooks
-*** nova
-    rabbit setup seems naive
-    Break out hypervisor support into separate cookbooks
+*** nova config/setup
+    needs cleanup to be safe to run partial Nova deploys
     nova-common should pass hashes instead of so many attributes, that would make conditional rendering blocks simpler
-    tag and release 5.0.0
+*** nova::scheduler
+*** nova::api
+*** nova::network
+*** nova::vncproxy
+*** nova::volume
+*** nova::project
+*** nova::compute
+    abstract out hypervisors and key off of attribute
 *** horizon
     tag and release 5.0.0
 *** swift
-    compare with Dell's implementation
+    compare with other implementations
     make documentation more consistent with other cookbooks
     tag and release 5.0.0
 ** foodcritic all the cookbooks
-   bring in Etsy's rules too?
+   sure would be nice if you could turn off individual rules within a recipe
 ** Document source of packages for all repos and break out to make them interchangeable
 ** Diagrams for Role/Cookbook relationships
    knife-spaghetti-roles
@@ -116,8 +103,10 @@
 *** push openstack cookbooks to community site and Opscode github repos
 *** start on the Quick Start for Chef and OpenStack
 ** DreamHost Chef for OpenStack Hackday August 21 in Los Angeles
-** visit Rackspace Wednesday
+** visited Rackspace Wednesday
+   Discussed the roadmap for the cookbooks and where we want to go with these. Folsom milestones will attempt to be kept in the same branch, RS would strongly prefer to stick with packages for installation and avoid working with trunk. This is of course, open for someone else to pursue if they can actively maintain it without breaking Essex. They should be providing a patch for a RabbitMQ recipe that does sticks with the distro version instead of rabbitmq.org's version (for consistency and security patches). The churn on the community MySQL cookbook has been disconcerting, we may explore a simplified MySQL cookbook if it continues to be an issue. We discussed osops-utils, it mostly needs more documentation but it's sticking around for now until time is invested to make better approaches to the problems it solves.
 ** cookbooks
+   Tracked with Librarian now
 *** mysql - fork updated, waiting on new release with 12.04 omnibus well-supported COOK-1384
 *** osops-utils - merged upstream, a few minor patches ahead for debugging
 *** sysctl - new dep, need to get upstreamed
