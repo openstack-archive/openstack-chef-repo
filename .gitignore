@@ -4,3 +4,5 @@
 *.swp
 *~
 .DS_Store
+/cookbooks
+/tmp

@@ -1,6 +1,8 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
+    apache2 (1.1.12)
+    apt (1.4.6)
     aws (0.99.1)
     build-essential (1.1.0)
     database (1.2.0)
@@ -19,13 +21,6 @@ SITE
     yum (0.6.2)
 
 GIT
-  remote: https://github.com/mattray/apt.git
-  ref: COOK-1530
-  sha: 743989eb614d55b5561671911d669d3bff66920e
-  specs:
-    apt (1.4.5)
-
-GIT
   remote: https://github.com/mattray/glance.git
   ref: essex
   sha: 6903b45981d3b6b8785bae6c17117aed48e8b02f
@@ -33,6 +28,17 @@ GIT
     glance (5.0.0)
       database (>= 0.0.0)
       keystone (>= 0.0.0)
+      mysql (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/horizon.git
+  ref: essex
+  sha: bf023c7e459fa688582e9978475717114c45abb3
+  specs:
+    horizon (5.0.0)
+      apache2 (>= 0.0.0)
+      database (>= 0.0.0)
       mysql (>= 0.0.0)
       osops-utils (>= 0.0.0)
 
@@ -96,12 +102,13 @@ GIT
     sysctl (0.1.0)
 
 DEPENDENCIES
-  apt (>= 0)
+  apt (= 1.4.6)
   aws (= 0.99.1)
   build-essential (= 1.1.0)
   database (= 1.2.0)
   erlang (= 1.0.0)
   glance (>= 0)
+  horizon (>= 0)
   keystone (>= 0)
   mysql (>= 0)
   nova (>= 0)

@@ -1,8 +1,7 @@
 * CURRENT: QuickStart for Chef & OpenStack
-** rebase rcbops and compare
-** nova!
+** glance image loading
+** rebase with rcbops and compare
 ** librarian-chef for spiceweasel
-** weekly status emails
 ** QuickStart
 * backlog
 ** remotefilemirror->pxe_dust and others?
@@ -42,16 +41,8 @@
 *** nova config/setup
     needs cleanup to be safe to run partial Nova deploys
     nova-common should pass hashes instead of so many attributes, that would make conditional rendering blocks simpler
-*** nova::scheduler
-*** nova::api
-*** nova::network
-*** nova::vncproxy
-*** nova::volume
-*** nova::project
 *** nova::compute
     abstract out hypervisors and key off of attribute
-*** horizon
-    tag and release 5.0.0
 *** swift
     compare with other implementations
     make documentation more consistent with other cookbooks
@@ -94,21 +85,19 @@
 * Technical Debt
   Rackspace->Rackspace US, Inc.
   there are a lot of :upgrades for packages rather than :install, let's clean that up.
-  osops-utils as a stand-alone cookbook just for managing networks with Chef? LWRPs driven by a cookbook?
-  osops-utils is heavily dependent on searching by roles... should we use recipes instead?
-* Weekly Status 8/10
+  move the os-database and os-network attributes to an environment?
+  verify still need patch for nova-scheduler
+* Weekly Status 8/17
 ** Goals for next week:
-*** nova deployed and working
-*** test using librarian-chef to manage mix of community and github-based cookbooks https://github.com/applicationsonline/librarian
+*** nova and horizon deployed and working
+*** document using librarian-chef to manage mix of community and github-based cookbooks
 *** push openstack cookbooks to community site and Opscode github repos
 *** start on the Quick Start for Chef and OpenStack
 ** DreamHost Chef for OpenStack Hackday August 21 in Los Angeles
-** visited Rackspace Wednesday
-   Discussed the roadmap for the cookbooks and where we want to go with these. Folsom milestones will attempt to be kept in the same branch, RS would strongly prefer to stick with packages for installation and avoid working with trunk. This is of course, open for someone else to pursue if they can actively maintain it without breaking Essex. They should be providing a patch for a RabbitMQ recipe that does sticks with the distro version instead of rabbitmq.org's version (for consistency and security patches). The churn on the community MySQL cookbook has been disconcerting, we may explore a simplified MySQL cookbook if it continues to be an issue. We discussed osops-utils, it mostly needs more documentation but it's sticking around for now until time is invested to make better approaches to the problems it solves.
 ** cookbooks
    Tracked with Librarian now
 *** mysql - fork updated, waiting on new release with 12.04 omnibus well-supported COOK-1384
 *** osops-utils - merged upstream, a few minor patches ahead for debugging
 *** sysctl - new dep, need to get upstreamed
-*** apt - waiting on COOK-1530
+*** apt - released 1.4.6
 *** rabbitmq - fix for COOK-1496

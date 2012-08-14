@@ -5,6 +5,7 @@ site 'http://community.opscode.com/api/v1'
 
 cookbook 'ntp', '1.1.8'
 cookbook 'openssh', '0.8.0'
+cookbook 'apt', '1.4.6'
 cookbook 'yum', '0.6.2'
 cookbook 'build-essential', '1.1.0'
 cookbook 'erlang', '1.0.0'
@@ -13,10 +14,6 @@ cookbook 'postgresql', '0.99.4'
 cookbook 'aws', '0.99.1'
 cookbook 'xfs', '1.0.0'
 cookbook 'database', '1.2.0'
-
-cookbook 'apt',
-  :git => 'https://github.com/mattray/apt.git',
-  :ref => 'COOK-1530'
 
 cookbook 'mysql',
   :git => 'https://github.com/mattray/mysql.git',
@@ -44,9 +41,9 @@ cookbook 'nova',
   :git => 'https://github.com/mattray/nova.git',
   :ref => 'essex'
 
-# cookbook 'horizon',
-#   :git => 'https://github.com/mattray/horizon.git',
-#   :ref => 'essex'
+cookbook 'horizon',
+  :git => 'https://github.com/mattray/horizon.git',
+  :ref => 'essex'
 
 # cookbook 'swift',
 #   :git => 'https://github.com/mattray/swift.git',
