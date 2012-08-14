@@ -2,27 +2,33 @@ Description
 ===========
 This repository contains documentation, roles, environments and data bags for deploying an OpenStack **Essex** reference architecture using Chef. This currently includes the 5 OpenStack core projects: Nova, Glance, Keystone, Swift and Horizon.
 
-Please use this `essex` branch to get the latest stable release. The `master` branch will remain empty until work begins on the **Folsom** pre-release. After **Folsom** is branched in OpenStack, it will get its own `folsom` Git branch as well.
+Please use this `essex` branch to get the latest stable release. Once **Folsom** work is started, the `essex` branch will be merged back to the `master` branch and that will become active again.
 
-This is a canonical source of documentation and there is additional content in the `documentation` directory in this repository.
+This is a canonical source of documentation and there is additional content in the `documentation` directory in this repository. There will be documentation for a variety of deployment techniques for single-node, small and large installations.
 
-There is a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (and their versions), roles, data bags and environments required to deploy OpenStack. The intention is to only depend on publicly available community versions of cookbooks so the openstack-chef-repo will not contain any cookbooks (there may temporarily be patched versions waiting for upstream to publish). The manifest will also document a variety of deployment techniques for single-node, small and large deployments.
+This repository uses Librarian (https://github.com/applicationsonline/librarian) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to publish all of the cookbook dependencies to the Opscode Community site.
+
+There is a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (currently redundant with Librarian), roles, data bags and environments required to deploy OpenStack.
 
 Usage
 =====
 To populate this Chef repository with the cookbooks for deploying, run the following command:
 
 ```
+librarian-chef update
+```
+
+To see the commands necessary to push all of the files to the Chef server, run the following command:
+
+```
 spiceweasel infrastructure.yml
 ```
 
-This will also give you all of the commands necessary to push the roles to the Chef server. You can execute this with
+To actually deploy the repository to your Chef server, run the following command:
 
 ```
 spiceweasel infrastructure.yml | sh
 ```
-
-Note that with subsequent runs of spiceweasel the commands will change once the missing cookbooks have been downloaded.
 
 Cookbooks
 =========
