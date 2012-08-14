@@ -38,6 +38,7 @@
     end
 *** glance
     make a glance::client for other cookbooks
+    refactor the glance/image upload in glance::api to use more idempotent Chef resources, perhaps as a separate recipe for readability
 *** nova config/setup
     needs cleanup to be safe to run partial Nova deploys
     nova-common should pass hashes instead of so many attributes, that would make conditional rendering blocks simpler
