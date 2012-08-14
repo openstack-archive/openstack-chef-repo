@@ -31,9 +31,11 @@ cookbooks:
   - 1.0.3
 - keystone: #used by keystone role
   - 5.0.0
-- glance: #used by glance role
+- glance: #used by glance roles
   - 5.0.0
-- nova: #used by glance role
+- nova: #used by nova roles
+  - 5.0.0
+- horizon: #used by horizon-server role
   - 5.0.0
 
 environments:
@@ -51,8 +53,14 @@ roles:
   - glance-registry:
   - glance:
   - nova-setup:
-  - single-compute:
+  - nova-scheduler:
+  - nova-api-ec2:
+  - nova-api-os-compute:
+  - nova-volume:
+  - nova-vncproxy:
+  - horizon-server:
   - single-controller:
+  - single-compute:
   - allinone:
 
 nodes:
