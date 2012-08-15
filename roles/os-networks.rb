@@ -8,12 +8,15 @@ override_attributes(
     "nova" => "10.0.111.0/24"
   },
   "nova" => {
+    "network" => {
+      "fixed_range" => "10.0.111.128/25"
+    },
     "networks" => [
       {
         "label" => "public",
-        "ipv4_cidr" => "192.168.100.0/24",
+        "ipv4_cidr" => "10.0.111.128/25",
         "num_networks" => "1",
-        "network_size" => "255",
+        "network_size" => "128",
         "bridge" => "br100",
         "bridge_dev" => "eth0.100",
         "dns1" => "8.8.8.8",
@@ -21,7 +24,7 @@ override_attributes(
       },
       {
         "label" => "private",
-        "ipv4_cidr" => "192.168.200.0/24",
+        "ipv4_cidr" => "10.0.222.0/24",
         "num_networks" => "1",
         "network_size" => "255",
         "bridge" => "br101",
