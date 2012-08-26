@@ -2,6 +2,8 @@
 ** rebase with rcbops and compare
 ** fix labsetup to use proper network configuration
    I'm still having issues with the configuration of networking with my VMs but this appears to be related to configuration of my nova-compute hosts and will get documented in the prerequisites.
+   controller -> should run nova-network
+   compute -> should only run nova-network with FlatDHCP
 ** glance-images
    use Cirros and optional Ubuntu 12.04
 ** nova::volume
@@ -18,7 +20,6 @@
 ** work on making Spiceweasel interface with Librarian is also in progress.
 * Technical Debt
 ** Rackspace->Rackspace US, Inc.
-** determine what's up with services starting, restarting and enabling
 ** foodcritic all the cookbooks
    sure would be nice if you could turn off individual rules within a recipe
 ** TravisCI MVT testing
@@ -27,25 +28,29 @@
    need to switch to using a "database" role and the database cookbook
    mysql having issues with 12.04 and omnibus
    is the cookbook too brittle? rackspace proposes a simplified replacement
+   mmm-support or a slave recipe
 ** keystone
    removed monitoring
    understand use of osops
    why is there a sleep?
    tag and release 5.0.0
    gotta think Fog is a better solution to some of the Keystone manipulations
-   need a keystone:client to wrap
-   package "python-keystone" do
-   action :install
-   end
+   need a keystone:client to wrap python-keystone,
+   hopefully won't have to install keystone and specifically disable the service
 ** glance
    make a glance::client for other cookbooks
    refactor the glance/image upload in glance::api to use more idempotent Chef resources, perhaps as a separate recipe for readability
 ** os-database
    document this
-   move to Environment?
 ** os-networks
    document this
-   move to Environment
+** environment provides networking
+   move the os-database and os-network attributes to an environment?
+   load balancers for services
+   short-circuits searches for osops-utils
+   need to update all searches to be environment-aware
+   nova-compute is currently setting up nova-network
+   update roles accordingly
 ** osops-utils
    waiting for partial search
    need to document this thoroughly to explain purpose
@@ -55,25 +60,32 @@
    nova-common should pass hashes instead of so many attributes, that would make conditional rendering blocks simpler
 ** nova::compute
    abstract out hypervisors and key off of attribute
+   nova::network needs to move out
+** nova::vncproxy
+   needs to break out xen vs. kvm support
 ** swift
    compare with other implementations
    make documentation more consistent with other cookbooks
    tag and release 5.0.0
 ** there are a lot of :upgrades for packages rather than :install, let's clean that up.
-** move the os-database and os-network attributes to an environment?
 ** verify still need patch for nova-scheduler
 ** does search make sense for things like nova::common if you have 1000 compute nodes?
    would a data bag be cleaner? perhaps a notification handler that automatically updates it?
    as soon as the new search syntax is supported, switch to that (available now)
-
 ** Document source of packages for all repos and break out to make them interchangeable
 
 ** librarian-chef for spiceweasel
 ** remotefilemirror->pxe_dust and others?
 ** Should we add kong and exerstack to the repo so people can validate their deployments?
+** Support multiple nova-network topologies
+   right now just doing FlatDHCP
 ** base role
    remove validator.pem?
    chef-client?
+** OpenStack-Syslog/Monitoring
+   pull the code back from Rackspace into 2 new cookbooks
+   openstack-monitoring
+   openstack-syslog
 * Documentation
 ** Diagrams for Role/Cookbook relationships
    knife-spaghetti-roles
@@ -86,6 +98,7 @@
 ** Update the existing wiki documentation for Chef and OpenStack
 ** Chef for OpenStack QuickStart
 ** Desktop virtualization HOWTO
+   document how to set all this up with Fusion/VirtualBox/Vagrant/KVM
 ** Alternate package HOWTO
 ** Testing Overview
 * Technical Roadmap
@@ -102,8 +115,10 @@
 ** RHEL
 ** OpenSuSE/SLES
 ** IPv6
+   DreamHost is doing this somewhat.
+   Grizzly?
 * Weekly Status 8/24
-** Goals for next week:
+** Goals for this week:
 *** prerequisites for networking documented
 *** nova-compute vms failing during networking
 *** nova-volume stop complaining
@@ -113,21 +128,30 @@
 *** started work on Spiceweasel to make it Librarian-aware
 ** LA Chef for OpenStack Hackday
 *** Prerequisites documentation (OS, network)
-*** Support nova-network topologies
-*** Desktop virtualization
-*** Hypervisor breakout (KVM, LXC)
-*** OpenStack-Syslog/Monitoring
-*** RHEL/SUSE support
-*** Ceph as nova-volumes/Cinder
-*** Swift start
-*** knife-openstack/hp/rackspace
+   I'm still having issues with the configuration of networking with my VMs but this appears to be related to configuration of my nova-compute hosts and will get documented in the prerequisites.
+   controller -> should run nova-network
+   compute -> should only run nova-network with FlatDHCP
+*** strategies for osops-utils to short-circuit searches for load balancers/fixed IPs
+    move to environments, update osops-utils
+*** Ceph as Cinder
+    Carl will start moving cookbooks to Folsom M3
+*** determine what's up with services starting, restarting and enabling
+    wait for HA in Folsom?
+    John Dewey will investigate
+*** knife-hp
 *** Technical Debt!
+    osops-utils needs to find networking from environments to override search results. take the node.chef_environment,
+*** documentation discussion, investigating MultiMarkDown for unifying docs into single PDF or HTML
+*** potential contributors
+    AT&T
+    DreamHost
 ** Cookbooks
 *** database - need to test and update to 1.3.4
 *** mysql - need to test and update to 1.3.0
 *** osops-utils - mostly synced, a few minor patches ahead for debugging
 *** sysctl - new dep, need to get upstreamed and documented
 *** rabbitmq - fix for COOK-1496, waiting on RCB for a new rabbitmq::distro recipe
+*** apt - need to test 1.4.8
 *** need to resync keystone, glance, nova and horizon with latest Rackspace patches
 
 
