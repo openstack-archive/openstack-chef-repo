@@ -4,7 +4,7 @@ cookbooks:
 - openssh: #used by base role
   - 0.8.0
 - apt: #used by erlang
-  - 1.4.6
+  - 1.4.8
 - yum: #used by erlang
   - 0.6.2
 - build-essential: # used by mysql

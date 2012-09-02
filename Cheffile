@@ -5,7 +5,7 @@ site 'http://community.opscode.com/api/v1'
 
 cookbook 'ntp', '1.1.8'
 cookbook 'openssh', '0.8.0'
-cookbook 'apt', '1.4.6'
+cookbook 'apt', '1.4.8'
 cookbook 'yum', '0.6.2'
 cookbook 'build-essential', '1.1.0'
 cookbook 'erlang', '1.0.0'
