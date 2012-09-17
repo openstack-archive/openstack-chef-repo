@@ -40,6 +40,7 @@
 ** glance
    make a glance::client for other cookbooks
    refactor the glance/image upload in glance::api to use more idempotent Chef resources, perhaps as a separate recipe for readability
+   run as the glance user instead of sudo
 ** os-database
    document this
 ** os-networks
@@ -61,6 +62,8 @@
 ** nova::compute
    abstract out hypervisors and key off of attribute
    nova::network needs to move out
+** nova::volume
+   everything fails without this
 ** nova::vncproxy
    needs to break out xen vs. kvm support
 ** swift
@@ -87,6 +90,7 @@
    openstack-monitoring
    openstack-syslog
 * Documentation
+** Convert to ReStructuredText
 ** Diagrams for Role/Cookbook relationships
    knife-spaghetti-roles
    Keystone
@@ -104,7 +108,7 @@
 * Technical Roadmap
 ** LXC
 ** Swift
-** Folsom Milestone 3
+** Folsom RC1
 ** HA setups
 ** Baremetal
 ** Hyper-V
@@ -117,50 +121,6 @@
 ** IPv6
    DreamHost is doing this somewhat.
    Grizzly?
-* Weekly Status 8/24
-** Goals for this week:
-*** prerequisites for networking documented
-*** nova-compute vms failing during networking
-*** nova-volume stop complaining
-*** integrate Chef for OpenStack Hackday efforts
-*** push openstack cookbooks to community site and Opscode github repos
-*** start on the Quick Start for Chef and OpenStack
-*** started work on Spiceweasel to make it Librarian-aware
-** LA Chef for OpenStack Hackday
-*** Prerequisites documentation (OS, network)
-   I'm still having issues with the configuration of networking with my VMs but this appears to be related to configuration of my nova-compute hosts and will get documented in the prerequisites.
-   controller -> should run nova-network
-   compute -> should only run nova-network with FlatDHCP
-*** strategies for osops-utils to short-circuit searches for load balancers/fixed IPs
-    move to environments, update osops-utils
-*** Ceph as Cinder
-    Carl will start moving cookbooks to Folsom M3
-*** determine what's up with services starting, restarting and enabling
-    wait for HA in Folsom?
-    John Dewey will investigate
-*** knife-hp
-*** Technical Debt!
-    osops-utils needs to find networking from environments to override search results. take the node.chef_environment,
-*** documentation discussion, investigating MultiMarkDown for unifying docs into single PDF or HTML
-*** potential contributors
-    AT&T
-    DreamHost
-** Cookbooks
-*** database - need to test and update to 1.3.4
-*** mysql - need to test and update to 1.3.0
-*** osops-utils - mostly synced, a few minor patches ahead for debugging
-*** sysctl - new dep, need to get upstreamed and documented
-*** rabbitmq - fix for COOK-1496, waiting on RCB for a new rabbitmq::distro recipe
-*** apt - need to test 1.4.8
-*** need to resync keystone, glance, nova and horizon with latest Rackspace patches
+* Weekly Status 9/14
 
 
-    added pm-utils
-    bridge-utils!!!???
-
-    mysql
-    mysql -pvbyH4FV_6HTkiMntgHSC
-    select id, host, hostname, display_name, access_ip_v4, task_state from instances;
-
-
-    Device "eth0.100" does not exist

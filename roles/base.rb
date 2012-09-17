@@ -1,6 +1,7 @@
 name "base"
 description "Base role for a server"
 run_list(
+  "recipe[apt]",
   "recipe[openssh]",
   "recipe[ntp]"
 )

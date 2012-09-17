@@ -35,17 +35,18 @@ cookbooks:
   - 5.0.0
 - nova: #used by nova roles
   - 5.0.0
+- apache2: #required by horizon
+  - 1.1.12
 - horizon: #used by horizon-server role
   - 5.0.0
 
 environments:
+- production:
 
 data bags:
 
 roles:
   - base:
-  - os-database:
-  - os-networks:
   - mysql-master:
   - rabbitmq-server:
   - keystone:
