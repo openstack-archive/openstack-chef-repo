@@ -12,7 +12,7 @@ cookbooks:
 - erlang: #used by rabbitmq-server role
   - 1.0.0
 - rabbitmq: #used by rabbitmq-server role
-  - 1.6.2
+  - 1.6.3
 - openssl: #used by mysql
   - 1.0.0
 - mysql: #used by mysql-master role
@@ -36,7 +36,7 @@ cookbooks:
 - mysql-openstack: #required by keystone
   - 1.0.4
 - rabbitmq-openstack: #required by keystone
-  - 1.0.3
+  - 1.0.4
 - keystone: #used by keystone role
   - 5.0.0
 - glance: #used by glance roles

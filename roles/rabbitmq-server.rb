@@ -5,3 +5,8 @@ run_list(
   "recipe[erlang::default]",
   "recipe[rabbitmq-openstack::server]"
 )
+default_attributes(
+  "rabbitmq" => {
+    "use_distro_version" => true
+  }
+)

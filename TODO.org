@@ -110,7 +110,12 @@
 ** Horizon-Skin cookbook
    after horizon removes the default skin, let's add a cookbook for passing a logo or something
 ** LXC
-** Folsom RC1
+** Folsom
+If you want to help out with the testing and reporting of bugs on your 12.04 servers,  you will want the following in your /etc/apt/sources.list:
+deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-proposed/folsom main
+If you just want to install the latest version of Openstack on your 12.04 servers, you will want the following in your /etc/apt/sources.list:
+deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/folsom main
+Please report any bugs that you discover on launchpad as well. In the coming months, we will be making it easier to use Openstack on both newer releases of Ubuntu and back porting those changes to 12.04 users as well.
 ** HA setups
 ** Baremetal
 ** Hyper-V
@@ -168,3 +173,6 @@ The following cookbooks need to be updated and tested with the latest:
 - aws
 - xfs
 - build-essential
+
+
+RabbitMQ refactored to work with the distro release.
