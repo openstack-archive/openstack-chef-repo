@@ -6,7 +6,7 @@ cookbooks:
 - apt: #used by erlang
   - 1.4.8
 - yum: #used by erlang
-  - 0.8.2
+  - 1.0.0
 - build-essential: # used by mysql
   - 1.1.2
 - erlang: #used by rabbitmq-server role

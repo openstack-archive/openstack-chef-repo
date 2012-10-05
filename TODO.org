@@ -81,6 +81,10 @@
 ** base role
    remove validator.pem?
    chef-client?
+** default security group
+   enable SSH and ICMP ping
+   euca-authorize -P tcp -s 192.168.1.1 -p 22 myservers
+   euca-authorize -P icmp -s 192.168.1.1 -t -1:-1 myservers
 ** platform-family
    start using the node.platform_family for attribute gating
 ** OpenStack-Syslog/Monitoring
@@ -176,3 +180,29 @@ The following cookbooks need to be updated and tested with the latest:
 
 
 RabbitMQ refactored to work with the distro release.
+
+nova-manage floating create --ip_range=10.0.111.128/25
+
+# modprobe kvm
+# modprobe kvm-amd
+
+virsh -c qemu:///system list
+apt-get install build-essential -y; /opt/chef/embedded/bin/gem update --no-ri --no-rdoc; chef-client
+
+dbus service is OK
+
+
+
+#disable virbr0
+virsh net-autostart default --disable 1>/dev/null
+virsh net-destroy default 1>/dev/null
+#setup_iptables
+sed -i '/net.ipv4.ip_forward/ s/^#//' /etc/sysctl.conf
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+echo iptables-persistent iptables-persistent/autosave_v4 select true | debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v6 select true | debconf-set-selections
+apt-get -y install iptables-persistent 1>/dev/null
+
+configure br100
+
+dmz_routes???
