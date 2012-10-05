@@ -6,7 +6,7 @@ override_attributes(
     "image_upload" => true,
     "images" => ["precise","cirros"],
     "image" => {
-      "cirros" => "http://hypnotoad/cirros-0.3.0-x86_64-uec.tar.gz",
+      "cirros" => "http://hypnotoad/cirros-0.3.0-x86_64-disk.img",
       "precise" => "http://hypnotoad/precise-server-cloudimg-amd64.tar.gz"
     }
   },
