@@ -59,7 +59,6 @@ roles:
   - glance-api:
   - glance-registry:
   - glance:
-  - glance-images:
   - nova-setup:
   - nova-scheduler:
   - nova-api-ec2:
