@@ -20,18 +20,14 @@ SITE
     openssl (1.0.0)
     postgresql (1.0.0)
       openssl (>= 0.0.0)
-    rabbitmq (1.6.2)
-      apt (>= 1.4.4)
-      erlang (>= 0.9)
-      yum (>= 0.5.0)
     selinux (0.5.2)
     xfs (1.0.0)
-    yum (0.8.2)
+    yum (1.0.0)
 
 GIT
   remote: https://github.com/mattray/glance.git
-  ref: essex
-  sha: 31497bd8f5ec0cf78301f702c7312d312b2e3970
+  ref: 5.0.0
+  sha: 86036c415699b0c36fc903f311a4afc3e0ae2723
   specs:
     glance (5.0.0)
       database (>= 0.0.0)
@@ -41,7 +37,7 @@ GIT
 
 GIT
   remote: https://github.com/mattray/horizon.git
-  ref: essex
+  ref: 5.0.0
   sha: e878d49e7c1cc4b0ab42fc2a05c545b1fd75f961
   specs:
     horizon (5.0.0)
@@ -52,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/mattray/keystone.git
-  ref: essex
+  ref: 5.0.0
   sha: 354304c5c30646e700c0e3c9c8c83c1b149202b3
   specs:
     keystone (5.0.0)
@@ -72,8 +68,8 @@ GIT
 
 GIT
   remote: https://github.com/mattray/nova.git
-  ref: essex
-  sha: 5e127eececa3324ee602a1270c95bd3941c1c432
+  ref: 5.0.0
+  sha: dc1910ff82e40ac12b77baee36601ab70cf97adb
   specs:
     nova (5.0.0)
       apt (>= 0.0.0)
@@ -100,11 +96,21 @@ GIT
 GIT
   remote: https://github.com/mattray/rabbitmq-openstack.git
   ref: master
-  sha: ab5c62f57201f4a868a96601177fdb6c40f6747d
+  sha: 25fbd90c4b4bdc4b5fe4154d560e15f6587c24ea
   specs:
-    rabbitmq-openstack (1.0.3)
+    rabbitmq-openstack (1.0.4)
       osops-utils (>= 0.0.0)
-      rabbitmq (>= 0.0.0)
+      rabbitmq (> 1.6.2)
+
+GIT
+  remote: https://github.com/mattray/rabbitmq.git
+  ref: COOK-1684
+  sha: 7ac2faac2e87bfb4e14dd19ba69d4156f50db3e8
+  specs:
+    rabbitmq (1.6.3)
+      apt (>= 1.4.4)
+      erlang (>= 0.9)
+      yum (>= 0.5.0)
 
 GIT
   remote: https://github.com/mattray/sysctl.git
@@ -130,9 +136,9 @@ DEPENDENCIES
   openssl (= 1.0.0)
   osops-utils (>= 0)
   postgresql (= 1.0.0)
-  rabbitmq (= 1.6.2)
+  rabbitmq (>= 0)
   rabbitmq-openstack (>= 0)
   sysctl (>= 0)
   xfs (= 1.0.0)
-  yum (= 0.8.2)
+  yum (= 1.0.0)
 

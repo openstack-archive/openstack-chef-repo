@@ -34,19 +34,19 @@ cookbook 'mysql-openstack',
 
 cookbook 'keystone',
   :git => 'https://github.com/mattray/keystone.git',
-  :ref => 'essex'
+  :ref => '5.0.0'
 
 cookbook 'glance',
   :git => 'https://github.com/mattray/glance.git',
-  :ref => 'essex'
+  :ref => '5.0.0'
 
 cookbook 'nova',
   :git => 'https://github.com/mattray/nova.git',
-  :ref => 'essex'
+  :ref => '5.0.0'
 
 cookbook 'horizon',
   :git => 'https://github.com/mattray/horizon.git',
-  :ref => 'essex'
+  :ref => '5.0.0'
 
 # cookbook 'swift',
 #   :git => 'https://github.com/mattray/swift.git',
