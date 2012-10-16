@@ -1,14 +1,15 @@
 Description
 ===========
-This repository contains documentation, roles, environments and data bags for deploying an OpenStack **Essex** reference architecture using Chef. This currently includes the 5 OpenStack core projects: Nova, Glance, Keystone, Swift and Horizon.
+This repository contains the roles, environments and data bags for deploying an OpenStack **Essex** reference architecture using Chef. This currently includes the 5 OpenStack core projects: Nova, Glance, Keystone, Horizon and Swift(under development). Folsom development will begin very soon.
 
 Please use this `essex` branch to get the latest stable release. Once **Folsom** work is started, the `essex` branch will be merged back to the `master` branch and that will become active again.
 
-This is a canonical source of documentation and there is additional content in the `documentation` directory in this repository. There will be documentation for a variety of deployment techniques for single-node, small and large installations.
+The documentation has been moved to the https://github.com/mattray/openstack-chef-docs repository. A public URL will be available soon, but instructions for building the docs are included and you can visit a temporary site here:
+http://15.185.230.54/
 
-This repository uses Librarian (https://github.com/applicationsonline/librarian) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to publish all of the cookbook dependencies to the Opscode Community site.
+This repository uses Librarian (https://github.com/applicationsonline/librarian) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to eventually publish all of the cookbook dependencies to the Opscode Community site.
 
-There is a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (currently redundant with Librarian), roles, data bags and environments required to deploy OpenStack.
+There is also a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (currently redundant with Librarian), roles, data bags and environments required to deploy OpenStack.
 
 Usage
 =====
