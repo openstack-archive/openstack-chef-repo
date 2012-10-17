@@ -5,6 +5,7 @@ This repository contains the roles, environments and data bags for deploying an 
 Please use this `essex` branch to get the latest stable release. Once **Folsom** work is started, the `essex` branch will be merged back to the `master` branch and that will become active again.
 
 The documentation has been moved to the https://github.com/mattray/openstack-chef-docs repository. A public URL will be available soon, but instructions for building the docs are included and you can visit a temporary site here:
+
 http://15.185.230.54/
 
 This repository uses Librarian (https://github.com/applicationsonline/librarian) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to eventually publish all of the cookbook dependencies to the Opscode Community site.
