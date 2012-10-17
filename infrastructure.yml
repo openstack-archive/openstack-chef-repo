@@ -1,0 +1,73 @@
+cookbooks:
+- ntp: #used by base role
+  - 1.2.0
+- openssh: #used by base role
+  - 1.0.0
+- apt: #used by erlang
+  - 1.4.8
+- yum: #used by erlang
+  - 1.0.0
+- build-essential: # used by mysql
+  - 1.1.2
+- erlang: #used by rabbitmq-server role
+  - 1.0.0
+- rabbitmq: #used by rabbitmq-server role
+  - 1.6.3
+- openssl: #used by mysql
+  - 1.0.0
+- mysql: #used by mysql-master role
+  - 1.3.0
+- postgresql: #required by database
+  - 1.0.0
+- aws: #required by database
+  - 0.100.2
+- xfs: #required by database
+  - 1.0.0
+- database: #required by keystone
+  - 1.3.4
+- apache2: #required by horizon
+  - 1.1.16
+- selinux: #required by nova
+   - 0.5.2
+- sysctl: #required by nova
+  - 0.1.2
+- osops-utils: #required by keystone
+  - 1.0.6
+- mysql-openstack: #required by keystone
+  - 1.0.4
+- rabbitmq-openstack: #required by keystone
+  - 1.0.4
+- keystone: #used by keystone role
+  - 5.0.0
+- glance: #used by glance roles
+  - 5.0.0
+- nova: #used by nova roles
+  - 5.0.0
+- horizon: #used by horizon-server role
+  - 5.0.0
+
+environments:
+- production:
+
+data bags:
+
+roles:
+  - base:
+  - mysql-master:
+  - rabbitmq-server:
+  - keystone:
+  - glance-api:
+  - glance-registry:
+  - glance:
+  - nova-setup:
+  - nova-scheduler:
+  - nova-api-ec2:
+  - nova-api-os-compute:
+  - nova-volume:
+  - nova-vncproxy:
+  - horizon-server:
+  - single-controller:
+  - single-compute:
+  - allinone:
+
+nodes:

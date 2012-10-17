@@ -1,0 +1,8 @@
+.chef/checksums/
+*.pem
+*.swo
+*.swp
+*~
+.DS_Store
+/cookbooks
+/tmp

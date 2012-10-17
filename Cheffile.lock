@@ -1,0 +1,144 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    apache2 (1.1.16)
+    apt (1.4.8)
+    aws (0.100.2)
+    build-essential (1.1.2)
+    database (1.3.4)
+      aws (>= 0.0.0)
+      mysql (>= 1.3.0)
+      postgresql (>= 1.0.0)
+      xfs (>= 0.0.0)
+    erlang (1.0.0)
+      yum (>= 0.5.0)
+    mysql (1.3.0)
+      build-essential (>= 0.0.0)
+      openssl (>= 0.0.0)
+    ntp (1.2.0)
+    openssh (1.0.0)
+    openssl (1.0.0)
+    postgresql (1.0.0)
+      openssl (>= 0.0.0)
+    selinux (0.5.2)
+    xfs (1.0.0)
+    yum (1.0.0)
+
+GIT
+  remote: https://github.com/mattray/glance.git
+  ref: 5.0.0
+  sha: 86036c415699b0c36fc903f311a4afc3e0ae2723
+  specs:
+    glance (5.0.0)
+      database (>= 0.0.0)
+      keystone (>= 0.0.0)
+      mysql (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/horizon.git
+  ref: 5.0.0
+  sha: e878d49e7c1cc4b0ab42fc2a05c545b1fd75f961
+  specs:
+    horizon (5.0.0)
+      apache2 (>= 0.0.0)
+      database (>= 0.0.0)
+      mysql (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/keystone.git
+  ref: 5.0.0
+  sha: 354304c5c30646e700c0e3c9c8c83c1b149202b3
+  specs:
+    keystone (5.0.0)
+      database (>= 0.0.0)
+      mysql (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/mysql-openstack.git
+  ref: master
+  sha: 6a47b59b55bc8297775e0b81db4e38a6bfce3aab
+  specs:
+    mysql-openstack (1.0.4)
+      database (>= 0.0.0)
+      mysql (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/nova.git
+  ref: 5.0.0
+  sha: dc1910ff82e40ac12b77baee36601ab70cf97adb
+  specs:
+    nova (5.0.0)
+      apt (>= 0.0.0)
+      database (>= 0.0.0)
+      glance (>= 0.0.0)
+      keystone (>= 0.0.0)
+      mysql (>= 0.0.0)
+      openssh (>= 0.0.0)
+      osops-utils (>= 0.0.0)
+      rabbitmq (>= 0.0.0)
+      selinux (>= 0.0.0)
+      sysctl (>= 0.0.0)
+      yum (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/osops-utils.git
+  ref: master
+  sha: 706d8296f1debd718f15faa4676e823aadb2671f
+  specs:
+    osops-utils (1.0.6)
+      apt (>= 0.0.0)
+      yum (>= 0.0.0)
+
+GIT
+  remote: https://github.com/mattray/rabbitmq-openstack.git
+  ref: master
+  sha: 25fbd90c4b4bdc4b5fe4154d560e15f6587c24ea
+  specs:
+    rabbitmq-openstack (1.0.4)
+      osops-utils (>= 0.0.0)
+      rabbitmq (> 1.6.2)
+
+GIT
+  remote: https://github.com/mattray/rabbitmq.git
+  ref: COOK-1684
+  sha: 7ac2faac2e87bfb4e14dd19ba69d4156f50db3e8
+  specs:
+    rabbitmq (1.6.3)
+      apt (>= 1.4.4)
+      erlang (>= 0.9)
+      yum (>= 0.5.0)
+
+GIT
+  remote: https://github.com/mattray/sysctl.git
+  ref: master
+  sha: 16f300b62e6e0158fe075c875c94c4d5fb835b5d
+  specs:
+    sysctl (0.1.0)
+
+DEPENDENCIES
+  apt (= 1.4.8)
+  aws (= 0.100.2)
+  build-essential (= 1.1.2)
+  database (= 1.3.4)
+  erlang (= 1.0.0)
+  glance (>= 0)
+  horizon (>= 0)
+  keystone (>= 0)
+  mysql (= 1.3.0)
+  mysql-openstack (>= 0)
+  nova (>= 0)
+  ntp (= 1.2.0)
+  openssh (= 1.0.0)
+  openssl (= 1.0.0)
+  osops-utils (>= 0)
+  postgresql (= 1.0.0)
+  rabbitmq (>= 0)
+  rabbitmq-openstack (>= 0)
+  sysctl (>= 0)
+  xfs (= 1.0.0)
+  yum (= 1.0.0)
+
