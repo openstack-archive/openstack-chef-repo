@@ -4,21 +4,20 @@
 site 'http://community.opscode.com/api/v1'
 
 cookbook 'ntp', '1.2.0'
-cookbook 'openssh', '1.0.0'
-cookbook 'apt', '1.4.8'
+cookbook 'openssh', '1.1.0'
+cookbook 'apt', '1.5.0'
 cookbook 'yum', '1.0.0'
 cookbook 'build-essential', '1.1.2'
-cookbook 'erlang', '1.0.0'
+cookbook 'erlang', '1.1.0'
 cookbook 'openssl', '1.0.0'
 cookbook 'postgresql', '1.0.0'
 cookbook 'aws', '0.100.2'
 cookbook 'xfs', '1.0.0'
-cookbook 'database', '1.3.4'
+cookbook 'database', '1.3.6'
 cookbook 'mysql', '1.3.0'
-
-cookbook 'rabbitmq',
-  :git => 'https://github.com/mattray/rabbitmq.git',
-  :ref => 'COOK-1684'
+cookbook 'rabbitmq', '1.6.4'
+cookbook 'apache2', '1.2.0'
+cookbook 'selinux', '0.5.2'
 
 cookbook 'sysctl',
   :git => 'https://github.com/mattray/sysctl.git'
@@ -34,19 +33,19 @@ cookbook 'mysql-openstack',
 
 cookbook 'keystone',
   :git => 'https://github.com/mattray/keystone.git',
-  :ref => '5.0.0'
+  :ref => '2012.1.0'
 
 cookbook 'glance',
   :git => 'https://github.com/mattray/glance.git',
-  :ref => '5.0.0'
+  :ref => '2012.1.0'
 
 cookbook 'nova',
   :git => 'https://github.com/mattray/nova.git',
-  :ref => '5.0.0'
+  :ref => '2012.1.0'
 
 cookbook 'horizon',
   :git => 'https://github.com/mattray/horizon.git',
-  :ref => '5.0.0'
+  :ref => '2012.1.0'
 
 # cookbook 'swift',
 #   :git => 'https://github.com/mattray/swift.git',
