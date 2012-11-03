@@ -1,25 +1,57 @@
-* Current Focus
-** rebase with rcbops and compare
-** fix labsetup to use proper network configuration
-   I'm still having issues with the configuration of networking with my VMs but this appears to be related to configuration of my nova-compute hosts and will get documented in the prerequisites.
-   controller -> should run nova-network
-   compute -> should only run nova-network with FlatDHCP
-** glance-images
-   use Cirros and optional Ubuntu 12.04
+* Roadmap
+** docs
+** rcbops iteration merge
+** at&t pull requests
+** osops-utils merges
+** ohai dependencies
+** nova-networking vlan support (jay pipes)
+** enable floating IPs
+   nova-manage floating create --ip_range=10.0.111.128/25
+** lxc- calxeda
+** Folsom
+   Carl Perry's repos
+   If you want to help out with the testing and reporting of bugs on your 12.04 servers,  you will want the following in your /etc/apt/sources.list:
+   deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-proposed/folsom main
+   If you just want to install the latest version of Openstack on your 12.04 servers, you will want the following in your /etc/apt/sources.list:
+   deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/folsom main
+   Please report any bugs that you discover on launchpad as well. In the coming months, we will be making it easier to use Openstack on both newer releases of Ubuntu and back porting those changes to 12.04 users as well.
+** Quantum
+   nicira & openvswitch from dreamhost
+** Cinder
+   DreamHost?/Ceph
+** Swift
+
+** PostgreSQL
+   DreamHost & Qualcomm
+** Hyper-V
+   November at the OpenStack hack day
+** HA OpenStack
+   follow official documentation
+   pacemaker cookbook, pacemaker_service LWRP
+   Galera vs. MySQL MMR
+   RabbitMQ clustered?
+** Horizon-Skin cookbook
+   after horizon removes the default skin, let's add a cookbook for passing a logo or something
+
+** Ceilometer
+** Baremetal
+   calxeda working towards it
+** RHEL
+** IPv6
+   DreamHost is doing this somewhat.
+   Grizzly?
+* Technical Debt
 ** nova::volume
    what's broken?
    /dev/sdb?
    apt-get install tgt open-iscsi open-iscsi-utils ?
    service tgt start?
+
 ** rabbitmq-server
    rename to "messaging" role
    waiting on 1.5.2 with http://tickets.opscode.com/browse/COOK-1496
    is rabbit too brittle? Is Qpid a better longterm solution?
    rackspace is sending a rabbitmq::distro recipe
-** update cookbook dependencies
-** work on making Spiceweasel interface with Librarian is also in progress.
-* Technical Debt
-** Rackspace->Rackspace US, Inc.
 ** foodcritic all the cookbooks
    sure would be nice if you could turn off individual rules within a recipe
 ** TravisCI MVT testing
@@ -41,13 +73,6 @@
    make a glance::client for other cookbooks
    refactor the glance/image upload in glance::api to use more idempotent Chef resources, perhaps as a separate recipe for readability
    run as the glance user instead of sudo
-** environment provides networking
-   move the os-database and os-network attributes to an environment?
-   load balancers for services
-   short-circuits searches for osops-utils
-   need to update all searches to be environment-aware
-   nova-compute is currently setting up nova-network
-   update roles accordingly
 ** osops-utils
    waiting for partial search
    need to document this thoroughly to explain purpose
@@ -58,8 +83,6 @@
 ** nova::compute
    abstract out hypervisors and key off of attribute
    nova::network needs to move out
-** nova::volume
-   everything fails without this
 ** nova::vncproxy
    needs to break out xen vs. kvm support
 ** swift
@@ -94,7 +117,6 @@
 ** osops-utils
    drop the , _, _ from searches and use the response["total"] instead of checking length
 * Documentation
-** Convert to ReStructuredText
 ** Diagrams for Role/Cookbook relationships
    knife-spaghetti-roles
    Keystone
@@ -109,84 +131,3 @@
    document how to set all this up with Fusion/VirtualBox/Vagrant/KVM
 ** Alternate package HOWTO
 ** Testing Overview
-* Technical Roadmap
-** Swift
-** Horizon-Skin cookbook
-   after horizon removes the default skin, let's add a cookbook for passing a logo or something
-** LXC
-** Folsom
-If you want to help out with the testing and reporting of bugs on your 12.04 servers,  you will want the following in your /etc/apt/sources.list:
-deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-proposed/folsom main
-If you just want to install the latest version of Openstack on your 12.04 servers, you will want the following in your /etc/apt/sources.list:
-deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/folsom main
-Please report any bugs that you discover on launchpad as well. In the coming months, we will be making it easier to use Openstack on both newer releases of Ubuntu and back porting those changes to 12.04 users as well.
-** HA setups
-** Baremetal
-** Hyper-V
-** XenServer
-** PostgreSQL
-** Debian
-** Fedora
-** RHEL
-** OpenSuSE/SLES
-** IPv6
-   DreamHost is doing this somewhat.
-   Grizzly?
-* Weekly Status 9/14
-Not enough time has been spent on the project since the last status email, I've mostly been doing customer work and training sessions which have taken me away from testing, coding and documenting. Some of the training was with Rackspace's support team for the 'Alamo' project and we had an extensive walk-through of the current state of the cookbooks which was quite productive and highlighted many more areas for improvement.
-
-I've removed the os-database and os-network roles from the openstack-chef-repo and switched to using a "production" environment to enforce the settings. I felt this makes more sense to enforce the attributes and give greater visibility into the configuration. Docs are being updated accordingly.
-
-The Essex cookbooks are working and have been tested with the recently released Chef 10.14. I'll sync with AT&T and Rackspace's latest patches and push them to the Community site this week. Documentation efforts continue on pre-requisites for the operating systems and networking configuration as well as deploying Essex.
-
-Updates have been made to the following related projects and cookbooks:
-- Spiceweasel
-- pxe_dust cookbook (Chef 10.14 and Environments support!)
-- udev cookbook for reordering NICs
-- users
-- sudo
-
-The following cookbooks need to be updated and tested with the latest:
-- database
-- mysql
-- rabbitmq
-- apache2
-
-I'd also like to mention that baremetalcloud has been added to http://www.opscode.com/openstack/. They've generously offered free access for testing, I'll be sure to take them up on this once I start testing with more machines.
-
-
-
-* Weekly Status 9/21
-- Carl Perry starting Folsom, versioning
-- rcbops sync
-- osops-utils
-
-Updates have been made to the following related projects and cookbooks:
-- udev cookbook for reordering NICs
-
-The following cookbooks need to be updated and tested with the latest:
-- ntp
-- apache2
-- database
-- mysql
-- rabbitmq
-- sudo
-- users
-- openssh
-- yum
-- aws
-- xfs
-- build-essential
-
-
-RabbitMQ refactored to work with the distro release.
-
-) this is 5.0.0
-) update docs
-) push to opscode
-) push to community site
-) update wiki
-) switch up network to use eth1 too
-) enable floating IPs
-nova-manage floating create --ip_range=10.0.111.128/25
-) swift
