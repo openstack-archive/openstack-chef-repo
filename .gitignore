@@ -1,4 +1,5 @@
 .chef/checksums/
+.chef/bootstrap/
 *.pem
 *.swo
 *.swp
