@@ -2,11 +2,9 @@ Description
 ===========
 This repository contains the roles, environments and data bags for deploying an OpenStack **Essex** reference architecture using Chef. This currently includes the 5 OpenStack core projects: Nova, Glance, Keystone, Horizon and Swift(under development). Folsom development will begin very soon.
 
-Please use this `essex` branch to get the latest stable release. Once **Folsom** work is started, the `essex` branch will be merged back to the `master` branch and that will become active again.
+Please use the `2012.1.1` tag to get the latest `essex` release. Once **Folsom** work was started, the `essex` branch was merged back to the `master` branch. If you need further `essex` development after **Folsom** work has started, we can branch off of the tag.
 
-The documentation has been moved to the https://github.com/mattray/openstack-chef-docs repository. A public URL will be available soon, but instructions for building the docs are included and you can visit a temporary site here:
-
-http://15.185.230.54/
+The documentation has been moved to the https://github.com/mattray/openstack-chef-docs repository. A public URL will be available soon, but instructions for building the docs are included.
 
 This repository uses Librarian (https://github.com/applicationsonline/librarian) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to eventually publish all of the cookbook dependencies to the Opscode Community site.
 
@@ -29,7 +27,7 @@ spiceweasel infrastructure.yml
 To actually deploy the repository to your Chef server, run the following command:
 
 ```
-spiceweasel infrastructure.yml | sh
+spiceweasel -e infrastructure.yml
 ```
 
 Cookbooks

@@ -3,21 +3,29 @@
 
 site 'http://community.opscode.com/api/v1'
 
-cookbook 'ntp', '1.2.0'
-cookbook 'openssh', '1.1.0'
-cookbook 'apt', '1.5.0'
-cookbook 'yum', '1.0.0'
-cookbook 'build-essential', '1.1.2'
-cookbook 'erlang', '1.1.0'
+cookbook 'apache2', '1.4.2'
+cookbook 'apt', '1.8.0'
+cookbook 'aws', '0.100.6'
+cookbook 'build-essential', '1.3.2'
+cookbook 'ntp', '1.3.2'
+cookbook 'openssh', '1.1.2'
 cookbook 'openssl', '1.0.0'
-cookbook 'postgresql', '1.0.0'
-cookbook 'aws', '0.100.2'
-cookbook 'xfs', '1.0.0'
-cookbook 'database', '1.3.6'
-cookbook 'mysql', '1.3.0'
-cookbook 'rabbitmq', '1.6.4'
-cookbook 'apache2', '1.2.0'
-cookbook 'selinux', '0.5.2'
+cookbook 'postgresql', '2.1.0'
+cookbook 'selinux', '0.5.4'
+cookbook 'xfs', '1.1.0'
+cookbook 'yum', '2.0.6'
+cookbook 'erlang', '1.1.2'
+cookbook 'mysql', '2.1.0'
+cookbook 'rabbitmq', '1.8.0'
+cookbook 'database', '1.3.10'
+
+cookbook 'omnibus_updater', '0.1.0'
+cookbook 'lxc', '0.1.0'
+
+cookbook 'keystone', '2012.1.1'
+cookbook 'glance', '2012.1.1'
+cookbook 'nova', '2012.1.1'
+cookbook 'horizon', '2012.1.1'
 
 cookbook 'sysctl',
   :git => 'https://github.com/mattray/sysctl.git'
@@ -30,22 +38,6 @@ cookbook 'rabbitmq-openstack',
 
 cookbook 'mysql-openstack',
   :git => 'https://github.com/mattray/mysql-openstack.git'
-
-cookbook 'keystone',
-  :git => 'https://github.com/mattray/keystone.git',
-  :ref => '2012.1.0'
-
-cookbook 'glance',
-  :git => 'https://github.com/mattray/glance.git',
-  :ref => '2012.1.0'
-
-cookbook 'nova',
-  :git => 'https://github.com/mattray/nova.git',
-  :ref => '2012.1.0'
-
-cookbook 'horizon',
-  :git => 'https://github.com/mattray/horizon.git',
-  :ref => '2012.1.0'
 
 # cookbook 'swift',
 #   :git => 'https://github.com/mattray/swift.git',

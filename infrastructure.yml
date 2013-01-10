@@ -1,58 +1,58 @@
 cookbooks:
-- ntp: #used by base role
-  - 1.2.0
-- openssh: #used by base role
-  - 1.1.0
-- apt: #used by erlang
-  - 1.5.0
-- yum: #used by erlang
-  - 1.0.0
-- build-essential: # used by mysql
-  - 1.1.2
-- erlang: #used by rabbitmq-server role
-  - 1.1.0
-- rabbitmq: #used by rabbitmq-server role
-  - 1.6.4
-- openssl: #used by mysql
-  - 1.0.0
-- mysql: #used by mysql-master role
-  - 1.3.0
-- postgresql: #required by database
-  - 1.0.0
-- aws: #required by database
-  - 0.100.2
-- xfs: #required by database
-  - 1.0.0
-- database: #required by keystone
-  - 1.3.6
 - apache2: #required by horizon
-  - 1.2.0
+    version: 1.4.2
+- apt: #used by erlang
+    version: 1.8.0
+- aws: #required by database
+    version: 0.100.6
+- build-essential: # used by mysql
+    version: 1.3.2
+- ntp: #used by base role
+    version: 1.3.2
+- openssh: #used by base role
+    version: 1.1.2
+- openssl: #used by mysql
+    version: 1.0.0
+- postgresql: #required by database
+    version: 2.1.0
 - selinux: #required by nova
-  - 0.5.2
+    version: 0.5.4
+- xfs: #required by database
+    version: 1.1.0
+- yum: #used by erlang
+    version: 2.0.6
+- erlang: #used by rabbitmq-server role
+    version: 1.1.2
+- mysql: #used by mysql-master role
+    version: 2.1.0
+- rabbitmq: #used by rabbitmq-server role
+    version: 1.8.0
+- database: #required by keystone
+    version: 1.3.10
+- omnibus_updater: #required by lxc
+    version: 0.1.0
+- lxc: #for use instead of kvm
+    version: 0.1.0
 - sysctl: #required by nova
-  - 0.1.2
+    version: 0.1.2
 - osops-utils: #required by keystone
-  - 1.0.6
+    version: 1.0.6
 - mysql-openstack: #required by keystone
-  - 1.0.4
+    version: 1.0.4
 - rabbitmq-openstack: #required by keystone
-  - 1.0.4
+    version: 1.0.4
 - keystone: #used by keystone role
-  - 2012.1.0
+    version: 2012.1.1
 - glance: #used by glance roles
-  - 2012.1.0
+    version: 2012.1.1
 - nova: #used by nova roles
-  - 2012.1.0
+    version: 2012.1.1
 - horizon: #used by horizon-server role
-  - 2012.1.0
-
-environments:
-- production:
-
-data bags:
+    version: 2012.1.1
 
 roles:
   - base:
+  - lxc:
   - mysql-master:
   - rabbitmq-server:
   - keystone:
@@ -69,5 +69,10 @@ roles:
   - single-controller:
   - single-compute:
   - allinone:
+
+environments:
+- production:
+
+data bags:
 
 nodes:
