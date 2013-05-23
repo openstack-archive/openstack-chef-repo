@@ -21,6 +21,8 @@ knife[:openstack_username] = ENV['OS_USERNAME']
 knife[:openstack_password] = ENV['OS_PASSWORD']
 knife[:openstack_auth_url] = ENV['OS_AUTH_URL']
 knife[:openstack_tenant]   = ENV['OS_TENANT']
+knife[:identity_file]      = ENV['OS_IDENTITY_FILE']
 
 # require 'fog'
-# connection = Fog::Compute.new(:provider => 'OpenStack', :openstack_username => ENV['OS_USERNAME'], :openstack_auth_url => ENV['OS_AUTH_URL'], :openstack_api_key => ENV['OS_PASSWORD'] )
+# conn = Fog::Compute.new(:provider => 'OpenStack', :openstack_username => ENV['OS_USERNAME'], :openstack_auth_url => ENV['OS_AUTH_URL'], :openstack_api_key => ENV['OS_PASSWORD'] )
+#
