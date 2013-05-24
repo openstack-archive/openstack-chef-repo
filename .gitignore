@@ -1,6 +1,6 @@
 .chef/checksums/
 .chef/bootstrap/
-*.pem
+.chef/*.pem
 *.swo
 *.swp
 *~
