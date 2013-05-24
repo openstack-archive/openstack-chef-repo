@@ -11,10 +11,7 @@ chef_server_url          "https://api.opscode.com/organizations/#{ENV['ORGNAME']
 cache_type               'BasicFile'
 cache_options( :path => "#{current_dir}/checksums" )
 cookbook_path            ["#{current_dir}/../cookbooks"]
-
 role_path                ["#{current_dir}/../roles"]
-
-# all your credentials are belong to us
 
 # OpenStack
 knife[:openstack_username] = ENV['OS_USERNAME']
@@ -22,7 +19,3 @@ knife[:openstack_password] = ENV['OS_PASSWORD']
 knife[:openstack_auth_url] = ENV['OS_AUTH_URL']
 knife[:openstack_tenant]   = ENV['OS_TENANT']
 knife[:identity_file]      = ENV['OS_IDENTITY_FILE']
-
-# require 'fog'
-# conn = Fog::Compute.new(:provider => 'OpenStack', :openstack_username => ENV['OS_USERNAME'], :openstack_auth_url => ENV['OS_AUTH_URL'], :openstack_api_key => ENV['OS_PASSWORD'] )
-#
