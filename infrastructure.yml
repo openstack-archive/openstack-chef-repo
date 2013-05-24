@@ -1,78 +1,60 @@
+berksfile:
+    options: '--no-freeze --halt-on-frozen'
+
 cookbooks:
-- apache2: #required by horizon
-    version: 1.4.2
-- apt: #used by erlang
-    version: 1.8.4
-- aws: #required by database
-    version: 0.100.6
-- build-essential: # used by mysql
-    version: 1.3.4
-- ntp: #used by base role
-    version: 1.3.2
-- openssh: #used by base role
-    version: 1.1.4
-- openssl: #used by mysql
-    version: 1.0.0
-- postgresql: #required by database
-    version: 2.2.0
-- selinux: #required by nova
-    version: 0.5.6
-- xfs: #required by database
-    version: 1.1.0
-- yum: #used by erlang
-    version: 2.1.0
-- erlang: #used by rabbitmq-server role
-    version: 1.1.2
-- mysql: #used by mysql-master role
-    version: 2.1.2
-- rabbitmq: #used by rabbitmq-server role
-    version: 1.8.0
-- database: #required by keystone
-    version: 1.3.12
-- omnibus_updater: #required by lxc
-    version: 0.1.2
-- lxc: #for use instead of kvm
-    version: 0.1.0
-- sysctl: #required by nova
-    version: 0.1.2
-- osops-utils: #required by keystone
-    version: 1.0.6
-- mysql-openstack: #required by keystone
-    version: 1.0.4
-- rabbitmq-openstack: #required by keystone
-    version: 1.0.4
-- keystone: #used by keystone role
-    version: 2012.1.1
-- glance: #used by glance roles
-    version: 2012.1.1
-- nova: #used by nova roles
-    version: 2012.1.2
-- horizon: #used by horizon-server role
-    version: 2012.1.1
+# - openstack-common:
+# - openstack-block-storage:
+# - openstack-compute:
+# - openstack-dashboard:
+# - openstack-identity:
+# - openstack-image:
+# - openstack-metering:
+# - openstack-network:
+# - openstack-object-storage:
+# - openstack-ops-database:
+# - openstack-ops-messaging:
 
 roles:
-  - base:
-  - lxc:
-  - mysql-master:
-  - rabbitmq-server:
-  - keystone:
-  - glance-api:
-  - glance-registry:
-  - glance:
-  - nova-setup:
-  - nova-scheduler:
-  - nova-api-ec2:
-  - nova-api-os-compute:
-  - nova-volume:
-  - nova-vncproxy:
-  - horizon-server:
-  - single-controller:
-  - single-compute:
-  - allinone:
+- os-base:
+#- os-ops-messaging:
+#- os-ops-database:
+#- allinone-compute:
+#- os-compute-single-controller:
+- os-block-storage-api:
+- os-block-storage-scheduler:
+- os-block-storage-worker:
+- os-block-storage:
+- os-compute-api-ec2:
+- os-compute-api-metadata:
+- os-compute-api-os-compute:
+- os-compute-api:
+- os-compute-cert:
+- os-compute-scheduler:
+- os-compute-vncproxy:
+- os-compute-worker:
+- os-dashboard:
+- os-identity-api-admin:
+- os-identity-api:
+- os-identity:
+- os-identity:
+- os-image-api:
+- os-image-registry:
+- os-image:
+- os-image:
+#- os-network:
+#- os-object-storage-account:
+#- os-object-storage-container:
+#- os-object-storage-management:
+#- os-object-storage-object:
+#- os-object-storage-proxy:
+#- os-object-storage:
 
 environments:
-- production:
+- example:
 
 data bags:
 
 nodes:
+# - ubuntu2-1204.vm:
+#     run_list: role[os-ops-messaging],role[os-ops-database],role[os-identity],role[os-image]
+#     options: -i ~/.ssh/mray.pem -x mray --sudo -E example
