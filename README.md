@@ -1,22 +1,16 @@
-Description
-===========
-This repository contains the roles, environments and data bags for deploying an OpenStack **Essex** reference architecture using Chef. This currently includes the 5 OpenStack core projects: Nova, Glance, Keystone, Horizon and Swift(under development). Folsom development will begin very soon.
+# Description #
 
-Please use the `2012.1.1` tag to get the latest `essex` release. Once **Folsom** work was started, the `essex` branch was merged back to the `master` branch. If you need further `essex` development after **Folsom** work has started, we can branch off of the tag.
+This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Grizzly** reference architecture using Chef. This currently includes the 7 OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object and Block Storage.
 
-The documentation has been moved to the https://github.com/mattray/openstack-chef-docs repository. A public URL will be available soon, but instructions for building the docs are included.
+Development of the latest Stable release will continue on the `master` branch and releases tagged with `7.0.X`. Once development starts against OpenStack `master` or `havana`, this branch will move to `grizzly` and the appropriate branches will continue development.
 
-This repository uses Librarian (https://github.com/applicationsonline/librarian) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to eventually publish all of the cookbook dependencies to the Opscode Community site.
+The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.opscode.com. Instructions for building the docs are included in the repository. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
 
-There is also a Spiceweasel (http://bit.ly/spcwsl) manifest documenting all the community cookbooks (currently redundant with Librarian), roles, data bags and environments required to deploy OpenStack.
+# Usage #
 
-Usage
-=====
-To populate this Chef repository with the cookbooks for deploying, run the following command:
+This repository uses Berkshelf (https://berkshelf.com) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to eventually upstream all cookbook dependencies to the Opscode Community site. The [Berksfile](Berksfile) lists the current dependencies.
 
-```
-librarian-chef update
-```
+There is a Spiceweasel (http://bit.ly/spcwsl) [infrastructure.yml](infrastructure.yml) manifest documenting all the roles and environments required to deploy OpenStack.
 
 To see the commands necessary to push all of the files to the Chef server, run the following command:
 
@@ -30,54 +24,62 @@ To actually deploy the repository to your Chef server, run the following command
 spiceweasel -e infrastructure.yml
 ```
 
-Cookbooks
-=========
-The cookbooks have been designed and written in such a way that they can be used to deploy individual service components on _any_ of the nodes in the infrastructure; in short they can be used for single node 'all-in-one' installs (for testing), right up to multi/many node production installs. In order to achieve this flexibility, they make use of the [chef search](http://wiki.opscode.com/display/chef/Search) functionality, and therefore require that if you are deploying anything larger than a single node deployment, you use [chef server](http://wiki.opscode.com/display/chef/Chef+Server) to host your cookbooks rather than using Chef Solo. It is important to note that much of the search is driven by the roles wrapping the recipes, so use the roles to deploy rather than directly including recipes in your run lists.
+# Cookbooks #
 
-Each of the OpenStack services has its own cookbook and is available on the Chef Community site and on GitHub. Please refer to the `documentation` directory for more details on the roles for deploying them.
+The cookbooks have been designed and written in such a way that they can be used to deploy individual service components on _any_ of the nodes in the infrastructure; in short they can be used for single node 'all-in-one' installs (for testing), right up to multi/many node production installs. In order to achieve this flexibility, they are configured by attributes which may be used to override search. Chef 10 or later is currently required, but the intention is to [move to Chef 11 with the `havana` release](https://bugs.launchpad.net/openstack-chef/+bug/1183540) to take advantage of features such as [partial search](http://docs.opscode.com/essentials_search_partial.html). Ruby 1.9.x is considered the minimum supported version of Ruby as well. Most users of this repository test with the full-stack Chef 11 client and a Chef server (Chef Solo is not explicity supported).
 
-Glance
-------
-http://community.opscode.com/cookbooks/glance
+Each of the OpenStack services has its own cookbook and will eventually be available on the Chef Community site.
 
-http://github.com/mattray/glance
+## OpenStack Block Storage ##
 
-There is further documentation in the [Glance cookbook README.me](http://github.com/mattray/glance/blob/essex/README.md).
+http://github.com/stackforge/cookbook-openstack-block-storage/
 
-Horizon
---------
-http://community.opscode.com/cookbooks/horizon
+There is further documentation in the [OpenStack Block Storage cookbook README](http://github.com/stackforge/cookbook-openstack-block-storage/).
 
-http://github.com/mattray/horizon
+## OpenStack Compute ##
 
-There is further documentation in the [Horizon cookbook README.me](http://github.com/mattray/horizon/blob/essex/README.md).
+http://github.com/stackforge/cookbook-openstack-compute/
 
-Keystone
---------
-http://community.opscode.com/cookbooks/keystone
+There is further documentation in the [OpenStack Compute cookbook README](http://github.com/stackforge/cookbook-openstack-compute/).
 
-http://github.com/mattray/keystone
+## OpenStack Dashboard ##
 
-There is further documentation in the [Keystone cookbook README.me](http://github.com/mattray/keystone/blob/essex/README.md).
+http://github.com/stackforge/cookbook-openstack-dashboard/
 
-Nova
-----
-http://community.opscode.com/cookbooks/nova
+There is further documentation in the [OpenStack Dashboard cookbook README](http://github.com/stackforge/cookbook-openstack-dashboard/).
 
-http://github.com/mattray/nova
+## OpenStack Identity ##
 
-There is further documentation in the [Nova cookbook README.me](http://github.com/mattray/nova/blob/essex/README.md).
+http://github.com/stackforge/cookbook-openstack-identity/
 
-Swift
------
-http://community.opscode.com/cookbooks/swift
+There is further documentation in the [OpenStack Identity cookbook README](http://github.com/stackforge/cookbook-openstack-identity/).
 
-http://github.com/mattray/swift
+## OpenStack Image ##
 
-There is further documentation in the [Swift cookbook README.me](http://github.com/mattray/swift/blob/essex/README.md).
+http://github.com/stackforge/cookbook-openstack-image/
 
-License
-=======
+There is further documentation in the [OpenStack Image cookbook README](http://github.com/stackforge/cookbook-openstack-image/).
+
+## OpenStack Network ##
+
+Http://github.com/stackforge/cookbook-openstack-network/
+
+There is further documentation in the [OpenStack Network cookbook README](http://github.com/stackforge/cookbook-openstack-network/).
+
+## OpenStack Object Storage ##
+
+http://github.com/stackforge/cookbook-openstack-object-storage/
+
+There is further documentation in the [OpenStack Object Storage cookbook README](http://github.com/stackforge/cookbook-openstack-object-storage/).
+
+# License and Author #
+
+|                      |                                          |
+|:---------------------|:-----------------------------------------|
+| **Author**           | Matt Ray (<matt@opscode.com>)            |
+|                      |                                          |
+| **Copyright**        | Copyright (c) 2011-2013 Opscode, Inc.    |
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
