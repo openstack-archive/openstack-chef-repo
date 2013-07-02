@@ -1,0 +1,55 @@
+{
+    :nodes => {
+        :ops => {
+            :template => "ubuntu_1204",
+            :ipaddress => "10.0.3.10",
+            :environment => "testing",
+            :run_list => [
+                "role[os-ops-database]",
+                "role[os-ops-messaging]",
+                "role[os-ops-caching]",
+                "recipe[openstack-ops-database::openstack-db]"
+            ]
+        },
+        :controller => {
+            :template => "ubuntu_1204",
+            :ipaddress => "10.0.3.11",
+            :environment => "testing",
+            :run_list => [
+                "role[os-base]",
+                "role[os-identity]",
+                "role[os-image]",
+                "role[os-compute-api]",
+                "role[os-compute-scheduler]",
+                "role[os-compute-cert]",
+                "role[os-compute-vncproxy]",
+                "role[os-block-storage]",
+                "role[os-dashboard]"
+            ]
+        },
+        :compute => {
+            :template => "ubuntu_1204",
+            :ipaddress => "10.0.3.12",
+            :environment => "testing",
+            :run_list => [
+                "role[os-base]",
+                "role[os-compute-worker]"
+            ]
+        }
+    },
+    :clusters => {
+        :simple => [
+            "ops",
+            "controller",
+            "compute"
+        ]
+    },
+   :local_chef_server => {
+       :zero => false,
+       :berkshelf => true,
+       :librarian => false,
+       :enabled => true,
+       :auto_upload => true
+   },
+   :sudo => true
+}
