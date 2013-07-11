@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Approved+1: Jay Pipes <jaypipes@gmail.com>
+Code-Review+2: Jay Pipes <jaypipes@gmail.com>
+Code-Review+1: Jesse Nelson <spheromak@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 11 Jul 2013 21:05:15 +0000
+Reviewed-on: https://review.openstack.org/36669
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
