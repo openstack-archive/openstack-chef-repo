@@ -7,8 +7,14 @@ override_attributes(
     "root_network_acl" => "%"
   },
   "openstack" => {
-    "developer_mode" => true
+    "developer_mode" => true,
+    "identity" => {
+      "db" => {
+        "username" => "identity"
+      }
+    }
   }
+
   # "glance" => {
   #   "image_upload" => true,
   #   "images" => ["precise","cirros"],
