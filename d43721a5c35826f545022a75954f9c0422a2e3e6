@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Code-Review+2: Jay Pipes <jaypipes@gmail.com>
+Approved+1: Matt Ray <matthewhray@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 11 Sep 2013 23:12:01 +0000
+Reviewed-on: https://review.openstack.org/43770
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
