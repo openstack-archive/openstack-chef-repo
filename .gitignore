@@ -7,3 +7,9 @@
 .DS_Store
 /cookbooks
 /tmp
+.chef
+.bundle
+.berkshelf
+.vagabond
+berks.json
+.kitchen
