@@ -41,6 +41,10 @@ roles:
 - os-image-registry:
 - os-image:
 - os-image:
+- os-metering-api
+- os-metering-collector
+- os-metering-agent-central
+- os-metering-agent-compute
 #- os-network:
 #- os-object-storage-account:
 #- os-object-storage-container:
