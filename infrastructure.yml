@@ -2,63 +2,49 @@ berksfile:
     options: '--no-freeze --halt-on-frozen'
 
 cookbooks:
-# - openstack-common:
-# - openstack-block-storage:
-# - openstack-compute:
-# - openstack-dashboard:
-# - openstack-identity:
-# - openstack-image:
-# - openstack-metering:
-# - openstack-network:
-# - openstack-object-storage:
-# - openstack-ops-database:
-# - openstack-ops-messaging:
 
 roles:
+- allinone-compute:
+- os-compute-single-controller:
 - os-base:
-#- os-ops-messaging:
-#- os-ops-database:
-#- allinone-compute:
-#- os-compute-single-controller:
+- os-ops-caching:
+- os-ops-messaging:
+- os-ops-database:
+- os-block-storage:
 - os-block-storage-api:
 - os-block-storage-scheduler:
-- os-block-storage-worker:
-- os-block-storage:
+- os-block-storage-volume:
+- os-compute-api:
 - os-compute-api-ec2:
 - os-compute-api-metadata:
 - os-compute-api-os-compute:
-- os-compute-api:
 - os-compute-cert:
+- os-compute-conductor:
 - os-compute-scheduler:
+- os-compute-setup:
 - os-compute-vncproxy:
 - os-compute-worker:
 - os-dashboard:
-- os-identity-api-admin:
-- os-identity-api:
 - os-identity:
-- os-identity:
+- os-image:
 - os-image-api:
 - os-image-registry:
-- os-image:
-- os-image:
-- os-metering-api
-- os-metering-collector
-- os-metering-agent-central
-- os-metering-agent-compute
-#- os-network:
-#- os-object-storage-account:
-#- os-object-storage-container:
-#- os-object-storage-management:
-#- os-object-storage-object:
-#- os-object-storage-proxy:
-#- os-object-storage:
+- os-metering-agent-central:
+- os-metering-agent-compute:
+- os-metering-api:
+- os-metering-collector:
+- os-network:
+- os-object-storage:
+- os-object-storage-account:
+- os-object-storage-container:
+- os-object-storage-management:
+- os-object-storage-object:
+- os-object-storage-proxy:
 
 environments:
 - example:
+- testing:
 
 data bags:
 
 nodes:
-# - ubuntu2-1204.vm:
-#     run_list: role[os-ops-messaging],role[os-ops-database],role[os-identity],role[os-image]
-#     options: -i ~/.ssh/mray.pem -x mray --sudo -E example
