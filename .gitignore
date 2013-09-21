@@ -11,5 +11,7 @@
 .bundle
 .berkshelf
 .vagabond
+.vagrant
 berks.json
 .kitchen
+.zero-knife.rb
