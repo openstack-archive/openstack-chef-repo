@@ -29,19 +29,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_client do |chef|
     chef.environment = "vagrant"
-    chef.run_list = [ "recipe[apt]", "recipe[packages]" ]
-  end
-
-  # Hack ...    chef-zero provisioner doesn't understand .rb for roles.
-  config.vm.provision :shell, :inline => <<-SCRIPT
-    mkdir -p /tmp/fake_key
-    cp /etc/chef/client.pem /tmp/fake_key/fake.pem
-    knife role from file /vagrant/roles/* -c /vagrant/.zero-knife.rb
-  SCRIPT
-
-   config.vm.provision :chef_client do |chef|
-    chef.environment = "vagrant"
-    chef.run_list = [ "role[allinone-compute]" ]
+    chef.run_list = [ "recipe[apt::cacher-client]", "recipe[packages]", "role[allinone-compute]" ]
   end
 
   # Ubuntu 12.04 Config
@@ -59,5 +47,3 @@ Vagrant.configure("2") do |config|
   end
 
 end
-
-
