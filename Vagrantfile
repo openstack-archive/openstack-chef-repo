@@ -1,5 +1,4 @@
 Vagrant.require_plugin "vagrant-berkshelf"
-Vagrant.require_plugin "vagrant-cachier"
 Vagrant.require_plugin "vagrant-chef-zero"
 Vagrant.require_plugin "vagrant-omnibus"
 

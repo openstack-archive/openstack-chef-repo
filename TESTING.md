@@ -6,7 +6,6 @@ The allinone-compute role may be tested with Vagrant, currently with Ubuntu 12.0
 2. You must have a "sane" Ruby 1.9.3 environment.
 3. You must have the following Vagrant plugins:
     vagrant plugin install vagrant-berkshelf
-    vagrant plugin install vagrant-cachier
     vagrant plugin install vagrant-chef-zero
     vagrant plugin install vagrant-omnibus
 
