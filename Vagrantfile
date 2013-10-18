@@ -6,9 +6,6 @@ Vagrant.configure("2") do |config|
   # Berkshelf plugin configuration
   config.berkshelf.enabled = true
 
-  # Cachier plugin configuration
-  config.cache.auto_detect = true
-
   # Chef-Zero plugin configuration
   config.chef_zero.enabled = true
   config.chef_zero.chef_repo_path = "."
