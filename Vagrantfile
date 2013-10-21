@@ -13,6 +13,11 @@ Vagrant.configure("2") do |config|
   # Omnibus plugin configuration
   config.omnibus.chef_version = :latest
 
+  # Port forwarding rules, for access to openstack services
+  config.vm.network "forwarded_port", guest: 443, host: 8443     # dashboard-ssl
+  config.vm.network "forwarded_port", guest: 8773, host: 8773    # compute-ec2-api
+  config.vm.network "forwarded_port", guest: 8774, host: 8774    # compute-api
+
   # OpenStack-related settings
   config.vm.network "private_network", ip: "33.33.33.60"
   config.vm.network "private_network", ip: "192.168.100.60"
