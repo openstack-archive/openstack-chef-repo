@@ -34,6 +34,11 @@ roles:
 - os-metering-api:
 - os-metering-collector:
 - os-network:
+- os-network-server:
+- os-network-l3-agent:
+- os-network-dhcp-agent:
+- os-network-metadata-agent:
+- os-network-openvswitch:
 - os-object-storage:
 - os-object-storage-account:
 - os-object-storage-container:
