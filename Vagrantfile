@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
 
   # Port forwarding rules, for access to openstack services
   config.vm.network "forwarded_port", guest: 443, host: 8443     # dashboard-ssl
+  config.vm.network "forwarded_port", guest: 4000, host: 4000    # chef-zero
   config.vm.network "forwarded_port", guest: 8773, host: 8773    # compute-ec2-api
   config.vm.network "forwarded_port", guest: 8774, host: 8774    # compute-api
 
@@ -22,10 +23,10 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "33.33.33.60"
   config.vm.network "private_network", ip: "192.168.100.60"
   config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--cpus", 2]
-      vb.customize ["modifyvm", :id, "--memory", 2048]
-      vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-      vb.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
+    vb.customize ["modifyvm", :id, "--cpus", 2]
+    vb.customize ["modifyvm", :id, "--memory", 2048]
+    vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+    vb.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
   end
 
   config.vm.provision :chef_client do |chef|
