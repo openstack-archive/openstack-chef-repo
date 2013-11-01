@@ -3,9 +3,9 @@ description "Configures OpenStack networking, managed by attribute for either no
 run_list(
   "role[os-base]",
   "recipe[openstack-network::identity_registration]",
-  "recipe[openstack-network::server]",
-  "recipe[openstack-network::openvswitch]",
-  "recipe[openstack-network::l3_agent]",
-  "recipe[openstack-network::dhcp_agent]",
-  "recipe[openstack-network::metadata_agent]"
+  "role[os-network-server]",
+  "role[os-network-openvswitch]",
+  "role[os-network-l3-agent]",
+  "role[os-network-dhcp-agent]",
+  "role[os-network-metadata-agent]"
   )
