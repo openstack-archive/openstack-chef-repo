@@ -14,10 +14,10 @@ override_attributes(
       },
     },
     "image" => {
-      "image_upload" => false,
+      "image_upload" => true,
       "upload_images" => ["cirros"],
       "upload_image" => {
-        "cirros" => "https =>//launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
+        "cirros" => "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
       },
       "identity_service_chef_role" => "allinone-compute"
     },
