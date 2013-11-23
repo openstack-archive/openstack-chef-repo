@@ -31,7 +31,6 @@ To test with Ubuntu 13.04, run:
 
 Now you have an openstack, you'll probably want to be able to actually launch instances.
 
-
 ### Log into box,  prepare environment ###
 
     $ vagrant ssh ubuntu1204
@@ -46,9 +45,8 @@ Now you have an openstack, you'll probably want to be able to actually launch in
 ### Working with Glance images ###
 
     $ glance image-list
-    $ wget -q -O - https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img \
-        | glance image-create --name=cirros --disk-format=qcow2 --container-format=bare
-    $ glance image-list
+
+This will return the existing Cirros image which was included in the `vagrant` Environment.
 
 ### Working with Security Groups ###
 
@@ -63,18 +61,16 @@ Now you have an openstack, you'll probably want to be able to actually launch in
     $ ssh-keygen
     $ nova keypair-add --pub-key=/root/.ssh/id_rsa.pub testing
 
-
 ### Create an instance ###
 
     $ nova flavor-list
     $ nova boot --flavor=1 --image=cirros --security-groups=allow_ssh --key-name=testing testserver
 
-wait a few seconds and the run `nova list`  if Status is not Active, wait a few seconds and repeat.
+Wait a few seconds and the run `nova list` if Status is not Active, wait a few seconds and repeat.
 
 Once status is active you should be able to log in via ssh to the listed IP.
 
-    $ ssh 192.168.100.2
-
+    $ ssh cirros@192.168.100.2
 
 
 # Testing with Vagabond #
