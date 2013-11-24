@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
   end
 
   chef_environment = "vagrant"
-  chef_run_list = [ "recipe[packages]", "role[allinone-compute]" ]
+  chef_run_list = [ "role[allinone-compute]" ]
 
   # Ubuntu 12.04 Config
   config.vm.define :ubuntu1204 do |ubuntu1204|
