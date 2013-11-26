@@ -67,7 +67,7 @@
     "openstack-image": {
       "locked_version": "7.0.0",
       "git": "git://github.com/stackforge/cookbook-openstack-image.git",
-      "ref": "5a272d21494c012aa6ab8a29d536fcb39b11f7d5"
+      "ref": "722a973a09ef7c2d58ac010cd0659ca48a81c266"
     },
     "openstack-metering": {
       "locked_version": "7.0.4",
@@ -80,9 +80,9 @@
       "ref": "b2b237a78c755492b9e51110704da900257a666d"
     },
     "openstack-object-storage": {
-      "locked_version": "1.1.0",
+      "locked_version": "7.0.10",
       "git": "git://github.com/stackforge/cookbook-openstack-object-storage.git",
-      "ref": "305b536ab409f806615926a32e5f3bb404d94d38"
+      "ref": "2a522aedfb1f9fc0fc23b1b394309e76404d88f9"
     },
     "openstack-ops-database": {
       "locked_version": "7.0.0",
