@@ -43,17 +43,6 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  # Ubuntu 13.04 Config
-  config.vm.define :ubuntu1304 do |ubuntu1304|
-    ubuntu1304.vm.hostname = "ubuntu1304"
-    ubuntu1304.vm.box = "opscode-ubuntu-13.04"
-    ubuntu1304.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box"
-    ubuntu1304.vm.provision :chef_client do |chef|
-      chef.environment = chef_environment
-      chef.run_list = chef_run_list.unshift("recipe[apt::cacher-client]")
-    end
-  end
-
 # Centos 6.4 Config
   config.vm.define :centos64 do |centos64|
     centos64.vm.hostname = "centos64"

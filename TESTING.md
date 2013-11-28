@@ -2,7 +2,7 @@
 
 ## Prerequisites ##
 
-The allinone-compute role may be tested with Vagrant, currently with Ubuntu 12.04 and 13.04. You need the following prerequisites:
+The allinone-compute role may be tested with Vagrant, currently with Ubuntu 12.04. You need the following prerequisites:
 
 1. You must have Vagrant 1.2.1 or later installed.
 2. You must have a "sane" Ruby 1.9.3 environment.
@@ -22,10 +22,6 @@ __notes:__
 To test with Ubuntu 12.04, run:
 
     $ vagrant up ubuntu1204
-
-To test with Ubuntu 13.04, run:
-
-    $ vagrant up ubuntu1304
 
 ## Further testing ##
 
