@@ -29,6 +29,7 @@ roles:
 - os-image:
 - os-image-api:
 - os-image-registry:
+- os-image-upload:
 - os-metering-agent-central:
 - os-metering-agent-compute:
 - os-metering-api:

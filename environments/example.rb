@@ -10,7 +10,6 @@ override_attributes(
     "developer_mode" => true
   }
   # "glance" => {
-  #   "image_upload" => true,
   #   "images" => ["precise","cirros"],
   #   "image" => {
   #     "cirros" => "http://hypnotoad/cirros-0.3.0-x86_64-disk.img",
