@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Approved+1: Matt Ray <matthewhray@gmail.com>
+Code-Review+2: Matt Ray <matthewhray@gmail.com>
+Code-Review+2: Justin Shepherd <jshepher@rackspace.com>
+Code-Review+1: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 16 Dec 2013 15:45:47 +0000
+Reviewed-on: https://review.openstack.org/59727
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
