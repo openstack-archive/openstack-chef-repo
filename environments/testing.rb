@@ -221,7 +221,6 @@ override_attributes(
       },
       "debug" => true,
       "identity_service_chef_role" => "os-identity",
-      "image_upload" => true,
       "rabbit_server_chef_role" => "os-ops-messaging",
       "registry" => {
         "bind_interface" => "eth0"
