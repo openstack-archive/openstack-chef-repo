@@ -1,8 +1,8 @@
 # Description #
 
-This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Grizzly** reference architecture using Chef. This currently includes the 7 OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object and Block Storage.
+This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Havana** reference architecture using Chef. This currently includes all OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object Storage, Block Storage, Telemetry and Orchestration.
 
-Development of the latest Stable release will continue on the `master` branch and releases tagged with `7.0.X`. Once development starts against OpenStack `master` or `havana`, this branch will move to `grizzly` and the appropriate branches will continue development.
+Development of the latest Stable release will continue on the `master` branch and releases tagged with `8.0.X`. Once development starts against OpenStack `master` or `icehouse`, this branch will move to `stable/havana` and the appropriate branches will continue development.
 
 The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.opscode.com. Instructions for building the docs are included in the repository. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
 
