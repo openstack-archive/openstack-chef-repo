@@ -78,6 +78,9 @@ override_attributes(
       },
       "metering" => {
         "host" => "10.0.3.10"
+      },
+      "orchestration" => {
+        "host" => "10.0.3.10"
       }
     },
     "developer_mode" => true,
@@ -153,6 +156,18 @@ override_attributes(
         "scheme" => "http",
         "port" => "9696",
         "path" => "/v2"
+      },
+      "orchestration-api" => {
+        "host" => "10.0.3.11",
+        "scheme" => "http",
+        "port" => "8004",
+        "path" => "/v1/%(tenant_id)s"
+      },
+      "orchestration-api-cfn" => {
+        "host" => "10.0.3.11",
+        "scheme" => "http",
+        "port" => "8000",
+        "path" => "/v1"
       }
     },
     "identity" => {
