@@ -82,8 +82,10 @@ Please refer to the [TESTING.md](TESTING.md) for instructions for testing the re
 |:---------------------|:-----------------------------------------|
 | **Author**           | Matt Ray (<matt@opscode.com>)            |
 | **Author**           | Jay Pipes (<jaypipes@gmail.com>)         |
+| **Author**           | Chen Zhiwei (<zhiwchen@cn.ibm.com>)      |
 |                      |                                          |
 | **Copyright**        | Copyright (c) 2011-2013 Opscode, Inc.    |
+| **Copyright**        | Copyright (c) 2014 IBM, Corp.            |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
