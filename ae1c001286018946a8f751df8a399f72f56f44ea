@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Approved+1: Matt Ray <matthewhray@gmail.com>
+Code-Review+1: Darren Birkett <darren.birkett@gmail.com>
+Code-Review+2: Justin Shepherd <jshepher@rackspace.com>
+Code-Review+1: Andy McCrae <andy.mccrae@googlemail.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 20 Jan 2014 16:14:55 +0000
+Reviewed-on: https://review.openstack.org/67478
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
