@@ -1,0 +1,14 @@
+Verified+2: Jenkins
+Code-Review+1: Darren Birkett <darren.birkett@gmail.com>
+Code-Review+2: Justin Shepherd <jshepher@rackspace.com>
+Code-Review+1: Mathew Odden <mrodden@us.ibm.com>
+Approved+1: craigtracey <craigtracey@gmail.com>
+Code-Review+1: Mark Vanderwiel <vanderwl@us.ibm.com>
+Code-Review+1: Luis A. Garcia <luis@linux.vnet.ibm.com>
+Code-Review+1: Richard Theis <rtheis@us.ibm.com>
+Code-Review+1: Feng Ju <jufeng@cn.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 23 Jan 2014 17:19:54 +0000
+Reviewed-on: https://review.openstack.org/67840
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
