@@ -1,0 +1,48 @@
+{
+  "name": "vagrant-aio-nova",
+  "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the Vagrantfile-aio-nova vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using nova-network for the networking component",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "openstack": {
+      "developer_mode": true,
+      "image": {
+        "image_upload": true,
+        "upload_images": [
+          "cirros"
+        ],
+        "upload_image": {
+          "cirros": "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
+        }
+      },
+      "compute": {
+        "network": {
+          "public_interface": "eth1",
+          "service_type": "nova"
+        },
+        "config": {
+          "ram_allocation_ratio": 5.0
+        },
+        "libvirt": {
+          "virt_type": "qemu"
+        },
+        "networks": [
+          {
+            "label": "public",
+            "ipv4_cidr": "192.168.100.0/24",
+            "num_networks": "1",
+            "network_size": "255",
+            "bridge": "br100",
+            "bridge_dev": "eth1",
+            "dns1": "8.8.8.8",
+            "dns2": "8.8.4.4"
+          }
+        ]
+      }
+    }
+  }
+}
