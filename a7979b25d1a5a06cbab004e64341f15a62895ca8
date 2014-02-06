@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Approved+1: Matt Ray <matthewhray@gmail.com>
+Code-Review+2: Justin Shepherd <jshepher@rackspace.com>
+Code-Review+1: Christopher H. Laco <chris.laco@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 06 Feb 2014 20:27:15 +0000
+Reviewed-on: https://review.openstack.org/69385
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
