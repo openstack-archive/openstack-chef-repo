@@ -1,0 +1,86 @@
+{
+  "name": "vagrant-multi-neutron",
+  "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the Vagrantfile-multi-neutron vagrantfile. Defines the necessary attributes for a working mutltinode (1 controller/n computes) openstack deployment, using neutron (with gre tunnels between hosts) for the networking component.",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "mysql": {
+      "allow_remote_root": true,
+      "root_network_acl": "%"
+    },
+    "openstack": {
+      "identity": {
+        "bind_interface": "eth1"
+      },
+      "endpoints": {
+          "host": "192.168.3.60"
+      },
+      "developer_mode": true,
+      "mq": {
+        "host": "192.168.3.60",
+        "bind_interface": "eth1"
+      },
+      "db": {
+        "host": "192.168.3.60",
+        "bind_interface": "eth1"
+      },
+      "network": {
+        "debug": "True",
+        "dhcp": {
+          "enable_isolated_metadata": "True"
+        },
+        "metadata": {
+          "nova_metadata_ip": "192.168.3.60"
+        },
+        "openvswitch": {
+          "tunnel_id_ranges": "1:1000",
+          "enable_tunneling": "True",
+          "tenant_network_type": "gre",
+          "local_ip_interface": "eth2"
+        },
+        "api": {
+          "bind_interface": "eth1"
+        }
+      },
+      "image": {
+        "api": {
+          "bind_interface": "eth1"
+        },
+        "registry": {
+          "bind_interface": "eth1"
+        },
+        "image_upload": true,
+        "upload_images": [
+          "cirros",
+          "ubuntu"
+        ],
+        "upload_image": {
+          "ubuntu": "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-amd64-disk1.img",
+          "cirros": "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
+        }
+      },
+      "compute": {
+        "xvpvnc_proxy": {
+          "bind_interface": "eth1"
+        },
+        "novnc_proxy": {
+          "bind_interface": "eth1"
+        },
+        "libvirt": {
+          "virt_type": "qemu"
+        },
+        "network": {
+          "public_interface": "eth1",
+          "service_type": "neutron"
+        },
+        "config": {
+          "ram_allocation_ratio": 5.0
+        }
+      }
+    }
+  }
+}
