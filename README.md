@@ -23,6 +23,48 @@ To actually deploy the repository to your Chef server, run the following command
 ```
 spiceweasel -e infrastructure.yml
 ```
+# Databags #
+
+You need to have some databags when you run the stackforge without the developer_mode -> true.
+
+You need four databags : user_passwords, db_passwords, service_passwords, secrets
+
+Each data bag need the following item to be created.
+
+user_passwords
+  ITEM example :    {"id" : "admin", "admin" : "mypass"}
+    - admin
+    - monitoring
+    - guest
+
+db_passwords
+  ITEM example :    {"id" : "nova", "nova" : "mypass"}
+
+    - nova
+    - horizon
+    - keystone
+    - glance
+    - ceilometer
+    - neutron
+    - cinder
+    - heat
+    - dash
+
+service_passwords
+  ITEM example :    {"id" : "openstack-image", "openstack-image" : "mypass"}
+
+    - openstack-image
+    - openstack-compute
+    - openstack-block-storage
+    - openstack-orchestration
+    - openstack-network
+    - rbd
+
+secrets
+  ITEM example : {"id" : "openstack_identity_bootstrap_token", "openstack_identity_bootstrap_token" : "mytoken"}
+
+    - openstack_identity_bootstrap_token
+    - neutron_metadata_secret
 
 # Cookbooks #
 
