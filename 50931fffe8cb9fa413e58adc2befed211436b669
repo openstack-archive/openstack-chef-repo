@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Approved+1: Matt Ray <matthewhray@gmail.com>
+Code-Review+2: Justin Shepherd <jshepher@rackspace.com>
+Verified+1: Wherenow.org Jenkins CI <jenkins@wherenow.org>
+Submitted-by: Jenkins
+Submitted-at: Mon, 24 Feb 2014 17:13:41 +0000
+Reviewed-on: https://review.openstack.org/75208
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
