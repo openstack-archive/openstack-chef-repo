@@ -1,0 +1,149 @@
+# to use this vagrantfile, do either one of the following (not both):
+# 1) export VAGRANT_VAGRANTFILE=Vagrantfile-multi-neutron
+# 2) mv Vagrantfile-multi-neutron Vagrantfile
+#
+# and then use as normal:
+# vagrant up /centos65/
+# OR
+# vagrant up /ubuntu1204/
+# will boot the controller and compute node
+#
+# NOTE: due to needing to specify IP's in the environment, you can only run
+# either ubuntu or centos at one time
+
+Vagrant.require_version ">= 1.1"
+
+Vagrant.require_plugin "vagrant-berkshelf"
+Vagrant.require_plugin "vagrant-chef-zero"
+Vagrant.require_plugin "vagrant-omnibus"
+
+Vagrant.configure("2") do |config|
+  # Berkshelf plugin configuration
+  config.berkshelf.enabled = true
+
+  # Chef-Zero plugin configuration
+  config.chef_zero.enabled = true
+  config.chef_zero.chef_repo_path = "."
+
+  # Omnibus plugin configuration
+  config.omnibus.chef_version = :latest
+
+  # get local ip so that we can force chef zero onto a different port per
+  # machine, allowing for multiple simultaneous vagrant up runs
+  local_ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
+
+  # OpenStack-related settings
+  chef_environment = "vagrant-multi-neutron"
+
+    controller_run_list = [
+      "role[os-compute-single-controller-no-network]",
+      "recipe[openstack-network::identity_registration]",
+      "role[os-network-openvswitch]",
+      "role[os-network-dhcp-agent]",
+      "role[os-network-metadata-agent]",
+      "role[os-network-server]"
+    ]
+
+  # virtualbox provider settings
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--cpus", 2]
+    vb.customize ["modifyvm", :id, "--memory", 2048]
+    vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+    vb.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
+  end
+
+  #################################
+  # Ubuntu 12.04 controller       #
+  #################################
+
+  config.vm.define :ubuntu1204cont do |ubuntu1204cont|
+
+    ubuntu1204cont.vm.hostname = "ubuntu1204cont"
+
+    ubuntu1204cont.vm.box = "opscode-ubuntu-12.04"
+
+    ubuntu1204cont.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
+
+    ubuntu1204cont.vm.network "forwarded_port", guest: 443, host: 8443     # dashboard-ssl
+    ubuntu1204cont.vm.network "forwarded_port", guest: 8773, host: 8773    # compute-ec2-api
+    ubuntu1204cont.vm.network "forwarded_port", guest: 8774, host: 8774    # compute-api
+    ubuntu1204cont.vm.network "private_network", ip: "192.168.3.60"
+    ubuntu1204cont.vm.network "private_network", ip: "172.16.10.60"
+
+    ubuntu1204cont.vm.provision :chef_client do |chef|
+      chef.run_list = controller_run_list
+      chef.environment = chef_environment
+      chef.chef_server_url = "http://#{local_ip}:4001"
+    end
+  end
+
+  #################################
+  # Ubuntu 12.04 compute1         #
+  #################################
+
+  config.vm.define :ubuntu1204comp1 do |ubuntu1204comp1|
+
+    ubuntu1204comp1.vm.hostname = "ubuntu1204comp1"
+
+    ubuntu1204comp1.vm.box = "opscode-ubuntu-12.04"
+
+    ubuntu1204comp1.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
+
+    ubuntu1204comp1.vm.network "private_network", ip: "192.168.3.61"
+    ubuntu1204comp1.vm.network "private_network", ip: "172.16.10.61"
+
+    ubuntu1204comp1.vm.provision :chef_client do |chef|
+      chef.run_list = [ "role[os-compute-worker]","recipe[apt::cacher-client]" ]
+      chef.environment = chef_environment
+      chef.chef_server_url = "http://#{local_ip}:4001"
+    end
+  end
+
+  #################################
+  # CentOS 6.5 controller         #
+  #################################
+
+  config.vm.define :centos65cont do |centos65cont|
+
+    centos65cont.vm.hostname = "centos65cont"
+
+    centos65cont.vm.box = "opscode-centos-6.5"
+
+    centos65cont.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box"
+
+    centos65cont.vm.network "forwarded_port", guest: 443, host: 9443     # dashboard-ssl
+    centos65cont.vm.network "forwarded_port", guest: 8773, host: 9773    # compute-ec2-api
+    centos65cont.vm.network "forwarded_port", guest: 8774, host: 9774    # compute-api
+    centos65cont.vm.network "private_network", ip: "192.168.3.60"
+    centos65cont.vm.network "private_network", ip: "172.16.10.60"
+
+    centos65cont.vm.provision :chef_client do |chef|
+      chef.run_list = controller_run_list
+      chef.environment = chef_environment
+      chef.chef_server_url = "http://#{local_ip}:4002"
+    end
+  end
+
+  #################################
+  # CentOS 6.5 compute1           #
+  #################################
+
+  config.vm.define :centos65comp1 do |centos65comp1|
+
+    centos65comp1.vm.hostname = "centos65comp1"
+
+    centos65comp1.vm.box = "opscode-centos-6.5"
+
+    centos65comp1.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box"
+
+    centos65comp1.vm.network "private_network", ip: "192.168.3.61"
+    centos65comp1.vm.network "private_network", ip: "172.16.10.61"
+
+    centos65comp1.vm.provision :chef_client do |chef|
+      chef.run_list = [ "role[os-compute-worker]" ]
+      chef.environment = chef_environment
+      chef.chef_server_url = "http://#{local_ip}:4002"
+    end
+  end
+
+end
