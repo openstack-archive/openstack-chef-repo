@@ -1,7 +1,7 @@
 site :opscode
 
 cookbook 'apache2', '1.8.4'
-cookbook 'apt', '2.2.0'
+cookbook 'apt', '2.3.8'
 cookbook 'aws', '0.101.6'
 cookbook 'build-essential', '1.4.2'
 cookbook 'database', '1.5.2'
