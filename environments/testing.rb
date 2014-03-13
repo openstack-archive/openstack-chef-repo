@@ -76,7 +76,7 @@ override_attributes(
       "dashboard" => {
         "host" => "10.0.3.10"
       },
-      "metering" => {
+      "telemetry" => {
         "host" => "10.0.3.10"
       },
       "orchestration" => {
@@ -145,7 +145,7 @@ override_attributes(
         "port" => "8776",
         "path" => "/v1/%(tenant_id)s"
       },
-      "metering-api" => {
+      "telemetry-api" => {
         "host" => "10.0.3.11",
         "scheme" => "http",
         "port" => "8777",

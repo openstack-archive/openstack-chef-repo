@@ -30,10 +30,10 @@ roles:
 - os-image-api:
 - os-image-registry:
 - os-image-upload:
-- os-metering-agent-central:
-- os-metering-agent-compute:
-- os-metering-api:
-- os-metering-collector:
+- os-telemetry-agent-central:
+- os-telemetry-agent-compute:
+- os-telemetry-api:
+- os-telemetry-collector:
 - os-network:
 - os-network-server:
 - os-network-l3-agent:
