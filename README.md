@@ -34,7 +34,6 @@ Each data bag need the following item to be created.
 user_passwords
   ITEM example :    {"id" : "admin", "admin" : "mypass"}
     - admin
-    - monitoring
     - guest
 
 db_passwords
