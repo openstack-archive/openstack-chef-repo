@@ -2,3 +2,4 @@
 host=review.openstack.org
 port=29418
 project=stackforge/openstack-chef-repo.git
+defaultbranch=stable/havana
