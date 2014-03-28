@@ -1,6 +1,8 @@
 # CHANGELOG for openstack-chef-repo
 
 This file is used to list changes made in each version of openstack-chef-repo
+## 9.0.0
+* Upgrade to Icehouse
 
 ## 8.0.0:
 

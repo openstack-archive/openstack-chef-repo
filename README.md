@@ -1,8 +1,8 @@
 # Description #
 
-This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Havana** reference architecture using Chef. This currently includes all OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object Storage, Block Storage, Telemetry and Orchestration.
+This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Icehouse** reference architecture using Chef. This currently includes all OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object Storage, Block Storage, Telemetry and Orchestration.
 
-Development of the latest Stable release will continue on the `master` branch and releases tagged with `8.0.X`. Once development starts against OpenStack `master` or `icehouse`, this branch will move to `stable/havana` and the appropriate branches will continue development.
+Development of the latest Stable release will continue on the `master` branch and releases tagged with `9.0.X`. Once development starts against OpenStack `master` or `juno`, this branch will move to `stable/icehouse` and the appropriate branches will continue development.
 
 The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.opscode.com. Instructions for building the docs are included in the repository. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
 
@@ -67,7 +67,7 @@ secrets
 
 # Cookbooks #
 
-The cookbooks have been designed and written in such a way that they can be used to deploy individual service components on _any_ of the nodes in the infrastructure; in short they can be used for single node 'all-in-one' installs (for testing), right up to multi/many node production installs. In order to achieve this flexibility, they are configured by attributes which may be used to override search. Chef 10 or later is currently required, but the intention is to [move to Chef 11 with the `havana` release](https://bugs.launchpad.net/openstack-chef/+bug/1183540) to take advantage of features such as [partial search](http://docs.opscode.com/essentials_search_partial.html). Ruby 1.9.x is considered the minimum supported version of Ruby as well. Most users of this repository test with the full-stack Chef 11 client and a Chef server (Chef Solo is not explicity supported).
+The cookbooks have been designed and written in such a way that they can be used to deploy individual service components on _any_ of the nodes in the infrastructure; in short they can be used for single node 'all-in-one' installs (for testing), right up to multi/many node production installs. In order to achieve this flexibility, they are configured by attributes which may be used to override search. Chef 11 or later is currently required. Ruby 1.9.x is considered the minimum supported version of Ruby as well. Most users of this repository test with the full-stack Chef 11 client and a Chef server (Chef Solo is not explicity supported).
 
 Each of the OpenStack services has its own cookbook and will eventually be available on the Chef Community site.
 
