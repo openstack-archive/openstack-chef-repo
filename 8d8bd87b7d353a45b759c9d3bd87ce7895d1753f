@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Approved+1: Andy McCrae <andy.mccrae@googlemail.com>
+Code-Review+2: Andy McCrae <andy.mccrae@googlemail.com>
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 04 Apr 2014 15:13:52 +0000
+Reviewed-on: https://review.openstack.org/83904
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/stable/havana
