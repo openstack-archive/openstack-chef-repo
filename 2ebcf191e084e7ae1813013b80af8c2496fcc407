@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Justin Shepherd <jshepher@rackspace.com>
+Approved+1: Andy McCrae <andy.mccrae@googlemail.com>
+Code-Review+2: Andy McCrae <andy.mccrae@googlemail.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 10 Apr 2014 08:46:29 +0000
+Reviewed-on: https://review.openstack.org/83809
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
