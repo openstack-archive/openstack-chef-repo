@@ -9,7 +9,8 @@
   "chef_type": "role",
   "run_list": [
     "role[os-compute-single-controller]",
-    "role[os-compute-worker]"
+    "role[os-compute-worker]",
+    "recipe[openstack-common::openrc]"
   ],
   "env_run_lists": {
   }

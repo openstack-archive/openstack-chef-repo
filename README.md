@@ -124,6 +124,7 @@ Please refer to the [TESTING.md](TESTING.md) for instructions for testing the re
 | **Author**           | Matt Ray (<matt@opscode.com>)            |
 | **Author**           | Jay Pipes (<jaypipes@gmail.com>)         |
 | **Author**           | Chen Zhiwei (<zhiwchen@cn.ibm.com>)      |
+| **Author**           | Mark Vanderwiel (<vanderwl.us.ibm.com>)  |
 |                      |                                          |
 | **Copyright**        | Copyright (c) 2011-2013 Opscode, Inc.    |
 | **Copyright**        | Copyright (c) 2014 IBM, Corp.            |
