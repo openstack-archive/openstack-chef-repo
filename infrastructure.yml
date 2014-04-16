@@ -14,6 +14,7 @@ roles:
 - os-block-storage-api:
 - os-block-storage-scheduler:
 - os-block-storage-volume:
+- os-client:
 - os-compute-api:
 - os-compute-api-ec2:
 - os-compute-api-metadata:

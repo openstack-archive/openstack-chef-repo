@@ -1,6 +1,9 @@
 # CHANGELOG for openstack-chef-repo
 
 This file is used to list changes made in each version of openstack-chef-repo
+## 9.0.1
+* Add client role
+
 ## 9.0.0
 * Upgrade to Icehouse
 
