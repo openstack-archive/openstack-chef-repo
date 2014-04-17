@@ -40,19 +40,19 @@
       "locked_version": "3.1.4"
     },
     "openstack-block-storage": {
-      "locked_version": "8.4.1",
+      "locked_version": "8.4.2",
       "git": "git://github.com/stackforge/cookbook-openstack-block-storage.git",
-      "ref": "2101de517678f55273a8078e74cfcdd805aefe4a"
+      "ref": "96f3da5551192423893a10a1dce12ba720c23acc"
     },
     "openstack-common": {
       "locked_version": "8.5.0",
       "git": "git://github.com/stackforge/cookbook-openstack-common.git",
-      "ref": "30c55743d0a3dc8399f412ec13acb7a0d8cdcd0c"
+      "ref": "3e9264d94b0cc0d30705408aa82ae538c482d2bb"
     },
     "openstack-compute": {
-      "locked_version": "8.4.2",
+      "locked_version": "8.4.3",
       "git": "git://github.com/stackforge/cookbook-openstack-compute.git",
-      "ref": "3faf96e0f4132eeed593795fa7b15c5bd4188d89"
+      "ref": "3490aacc2f4b7538558452cc51ebe86f527e2f89"
     },
     "openstack-dashboard": {
       "locked_version": "8.1.1",
@@ -60,9 +60,9 @@
       "ref": "d965afb91f21174e6156ddb8695dcad24e083c0a"
     },
     "openstack-identity": {
-      "locked_version": "8.1.3",
+      "locked_version": "8.1.4",
       "git": "git://github.com/stackforge/cookbook-openstack-identity.git",
-      "ref": "ef39c687d48c4674532deaa271555e323d37d46a"
+      "ref": "d3d1e34a63e2fe5f3764149a38378070956e1756"
     },
     "openstack-image": {
       "locked_version": "8.2.1",
