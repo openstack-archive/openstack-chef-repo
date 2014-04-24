@@ -10,6 +10,11 @@
   "override_attributes": {
     "openstack": {
       "developer_mode": true,
+      "endpoints": {
+        "identity-bind": {
+          "host": "0.0.0.0"
+        }
+      },
       "image": {
         "image_upload": true,
         "upload_images": [

@@ -25,6 +25,11 @@
           "host": "192.168.3.60"
         },
         "developer_mode": true,
+        "endpoints": {
+          "identity-bind": {
+            "host": "0.0.0.0"
+          }
+        },
         "network": {
           "debug": "True",
           "dhcp": {

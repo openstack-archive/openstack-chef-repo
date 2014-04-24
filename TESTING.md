@@ -10,12 +10,29 @@ The allinone-compute role may be tested with Vagrant, currently with Ubuntu 12.0
 
     $ vagrant plugin install vagrant-omnibus
     $ vagrant plugin install vagrant-chef-zero
-    $ vagrant plugin install vagrant-berkshelf
 
 __notes:__
 
-* Vagrant plugins must be installed in the described order.
-* If you have issues with berkshelf,  you may need to use a previous version of vagrant-chef-zero.
+* vagrant-berkshelf is no longer used: https://sethvargo.com/the-future-of-vagrant-berkshelf/
+
+## Install the gem dependencies for use with bundler
+
+    $ bundle install --path=.bundle
+
+## Upload all of your cookbooks with Berkshelf
+
+    $ bundle exec berks install --path=.cookbooks
+
+## Decide which Vagrant instance you wish to use
+
+There are several Vagrant files available:
+* Vagrantfile-aio-neutron: single compute node with Neutron
+* Vagrantfile-aio-nova: single compute node with nova-network
+* Vagrantfile-multi-neutron: seprate controller and compute nodes
+
+Set an environment file to specify which Vagrantfile to use, for example:
+
+    export VAGRANT_VAGRANTFILE=Vagrantfile-aio-nova
 
 ## Starting the allinone-compute node ##
 
@@ -60,7 +77,7 @@ This will return the existing Cirros image which was included in the `vagrant` E
 ### Create an instance ###
 
     $ nova flavor-list
-    $ nova boot --flavor=1 --image=cirros --security-groups=allow_ssh --key-name=testing testserver
+    $ nova boot --flavor=1 --image=cirros --security-groups=allow_ssh --key-name=testing testserver --poll
 
 Wait a few seconds and the run `nova list` if Status is not Active, wait a few seconds and repeat.
 
@@ -68,6 +85,11 @@ Once status is active you should be able to log in via ssh to the listed IP.
 
     $ ssh cirros@192.168.100.2
 
+### Interacting with your OpenStack Deployment
+
+The ports for your VM have been forwarded, so you may attach to the Dashboard and APIs from your workstation. Please refer to the Vagrant file you use for their mappings. The ubuntu1204 vagrant-aio-nova is reachable at:
+
+   https://127.0.0.1:8443
 
 # Testing with Vagabond #
 

@@ -10,6 +10,11 @@
   "override_attributes": {
     "openstack": {
       "developer_mode": true,
+      "endpoints": {
+        "identity-bind": {
+          "host": "0.0.0.0"
+        }
+      },
       "network": {
         "openvswitch": {
           "local_ip_interface": "eth1"
