@@ -1,0 +1,16 @@
+{
+  "name": "os-orchestration-engine",
+  "description": "Role for Heat Engine Service.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-orchestration::engine]"
+  ],
+  "env_run_lists": {
+  }
+}

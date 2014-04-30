@@ -1,0 +1,16 @@
+{
+  "name": "os-network-dhcp-agent",
+  "description": "OpenStack network dhcp-agent service",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-network::dhcp_agent]"
+  ],
+  "env_run_lists": {
+  }
+}

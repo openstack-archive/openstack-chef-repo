@@ -1,0 +1,16 @@
+{
+  "name": "os-image-upload",
+  "description": "Glance image upload",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-image::image_upload]"
+  ],
+  "env_run_lists": {
+  }
+}

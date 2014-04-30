@@ -1,0 +1,16 @@
+{
+  "name": "os-orchestration-api",
+  "description": "Role for Heat Api Service.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-orchestration::api]"
+  ],
+  "env_run_lists": {
+  }
+}

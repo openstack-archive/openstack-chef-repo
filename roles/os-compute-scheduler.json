@@ -1,0 +1,16 @@
+{
+  "name": "os-compute-scheduler",
+  "description": "Nova scheduler",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-compute::scheduler]"
+  ],
+  "env_run_lists": {
+  }
+}

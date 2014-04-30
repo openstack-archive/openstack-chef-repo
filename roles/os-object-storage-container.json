@@ -1,0 +1,16 @@
+{
+  "name": "os-object-storage-container",
+  "description": "OpenStack object storage container service",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-object-storage::container]"
+  ],
+  "env_run_lists": {
+  }
+}

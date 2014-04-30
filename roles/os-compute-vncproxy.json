@@ -1,0 +1,16 @@
+{
+  "name": "os-compute-vncproxy",
+  "description": "Nova VNC Proxy",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-compute::vncproxy]"
+  ],
+  "env_run_lists": {
+  }
+}

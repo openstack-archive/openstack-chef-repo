@@ -1,0 +1,19 @@
+{
+  "name": "os-compute-api",
+  "description": "Roll-up role for all the Compute APIs",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "role[os-compute-api-ec2]",
+    "role[os-compute-api-os-compute]",
+    "role[os-compute-api-metadata]",
+    "recipe[openstack-compute::identity_registration]"
+  ],
+  "env_run_lists": {
+  }
+}
