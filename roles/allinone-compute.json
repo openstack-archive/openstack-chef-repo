@@ -8,6 +8,7 @@
   },
   "chef_type": "role",
   "run_list": [
+    "role[os-ops-caching]",
     "role[os-compute-single-controller]",
     "role[os-compute-worker]",
     "recipe[openstack-common::openrc]"
