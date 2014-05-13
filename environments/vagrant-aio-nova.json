@@ -10,6 +10,11 @@
   "override_attributes": {
     "openstack": {
       "developer_mode": true,
+      "identity": {
+        "catalog": {
+          "backend": "templated"
+        }
+      },
       "endpoints": {
         "identity-bind": {
           "host": "0.0.0.0"
