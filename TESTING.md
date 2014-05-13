@@ -10,12 +10,29 @@ The allinone-compute role may be tested with Vagrant, currently with Ubuntu 12.0
 
     $ vagrant plugin install vagrant-omnibus
     $ vagrant plugin install vagrant-chef-zero
-    $ vagrant plugin install vagrant-berkshelf
 
 __notes:__
 
-* Vagrant plugins must be installed in the described order.
-* If you have issues with berkshelf,  you may need to use a previous version of vagrant-chef-zero.
+* vagrant-berkshelf is no longer used: https://sethvargo.com/the-future-of-vagrant-berkshelf/
+
+## Install the gem dependencies for use with bundler
+
+    $ bundle install --path=.bundle
+
+## Upload all of your cookbooks with Berkshelf
+
+    $ bundle exec berks install --path=.cookbooks
+
+## Decide which Vagrant instance you wish to use
+
+There are several Vagrant files available:
+* Vagrantfile-aio-neutron: single compute node with Neutron
+* Vagrantfile-aio-nova: single compute node with nova-network
+* Vagrantfile-multi-neutron: seprate controller and compute nodes
+
+Set an environment file to specify which Vagrantfile to use, for example:
+
+    $ export VAGRANT_VAGRANTFILE=Vagrantfile-aio-nova
 
 ## Starting the allinone-compute node ##
 
