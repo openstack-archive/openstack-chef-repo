@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Andy McCrae <andy.mccrae@googlemail.com>
+Workflow+1: Andy McCrae <andy.mccrae@googlemail.com>
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 14 May 2014 22:04:03 +0000
+Reviewed-on: https://review.openstack.org/93504
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
