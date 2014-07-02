@@ -16,6 +16,7 @@ cookbook 'xfs', '1.1.0'
 cookbook 'yum', '3.1.4'
 cookbook 'selinux', '0.7.2'
 cookbook 'yum-epel', '0.3.4'
+cookbook 'galera', '0.4.1'
 cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
 
 cookbook 'openstack-block-storage', github: 'stackforge/cookbook-openstack-block-storage'
