@@ -1,0 +1,24 @@
+{
+  "name": "galera_cluster",
+  "description": "Environment used in testing the MySQL galera cluster.",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "openstack": {
+      "db": {
+        "service_type": "galera"
+      }
+    },
+    "mysql": {
+	  "bin_dir": "/usr/bin",
+      "mysql_bin": "/usr/bin/mysql",
+      "server_root_password": "pass1234",
+      "server": {
+        "socket" : "/var/run/mysqld/mysqld.sock"
+    }
+  }
+}

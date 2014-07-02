@@ -113,6 +113,44 @@ http://github.com/stackforge/cookbook-openstack-object-storage/
 
 There is further documentation in the [OpenStack Object Storage cookbook README](http://github.com/stackforge/cookbook-openstack-object-storage/).
 
+## Galera ##
+
+http://community.opscode.com/cookbooks/galera
+
+There is further documentation in the [Galera cookbook README](http://community.opscode.com/cookbooks/galera/source).
+
+Data bag:
+
+s9s_galera / config.json
+-------------------------
+        {
+          "id": "config",
+          "mysql_wsrep_tarball_x86_64": "mysql-5.5.29_wsrep_23.7.3-linux-x86_64.tar.gz",
+          "mysql_wsrep_tarball_i686": "mysql-5.5.29_wsrep_23.7.3-linux-i686.tar.gz",
+          "galera_package_i386": {
+            "deb": "galera-23.2.4-i386.deb",
+            "rpm": "galera-23.2.4-1.rhel5.i386.rpm"},
+          "galera_package_x86_64": {
+            "deb": "galera-23.2.4-amd64.deb",
+            "rpm": "galera-23.2.4-1.rhel5.x86_64.rpm"
+          },
+          "mysql_wsrep_source": "https://launchpad.net/codership-mysql/5.5/5.5.29-23.7.3/+download",
+          "galera_source": "https://launchpad.net/galera/2.x/23.2.4/+download",
+          "sst_method": "rsync",
+          "init_node": "192.168.122.12",
+          "galera_nodes": [
+             "192.168.122.12",
+             "192.168.122.14",
+             "192.168.122.16"
+            ],
+           "secure": "yes",
+           "update_wsrep_urls": "yes"
+        }
+        
+Attrbitues:
+* ['mysql']['root_password'] = "password"
+* ['mysql']['tunable']['buffer_pool_size'] = "256M"
+
 # Testing #
 
 Please refer to the [TESTING.md](TESTING.md) for instructions for testing the repository and cookbooks with Vagrant or Vagabond.
