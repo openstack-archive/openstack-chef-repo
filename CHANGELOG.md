@@ -1,6 +1,9 @@
 # CHANGELOG for openstack-chef-repo
 
 This file is used to list changes made in each version of openstack-chef-repo
+## 9.1.0
+* Bump berkshelf to 2.0.18
+
 ## 9.0.2
 * Add new openrc recipe to all in one role for demos and testing
 
