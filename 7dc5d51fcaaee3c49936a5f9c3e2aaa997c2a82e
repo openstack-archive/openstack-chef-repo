@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Workflow+1: Matt Ray <matthewhray@gmail.com>
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Verified+1: Wherenow.org Jenkins CI <jenkins@wherenow.org>
+Code-Review+1: JJ Asghar <jj@getchef.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 10 Jul 2014 17:50:26 +0000
+Reviewed-on: https://review.openstack.org/105872
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
