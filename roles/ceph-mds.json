@@ -1,0 +1,16 @@
+{
+  "name": "ceph-mds",
+  "description": "Ceph Metadata Server",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[ceph::repo]",
+    "recipe[ceph::mds]"
+  ],
+  "env_run_lists": {
+  }
+}

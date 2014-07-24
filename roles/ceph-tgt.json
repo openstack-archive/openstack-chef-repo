@@ -1,0 +1,16 @@
+{
+  "name": "ceph-tgt",
+  "description": "Ceph iSCSI Target",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[ceph::repo]",
+    "recipe[ceph::tgt]"
+  ],
+  "env_run_lists": {
+  }
+}

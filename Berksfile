@@ -19,6 +19,7 @@ cookbook 'selinux', '0.7.2'
 cookbook 'yum-epel', '0.3.4'
 cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
 
+cookbook 'ceph', github: 'stackforge/cookbook-ceph'
 cookbook 'openstack-block-storage', github: 'stackforge/cookbook-openstack-block-storage'
 cookbook 'openstack-common', github: 'stackforge/cookbook-openstack-common'
 cookbook 'openstack-compute', github: 'stackforge/cookbook-openstack-compute'

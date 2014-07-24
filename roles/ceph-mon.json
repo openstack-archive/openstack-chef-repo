@@ -1,0 +1,16 @@
+{
+  "name": "ceph-mon",
+  "description": "Ceph Monitor",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[ceph::repo]",
+    "recipe[ceph::mon]"
+  ],
+  "env_run_lists": {
+  }
+}
