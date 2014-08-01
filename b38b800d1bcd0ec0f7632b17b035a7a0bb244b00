@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Salman Baset <sabaset@us.ibm.com>
+Workflow+1: Salman Baset <sabaset@us.ibm.com>
+Code-Review+2: JJ Asghar <jj@getchef.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 01 Aug 2014 21:45:17 +0000
+Reviewed-on: https://review.openstack.org/111345
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
