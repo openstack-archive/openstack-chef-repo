@@ -5,14 +5,13 @@
 *.swp
 *~
 .DS_Store
-/cookbooks
 /tmp
 .chef
 .bundle
+.cookbooks
 .berkshelf
 .vagabond
 .vagrant
 berks.json
 .kitchen
 .zero-knife.rb
-Berksfile.lock
