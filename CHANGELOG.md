@@ -1,6 +1,9 @@
 # CHANGELOG for openstack-chef-repo
 
 This file is used to list changes made in each version of openstack-chef-repo
+## 10.0.0
+* Update to Juno
+
 ## 9.1.0
 * Bump berkshelf to 2.0.18
 

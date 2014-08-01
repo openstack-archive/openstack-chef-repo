@@ -1,8 +1,8 @@
 # Description #
 
-This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Icehouse** reference architecture using Chef. This currently includes all OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object Storage, Block Storage, Telemetry and Orchestration.
+This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Juno** reference architecture using Chef. This currently includes all OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object Storage, Block Storage, Telemetry and Orchestration.
 
-Development of the latest Stable release will continue on the `master` branch and releases tagged with `9.0.X`. Once development starts against OpenStack `master` or `juno`, this branch will move to `stable/icehouse` and the appropriate branches will continue development.
+Development of the latest OpenStack release will continue on the `master` branch and releases tagged with `10.0.X`. Once development starts against OpenStack `k' release, this branch will move to `stable/juno` and the appropriate branches will continue development.
 
 The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.opscode.com. Instructions for building the docs are included in the repository. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
 
