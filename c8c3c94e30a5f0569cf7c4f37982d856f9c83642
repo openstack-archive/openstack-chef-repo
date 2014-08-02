@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Justin Shepherd <jshepher@rackspace.com>
+Workflow+1: Justin Shepherd <jshepher@rackspace.com>
+Code-Review+2: Salman Baset <sabaset@us.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Sat, 02 Aug 2014 23:01:39 +0000
+Reviewed-on: https://review.openstack.org/111346
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/stable/icehouse
