@@ -36,6 +36,12 @@ user_passwords
     - admin
     - guest
 
+```bash
+for item in admin guest ; do
+ knife data bag create user_passw $p --secret-file ~/.chef/openstack_data_bag_secret;
+done
+```
+
 db_passwords
   ITEM example :    {"id" : "nova", "nova" : "mypass"}
 
@@ -49,6 +55,12 @@ db_passwords
     - heat
     - dash
 
+```bash
+for item in nova horizon keystone glance ceilmeter neutron cinder heat dash ; do
+ knife data bag create db_passwords $p --secret-file ~/.chef/openstack_data_bag_secret;
+done
+```
+
 service_passwords
   ITEM example :    {"id" : "openstack-image", "openstack-image" : "mypass"}
 
@@ -59,11 +71,23 @@ service_passwords
     - openstack-network
     - rbd
 
+```bash
+for item in openstack-image openstack-compute openstack-block-storage openstack-orchestration openstack-network rbd ; do
+ knife data bag create service_passwords $p --secret-file ~/.chef/openstack_data_bag_secret;
+done
+```
+
 secrets
   ITEM example : {"id" : "openstack_identity_bootstrap_token", "openstack_identity_bootstrap_token" : "mytoken"}
 
     - openstack_identity_bootstrap_token
     - neutron_metadata_secret
+
+```bash
+for item in openstack_identity_bootstrap_token neutron_metadata_secret ; do
+ knife data bag create secrets $p --secret-file ~/.chef/openstack_data_bag_secret;
+done
+```
 
 # Cookbooks #
 
