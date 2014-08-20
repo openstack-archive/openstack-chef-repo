@@ -21,7 +21,7 @@ __notes:__
 
 ## Upload all of your cookbooks with Berkshelf
 
-    $ bundle exec berks install --path=.cookbooks
+    $ bundle exec berks vendor .cookbooks
 
 ## Decide which Vagrant instance you wish to use
 
