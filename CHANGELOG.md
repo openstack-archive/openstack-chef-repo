@@ -3,6 +3,7 @@
 This file is used to list changes made in each version of openstack-chef-repo
 ## 10.0.0
 * Update to Juno
+* Bump mysql and mysql-chef to required levels for Juno
 
 ## 9.1.0
 * Bump berkshelf to 2.0.18
