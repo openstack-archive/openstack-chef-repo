@@ -2,11 +2,11 @@
 
 This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Juno** reference architecture using Chef. This currently includes all OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object Storage, Block Storage, Telemetry and Orchestration.
 
-Development of the latest OpenStack release will continue on the `master` branch and releases tagged with `10.0.X`. Once development starts against OpenStack `k' release, this branch will move to `stable/juno` and the appropriate branches will continue development.
+Development of the latest OpenStack release will continue on the `master` branch and releases tagged with `10.0.X`. Once development starts against OpenStack `k` release, this branch will move to `stable/juno` and the appropriate branches will continue development.
 
 The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.opscode.com. Instructions for building the docs are included in the repository. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
 
-# Usage #
+# Usage with Chef Server #
 
 This repository uses Berkshelf (https://berkshelf.com) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to eventually upstream all cookbook dependencies to the Opscode Community site. The [Berksfile](Berksfile) lists the current dependencies. Note that berks will resolve version requirements and dependencies on first run and store these in Berksfile.lock. If new cookbooks become available you can run `berks update` to update the references in Berksfile.lock. Berksfile.lock will be included in stable branches to provide a known good set of dependencies. Berksfile.lock will not be included in development branches to encourage development against the latest cookbooks.
 
@@ -23,6 +23,60 @@ To actually deploy the repository to your Chef server, run the following command
 ```
 spiceweasel -e infrastructure.yml
 ```
+
+# Usage with Chef Zero #
+
+[Chef Zero](http://www.getchef.com/blog/2013/10/31/chef-client-z-from-zero-to-chef-in-8-5-seconds/) is Chef local mode, without Chef server.
+
+## Install Chef
+
+```
+curl -L https://www.opscode.com/chef/install.sh | bash
+```
+
+## Checkout cookbooks
+
+```
+git clone https://github.com/stackforge/openstack-chef-repo
+cd openstack-chef-repo
+/opt/chef/embedded/bin/gem install berkshelf
+/opt/chef/embedded/bin/berks install --path=./cookbooks
+```
+
+TODO(zhiwei): Need to change `berks install` to `berks vendor` after upgrading Berkshelf to 3.x.
+
+## Prepare Chef environment
+
+Here is a minimal [environment file](environments/zero-demo.json).
+
+```
+{
+  "name": "zero_demo",
+  "override_attributes": {
+    "mysql": {
+      "server_root_password": "ilikerandompasswords"
+    },
+    "openstack": {
+      "developer_mode": true
+      }
+    }
+  }
+}
+```
+
+## Start to deploy
+
+Note that `your_node_name` below is your node's hostname.
+
+```
+cd openstack-chef-repo
+chef-client -z
+knife node -z add run_list your_node_name 'role[allinone-compute]'
+chef-client -z -E zero_demo
+```
+
+If there are no errors in output, congratulations!
+
 # Databags #
 
 You need to have some databags when you run the stackforge without the developer_mode -> true.
