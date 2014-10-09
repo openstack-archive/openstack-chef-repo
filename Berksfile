@@ -1,4 +1,4 @@
-site :opscode
+source "https://supermarket.getchef.com"
 
 cookbook 'apache2', '1.9.6'
 cookbook 'apt', '2.3.8'
