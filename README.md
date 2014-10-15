@@ -92,7 +92,7 @@ user_passwords
 
 ```bash
 for item in admin guest ; do
- knife data bag create user_passw $p --secret-file ~/.chef/openstack_data_bag_secret;
+ knife data bag create user_passwords $p --secret-file ~/.chef/openstack_data_bag_secret;
 done
 ```
 
