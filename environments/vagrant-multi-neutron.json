@@ -10,9 +10,10 @@
   "override_attributes": {
     "mysql": {
       "allow_remote_root": true,
-      "root_network_acl": "%"
+      "root_network_acl": ["%"]
     },
     "openstack": {
+      "developer_mode": true,
       "identity": {
         "bind_interface": "eth1"
       },
@@ -24,7 +25,6 @@
         "db": {
           "host": "192.168.3.60"
         },
-        "developer_mode": true,
         "network": {
           "debug": "True",
           "dhcp": {

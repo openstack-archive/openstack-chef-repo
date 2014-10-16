@@ -1,12 +1,11 @@
 {
   "name": "zero_demo",
   "override_attributes": {
-    "mysql": {
-      "server_root_password": "ilikerandompasswords"
-    },
-    "openstack": {
-      "developer_mode": true
+      "mysql": {
+          "server_root_password": "ilikerandompasswords"
+      },
+      "openstack": {
+          "developer_mode": true
       }
-    }
   }
 }
