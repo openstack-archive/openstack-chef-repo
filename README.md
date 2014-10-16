@@ -40,10 +40,8 @@ curl -L https://www.opscode.com/chef/install.sh | bash
 git clone https://github.com/stackforge/openstack-chef-repo
 cd openstack-chef-repo
 /opt/chef/embedded/bin/gem install berkshelf
-/opt/chef/embedded/bin/berks install --path=./cookbooks
+/opt/chef/embedded/bin/berks vendor ./cookbooks
 ```
-
-TODO(zhiwei): Need to change `berks install` to `berks vendor` after upgrading Berkshelf to 3.x.
 
 ## Prepare Chef environment
 
@@ -53,13 +51,12 @@ Here is a minimal [environment file](environments/zero-demo.json).
 {
   "name": "zero_demo",
   "override_attributes": {
-    "mysql": {
-      "server_root_password": "ilikerandompasswords"
-    },
-    "openstack": {
-      "developer_mode": true
+      "mysql": {
+          "server_root_password": "ilikerandompasswords"
+      },
+      "openstack": {
+          "developer_mode": true
       }
-    }
   }
 }
 ```
@@ -72,7 +69,7 @@ Note that `your_node_name` below is your node's hostname.
 cd openstack-chef-repo
 chef-client -z
 knife node -z add run_list your_node_name 'role[allinone-compute]'
-chef-client -z -E zero_demo
+chef-client -z -E zero-demo
 ```
 
 If there are no errors in output, congratulations!
