@@ -58,7 +58,6 @@ Here is a minimal [environment file](environments/zero-demo.json).
     },
     "openstack": {
       "developer_mode": true
-      }
     }
   }
 }
