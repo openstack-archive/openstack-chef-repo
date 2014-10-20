@@ -1,5 +1,5 @@
 {
-  "name": "zero_demo",
+  "name": "zero-demo",
   "override_attributes": {
     "mysql": {
       "server_root_password": "ilikerandompasswords"

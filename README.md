@@ -51,7 +51,7 @@ Here is a minimal [environment file](environments/zero-demo.json).
 
 ```
 {
-  "name": "zero_demo",
+  "name": "zero-demo",
   "override_attributes": {
     "mysql": {
       "server_root_password": "ilikerandompasswords"
@@ -72,7 +72,7 @@ Note that `your_node_name` below is your node's hostname.
 cd openstack-chef-repo
 chef-client -z
 knife node -z add run_list your_node_name 'role[allinone-compute]'
-chef-client -z -E zero_demo
+chef-client -z -E zero-demo
 ```
 
 If there are no errors in output, congratulations!
