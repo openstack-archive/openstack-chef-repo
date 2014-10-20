@@ -40,10 +40,8 @@ curl -L https://www.opscode.com/chef/install.sh | bash
 git clone https://github.com/stackforge/openstack-chef-repo
 cd openstack-chef-repo
 /opt/chef/embedded/bin/gem install berkshelf
-/opt/chef/embedded/bin/berks install --path=./cookbooks
+/opt/chef/embedded/bin/berks vendor ./cookbooks
 ```
-
-TODO(zhiwei): Need to change `berks install` to `berks vendor` after upgrading Berkshelf to 3.x.
 
 ## Prepare Chef environment
 
