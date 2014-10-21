@@ -70,7 +70,7 @@ Note that `your_node_name` below is your node's hostname.
 ```
 cd openstack-chef-repo
 chef-client -z
-knife node -z add run_list your_node_name 'role[allinone-compute]'
+knife node -z run_list add your_node_name 'role[allinone-compute]'
 chef-client -z -E zero-demo
 ```
 
