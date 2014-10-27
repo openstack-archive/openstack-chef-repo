@@ -1,6 +1,9 @@
 # CHANGELOG for openstack-chef-repo
 
 This file is used to list changes made in each version of openstack-chef-repo
+## 9.2.1
+* Update lock for dashboard, OpenStack security note OSSN-0039
+
 ## 9.2.0
 * Lock down for stable icehouse branch
 

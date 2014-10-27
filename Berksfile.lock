@@ -74,7 +74,7 @@
     "openstack-dashboard": {
       "locked_version": "9.1.0",
       "git": "git://github.com/stackforge/cookbook-openstack-dashboard.git",
-      "ref": "b3e58a09faef1799b956fbd9e3e3282a36894ffc"
+      "ref": "40de484ce72f1fa8ee37abb4392ef95bd11e337f"
     },
     "openstack-identity": {
       "locked_version": "9.3.1",
