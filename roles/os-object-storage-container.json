@@ -9,7 +9,7 @@
   "chef_type": "role",
   "run_list": [
     "role[os-base]",
-    "recipe[openstack-object-storage::container]"
+    "recipe[openstack-object-storage::container-server]"
   ],
   "env_run_lists": {
   }
