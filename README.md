@@ -4,11 +4,11 @@ This repository contains examples of the roles, environments and other supportin
 
 Development of the latest OpenStack release will continue on the `master` branch and releases tagged with `10.0.X`. Once development starts against OpenStack `k` release, this branch will move to `stable/juno` and the appropriate branches will continue development.
 
-The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.opscode.com. Instructions for building the docs are included in the repository. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
+The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.getchef.com/openstack_develop.html. Instructions for building the docs are included in the repository. The documentation for Chef is available at http://docs.getchef.com. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
 
 # Usage with Chef Server #
 
-This repository uses Berkshelf (https://berkshelf.com) to manage downloading all of the proper cookbook versions, whether from Git or from the Opscode Community site (https://community.opscode.com). The preference is to eventually upstream all cookbook dependencies to the Opscode Community site. The [Berksfile](Berksfile) lists the current dependencies. Note that berks will resolve version requirements and dependencies on first run and store these in Berksfile.lock. If new cookbooks become available you can run `berks update` to update the references in Berksfile.lock. Berksfile.lock will be included in stable branches to provide a known good set of dependencies. Berksfile.lock will not be included in development branches to encourage development against the latest cookbooks.
+This repository uses Berkshelf (https://berkshelf.com) to manage downloading all of the proper cookbook versions, whether from Git or from the Chef Supermarket site (https://supermarket.getchef.com/). The preference is to eventually upstream all cookbook dependencies to the Chef Supermarket site. The [Berksfile](Berksfile) lists the current dependencies. Note that berks will resolve version requirements and dependencies on first run and store these in Berksfile.lock. If new cookbooks become available you can run `berks update` to update the references in Berksfile.lock. Berksfile.lock will be included in stable branches to provide a known good set of dependencies. Berksfile.lock will not be included in development branches to encourage development against the latest cookbooks.
 
 There is a Spiceweasel (http://bit.ly/spcwsl) [infrastructure.yml](infrastructure.yml) manifest documenting all the roles and environments required to deploy OpenStack.
 
@@ -31,7 +31,7 @@ spiceweasel -e infrastructure.yml
 ## Install Chef
 
 ```
-curl -L https://www.opscode.com/chef/install.sh | bash
+curl -L https://www.getchef.com/chef/install.sh | sudo bash
 ```
 
 ## Checkout cookbooks
@@ -194,15 +194,16 @@ Please refer to the [TESTING.md](TESTING.md) for instructions for testing the re
 
 # License and Author #
 
-|                      |                                          |
-|:---------------------|:-----------------------------------------|
-| **Author**           | Matt Ray (<matt@opscode.com>)            |
-| **Author**           | Jay Pipes (<jaypipes@gmail.com>)         |
-| **Author**           | Chen Zhiwei (<zhiwchen@cn.ibm.com>)      |
-| **Author**           | Mark Vanderwiel (<vanderwl.us.ibm.com>)  |
-|                      |                                          |
-| **Copyright**        | Copyright (c) 2011-2013 Opscode, Inc.    |
-| **Copyright**        | Copyright (c) 2014 IBM, Corp.            |
+|                      |                                              |
+|:---------------------|:---------------------------------------------|
+| **Author**           | Matt Ray (<matt@opscode.com>)                |
+| **Author**           | Jay Pipes (<jaypipes@gmail.com>)             |
+| **Author**           | Chen Zhiwei (<zhiwchen@cn.ibm.com>)          |
+| **Author**           | Juergen Brueder (<juergen.brueder@gmail.com>)  |
+| **Author**           | Mark Vanderwiel (<vanderwl.us.ibm.com>)      |
+|                      |                                              |
+| **Copyright**        | Copyright (c) 2011-2013 Opscode, Inc.        |
+| **Copyright**        | Copyright (c) 2014 IBM, Corp.                |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
