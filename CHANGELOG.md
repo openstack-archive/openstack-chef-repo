@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of openstack-chef-repo
 
+## 8.0.1:
+
+* Updating Berkshelf to 2.0.18 to fix bug #1338972
+
 ## 8.0.0:
 
 * Updating to Havana
