@@ -24,6 +24,76 @@ To actually deploy the repository to your Chef server, run the following command
 spiceweasel -e infrastructure.yml
 ```
 
+# Usage with Chef Server manual steps #
+
+## Perpare Chef Server
+
+### Pre-condition
+
+Make sure your Chef server's hostname is resolvable(i.e. ping your hostname will show the IP address).
+
+### Install Chef Server
+
+Download Chef server package from here: <https://www.chef.io/download-open-source-chef-server-11/>
+
+Install the file using the correct method for your system.
+
+For Debain using `dpkg -i chef-server.deb`, for RHEL using `rpm -i chef-server.rpm`.
+
+### Configure Chef Server
+
+    chef-server-ctl reconfigure
+
+## Prepare Chef Workstation
+
+Usually we setup the Chef workstation on Chef server node.
+
+### Install Chef
+
+    curl -L https://www.chef.io/chef/install.sh | bash
+
+### Configure Chef Workstation
+
+    knife ssl fetch
+    knife configure -y -i --defaults -r ''
+
+## Prepare Chef repository
+
+### Download OpenStack Chef cookbooks
+
+    git clone https://github.com/stackforge/openstack-chef-repo
+    cd openstack-chef-repo
+    /opt/chef/embedded/bin/gem install berkshelf
+    /opt/chef/embedded/bin/berks vendor ./cookbooks
+
+### Upload Chef roles and cookbooks
+
+    cd openstack-chef-repo
+    knife role from file ./roles/*.json
+    knife cookbook upload --cookbook-path ./cookbooks --all
+
+### Create and upload Chef environment
+
+    cd openstack-chef-repo
+    cp environments/example.json environments/your_environment.json
+    knife environment from file environments/your_environment.json
+
+NOTE: Your should update the necessary attributes in `environments/your_environment.json`.
+
+## Start deploy OpenStack
+
+Make sure your nodes can connect Chef server through Chef server's hostname/FQDN.
+
+### Deploy an allinone environment
+
+    knife bootstrap allinone_node_ip -E your_environment -r 'role[allinone-compute]'
+
+### Deploy a controller + compute environment
+
+    knife bootstrap controller_node_ip -E your_environment -r 'role[os-compute-single-controller]'
+    knife bootstrap compute_node1_ip -E your_environment -r 'role[os-compute-worker],role[os-telemetry-agent-compute]'
+    knife bootstrap compute_node2_ip -E your_environment -r 'role[os-compute-worker],role[os-telemetry-agent-compute]'
+
 # Usage with Chef Zero #
 
 [Chef Zero](http://www.getchef.com/blog/2013/10/31/chef-client-z-from-zero-to-chef-in-8-5-seconds/) is Chef local mode, without Chef server.
@@ -67,9 +137,7 @@ Note that `your_node_name` below is your node's hostname.
 
 ```
 cd openstack-chef-repo
-chef-client -z
-knife node -z run_list add your_node_name 'role[allinone-compute]'
-chef-client -z -E zero-demo
+chef-client -z -E zero-demo -r 'role[allinone-compute]'
 ```
 
 If there are no errors in output, congratulations!
@@ -200,10 +268,10 @@ Please refer to the [TESTING.md](TESTING.md) for instructions for testing the re
 | **Author**           | Jay Pipes (<jaypipes@gmail.com>)             |
 | **Author**           | Chen Zhiwei (<zhiwchen@cn.ibm.com>)          |
 | **Author**           | Juergen Brueder (<juergen.brueder@gmail.com>)  |
-| **Author**           | Mark Vanderwiel (<vanderwl.us.ibm.com>)      |
+| **Author**           | Mark Vanderwiel (<vanderwl@us.ibm.com>)      |
 |                      |                                              |
 | **Copyright**        | Copyright (c) 2011-2013 Opscode, Inc.        |
-| **Copyright**        | Copyright (c) 2014 IBM, Corp.                |
+| **Copyright**        | Copyright (c) 2014-2015 IBM, Corp.           |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

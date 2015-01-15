@@ -1,0 +1,15 @@
+{
+  "name": "CHANGE_TO_YOUR_ENVIRONMENT_NAME",
+  "override_attributes": {
+    "mysql": {
+      "server_root_password": "ilikerandompasswords"
+    },
+    "openstack": {
+      "use_databags": false,
+      "endpoints": {
+        "host": "CHANGE_TO_YOUR_CONTROLLER_IP",
+        "bind-host": "0.0.0.0"
+      }
+    }
+  }
+}
