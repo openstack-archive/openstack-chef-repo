@@ -5,11 +5,6 @@ cookbooks:
 
 roles:
 - allinone-compute:
-- ceph-mds:
-- ceph-mon:
-- ceph-osd:
-- ceph-radosgw:
-- ceph-tgt:
 - os-compute-single-controller:
 - os-base:
 - os-ops-caching:

@@ -1,6 +1,6 @@
 source "https://supermarket.getchef.com"
 
-cookbook 'apache2', '1.9.6'
+cookbook 'apache2', '3.0.0'
 cookbook 'apt', '2.3.8'
 cookbook 'aws', '2.1.1'
 cookbook 'build-essential', '1.4.2'
@@ -18,8 +18,8 @@ cookbook 'yum', '3.1.4'
 cookbook 'selinux', '0.7.2'
 cookbook 'yum-epel', '0.3.4'
 cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
+cookbook 'ceph', github: 'ceph/ceph-cookbook'
 
-cookbook 'ceph', github: 'stackforge/cookbook-ceph'
 cookbook 'openstack-block-storage', github: 'stackforge/cookbook-openstack-block-storage'
 cookbook 'openstack-common', github: 'stackforge/cookbook-openstack-common'
 cookbook 'openstack-compute', github: 'stackforge/cookbook-openstack-compute'

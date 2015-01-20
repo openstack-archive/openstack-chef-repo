@@ -7,6 +7,7 @@ This file is used to list changes made in each version of openstack-chef-repo
 * Bump Chef gem to 11.16
 * update berkshelf from 2.0.18 to 3.1.5
 * Fix object storage recipe names
+* Cleanup ceph cookbook, replace with upstream ceph cookbook
 
 ## 9.1.0
 * Bump berkshelf to 2.0.18
