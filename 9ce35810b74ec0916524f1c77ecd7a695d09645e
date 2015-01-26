@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Workflow+1: JJ Asghar <jj@getchef.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 26 Jan 2015 19:53:06 +0000
+Reviewed-on: https://review.openstack.org/147472
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
