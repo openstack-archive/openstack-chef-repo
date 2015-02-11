@@ -29,10 +29,6 @@ Vagrant.configure("2") do |config|
   # Omnibus plugin configuration
   config.omnibus.chef_version = :latest
 
-  # get local ip so that we can force chef zero onto a different port per
-  # machine, allowing for multiple simultaneous vagrant up runs
-  local_ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
-
   # OpenStack-related settings
   config.vm.network "private_network", ip: "192.168.100.60"
   chef_environment = "vagrant-aio-nova"
@@ -68,12 +64,12 @@ Vagrant.configure("2") do |config|
     ubuntu1404.vm.network "forwarded_port", guest: 8774, host: 8774    # compute-api
     ubuntu1404.vm.network "forwarded_port", guest: 35357, host: 35357  # identity-admin-api
 
-    ubuntu1404.vm.provision :chef_client do |chef|
+    ubuntu1404.vm.provision :chef_zero do |chef|
       chef.environment = chef_environment
+      chef.environments_path = './environments'
+      chef.roles_path = './roles'
       chef.run_list = chef_run_list.unshift("recipe[apt::cacher-client]")
-      chef.chef_server_url        = "http://#{local_ip}:4002"
     end
-
   end
 
   #######################
@@ -97,12 +93,11 @@ Vagrant.configure("2") do |config|
     centos65.vm.network "forwarded_port", guest: 8774, host: 9774    # compute-api
     centos65.vm.network "forwarded_port", guest: 4001, host: 4001    # chef-zero
 
-    centos65.vm.provision :chef_client do |chef|
+    centos65.vm.provision :chef_zero do |chef|
       chef.environment = chef_environment
       chef.run_list = chef_run_list
-      chef.chef_server_url        = "http://#{local_ip}:4001"
+      chef.environments_path = './environments'
+      chef.roles_path = './roles'
     end
-
   end
-
 end
