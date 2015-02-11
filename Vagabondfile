@@ -1,7 +1,7 @@
 {
     :nodes => {
         :ops => {
-            :template => "ubuntu_1204",
+            :template => "ubuntu_1404",
             :ipaddress => "10.0.3.10",
             :environment => "testing",
             :run_list => [
@@ -12,7 +12,7 @@
             ]
         },
         :controller => {
-            :template => "ubuntu_1204",
+            :template => "ubuntu_1404",
             :ipaddress => "10.0.3.11",
             :environment => "testing",
             :run_list => [
@@ -28,7 +28,7 @@
             ]
         },
         :compute => {
-            :template => "ubuntu_1204",
+            :template => "ubuntu_1404",
             :ipaddress => "10.0.3.12",
             :environment => "testing",
             :run_list => [

@@ -5,7 +5,7 @@
 # and then use as normal:
 # vagrant up /centos65/
 # OR
-# vagrant up /ubuntu1204/
+# vagrant up /ubuntu1404/
 # will boot the controller and compute node
 #
 # NOTE: due to needing to specify IP's in the environment, you can only run
@@ -53,24 +53,24 @@ Vagrant.configure("2") do |config|
   end
 
   #################################
-  # Ubuntu 12.04 controller       #
+  # Ubuntu 14.04 controller       #
   #################################
 
-  config.vm.define :ubuntu1204cont do |ubuntu1204cont|
+  config.vm.define :ubuntu1404cont do |ubuntu1404cont|
 
-    ubuntu1204cont.vm.hostname = "ubuntu1204cont"
+    ubuntu1404cont.vm.hostname = "ubuntu1404cont"
 
-    ubuntu1204cont.vm.box = "opscode-ubuntu-12.04"
+    ubuntu1404cont.vm.box = "opscode-ubuntu-14.04"
 
-    ubuntu1204cont.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
+    ubuntu1404cont.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
 
-    ubuntu1204cont.vm.network "forwarded_port", guest: 443, host: 8443     # dashboard-ssl
-    ubuntu1204cont.vm.network "forwarded_port", guest: 8773, host: 8773    # compute-ec2-api
-    ubuntu1204cont.vm.network "forwarded_port", guest: 8774, host: 8774    # compute-api
-    ubuntu1204cont.vm.network "private_network", ip: "192.168.3.60"
-    ubuntu1204cont.vm.network "private_network", ip: "172.16.10.60"
+    ubuntu1404cont.vm.network "forwarded_port", guest: 443, host: 8443     # dashboard-ssl
+    ubuntu1404cont.vm.network "forwarded_port", guest: 8773, host: 8773    # compute-ec2-api
+    ubuntu1404cont.vm.network "forwarded_port", guest: 8774, host: 8774    # compute-api
+    ubuntu1404cont.vm.network "private_network", ip: "192.168.3.60"
+    ubuntu1404cont.vm.network "private_network", ip: "172.16.10.60"
 
-    ubuntu1204cont.vm.provision :chef_client do |chef|
+    ubuntu1404cont.vm.provision :chef_client do |chef|
       chef.run_list = controller_run_list
       chef.environment = chef_environment
       chef.chef_server_url = "http://#{local_ip}:4001"
@@ -78,21 +78,21 @@ Vagrant.configure("2") do |config|
   end
 
   #################################
-  # Ubuntu 12.04 compute1         #
+  # Ubuntu 14.04 compute1         #
   #################################
 
-  config.vm.define :ubuntu1204comp1 do |ubuntu1204comp1|
+  config.vm.define :ubuntu1404comp1 do |ubuntu1404comp1|
 
-    ubuntu1204comp1.vm.hostname = "ubuntu1204comp1"
+    ubuntu1404comp1.vm.hostname = "ubuntu1404comp1"
 
-    ubuntu1204comp1.vm.box = "opscode-ubuntu-12.04"
+    ubuntu1404comp1.vm.box = "opscode-ubuntu-14.04"
 
-    ubuntu1204comp1.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
+    ubuntu1404comp1.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
 
-    ubuntu1204comp1.vm.network "private_network", ip: "192.168.3.61"
-    ubuntu1204comp1.vm.network "private_network", ip: "172.16.10.61"
+    ubuntu1404comp1.vm.network "private_network", ip: "192.168.3.61"
+    ubuntu1404comp1.vm.network "private_network", ip: "172.16.10.61"
 
-    ubuntu1204comp1.vm.provision :chef_client do |chef|
+    ubuntu1404comp1.vm.provision :chef_client do |chef|
       chef.run_list = [ "role[os-compute-worker]","recipe[apt::cacher-client]" ]
       chef.environment = chef_environment
       chef.chef_server_url = "http://#{local_ip}:4001"

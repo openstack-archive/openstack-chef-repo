@@ -2,7 +2,7 @@
 
 ## Prerequisites ##
 
-The allinone-compute role may be tested with Vagrant, currently with Ubuntu 12.04. You need the following prerequisites:
+The allinone-compute role may be tested with Vagrant, currently with Ubuntu 14.04. You need the following prerequisites:
 
 1. You must have Vagrant 1.2.1 or later installed.
 2. You must have a "sane" Ruby 1.9.3 environment.
@@ -36,9 +36,9 @@ Set an environment file to specify which Vagrantfile to use, for example:
 
 ## Starting the allinone-compute node ##
 
-To test with Ubuntu 12.04, run:
+To test with Ubuntu 14.04, run:
 
-    $ vagrant up ubuntu1204
+    $ vagrant up ubuntu1404
 
 ## Further testing ##
 
@@ -46,7 +46,7 @@ Now you have an openstack, you'll probably want to be able to actually launch in
 
 ### Log into box,  prepare environment ###
 
-    $ vagrant ssh ubuntu1204
+    $ vagrant ssh ubuntu1404
     $ sudo bash
     $ source /root/openrc
 
