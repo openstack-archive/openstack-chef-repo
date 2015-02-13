@@ -9,8 +9,11 @@
 
 Vagrant.require_version ">= 1.1"
 
-Vagrant.require_plugin "vagrant-chef-zero"
-Vagrant.require_plugin "vagrant-omnibus"
+%w(vagrant-chef-zero vagrant-omnibus).each do |plugin|
+  unless Vagrant.has_plugin?(plugin)
+    fail LoadError, "#{plugin} is not installed!"
+  end
+end
 
 Vagrant.configure("2") do |config|
   # Berkshelf plugin configuration
