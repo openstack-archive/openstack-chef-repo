@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Code-Review+2: Jan Klare <j.klare@x-ion.de>
+Workflow+1: Jan Klare <j.klare@x-ion.de>
+Submitted-by: Jenkins
+Submitted-at: Tue, 24 Feb 2015 16:20:22 +0000
+Reviewed-on: https://review.openstack.org/157026
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
