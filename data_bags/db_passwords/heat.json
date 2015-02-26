@@ -1,0 +1,9 @@
+{
+  "id": "heat",
+  "heat": {
+    "encrypted_data": "zgl0ZuuOiJ0LpzDdKCX4M9n/l9bkcF4Z45gv4abyLng=\n",
+    "iv": "182xiFiVaERWG53LotL7Gg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

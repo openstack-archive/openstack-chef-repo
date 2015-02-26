@@ -1,0 +1,9 @@
+{
+  "id": "ceilometer",
+  "ceilometer": {
+    "encrypted_data": "NAJwrZJbTX7HxNH4rzGJMYnDeWQMz3dlskH1w1oK39c=\n",
+    "iv": "HQAYmxr9s/4T7wymjyOdkw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

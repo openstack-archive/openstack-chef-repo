@@ -5,11 +5,7 @@ cookbooks:
 
 roles:
 - allinone-compute:
-- os-compute-single-controller:
 - os-base:
-- os-ops-caching:
-- os-ops-messaging:
-- os-ops-database:
 - os-block-storage:
 - os-block-storage-api:
 - os-block-storage-scheduler:
@@ -23,6 +19,8 @@ roles:
 - os-compute-conductor:
 - os-compute-scheduler:
 - os-compute-setup:
+- os-compute-single-controller:
+- os-compute-single-controller-no-network:
 - os-compute-vncproxy:
 - os-compute-worker:
 - os-dashboard:
@@ -31,22 +29,34 @@ roles:
 - os-image-api:
 - os-image-registry:
 - os-image-upload:
-- os-telemetry-agent-central:
-- os-telemetry-agent-compute:
-- os-telemetry-api:
-- os-telemetry-collector:
 - os-network:
-- os-network-server:
-- os-network-l3-agent:
 - os-network-dhcp-agent:
+- os-network-l3-agent:
 - os-network-metadata-agent:
 - os-network-openvswitch:
-- os-object-storage:
+- os-network-server:
 - os-object-storage-account:
 - os-object-storage-container:
 - os-object-storage-management:
 - os-object-storage-object:
 - os-object-storage-proxy:
+- os-object-storage-setup:
+- os-ops-caching:
+- os-ops-database:
+- os-ops-messaging:
+- os-orchestration:
+- os-orchestration-api:
+- os-orchestration-api-cfn:
+- os-orchestration-api-cloudwatch:
+- os-orchestration-engine:
+- os-telemetry:
+- os-telemetry-agent-central:
+- os-telemetry-agent-compute:
+- os-telemetry-agent-notification:
+- os-telemetry-alarm-evaluator:
+- os-telemetry-alarm-notifier:
+- os-telemetry-api:
+- os-telemetry-collector:
 
 environments:
 - example:

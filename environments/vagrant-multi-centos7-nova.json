@@ -1,0 +1,92 @@
+{
+    "name": "vagrant-multi-centos7-nova",
+    "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the Vagrantfile-multi-neutron vagrantfile. Defines the necessary attributes for a working mutltinode (1 controller/n computes) openstack deployment, using neutron (with gre tunnels between hosts) for the networking component.",
+    "cookbook_versions": {
+    },
+    "json_class": "Chef::Environment",
+    "chef_type": "environment",
+    "default_attributes": {
+    },
+    "override_attributes": {
+        "yum": {
+            "repo": {
+                "baseurl": "https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7"
+            },
+            "epel": {
+                "mirrorlist": "http://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=$basearch",
+                "gpgkey": "http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7"
+            }
+        },
+        "mysql": {
+            "allow_remote_root": true,
+            "root_network_acl": ["%"]
+        },
+        "openstack": {
+            "yum": {
+                "uri": "https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7"
+            },
+            "identity": {
+                "bind_interface": "enp0s8"
+            },
+            "endpoints": {
+                "bind-host": "10.0.1.60",
+                "host": "10.0.1.60",
+                "mq": {
+                    "host": "10.0.1.60"
+                },
+                "db": {
+                    "host": "10.0.1.60"
+                },
+                "compute-vnc-bind":{
+                    "host": "0.0.0.0"
+                }
+            },
+            "image": {
+                "api": {
+                    "bind_interface": "enp0s8"
+                },
+                "registry": {
+                    "bind_interface": "enp0s8"
+                },
+                "image_upload": true,
+                "upload_images": [
+                    "cirros",
+                    "ubuntu-trusty",
+                    "centos-7"
+                ],
+                "upload_image": {
+                    "cirros": "http://download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img",
+                    "ubuntu-trusty": "https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img",
+                    "centos-7": "http://cloud.centos.org/centos/7/devel/CentOS-7-x86_64-GenericCloud.qcow2"
+                }
+            },
+            "compute": {
+                "libvirt": {
+                    "virt_type": "qemu"
+                },
+                "network": {
+                    "public_interface": "enp0s3",
+                    "service_type": "nova",
+                    "multi_host": "true"
+                },
+                "enabled_apis": "ec2,osapi_compute",
+                "config": {
+                    "ram_allocation_ratio": 5.0
+                },
+                "networks": [
+                    {
+                        "label": "public",
+                        "ipv4_cidr": "10.0.1.0/24",
+                        "num_networks": "1",
+                        "network_size": "254",
+                        "bridge": "br100",
+                        "bridge_dev": "enp0s8",
+                        "dns1": "8.8.8.8",
+                        "dns2": "8.8.4.4",
+                        "multi_host": "T"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "openstack-orchestration",
+  "openstack-orchestration": {
+    "encrypted_data": "0HpyFflTF4UHGDtq3koSMGkLOZ7XAKrp0fw2D0rKSt0=\n",
+    "iv": "xRgADbFNtnNdPrRHGdI1vg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

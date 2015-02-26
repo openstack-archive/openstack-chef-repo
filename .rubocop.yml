@@ -1,0 +1,11 @@
+AllCops:
+  Include:
+    - '**/*.rb'
+    - '**/Gemfile'
+    - environments/**/*.rb
+    - roles/**/*.rb
+    - .chef/**/*.rb
+  Exclude:
+    - cookbooks/**/*
+    - vms/**/*
+    - nodes/**/*

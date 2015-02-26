@@ -1,277 +1,211 @@
-# Description #
+# OpenStack cluster with chef-provisioning
 
-This repository contains examples of the roles, environments and other supporting files for deploying an OpenStack **Juno** reference architecture using Chef. This currently includes all OpenStack core projects: Compute, Dashboard, Identity, Image, Network, Object Storage, Block Storage, Telemetry and Orchestration.
+This is the testing framework for OpenStack and Chef. We leverage this to test against our changes to our [cookbooks](https://wiki.openstack.org/wiki/Chef/GettingStarted) to make sure
+that you can still build a cluster from the ground up with any changes we push up. This will eventually be tied into the gerrit workflow
+and become a stackforge project.
 
-Development of the latest OpenStack release will continue on the `master` branch and releases tagged with `10.0.X`. Once development starts against OpenStack `k` release, this branch will move to `stable/juno` and the appropriate branches will continue development.
+This framework also gives us an opportunity to show different Reference Architectures and a sane example on how to start with OpenStack and Chef.
 
-The documentation has been moved to the https://github.com/mattray/chef-docs repository for merging to https://github.com/opscode/chef-docs and eventual release to https://docs.getchef.com/openstack_develop.html. Instructions for building the docs are included in the repository. The documentation for Chef is available at http://docs.getchef.com. There is additional documentation on the [OpenStack wiki](https://wiki.openstack.org/wiki/Chef/GettingStarted).
+With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Juno release, this supports deploying to Ubuntu 14 and CentOS 7 platforms for all in one with nova networking.  Support for all in one neutron and multi node support is a work in progress.
 
-# Usage with Chef Server #
+Support for CentOS 6.5 and Ubuntu 12 with Icehouse is available with the stable/icehouse branch of this project.
 
-This repository uses Berkshelf (https://berkshelf.com) to manage downloading all of the proper cookbook versions, whether from Git or from the Chef Supermarket site (https://supermarket.getchef.com/). The preference is to eventually upstream all cookbook dependencies to the Chef Supermarket site. The [Berksfile](Berksfile) lists the current dependencies. Note that berks will resolve version requirements and dependencies on first run and store these in Berksfile.lock. If new cookbooks become available you can run `berks update` to update the references in Berksfile.lock. Berksfile.lock will be included in stable branches to provide a known good set of dependencies. Berksfile.lock will not be included in development branches to encourage development against the latest cookbooks.
+## Prereqs
 
-There is a Spiceweasel (http://bit.ly/spcwsl) [infrastructure.yml](infrastructure.yml) manifest documenting all the roles and environments required to deploy OpenStack.
+- [ChefDK](https://downloads.chef.io/chef-dk/) 0.3.6 or later
+- [Vagrant](https://www.vagrantup.com/downloads.html) 1.7.2 or later with [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or some other provider
 
-To see the commands necessary to push all of the files to the Chef server, run the following command:
+## Initial Setup Steps
 
-```
-spiceweasel infrastructure.yml
-```
-
-To actually deploy the repository to your Chef server, run the following command:
-
-```
-spiceweasel -e infrastructure.yml
-```
-
-# Usage with Chef Server manual steps #
-
-## Perpare Chef Server
-
-### Pre-condition
-
-Make sure your Chef server's hostname is resolvable(i.e. ping your hostname will show the IP address).
-
-### Install Chef Server
-
-Download Chef server package from here: <https://www.chef.io/download-open-source-chef-server-11/>
-
-Install the file using the correct method for your system.
-
-For Debain using `dpkg -i chef-server.deb`, for RHEL using `rpm -i chef-server.rpm`.
-
-### Configure Chef Server
-
-    chef-server-ctl reconfigure
-
-## Prepare Chef Workstation
-
-Usually we setup the Chef workstation on Chef server node.
-
-### Install Chef
-
-    curl -L https://www.chef.io/chef/install.sh | bash
-
-### Configure Chef Workstation
-
-    knife ssl fetch
-    knife configure -y -i --defaults -r ''
-
-## Prepare Chef repository
-
-### Download OpenStack Chef cookbooks
-
-    git clone https://github.com/stackforge/openstack-chef-repo
-    cd openstack-chef-repo
-    /opt/chef/embedded/bin/gem install berkshelf
-    /opt/chef/embedded/bin/berks vendor ./cookbooks
-
-### Upload Chef roles and cookbooks
-
-    cd openstack-chef-repo
-    knife role from file ./roles/*.json
-    knife cookbook upload --cookbook-path ./cookbooks --all
-
-### Create and upload Chef environment
-
-    cd openstack-chef-repo
-    cp environments/example.json environments/your_environment.json
-    knife environment from file environments/your_environment.json
-
-NOTE: Your should update the necessary attributes in `environments/your_environment.json`.
-
-## Start deploy OpenStack
-
-Make sure your nodes can connect Chef server through Chef server's hostname/FQDN.
-
-### Deploy an allinone environment
-
-    knife bootstrap allinone_node_ip -E your_environment -r 'role[allinone-compute]'
-
-### Deploy a controller + compute environment
-
-    knife bootstrap controller_node_ip -E your_environment -r 'role[os-compute-single-controller]'
-    knife bootstrap compute_node1_ip -E your_environment -r 'role[os-compute-worker],role[os-telemetry-agent-compute]'
-    knife bootstrap compute_node2_ip -E your_environment -r 'role[os-compute-worker],role[os-telemetry-agent-compute]'
-
-# Usage with Chef Zero #
-
-[Chef Zero](http://www.getchef.com/blog/2013/10/31/chef-client-z-from-zero-to-chef-in-8-5-seconds/) is Chef local mode, without Chef server.
-
-## Install Chef
-
-```
-curl -L https://www.getchef.com/chef/install.sh | sudo bash
+```shell
+$ git clone https://github.com/jjasghar/chef-openstack-testing-stack.git testing-stack
+$ cd testing-stack
+$ vi vagrant_linux.rb # change the 'vm.box' to the openstack platform you'd like to run.
+$ chef exec rake berks_vendor
+$ chef exec ruby -e "require 'openssl'; File.binwrite('.chef/validator.pem', OpenSSL::PKey::RSA.new(2048).to_pem)"
 ```
 
-## Checkout cookbooks
+The stackforge OpenStack cookbooks by default use databags for configuring passwords.  There are four
+data_bags : *user_passwords*, *db_passwords*, *service_passwords*, *secrets*. I have a already created
+the `data_bags/` directory, so you shouldn't need to make them, if you do something's broken.
+See [Databag](#Databags) section below for more details.
 
-```
-git clone https://github.com/stackforge/openstack-chef-repo
-cd openstack-chef-repo
-/opt/chef/embedded/bin/gem install berkshelf
-/opt/chef/embedded/bin/berks vendor ./cookbooks
-```
+**NOTE**: If you are running Ubuntu 14.04 LTS and as your **base** compute machine, you should note that the shipped
+kernel `3.13.0-24-generic` has networking issues, and the best way to resolve this is
+via: `apt-get install linux-image-generic-lts-utopic`. This will install at least `3.16.0` from the Utopic hardware enablement.
 
-## Prepare Chef environment
+## Supported Environments
 
-Here is a minimal [environment file](environments/zero-demo.json).
+* All in One
+  * Nova networking
+  * Neutron networking
+* Multi-Node
+  * Nova networking
+  * Nuetron networking
 
-```
-{
-  "name": "zero-demo",
-  "override_attributes": {
-    "mysql": {
-      "server_root_password": "ilikerandompasswords"
-    },
-    "openstack": {
-      "developer_mode": true
-    }
-  }
-}
-```
+For each environment, there's a corresponding readme file in the doc directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
 
-## Start to deploy
+## Rake Deploy Commands
 
-Note that `your_node_name` below is your node's hostname.
-
-```
-cd openstack-chef-repo
-chef-client -z -E zero-demo -r 'role[allinone-compute]'
-```
-
-If there are no errors in output, congratulations!
-
-# Databags #
-
-You need to have some databags when you run the stackforge without the developer_mode -> true.
-
-You need four databags : user_passwords, db_passwords, service_passwords, secrets
-
-Each data bag need the following item to be created.
-
-user_passwords
-  ITEM example :    {"id" : "admin", "admin" : "mypass"}
-    - admin
-    - guest
+These commands will spin up various OpenStack cluster configurations, the simplest being the all-in-one controller with Nova networking.
 
 ```bash
-for item in admin guest ; do
- knife data bag create user_passw $p --secret-file ~/.chef/openstack_data_bag_secret;
-done
+$ chef exec rake aio_nova       # All-in-One Nova-networking Controller
+$ chef exec rake aio_neutron    # All-in-One Neutron Controller
+$ chef exec rake multi_neutron  # Multi-Neutron Controller and 3 Compute nodes
+$ chef exec rake multi_nova     # Multi-Nova-networking Controller and 3 Compute nodes
 ```
 
+### Access the Controller
+
+```bash
+$ cd vms
+$ vagrant ssh controller
+$ sudo su -
+```
+
+### Testing the Controller
+
+```bash
+# Access the controller as noted above
+$ source openrc
+$ nova service-list && nova hypervisor-list
+$ glance image-list
+$ keystone user-list
+$ nova list
+```
+
+### Working with Security Groups ###
+
+To allow ssh access to instances, a nova security group is defined as follows:
+
+```bash
+$ nova secgroup-list
+$ nova secgroup-list-rules default
+$ nova secgroup-create allow_ssh "allow ssh to instance"
+$ nova secgroup-add-rule allow_ssh tcp 22 22 0.0.0.0/0
+$ nova secgroup-list-rules allow_ssh
+```
+
+### Working with keys ###
+
+To allow ssh keys to be injected into instance, a nova keypair is defined as follows:
+
+```bash
+# Just press Enter to all the questions
+$ ssh-keygen
+$ nova keypair-add --pub-key=/root/.ssh/id_rsa.pub mykey
+```
+
+#### Booting up a cirros image on the Controller
+
+```bash
+$ nova boot test --image cirros --flavor 1  --security-groups=allow_ssh --key-name=mykey
+```
+
+Wait a few seconds and the run `nova list` if Status is not Active, wait a few seconds and repeat.
+
+Once status is active you should be able to log in via ssh to the listed IP.
+
+```bash
+$ ssh cirros@<ip address from nova list output>
+```
+
+#### Accessing the OpenStack Dashboard
+
+If you would like to use the OpenStack dashboard you should go to https://localhost:9443 and the username and password is `admin/mypass`.
+
+## Cleanup
+
+To remove all the nodes and start over again with a different environment or different environment attribute overrides, using the following rake command.
+
+```bash
+$ chef exec rake destroy_machines
+```
+
+To refresh all the cookbooks, use the following rake commands.
+
+```bash
+$ chef exec rake destroy_cookbooks
+$ chef exec rake berks_vendor
+```
+
+To cleanup everything, use the following rake command.
+
+```bash
+$ chef exec rake clean
+```
+
+## Databags
+
+Some basic information about the use of databags within this repo.
+
+```
+# Show the list of databags
+$ chef exec knife  data bag list -z
 db_passwords
-  ITEM example :    {"id" : "nova", "nova" : "mypass"}
-
-    - nova
-    - horizon
-    - keystone
-    - glance
-    - ceilometer
-    - neutron
-    - cinder
-    - heat
-    - dash
-
-```bash
-for item in nova horizon keystone glance ceilmeter neutron cinder heat dash ; do
- knife data bag create db_passwords $p --secret-file ~/.chef/openstack_data_bag_secret;
-done
-```
-
-service_passwords
-  ITEM example :    {"id" : "openstack-image", "openstack-image" : "mypass"}
-
-    - openstack-image
-    - openstack-compute
-    - openstack-block-storage
-    - openstack-orchestration
-    - openstack-network
-    - rbd
-
-```bash
-for item in openstack-image openstack-compute openstack-block-storage openstack-orchestration openstack-network rbd ; do
- knife data bag create service_passwords $p --secret-file ~/.chef/openstack_data_bag_secret;
-done
-```
-
 secrets
-  ITEM example : {"id" : "openstack_identity_bootstrap_token", "openstack_identity_bootstrap_token" : "mytoken"}
+service_passwords
+user_passwords
 
-    - openstack_identity_bootstrap_token
-    - neutron_metadata_secret
+# Show the list of databag items
+$ chef exec knife data bag show db_passwords -z
+ceilometer
+cinder
+dash
+glance
+heat
+horizon
+keystone
+neutron
+nova
 
-```bash
-for item in openstack_identity_bootstrap_token neutron_metadata_secret ; do
- knife data bag create secrets $p --secret-file ~/.chef/openstack_data_bag_secret;
-done
+# Show contents of databag item
+$ chef exec knife data bag show db_passwords ceilometer -z
+Encrypted data bag detected, decrypting with provided secret.
+ceilometer: mypass
+id:         ceilometer
+
+# Update contents of databag item
+# set EDITOR env var to your editor, for powershell, I used nano
+$ chef exec knife data bag edit secrets dispersion_auth_user -z
 ```
 
-# Cookbooks #
+### Databag Default Values
+db_passwords are set to "mypass"
+secrets are set to "<key>_token"
+service_passwords are set to "mypass"
+user_passwords are set to "mypass"
 
-The cookbooks have been designed and written in such a way that they can be used to deploy individual service components on _any_ of the nodes in the infrastructure; in short they can be used for single node 'all-in-one' installs (for testing), right up to multi/many node production installs. In order to achieve this flexibility, they are configured by attributes which may be used to override search. Chef 11 or later is currently required. Ruby 1.9.x is considered the minimum supported version of Ruby as well. Most users of this repository test with the full-stack Chef 11 client and a Chef server (Chef Solo is not explicity supported).
+### Default Databag Secret
+The default secret is stored here .chef\encrypted_data_bag_secret
+and referenced by .chef\knife.rb.
 
-Each of the OpenStack services has its own cookbook and will eventually be available on the Chef Community site.
+## Known Issues and Workarounds
 
-## OpenStack Block Storage ##
+### Gemfile support
 
-http://github.com/stackforge/cookbook-openstack-block-storage/
+The ChefDK provides all the required level of gems this testing suite needs.  But there exists a Gemfile-Provisioning file that can be used as well.
+You will need to replace the Gemfile with the Gemfile-Provisioning before running your gem bundling.
+Note: please ignore the Gemfile, as it is needed only to pass the existing gates with older levels of gems.
 
-There is further documentation in the [OpenStack Block Storage cookbook README](http://github.com/stackforge/cookbook-openstack-block-storage/).
+### Windows Platform
 
-## OpenStack Compute ##
+When using this on a Windows platform, here are some tweaks to make this work.
 
-http://github.com/stackforge/cookbook-openstack-compute/
+- In order to get ssh to work, you will need an ssl client installed.  I used the one that came with [Git for Windows](git-scm.com/download).  I needed to append the `C:\Program Files (x86)\Git\bin;` to the system PATH.
 
-There is further documentation in the [OpenStack Compute cookbook README](http://github.com/stackforge/cookbook-openstack-compute/).
+## TODOs
 
-## OpenStack Dashboard ##
+- Better instructions for multi-node network setup
+- Better support for aio_neutron and muilt node tests
+- Support for floating ip's
+- Split out the `multi-neutron-network-node` cluster also so the network node is it's own machine
+- Support for swift multi node test
+- Easier debugging. Maybe a script to pull the logs from the controller.
+- More automated verification testing.  Tie into some amount of [tempest](https://github.com/openstack/tempest) or [refstack](https://wiki.openstack.org/wiki/RefStack)? for basic cluster testing.
 
-http://github.com/stackforge/cookbook-openstack-dashboard/
-
-There is further documentation in the [OpenStack Dashboard cookbook README](http://github.com/stackforge/cookbook-openstack-dashboard/).
-
-## OpenStack Identity ##
-
-http://github.com/stackforge/cookbook-openstack-identity/
-
-There is further documentation in the [OpenStack Identity cookbook README](http://github.com/stackforge/cookbook-openstack-identity/).
-
-## OpenStack Image ##
-
-http://github.com/stackforge/cookbook-openstack-image/
-
-There is further documentation in the [OpenStack Image cookbook README](http://github.com/stackforge/cookbook-openstack-image/).
-
-## OpenStack Network ##
-
-Http://github.com/stackforge/cookbook-openstack-network/
-
-There is further documentation in the [OpenStack Network cookbook README](http://github.com/stackforge/cookbook-openstack-network/).
-
-## OpenStack Object Storage ##
-
-http://github.com/stackforge/cookbook-openstack-object-storage/
-
-There is further documentation in the [OpenStack Object Storage cookbook README](http://github.com/stackforge/cookbook-openstack-object-storage/).
-
-# Testing #
-
-Please refer to the [TESTING.md](TESTING.md) for instructions for testing the repository and cookbooks with Vagrant or Vagabond.
-
-# License and Author #
-
-|                      |                                              |
-|:---------------------|:---------------------------------------------|
-| **Author**           | Matt Ray (<matt@opscode.com>)                |
-| **Author**           | Jay Pipes (<jaypipes@gmail.com>)             |
-| **Author**           | Chen Zhiwei (<zhiwchen@cn.ibm.com>)          |
-| **Author**           | Juergen Brueder (<juergen.brueder@gmail.com>)  |
-| **Author**           | Mark Vanderwiel (<vanderwl@us.ibm.com>)      |
-|                      |                                              |
-| **Copyright**        | Copyright (c) 2011-2013 Opscode, Inc.        |
-| **Copyright**        | Copyright (c) 2014-2015 IBM, Corp.           |
+# License #
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

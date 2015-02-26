@@ -1,169 +1,25 @@
-# Testing with Vagrant #
+# Testing the Openstack Cookbook Repo #
 
-## Prerequisites ##
+This cookbook uses [bundler](http://gembundler.com/) and [berkshelf](http://berkshelf.com/) to isolate dependencies. Make sure you have `ruby 1.9.x`, `bundler`, build essentials and the header files for `gecode` installed before continuing. Make sure that you're using gecode version 3. More info [here](https://github.com/opscode/dep-selector-libgecode/tree/0bad63fea305ede624c58506423ced697dd2545e#using-a-system-gecode-instead).
 
-The allinone-compute role may be tested with Vagrant, currently with Ubuntu 14.04. You need the following prerequisites:
+## Bundle required gems ##
 
-1. You must have Vagrant 1.2.1 or later installed.
-2. You must have a "sane" Ruby 1.9.3 environment.
-3. You must have the following Vagrant plugins:
+Berkshelf 3.x needs the to use the system gecode 3.x libraries
 
-    $ vagrant plugin install vagrant-omnibus
-    $ vagrant plugin install vagrant-chef-zero
+For ubuntu 12.04 use:
 
-__notes:__
+ $ sudo apt-get update
+ $ sudo apt-get install -y libgecode-dev libxml2-dev libxml2 libxslt-dev build-essential
+ $ USE_SYSTEM_GECODE=1 bundle install --path=.bundle --jobs 1 --retry 3 --verbose
 
-* vagrant-berkshelf is no longer used: https://sethvargo.com/the-future-of-vagrant-berkshelf/
+For other platforms use:
 
-## Install the gem dependencies for use with bundler
+ $ bundle install --path=.bundle --jobs 1 --retry 3 --verbose
 
-    $ bundle install --path=.bundle
+## Vendor the Cookbooks ##
 
-## Upload all of your cookbooks with Berkshelf
+ $ bundle exec berks vendor .cookbooks
 
-    $ bundle exec berks vendor .cookbooks
-
-## Decide which Vagrant instance you wish to use
-
-There are several Vagrant files available:
-* Vagrantfile-aio-neutron: single compute node with Neutron
-* Vagrantfile-aio-nova: single compute node with nova-network
-* Vagrantfile-multi-neutron: seprate controller and compute nodes
-
-Set an environment file to specify which Vagrantfile to use, for example:
-
-    $ export VAGRANT_VAGRANTFILE=Vagrantfile-aio-nova
-
-## Starting the allinone-compute node ##
-
-To test with Ubuntu 14.04, run:
-
-    $ vagrant up ubuntu1404
-
-## Further testing ##
-
-Now you have an openstack, you'll probably want to be able to actually launch instances.
-
-### Log into box,  prepare environment ###
-
-    $ vagrant ssh ubuntu1404
-    $ sudo bash
-    $ source /root/openrc
-
-### Basic health checks ###
-
-    $ nova service-list
-    $ keystone catalog
-
-### Working with Glance images ###
-
-    $ glance image-list
-
-This will return the existing Cirros image which was included in the `vagrant` Environment.
-
-### Working with Security Groups ###
-
-    $ nova secgroup-list
-    $ nova secgroup-list-rules default
-    $ nova secgroup-create allow_ssh "allow ssh to instance"
-    $ nova secgroup-add-rule allow_ssh tcp 22 22 0.0.0.0/0
-    $ nova secgroup-list-rules allow_ssh
-
-### Working with keys ###
-
-    $ ssh-keygen
-    $ nova keypair-add --pub-key=/root/.ssh/id_rsa.pub testing
-
-### Create an instance ###
-
-    $ nova flavor-list
-    $ nova boot --flavor=1 --image=cirros --security-groups=allow_ssh --key-name=testing testserver
-
-Wait a few seconds and the run `nova list` if Status is not Active, wait a few seconds and repeat.
-
-Once status is active you should be able to log in via ssh to the listed IP.
-
-    $ ssh cirros@192.168.100.2
-
-
-# Testing with Vagabond #
-
-We use Vagabond to do integration testing. The Vagabondfile in the root
-directory of the Chef repo contains the definitions of the nodes that
-are used during integration testing.
-
-To set up Vagabond, do this:
-
-    $ bundle exec vagabond init
-
-When prompted, answer "N" to not overwrite the existing Vagabondfile, and then
-answer "n" for all templates you don't want to use and "y" for the rest.
-
-When running integration tests, Vagabond starts up a set of LXC containers
-to represent the actual hardware nodes used in a deployment, including the
-Chef server itself. The nodes we use in integration testing are the
-following:
-
-* `server` -- A hardcoded LXC instance name that contains a Chef 11 server
-              that is loaded up with the Berkshelf cookbooks, the role definitions,
-              and environment definitions defined in this Chef repo
-* `ops` -- An LXC instance that gets all the ops-related recipes and applications
-           installed in it, including databases, message queues, logging, etc
-* `compute-worker` -- An LXC instance that acts as a compute worker
-* `controller` -- An LXC instance that contains all the OpenStack control software
-
-### Vagabond Local Chef Server
-
-To start the local Chef 11 server LXC instance using Vagabond:
-
-    $ bundle exec vagabond server up
-
-The above will automatically upload the roles and environment
-definitions in this Chef repo along with all of the cookbooks
-in the Berkshelf.
-
-To re-upload all of the cookbooks in the Berkshelf, simply do:
-
-    $ bundle exec vagabond server upload_cookbooks
-
-To re-upload the roles or environment files:
-
-    $ bundle exec vagabond server upload_roles
-    $ bundle exec vagabond server upload_environments
-
-Remember that the above will install the **current** Berkshelf. Remember to
-run:
-
-    $ bundle exec berks update
-
-before you do the `vagabond server upload_cookbooks` command.
-
-### Test Nodes
-
-To start any of the LXC instances that represent the different ops, controller
-and worker nodes in an OpenStack environment, do:
-
-    $ bundle exec vagabond up <NODE>
-
-If you make changes to cookbooks and issue a `vagabond server upload_cookbooks` or
-role/environment definitions, you will want to re-provision the node, which basically
-ensures the node is up and runs chef-client on it:
-
-    $ bundle exec vagabond provision <NODE>
-
-To destroy a node:
-
-    $ bundle exec vagabond destroy <NODE>
-
-To entirely rebuild a node from scratch:
-
-    $ bundle exec vagabond rebuild <NODE>
-
-When a node is up, you can SSH into that node to run tests or investigate logs, etc:
-
-    $ bundle exec vagabond ssh <NODE>
-
-To see the status of all the nodes that Vagabond is managing, including the IP addresses
-that the containers are bound to:
-
-    $ bundle exec vagabond status
+## Run the Spiceweasel test ##
+ 
+ $ bundle exec spiceweasel infrastructure.yml --debug

@@ -1,5 +1,5 @@
 {
-    "name": "vagrant-aio-nova",
+    "name": "vagrant-aio-centos7-nova",
     "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the Vagrantfile-aio-nova vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using nova-network for the networking component",
     "cookbook_versions": {
     },
@@ -28,7 +28,7 @@
             },
             "compute": {
                 "network": {
-                    "public_interface": "eth0",
+                    "public_interface": "enp0s3",
                     "service_type": "nova"
                 },
                 "enabled_apis": "ec2,osapi_compute",
@@ -45,7 +45,7 @@
                         "num_networks": "1",
                         "network_size": "255",
                         "bridge": "br100",
-                        "bridge_dev": "eth1",
+                        "bridge_dev": "enp0s8",
                         "dns1": "8.8.8.8",
                         "dns2": "8.8.4.4"
                     }
