@@ -41,7 +41,7 @@ via: `apt-get install linux-image-generic-lts-utopic`. This will install at leas
   * Neutron networking
 * Multi-Node
   * Nova networking
-  * Nuetron networking
+  * Neutron networking
 
 For each environment, there's a corresponding readme file in the doc directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
 
