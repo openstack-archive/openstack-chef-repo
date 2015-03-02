@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Workflow+1: Jan Klare <j.klare@x-ion.de>
+Code-Review+2: JJ Asghar <jj@getchef.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 02 Mar 2015 20:38:17 +0000
+Reviewed-on: https://review.openstack.org/160026
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/stable/juno
