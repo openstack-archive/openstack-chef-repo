@@ -10,7 +10,7 @@
     "override_attributes": {
         "yum": {
             "repo": {
-                "baseurl": "https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7"
+                "baseurl": "https://repos.fedorapeople.org/repos/openstack/openstack-kilo/epel-7"
             },
             "epel": {
                 "mirrorlist": "http://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=$basearch",
@@ -23,7 +23,7 @@
         },
         "openstack": {
             "yum": {
-                "uri": "https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7"
+                "uri": "https://repos.fedorapeople.org/repos/openstack/openstack-kilo/epel-7"
             },
             "identity": {
                 "bind_interface": "eth1"

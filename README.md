@@ -6,7 +6,7 @@ and become a stackforge project.
 
 This framework also gives us an opportunity to show different Reference Architectures and a sane example on how to start with OpenStack and Chef.
 
-With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Juno release, this supports deploying to Ubuntu 14 and CentOS 7 platforms for all in one with nova networking.  Support for all in one neutron and multi node support is a work in progress.
+With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Kilo release, this supports deploying to Ubuntu 14 and CentOS 7 platforms for all in one with nova networking.  Support for all in one neutron and multi node support is a work in progress.
 
 Support for CentOS 6.5 and Ubuntu 12 with Icehouse is available with the stable/icehouse branch of this project.
 
