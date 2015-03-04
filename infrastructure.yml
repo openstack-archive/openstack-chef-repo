@@ -5,6 +5,9 @@ cookbooks:
 
 roles:
 - allinone-compute:
+- os-bare-metal:
+- os-bare-metal-api:
+- os-bare-metal-conductor:
 - os-base:
 - os-block-storage:
 - os-block-storage-api:

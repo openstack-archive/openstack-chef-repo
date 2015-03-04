@@ -1,0 +1,18 @@
+{
+  "name": "os-bare-metal",
+  "description": "Configures OpenStack Bare Metal, configured by attributes.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "role[os-bare-metal-api]",
+    "role[os-bare-metal-conductor]",
+    "recipe[openstack-bare-metal::identity_registration]"
+  ],
+  "env_run_lists": {
+  }
+}

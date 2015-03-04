@@ -18,6 +18,7 @@ dash
 glance
 heat
 horizon
+ironic
 keystone
 neutron
 nova

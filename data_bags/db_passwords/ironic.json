@@ -1,0 +1,9 @@
+{
+  "id": "ironic",
+  "ironic": {
+    "encrypted_data": "Dar/zqjgektkx9BOkjHJW4s6uQpGRcsBpSVEKgkqPws=\n",
+    "iv": "h+k6v3xcQdqzdqQWlyoOnQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}
