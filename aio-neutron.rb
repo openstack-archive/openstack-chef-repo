@@ -20,7 +20,6 @@ machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'allinone-compute'
   role 'os-image-upload'
-  recipe 'openstack-common::openrc'
   chef_environment 'vagrant-aio-neutron'
   file('/etc/chef/openstack_data_bag_secret',
        "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
