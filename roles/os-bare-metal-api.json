@@ -1,6 +1,6 @@
 {
-  "name": "os-compute-worker",
-  "description": "The compute node, most likely with a hypervisor.",
+  "name": "os-bare-metal-api",
+  "description": "OpenStack Bare Metal API service",
   "json_class": "Chef::Role",
   "default_attributes": {
   },
@@ -9,8 +9,7 @@
   "chef_type": "role",
   "run_list": [
     "role[os-base]",
-    "recipe[openstack-compute::compute]",
-    "role[os-bare-metal-conductor]"
+    "recipe[openstack-bare-metal::api]"
   ],
   "env_run_lists": {
   }
