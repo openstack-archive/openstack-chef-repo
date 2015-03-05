@@ -3,7 +3,7 @@ source "https://supermarket.chef.io"
 cookbook 'apache2', '3.0.0'
 cookbook 'apt', '2.6.1'
 cookbook 'aws', '2.1.1'
-cookbook 'build-essential', '1.4.2'
+cookbook 'build-essential', '2.1.3'
 cookbook 'ceph', '0.8.0'
 cookbook 'database', '4.0.2'
 cookbook 'erlang', '1.4.2'
