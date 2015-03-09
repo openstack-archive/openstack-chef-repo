@@ -9,8 +9,8 @@
   "chef_type": "role",
   "run_list": [
     "role[os-base]",
-    "recipe[openstack-compute::compute]",
-    "role[os-bare-metal-conductor]"
+    "recipe[openstack-compute::compute]"
+    // bug https://bugs.launchpad.net/ubuntu/+source/ironic/+bug/1429962 "role[os-bare-metal-conductor]"
   ],
   "env_run_lists": {
   }
