@@ -22,7 +22,6 @@ $ git clone https://github.com/jjasghar/chef-openstack-testing-stack.git testing
 $ cd testing-stack
 $ vi vagrant_linux.rb # change the 'vm.box' to the openstack platform you'd like to run.
 $ chef exec rake berks_vendor
-$ chef exec ruby -e "require 'openssl'; File.binwrite('.chef/validator.pem', OpenSSL::PKey::RSA.new(2048).to_pem)"
 ```
 
 The stackforge OpenStack cookbooks by default use databags for configuring passwords.  There are four
