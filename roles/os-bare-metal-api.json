@@ -9,7 +9,8 @@
   "chef_type": "role",
   "run_list": [
     "role[os-base]",
-    "recipe[openstack-bare-metal::api]"
+    "recipe[openstack-bare-metal::api]",
+    "recipe[openstack-bare-metal::identity_registration]"
   ],
   "env_run_lists": {
   }
