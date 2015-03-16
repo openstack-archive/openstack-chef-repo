@@ -21,6 +21,7 @@ machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'allinone-compute'
   role 'os-image-upload'
+  recipe 'openstack-integration-test::setup'
   # if you would like to use centos7 you'll need to
   # use 'vagrant-aio-centos7-nova' for the environment
   chef_environment 'vagrant-aio-nova'

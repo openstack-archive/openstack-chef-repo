@@ -27,6 +27,7 @@ machine 'controller' do
   role 'os-network-metadata-agent'
   role 'os-network-server'
   recipe 'openstack-common::openrc'
+  recipe 'openstack-integration-test::setup'
   # if you would like to use centos7 you'll need to
   # use 'vagrant-multi-centos7-nova' for the environment
   chef_environment 'vagrant-multi-nova'

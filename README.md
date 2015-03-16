@@ -113,6 +113,33 @@ $ ssh cirros@<ip address from nova list output>
 
 If you would like to use the OpenStack dashboard you should go to https://localhost:9443 and the username and password is `admin/mypass`.
 
+#### Verifying stack with tempest
+
+If you ssh into the `controller` machine you can test via the most recent [tempest](https://github.com/openstack/tempest) release.
+
+```bash
+$ cd vms
+$ vagrant ssh controller
+$ sudo su -
+root@controller:~ cd /opt/tempest
+root@controller:/opt/tempest$ ./run_tests.sh -V
+
+[-- snip --]
+
+tempest.tests.test_wrappers.TestWrappers
+    test_pretty_tox                                                       1.68
+    test_pretty_tox_fails                                                 1.03
+    test_pretty_tox_serial                                                0.61
+    test_pretty_tox_serial_fails                                          0.55
+
+Ran 233 tests in 13.869s
+
+OK
+Running flake8 ...
+root@controller:/opt/tempest#
+```
+
+
 ## Cleanup
 
 To remove all the nodes and start over again with a different environment or different environment attribute overrides, using the following rake command.
@@ -202,7 +229,6 @@ When using this on a Windows platform, here are some tweaks to make this work:
 - Split out the `multi-neutron-network-node` cluster also so the network node is it's own machine
 - Support for swift multi node test
 - Easier debugging. Maybe a script to pull the logs from the controller.
-- More automated verification testing.  Tie into some amount of [tempest](https://github.com/openstack/tempest) or [refstack](https://wiki.openstack.org/wiki/RefStack)? for basic cluster testing.
 
 # License #
 
