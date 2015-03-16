@@ -67,6 +67,7 @@ $ sudo su -
 ```bash
 # Access the controller as noted above
 $ source openrc
+$ nova-manage version
 $ nova service-list && nova hypervisor-list
 $ glance image-list
 $ keystone user-list
@@ -160,6 +161,10 @@ To cleanup everything, use the following rake command.
 ```bash
 $ chef exec rake clean
 ```
+
+## Tools
+
+See the doc/tools.md for more information.
 
 ## Databags
 

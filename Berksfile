@@ -4,7 +4,11 @@ source 'https://supermarket.chef.io'
    dashboard database data-processing identity image
    integration-test network object-storage ops-database
    ops-messaging orchestration telemetry}.each do |cookbook|
-      cookbook "openstack-#{cookbook}", github: "stackforge/cookbook-openstack-#{cookbook}", branch: 'master'
+  if ENV['REPO_DEV'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
+    cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
+  else
+    cookbook "openstack-#{cookbook}", github: "stackforge/cookbook-openstack-#{cookbook}", branch: 'master'
+  end
 end
 cookbook "openstack_client", github: "stackforge/cookbook-openstack-client", branch: 'master'
 
