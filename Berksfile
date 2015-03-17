@@ -16,7 +16,7 @@ cookbook 'python', '1.4.6'
 cookbook 'rabbitmq', '3.9.0'
 cookbook 'xfs', '1.1.0'
 cookbook 'yum', '3.5.2'
-cookbook 'selinux', '0.7.2'
+cookbook 'selinux', '0.9.0'
 cookbook 'yum-epel', '0.6.0'
 cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
 
