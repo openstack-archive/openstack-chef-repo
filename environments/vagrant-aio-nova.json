@@ -9,6 +9,9 @@
     },
     "override_attributes": {
         "openstack": {
+            "mq": {
+                "user": "admin"
+            },
             "endpoints": {
                 "bind-host": "0.0.0.0",
                 "host": "0.0.0.0"

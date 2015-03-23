@@ -13,6 +13,9 @@
             "root_network_acl": ["%"]
         },
         "openstack": {
+            "mq": {
+                "user": "admin"
+            },
             "identity": {
                 "bind_interface": "eth1"
             },
