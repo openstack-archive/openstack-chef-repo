@@ -1,12 +1,11 @@
 # OpenStack cluster with chef-provisioning
 
 This is the testing framework for OpenStack and Chef. We leverage this to test against our changes to our [cookbooks](https://wiki.openstack.org/wiki/Chef/GettingStarted) to make sure
-that you can still build a cluster from the ground up with any changes we push up. This will eventually be tied into the gerrit workflow
-and become a stackforge project.
+that you can still build a cluster from the ground up with any changes we push up.
 
 This framework also gives us an opportunity to show different Reference Architectures and a sane example on how to start with OpenStack and Chef.
 
-With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Kilo release, this supports deploying to Ubuntu 14 and CentOS 7 platforms for all in one with nova networking.  Support for all in one neutron and multi node support is a work in progress.
+With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Kilo release, this supports deploying to Ubuntu 14 and CentOS 7 for all-in-one with nova-network.  Support for all-in-one with Neutron, and multi-node support, is a work in progress.
 
 Support for CentOS 6.5 and Ubuntu 12 with Icehouse is available with the stable/icehouse branch of this project.
 
@@ -18,13 +17,13 @@ Support for CentOS 6.5 and Ubuntu 12 with Icehouse is available with the stable/
 ## Initial Setup Steps
 
 ```shell
-$ git clone https://github.com/jjasghar/chef-openstack-testing-stack.git testing-stack
-$ cd testing-stack
-$ vi vagrant_linux.rb # change the 'vm.box' to the openstack platform you'd like to run.
+$ git clone https://github.com/stackforge/openstack-chef-repo.git
+$ cd openstack-chef-repo
+$ vi vagrant_linux.rb # change the 'vm.box' to the variant you'd like to use.
 $ chef exec rake berks_vendor
 ```
 
-The stackforge OpenStack cookbooks by default use databags for configuring passwords.  There are four
+The StackForge OpenStack cookbooks by default use databags for configuring passwords.  There are four
 data_bags : *user_passwords*, *db_passwords*, *service_passwords*, *secrets*. I have a already created
 the `data_bags/` directory, so you shouldn't need to make them, if you do something's broken.
 See [Databag](#Databags) section below for more details.
@@ -35,25 +34,25 @@ via: `apt-get install linux-image-generic-lts-utopic`. This will install at leas
 
 ## Supported Environments
 
-* All in One
-  * Nova networking
-  * Neutron networking
+* All-in-One
+  * nova-network
+  * Neutron
 * Multi-Node
-  * Nova networking
-  * Neutron networking
+  * nova-network
+  * Neutron
 
 For each environment, there's a corresponding readme file in the doc directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
 
 ## Rake Deploy Commands
 
-These commands will spin up various OpenStack cluster configurations, the simplest being the all-in-one controller with Nova networking.
+These commands will spin up various OpenStack cluster configurations, the simplest being the all-in-one controller with nova-network.
 
 ```bash
-$ chef exec rake aio_nova       # All-in-One Nova-networking Controller
-$ chef exec rake aio_neutron    # All-in-One Neutron Controller
-$ chef exec rake multi_neutron  # Multi-Neutron Controller and 3 Compute nodes
-$ chef exec rake multi_nova     # Multi-Nova-networking Controller and 3 Compute nodes
-```
+$ chef exec rake aio_nova       # All-in-one controller with nova-network
+$ chef exec rake aio_neutron    # All-in-one controller with Neutron
+$ chef exec rake multi_nova     # Multi-node controller with nova-network and 3 compute nodes
+$ chef exec rake multi_neutron  # Multi-node controller with Neutron and 3 compute nodes
+ ```
 
 ### Access the Controller
 
@@ -76,7 +75,7 @@ $ nova list
 
 ### Working with Security Groups ###
 
-To allow ssh access to instances, a nova security group is defined as follows:
+To allow SSH access to instances, a nova security group is defined as follows:
 
 ```bash
 $ nova secgroup-list
@@ -88,7 +87,7 @@ $ nova secgroup-list-rules allow_ssh
 
 ### Working with keys ###
 
-To allow ssh keys to be injected into instance, a nova keypair is defined as follows:
+To allow SSH keys to be injected into instance, a nova keypair is defined as follows:
 
 ```bash
 # Just press Enter to all the questions
@@ -191,9 +190,9 @@ Note: please ignore the Gemfile, as it is needed only to pass the existing gates
 
 ### Windows Platform
 
-When using this on a Windows platform, here are some tweaks to make this work.
+When using this on a Windows platform, here are some tweaks to make this work:
 
-- In order to get ssh to work, you will need an ssl client installed.  I used the one that came with [Git for Windows](git-scm.com/download).  I needed to append the `C:\Program Files (x86)\Git\bin;` to the system PATH.
+- In order to get SSH to work, you will need an SSL client installed.  You can use the one that comes with [Git for Windows](http://git-scm.com/download).  You will need to append `C:\Program Files (x86)\Git\bin;` to the system PATH.
 
 ## TODOs
 
