@@ -1,12 +1,14 @@
 # Multi node with Nova networking
 
+Note: Default operating system is ubuntu. If you would like centos, set env var REPO_OS=centos
+
 ## Nodes
 
-The multi-node environments will have four machines `controller`,`compute1`,`compute2`, and `compute3`.
+The multi-node environments will have four machines `controller`, `compute1`, `compute2`, and `compute3`.
 
 ## Networking setup
 
-Changes need to be made to the multi-nova.rb and the environments\vagrant-multi-nova.json file.
+Changes need to be made to the multi-nova.rb and the environments\vagrant-multi-nova.json or environments\vagrant-multi-centos7-nova.json file.
 
 ### Bridge IP Address
 

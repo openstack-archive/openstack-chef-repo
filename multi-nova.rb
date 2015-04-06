@@ -19,15 +19,16 @@ controller_config = <<-ENDCONFIG
     bridge: '<put your interface device name here>'
 ENDCONFIG
 
+env = 'vagrant-aio-nova'
+env = 'vagrant-aio-centos7-nova' if ENV['REPO_OS'].to_s.include?('centos')
+
 machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'os-compute-single-controller'
   recipe 'openstack-common::openrc'
   recipe 'openstack-common::client'
   recipe 'openstack-integration-test::setup'
-  # if you would like to use centos7 you'll need to
-  # use 'vagrant-multi-centos7-nova' for the environment
-  chef_environment 'vagrant-multi-nova'
+  chef_environment env
   file('/etc/chef/openstack_data_bag_secret',
        "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
   converge true
@@ -48,9 +49,7 @@ config.vm.network "public_network", ip: "172.16.100.#{ip_suff}",
   bridge: '<put your interface device name here>'
 ENDCONFIG
       role 'os-compute-worker'
-      # if you would like to use centos7 you'll need to
-      # use 'vagrant-multi-centos7-nova' for the environment
-      chef_environment 'vagrant-multi-nova'
+      chef_environment env
       file('/etc/chef/openstack_data_bag_secret',
            "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
       converge true

@@ -16,11 +16,14 @@ controller_config = <<-ENDCONFIG
   config.vm.network "private_network", ip: "172.16.0.254"
 ENDCONFIG
 
+env = 'vagrant-aio-neutron'
+env = 'vagrant-aio-centos7-neutron' if ENV['REPO_OS'].to_s.include?('centos')
+
 machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'allinone-compute'
   role 'os-image-upload'
-  chef_environment 'vagrant-aio-neutron'
+  chef_environment env
   file('/etc/chef/openstack_data_bag_secret',
        "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
   converge true

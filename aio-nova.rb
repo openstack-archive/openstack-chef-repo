@@ -17,14 +17,15 @@ controller_config = <<-ENDCONFIG
   config.vm.network "private_network", ip: "192.168.100.60"
 ENDCONFIG
 
+env = 'vagrant-aio-nova'
+env = 'vagrant-aio-centos7-nova' if ENV['REPO_OS'].to_s.include?('centos')
+
 machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'allinone-compute'
   role 'os-image-upload'
   recipe 'openstack-integration-test::setup'
-  # if you would like to use centos7 you'll need to
-  # use 'vagrant-aio-centos7-nova' for the environment
-  chef_environment 'vagrant-aio-nova'
+  chef_environment env
   file('/etc/chef/openstack_data_bag_secret',
        "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
   converge true

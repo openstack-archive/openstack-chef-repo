@@ -18,6 +18,9 @@ controller_config = <<-ENDCONFIG
   config.vm.network "private_network", ip: "192.168.200.60"
 ENDCONFIG
 
+env = 'vagrant-multi-neutron'
+env = 'vagrant-multi-centos7-neutron' if ENV['REPO_OS'].to_s.include?('centos')
+
 machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'os-compute-single-controller-no-network'
@@ -28,7 +31,7 @@ machine 'controller' do
   role 'os-network-server'
   recipe 'openstack-common::openrc'
   recipe 'openstack-common::client'
-  chef_environment 'vagrant-multi-neutron'
+  chef_environment env
   file('/etc/chef/openstack_data_bag_secret',
        "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
   converge true
@@ -49,7 +52,7 @@ config.vm.network "private_network", ip: "192.168.100.#{ip_suff}"
 config.vm.network "private_network", ip: "192.168.200.#{ip_suff}"
 ENDCONFIG
       role 'os-compute-worker'
-      chef_environment 'vagrant-multi-neutron'
+      chef_environment env
       file('/etc/chef/openstack_data_bag_secret',
            "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
       converge true
