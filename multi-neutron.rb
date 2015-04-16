@@ -27,6 +27,7 @@ machine 'controller' do
   role 'os-network-metadata-agent'
   role 'os-network-server'
   recipe 'openstack-common::openrc'
+  recipe 'openstack-common::client'
   chef_environment 'vagrant-multi-neutron'
   file('/etc/chef/openstack_data_bag_secret',
        "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
