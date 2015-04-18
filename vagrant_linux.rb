@@ -1,7 +1,7 @@
 require 'chef/provisioning/vagrant_driver'
 
-vagrant_box 'centos7' do
-  url 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.0_chef-provisionerless.box'
+vagrant_box 'centos7.1' do
+  url 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.1_chef-provisionerless.box'
 end
 
 vagrant_box 'ubuntu14' do
