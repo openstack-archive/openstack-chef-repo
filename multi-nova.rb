@@ -22,10 +22,6 @@ ENDCONFIG
 machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'os-compute-single-controller'
-  recipe 'openstack-network::identity_registration'
-  role 'os-network-dhcp-agent'
-  role 'os-network-metadata-agent'
-  role 'os-network-server'
   recipe 'openstack-common::openrc'
   recipe 'openstack-integration-test::setup'
   # if you would like to use centos7 you'll need to
