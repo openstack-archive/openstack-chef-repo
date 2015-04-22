@@ -1,11 +1,12 @@
 source 'https://supermarket.chef.io'
 
-%w{bare-metal block-storage client common compute
+%w{bare-metal block-storage common compute
    dashboard database data-processing identity image
    integration-test network object-storage ops-database
    ops-messaging orchestration telemetry}.each do |cookbook|
       cookbook "openstack-#{cookbook}", github: "stackforge/cookbook-openstack-#{cookbook}", branch: 'master'
 end
+cookbook "openstack_client", github: "stackforge/cookbook-openstack-client", branch: 'master'
 
 cookbook 'apache2', '3.0.0'
 cookbook 'apt', '2.6.1'
@@ -22,7 +23,7 @@ cookbook 'postgresql', '3.4.18'
 cookbook 'python', '1.4.6'
 cookbook 'rabbitmq', '3.12.0'
 cookbook 'xfs', '1.1.0'
-cookbook 'yum', '3.5.2'
+cookbook 'yum', '3.5.4'
 cookbook 'selinux', '0.9.0'
 cookbook 'yum-epel', '0.6.0'
 cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
