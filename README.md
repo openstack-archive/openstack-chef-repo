@@ -26,7 +26,7 @@ $ chef exec rake berks_vendor
 The StackForge OpenStack cookbooks by default use databags for configuring passwords.  There are four
 data_bags : *user_passwords*, *db_passwords*, *service_passwords*, *secrets*. I have a already created
 the `data_bags/` directory, so you shouldn't need to make them, if you do something's broken.
-See [Databag](#Databags) section below for more details.
+See [Databag](#databags) section below for more details.
 
 **NOTE**: If you are running Ubuntu 14.04 LTS and as your **base** compute machine, you should note that the shipped
 kernel `3.13.0-24-generic` has networking issues, and the best way to resolve this is
