@@ -23,6 +23,7 @@ machine 'controller' do
   add_machine_options vagrant_config: controller_config
   role 'os-compute-single-controller'
   recipe 'openstack-common::openrc'
+  recipe 'openstack-common::client'
   recipe 'openstack-integration-test::setup'
   # if you would like to use centos7 you'll need to
   # use 'vagrant-multi-centos7-nova' for the environment

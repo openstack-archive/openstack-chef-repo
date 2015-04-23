@@ -10,7 +10,8 @@
   "run_list": [
     "role[os-compute-single-controller]",
     "role[os-compute-worker]",
-    "recipe[openstack-common::openrc]"
+    "recipe[openstack-common::openrc]",
+    "recipe[openstack-common::client]"
   ],
   "env_run_lists": {
   }
