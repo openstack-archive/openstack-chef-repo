@@ -19,8 +19,8 @@ controller_config = <<-ENDCONFIG
     bridge: '<put your interface device name here>'
 ENDCONFIG
 
-env = 'vagrant-aio-nova'
-env = 'vagrant-aio-centos7-nova' if ENV['REPO_OS'].to_s.include?('centos')
+env = 'vagrant-multi-nova'
+env = 'vagrant-multi-centos7-nova' if ENV['REPO_OS'].to_s.include?('centos')
 
 machine 'controller' do
   add_machine_options vagrant_config: controller_config
