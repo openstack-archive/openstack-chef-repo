@@ -12,6 +12,7 @@
     "role[os-block-storage-api]",
     "role[os-block-storage-scheduler]",
     "role[os-block-storage-volume]",
+    "role[os-block-storage-backup]",
     "recipe[openstack-block-storage::identity_registration]"
   ],
   "env_run_lists": {
