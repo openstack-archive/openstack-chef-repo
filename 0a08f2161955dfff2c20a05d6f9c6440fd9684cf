@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Workflow+1: Jan Klare <j.klare@x-ion.de>
+Code-Review+2: JJ Asghar <jj@getchef.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 06 May 2015 15:31:41 +0000
+Reviewed-on: https://review.openstack.org/179161
+Project: stackforge/openstack-chef-repo
+Branch: refs/heads/master
