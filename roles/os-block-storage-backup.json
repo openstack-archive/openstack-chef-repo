@@ -1,0 +1,16 @@
+{
+  "name": "os-block-storage-backup",
+  "description": "OpenStack Block Storage Backup service",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[os-base]",
+    "recipe[openstack-block-storage::backup]"
+  ],
+  "env_run_lists": {
+  }
+}
