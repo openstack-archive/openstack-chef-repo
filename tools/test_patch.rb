@@ -57,7 +57,7 @@ end
 
 def add_patch(patch_info)
   puts "## Adding patch: #{patch_info[:patch]} to cookbook: #{patch_info[:cookbook]}"
-  run("git clone git@github.com:stackforge/#{patch_info[:project]}.git")
+  run("git clone --depth 1 git@github.com:stackforge/#{patch_info[:project]}.git")
   Dir.chdir(patch_info[:project]) do
     run("git fetch https://review.openstack.org/stackforge/#{patch_info[:project]} #{patch_info[:ref]}")
     run('git checkout FETCH_HEAD')
@@ -163,7 +163,7 @@ LONGDESC
         end
       end
 
-      run('git clone git@github.com:stackforge/openstack-chef-repo.git') unless options[:skip]
+      run('git clone --depth 1 git@github.com:stackforge/openstack-chef-repo.git') unless options[:skip]
       Dir.chdir('openstack-chef-repo') do
         ENV['REPO_DEV'] = options[:patches]
         run('chef exec rake berks_vendor') unless options[:skip]
