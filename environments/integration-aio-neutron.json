@@ -1,0 +1,48 @@
+{
+    "name": "vagrant-aio-neutron",
+    "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the Vagrantfile-aio-neutron vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using neutron for the networking component, and the openvswitch neutron plugin",
+    "cookbook_versions": {
+    },
+    "json_class": "Chef::Environment",
+    "chef_type": "environment",
+    "default_attributes": {
+    },
+    "override_attributes": {
+        "openstack": {
+            "mq": {
+                "user": "admin"
+            },
+            "network": {
+                "dhcp": {
+                    "enable_isolated_metadata": "True"
+                },
+                "l3":{
+                    "external_network_bridge_interface": "eth0"
+                }
+            },
+            "block-storage": {
+                "volume": {
+                    "create_volume_group": true,
+                    "default_volume_type": "lvm"
+                }
+            },
+            "image": {
+                "image_upload": true,
+                "upload_images": [
+                    "cirros"
+                ],
+                "upload_image": {
+                    "cirros": "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
+                }
+            },
+            "compute": {
+                "network": {
+                    "service_type": "neutron"
+                },
+                "libvirt": {
+                    "virt_type": "qemu"
+                }
+            }
+        }
+    }
+}
