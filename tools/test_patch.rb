@@ -43,7 +43,11 @@ end
 
 def get_patch_info(user, patch) # rubocop:disable Metrics/MethodLength
   puts "## Gathering information for patch: #{patch} with user: #{user}"
-  patch_info = run("ssh -p 29418 #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
+  if "#{user}" == 'jenkins'
+    patch_info = run("ssh -p 29418 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
+  else
+    patch_info = run("ssh -p 29418 #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
+  end
   /^\s*project: stackforge\/(?<patch_project>.*)$/i =~ patch_info
   /^\s*ref: (?<patch_ref>.*)$/i =~ patch_info
   abort "Error! Patch: #{patch} not valid" if patch_project.nil?
