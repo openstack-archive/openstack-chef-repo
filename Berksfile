@@ -13,10 +13,10 @@ end
 cookbook "openstack_client", github: "openstack/cookbook-openstack-client"
 
 cookbook 'apache2', '3.1.0'
-cookbook 'apt', '2.6.1'
+cookbook 'apt', '2.8.2'
 cookbook 'aws', '2.1.1'
 cookbook 'build-essential', '2.1.3'
-cookbook 'ceph', '0.8.0'
+cookbook 'ceph', '0.9.2'
 cookbook 'database', '4.0.2'
 cookbook 'erlang', '1.5.8'
 cookbook 'mariadb', '0.3.1'
