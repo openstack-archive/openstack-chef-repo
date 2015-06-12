@@ -1,3 +1,3 @@
-# Multi node with Nuetron networking
+# Multi-node with Neutron
 
 todo ...

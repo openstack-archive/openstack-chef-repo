@@ -1,6 +1,6 @@
-# Multi node with Nova networking
+# Multi-node with nova-network
 
-Note: Default operating system is ubuntu. If you would like centos, set env var REPO_OS=centos
+Note: Default operating system is Ubuntu. If you would like CentOS, set env var REPO_OS=centos7
 
 ## Nodes
 
@@ -12,8 +12,8 @@ Changes need to be made to the multi-nova.rb and the environments\vagrant-multi-
 
 ### Bridge IP Address
 
-The ip address used for the bridge should on the same network as your machine connects to the internet. Change the '172.16.100.' ip address in the multi-nova.rb and the environments\vagrant-multi-nova.json files.
-For example, on my home network, my laptop as and ip of 192.168.1.xxx, so I set the bridge address to 192.168.1.60.
+The IP address used for the bridge should on the same network as your machine connects to the internet. Change the '172.16.100.' ip address in the multi-nova.rb and the environments\vagrant-multi-nova.json files.
+For example, on my home network, my laptop has an IP of 192.168.1.xxx, so I set the bridge address to 192.168.1.60.
 
 ### Device interface
 

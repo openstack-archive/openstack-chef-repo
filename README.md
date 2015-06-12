@@ -5,9 +5,9 @@ that you can still build a cluster from the ground up with any changes we push u
 
 This framework also gives us an opportunity to show different Reference Architectures and a sane example on how to start with OpenStack and Chef.
 
-With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Kilo release, this supports deploying to Ubuntu 14 and CentOS 7 for all-in-one with nova-network.  Support for all-in-one with Neutron, and multi-node support, is a work in progress.
+With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Kilo release, this supports deploying to Ubuntu 14.04 and CentOS 7.1 for all-in-one with nova-network.  Support for all-in-one with Neutron, and multi-node support, is a work in progress.
 
-Support for CentOS 6.5 and Ubuntu 12 with Icehouse is available with the stable/icehouse branch of this project.
+Support for CentOS 6.5 and Ubuntu 12.04 with Icehouse is available with the stable/icehouse branch of this project.
 
 ## Prereqs
 
@@ -19,20 +19,19 @@ Support for CentOS 6.5 and Ubuntu 12 with Icehouse is available with the stable/
 ```shell
 $ git clone https://github.com/stackforge/openstack-chef-repo.git
 $ cd openstack-chef-repo
-$ vi vagrant_linux.rb # change the 'vm.box' to the variant you'd like to use.
 $ chef exec rake berks_vendor
 ```
 
-The StackForge OpenStack cookbooks by default use databags for configuring passwords.  There are four
+The OpenStack cookbooks by default use databags for configuring passwords.  There are four
 data_bags : *user_passwords*, *db_passwords*, *service_passwords*, *secrets*. I have a already created
 the `data_bags/` directory, so you shouldn't need to make them, if you do something's broken.
-See [Databag](#databags) section below for more details.
+See [Databags](#databags) section below for more details.
 
 **NOTE**: If you are running Ubuntu 14.04 LTS and as your **base** compute machine, you should note that the shipped
 kernel `3.13.0-24-generic` has networking issues, and the best way to resolve this is
 via: `apt-get install linux-image-generic-lts-utopic`. This will install at least `3.16.0` from the Utopic hardware enablement.
 
-## Supported Environments
+## Supported Deployments
 
 * All-in-One
   * nova-network
@@ -41,11 +40,13 @@ via: `apt-get install linux-image-generic-lts-utopic`. This will install at leas
   * nova-network
   * Neutron
 
-For each environment, there's a corresponding readme file in the doc directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
+For each deployment model, there is a corresponding readme file in the doc/ directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
 
 ## Rake Deploy Commands
 
 These commands will spin up various OpenStack cluster configurations, the simplest being the all-in-one controller with nova-network.
+
+For CentOS, set the environment variable REPO_OS=centos7
 
 ```bash
 $ chef exec rake aio_nova       # All-in-one controller with nova-network
@@ -178,7 +179,7 @@ secrets
 service_passwords
 user_passwords
 
-# Show the list of databag items
+# Show the list of data bag items
 $ chef exec knife data bag show db_passwords -z
 ceilometer
 cinder
@@ -191,32 +192,32 @@ keystone
 neutron
 nova
 
-# Show contents of databag item
+# Show contents of data bag item
 $ chef exec knife data bag show db_passwords ceilometer -z
 Encrypted data bag detected, decrypting with provided secret.
 ceilometer: mypass
 id:         ceilometer
 
-# Update contents of databag item
-# set EDITOR env var to your editor, for powershell, I used nano
+# Update contents of data bag item
+# set EDITOR env var to your editor. For PowerShell, I used nano
 $ chef exec knife data bag edit secrets dispersion_auth_user -z
 ```
 
-### Databag Default Values
+### Data bag default values
 db_passwords are set to "mypass"
 secrets are set to "<key>_token"
 service_passwords are set to "mypass"
 user_passwords are set to "mypass"
 
-### Default Databag Secret
-The default secret is stored here .chef\encrypted_data_bag_secret
-and referenced by .chef\knife.rb.
+### Default encrypted data bag secret
+The default secret is stored here .chef/encrypted_data_bag_secret
+and referenced by .chef/knife.rb.
 
 ## Known Issues and Workarounds
 
 ### Gemfile support
 
-The ChefDK provides all the required level of gems this testing suite needs.  But there exists a Gemfile-Provisioning file that can be used as well.
+The ChefDK provides all the required level of gems this testing suite needs, but there exists a Gemfile-Provisioning file that can be used as well.
 You will need to replace the Gemfile with the Gemfile-Provisioning before running your gem bundling.
 Note: please ignore the Gemfile, as it is needed only to pass the existing gates with older levels of gems.
 
@@ -229,8 +230,8 @@ When using this on a Windows platform, here are some tweaks to make this work:
 ## TODOs
 
 - Better instructions for multi-node network setup
-- Better support for aio_neutron and muilt node tests
-- Support for floating ip's
+- Better support for aio_neutron and multi-node tests
+- Support for floating IPs
 - Split out the `multi-neutron-network-node` cluster also so the network node is it's own machine
 - Support for swift multi node test
 - Easier debugging. Maybe a script to pull the logs from the controller.
