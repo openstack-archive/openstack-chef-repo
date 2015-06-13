@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+1: Eric Brown <browne@vmware.com>
+Code-Review+2: JJ Asghar <jj@getchef.com>
+Workflow+1: Samuel Cassiba <sam@cassiba.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Sat, 13 Jun 2015 22:07:13 +0000
+Reviewed-on: https://review.openstack.org/191419
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/icehouse
