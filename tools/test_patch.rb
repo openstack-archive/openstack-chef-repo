@@ -48,7 +48,7 @@ def get_patch_info(user, patch) # rubocop:disable Metrics/MethodLength
   else
     patch_info = run("ssh -p 29418 #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
   end
-  /^\s*project: stackforge\/(?<patch_project>.*)$/i =~ patch_info
+  /^\s*project: openstack\/(?<patch_project>.*)$/i =~ patch_info
   /^\s*ref: (?<patch_ref>.*)$/i =~ patch_info
   abort "Error! Patch: #{patch} not valid" if patch_project.nil?
   patch_cookbook = patch_project.gsub('cookbook-', '')
@@ -61,9 +61,9 @@ end
 
 def add_patch(patch_info)
   puts "## Adding patch: #{patch_info[:patch]} to cookbook: #{patch_info[:cookbook]}"
-  run("git clone --depth 1 git@github.com:stackforge/#{patch_info[:project]}.git")
+  run("git clone --depth 1 git@github.com:openstack/#{patch_info[:project]}.git")
   Dir.chdir(patch_info[:project]) do
-    run("git fetch https://review.openstack.org/stackforge/#{patch_info[:project]} #{patch_info[:ref]}")
+    run("git fetch https://review.openstack.org/openstack/#{patch_info[:project]} #{patch_info[:ref]}")
     run('git checkout FETCH_HEAD')
   end
 end
@@ -167,7 +167,7 @@ LONGDESC
         end
       end
 
-      run('git clone --depth 1 git@github.com:stackforge/openstack-chef-repo.git') unless options[:skip]
+      run('git clone --depth 1 git@github.com:openstack/openstack-chef-repo.git') unless options[:skip]
       Dir.chdir('openstack-chef-repo') do
         ENV['REPO_DEV'] = options[:patches]
         run('chef exec rake berks_vendor') unless options[:skip]

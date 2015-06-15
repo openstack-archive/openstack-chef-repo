@@ -17,7 +17,7 @@ Support for CentOS 6.5 and Ubuntu 12.04 with Icehouse is available with the stab
 ## Initial Setup Steps
 
 ```shell
-$ git clone https://github.com/stackforge/openstack-chef-repo.git
+$ git clone https://github.com/openstack/openstack-chef-repo.git
 $ cd openstack-chef-repo
 $ chef exec rake berks_vendor
 ```

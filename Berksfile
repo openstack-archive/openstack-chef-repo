@@ -7,10 +7,10 @@ source 'https://supermarket.chef.io'
   if ENV['REPO_DEV'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
   else
-    cookbook "openstack-#{cookbook}", github: "stackforge/cookbook-openstack-#{cookbook}", branch: 'master'
+    cookbook "openstack-#{cookbook}", github: "openstack/cookbook-openstack-#{cookbook}", branch: 'master'
   end
 end
-cookbook "openstack_client", github: "stackforge/cookbook-openstack-client", branch: 'master'
+cookbook "openstack_client", github: "openstack/cookbook-openstack-client", branch: 'master'
 
 cookbook 'apache2', '3.0.0'
 cookbook 'apt', '2.6.1'
