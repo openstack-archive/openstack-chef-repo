@@ -12,7 +12,7 @@ source 'https://supermarket.chef.io'
 end
 cookbook "openstack_client", github: "openstack/cookbook-openstack-client", branch: 'master'
 
-cookbook 'apache2', '3.0.0'
+cookbook 'apache2', '3.1.0'
 cookbook 'apt', '2.6.1'
 cookbook 'aws', '2.1.1'
 cookbook 'build-essential', '2.1.3'
