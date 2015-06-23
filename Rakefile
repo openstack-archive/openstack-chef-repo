@@ -61,3 +61,88 @@ task clean: [:destroy_all]
 require 'rubocop/rake_task'
 desc 'Run RuboCop'
 RuboCop::RakeTask.new(:rubocop)
+
+# Helper for running various testing commands
+def _run_commands(desc, commands, openstack=true)
+  puts "## Running #{desc}"
+  commands.each do |command, options|
+    options.each do |option|
+      if openstack
+        sh %(sudo bash -c '. /root/openrc && #{command} #{option}')
+      else
+        sh %(#{command} #{option})
+      end
+    end
+  end
+  puts "## Finished #{desc} tests"
+end
+
+# Helper for looking at the starting environment
+def _run_env_queries # rubocop:disable Metrics/MethodLength
+  _run_commands('basic env queries', {
+    'uname' => ['-a'],
+    'pwd' => [''],
+    'env' => [''],
+    'ifconfig' => [''] },
+    false
+  )
+end
+
+# Helper for setting up basic query tests
+def _run_basic_queries # rubocop:disable Metrics/MethodLength
+  _run_commands('basic test queries', {
+    'nova-manage' => ['version', 'db version'],
+    'nova' => %w(--version service-list hypervisor-list net-list image-list),
+    'glance-manage' => %w(db_version),
+    'glance' => %w(--version image-list),
+    'keystone-manage' => %w(db_version),
+    'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
+    'cinder-manage' => ['version list', 'db version'],
+    'cinder' => %w(--version list),
+    'rabbitmqctl' => %w(cluster_status),
+    'ifconfig' => [''],
+    'neutron' => %w(agent-list ext-list net-list port-list subnet-list quota-list),
+    'ovs-vsctl' => %w(show) }
+  )
+end
+
+# Helper for setting up basic nova tests
+def _run_nova_tests # rubocop:disable Metrics/MethodLength
+  _run_commands('nova boot tests', {
+    'nova' => ['boot test --image cirros --flavor 1'],
+    'sleep' => ['25'] }
+  )
+  _run_commands('nova boot tests', {
+    'nova' => ['list', 'show test', 'delete test'] }
+  )
+end
+
+# Helper for setting up neutron local network
+def _setup_local_network # rubocop:disable Metrics/MethodLength
+  _run_commands('neutron local network setup', {
+    'neutron' => ['net-create local_net --provider:network_type local',
+                  'subnet-create local_net --name local_subnet 192.168.1.0/24'] }
+  )
+end
+
+desc "Integration test on Infra"
+task :integration => [:create_key, :berks_vendor] do
+  # This is a workaround for allowing chef-client to run in local mode
+  sh %(sudo mkdir /etc/chef && sudo cp .chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret)
+  _run_env_queries
+
+  # Three passes to make sure of cookbooks idempotency
+  for i in 1..3
+    puts "####### Pass #{i}"
+    # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
+    sh %(sudo chef-client --force-formatter -z -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
+    _setup_local_network if i == 1
+    _run_basic_queries
+    _run_nova_tests
+  end
+  # Run the tempest formal tests, setup with the openstack-integration-test cookbook
+  Dir.chdir('/opt/tempest') do
+    sh %(sudo ./run_tests.sh)
+  end
+  # TODO (MRV) gather logs
+end
