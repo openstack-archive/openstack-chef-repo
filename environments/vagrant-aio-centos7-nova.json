@@ -9,6 +9,9 @@
     },
     "override_attributes": {
         "openstack": {
+            "yum": {
+                "rdo_delorean_enabled": true
+            },
             "mq": {
                 "user": "admin"
             },
