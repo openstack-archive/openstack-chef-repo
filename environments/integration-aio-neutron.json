@@ -1,5 +1,5 @@
 {
-    "name": "vagrant-aio-neutron",
+    "name": "integration-aio-neutron",
     "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the Vagrantfile-aio-neutron vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using neutron for the networking component, and the openvswitch neutron plugin",
     "cookbook_versions": {
     },

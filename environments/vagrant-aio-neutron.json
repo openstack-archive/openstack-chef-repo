@@ -8,36 +8,21 @@
     "default_attributes": {
     },
     "override_attributes": {
-        "mysql": {
-            "allow_remote_root": true,
-            "root_network_acl": ["%"]
-        },
         "openstack": {
-            "mq": {
-                "user": "admin"
-            },
             "endpoints": {
+                "bind-host": "0.0.0.0",
+                "host": "0.0.0.0",
                 "identity-bind": {
                     "host": "0.0.0.0"
-                },
-                "bind-host": "0.0.0.0"
+                }
+            },
+            "mq": {
+                "user": "admin"
             },
             "network": {
                 "service_plugins": [ "neutron.services.l3_router.l3_router_plugin.L3RouterPlugin" ],
                 "dhcp": {
                     "enable_isolated_metadata": "True"
-                },
-                "openvswitch": {
-                    "tunnel_id_ranges": "1:1000",
-                    "enable_tunneling": "True",
-                    "tunnel_type": "gre",
-                    "tenant_network_type": "gre"
-                },
-                "api": {
-                    "bind_interface": "eth1"
-                },
-                "quota": {
-                    "floatingip": "50"
                 },
                 "l3":{
                     "external_network_bridge_interface": "eth1"
@@ -61,9 +46,6 @@
             "compute": {
                 "network": {
                     "service_type": "neutron"
-                },
-                "config": {
-                    "ram_allocation_ratio": 5.0
                 },
                 "libvirt": {
                     "virt_type": "qemu"
