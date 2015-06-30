@@ -91,6 +91,7 @@ end
 # Helper for setting up basic query tests
 def _run_basic_queries # rubocop:disable Metrics/MethodLength
   _run_commands('basic test queries', {
+    'curl' => ['-v http://localhost', '-kv https://localhost'],
     'nova-manage' => ['version', 'db version'],
     'nova' => %w(--version service-list hypervisor-list net-list image-list),
     'glance-manage' => %w(db_version),
