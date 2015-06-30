@@ -32,6 +32,12 @@
                     "fedora": "http://download.fedoraproject.org/pub/fedora/linux/releases/21/Cloud/Images/x86_64/Fedora-Cloud-Base-20141203-21.x86_64.qcow2"
                 }
             },
+            "block-storage": {
+                "volume": {
+                    "create_volume_group": true,
+                    "default_volume_type": "lvm"
+                }
+            },
             "compute": {
                 "network": {
                     "public_interface": "enp0s3",

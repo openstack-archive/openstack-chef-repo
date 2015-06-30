@@ -63,6 +63,12 @@
                     "centos-7": "http://cloud.centos.org/centos/7/devel/CentOS-7-x86_64-GenericCloud.qcow2"
                 }
             },
+            "block-storage": {
+                "volume": {
+                    "create_volume_group": true,
+                    "default_volume_type": "lvm"
+                }
+            },
             "compute": {
                 "enabled_apis": "ec2,osapi_compute",
                 "libvirt": {
