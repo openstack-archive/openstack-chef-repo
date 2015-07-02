@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Ma Wen Cheng <wenchma@cn.ibm.com>
+Workflow+1: Ma Wen Cheng <wenchma@cn.ibm.com>
+Code-Review+2: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 02 Jul 2015 08:06:06 +0000
+Reviewed-on: https://review.openstack.org/197173
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
