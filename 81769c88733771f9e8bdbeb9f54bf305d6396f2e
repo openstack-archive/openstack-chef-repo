@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Code-Review+2: Jan Klare <j.klare@x-ion.de>
+Workflow+1: Jan Klare <j.klare@x-ion.de>
+Submitted-by: Jenkins
+Submitted-at: Tue, 07 Jul 2015 09:55:20 +0000
+Reviewed-on: https://review.openstack.org/196757
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
