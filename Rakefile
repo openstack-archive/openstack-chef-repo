@@ -109,12 +109,15 @@ end
 
 # Helper for setting up basic nova tests
 def _run_nova_tests # rubocop:disable Metrics/MethodLength
-  _run_commands('nova boot tests', {
-    'nova' => ['boot test --image cirros --flavor 1'],
+  uuid = `sudo bash -c '. /root/openrc && cinder list | grep test_volume | cut -d " " -f 2'`
+  _run_commands('nova boot tests pre', {
+    'nova' => ['list', "boot test --image cirros --flavor 1 --block-device-mapping vdb=#{uuid.chomp!}:::1"],
     'sleep' => ['25'] }
   )
-  _run_commands('nova boot tests', {
-    'nova' => ['list', 'show test', 'delete test'] }
+  _run_commands('nova boot tests post', {
+    'nova' => ['list', 'show test', 'delete test'],
+    'sleep' => ['25'],
+    'cinder' => ['list'] }
   )
 end
 
@@ -123,6 +126,13 @@ def _setup_local_network # rubocop:disable Metrics/MethodLength
   _run_commands('neutron local network setup', {
     'neutron' => ['net-create local_net --provider:network_type local',
                   'subnet-create local_net --name local_subnet 192.168.1.0/24'] }
+  )
+end
+
+# Helper for setting up cinder storage volume
+def _setup_cinder_volume # rubocop:disable Metrics/MethodLength
+  _run_commands('cinder storage volume setup', {
+    'cinder' => ['create --display_name test_volume 1'] }
   )
 end
 
@@ -139,6 +149,7 @@ task :integration => [:create_key, :berks_vendor] do
     sh %(sudo chef-client --force-formatter -z -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
     _setup_local_network if i == 1
     _run_basic_queries
+    _setup_cinder_volume
     _run_nova_tests
   end
   # Run the tempest formal tests, setup with the openstack-integration-test cookbook
