@@ -1,7 +1,7 @@
 task default: ["test"]
 
 desc "Default gate tests to run"
-task :test => [:rubocop, :berks_vendor]
+task :test => [:rubocop, :berks_vendor, :json_check]
 
 def run_command(command)
   if File.exist?('Gemfile.lock')
@@ -61,6 +61,17 @@ task clean: [:destroy_all]
 require 'rubocop/rake_task'
 desc 'Run RuboCop'
 RuboCop::RakeTask.new(:rubocop)
+
+desc "Validate data bags, environments and roles"
+task :json_check do
+  require 'json'
+  ['data_bags/*', 'environments', 'roles'].each do |sub_dir|
+    Dir.glob(sub_dir + '/*.json') do |env_file|
+      puts "Checking #{env_file}"
+      JSON.parse(File.read(env_file))
+    end
+  end
+end
 
 # Helper for running various testing commands
 def _run_commands(desc, commands, openstack=true)
