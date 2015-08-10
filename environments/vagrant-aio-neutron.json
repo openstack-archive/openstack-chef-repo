@@ -50,6 +50,11 @@
                 "libvirt": {
                     "virt_type": "qemu"
                 }
+            },
+            "orchestration": {
+                "heat_stack_user_role": "heat_stack_user",
+                "stack_user_domain_name": "heat",
+                "stack_domain_admin": "heat_stack_admin"
             }
         }
     }

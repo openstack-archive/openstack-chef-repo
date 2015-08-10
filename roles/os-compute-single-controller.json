@@ -23,6 +23,7 @@
     "role[os-compute-cert]",
     "role[os-compute-vncproxy]",
     "role[os-bare-metal-api]",
+    "role[os-orchestration]",
     "role[os-dashboard]"
   ],
   "env_run_lists": {

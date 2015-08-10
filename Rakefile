@@ -112,6 +112,8 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
     'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
     'cinder-manage' => ['version list', 'db version'],
     'cinder' => %w(--version list),
+    'heat-manage' => ['db_version', 'service list'],
+    'heat' => %w(--version stack-list),
     'rabbitmqctl' => %w(cluster_status),
     'ifconfig' => [''],
     'neutron' => %w(agent-list ext-list net-list port-list subnet-list quota-list),
@@ -148,6 +150,19 @@ def _setup_cinder_volume # rubocop:disable Metrics/MethodLength
   )
 end
 
+def _dump_logs
+  paths = []
+  %w(nova neutron keystone cinder glance heat).each do |project|
+    paths << "-r \"\" /etc/#{project}/*"
+    paths << "-r \"\" /var/log/#{project}/*"
+  end
+
+  _run_commands('Dump Logs', {
+    'sleep' => ['25'],
+    'grep' => paths }
+  )
+end
+
 desc "Integration test on Infra"
 task :integration => [:create_key, :berks_vendor] do
   # This is a workaround for allowing chef-client to run in local mode
@@ -162,6 +177,7 @@ task :integration => [:create_key, :berks_vendor] do
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
     sh %(sudo chef-client --force-logger -z -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
+    _dump_logs
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume
