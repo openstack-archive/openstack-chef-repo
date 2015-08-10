@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Code-Review+2: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Workflow+1: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 10 Aug 2015 14:10:58 +0000
+Reviewed-on: https://review.openstack.org/178758
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/juno
