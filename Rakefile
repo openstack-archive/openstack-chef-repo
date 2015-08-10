@@ -26,23 +26,31 @@ task :berks_vendor do
   run_command('berks vendor cookbooks')
 end
 
+desc "Create Chef Key"
+task :create_key do
+  if not File.exist?('.chef/validator.pem')
+    require 'openssl'
+    File.binwrite('.chef/validator.pem', OpenSSL::PKey::RSA.new(2048).to_pem)
+  end
+end
+
 desc "All-in-One Neutron build"
-task :aio_neutron do
+task :aio_neutron => :create_key do
   run_command('chef-client -z vagrant_linux.rb aio-neutron.rb')
 end
 
 desc "All-in-One Nova-networking build"
-task :aio_nova do
+task :aio_nova => :create_key do
   run_command('chef-client -z vagrant_linux.rb aio-nova.rb')
 end
 
 desc "Multi-Neutron build"
-task :multi_neutron do
+task :multi_neutron => :create_key do
   run_command('chef-client -z vagrant_linux.rb multi-neutron.rb')
 end
 
 desc "Multi-Nova-networking build"
-task :multi_nova do
+task :multi_nova => :create_key do
   run_command('chef-client -z vagrant_linux.rb multi-nova.rb')
 end
 
