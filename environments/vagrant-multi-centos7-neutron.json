@@ -8,57 +8,26 @@
     "default_attributes": {
     },
     "override_attributes": {
-        "mysql": {
-            "allow_remote_root": true,
-            "root_network_acl": ["%"]
-        },
         "openstack": {
-            "mq": {
-                "user": "admin"
-            },
-            "identity": {
-                "bind_interface": "enp0s8"
+            "yum": {
+                "rdo_delorean_enabled": true
             },
             "endpoints": {
-                "host": "192.168.100.60",
-                "bind-host": "192.168.100.60",
-                "mq": {
-                    "host": "192.168.100.60"
+                "bind_interface": "enp0s8",
+                "compute-vnc-bind": {
+                    "host": "0.0.0.0"
                 },
-                "db": {
-                    "host": "192.168.100.60"
-                },
-                "image-api-bind":{
-                    "host": "192.168.100.60"
-                },
-                "image-api":{
-                    "host": "192.168.100.60"
-                },
-                "compute-vnc-bind":{
-                    "host": "0.0.0.0",
-                    "bind_interface": "enp0s8"
-                },
-                "compute-vnc":{
-                    "host": "0.0.0.0",
-                    "bind_interface": "enp0s8"
+                "compute-vnc": {
+                    "host": "0.0.0.0"
                 }
+            },
+            "mq": {
+                "user": "admin"
             },
             "network": {
                 "service_plugins": [ "neutron.services.l3_router.l3_router_plugin.L3RouterPlugin" ],
                 "dhcp": {
                     "enable_isolated_metadata": "True"
-                },
-                "openvswitch": {
-                    "tunnel_id_ranges": "1:1000",
-                    "enable_tunneling": "True",
-                    "tunnel_type": "gre",
-                    "tenant_network_type": "gre"
-                },
-                "api": {
-                    "bind_interface": "enp0s8"
-                },
-                "quota": {
-                    "floatingip": "50"
                 },
                 "l3":{
                     "external_network_bridge_interface": "enp0s8"
@@ -71,12 +40,6 @@
                 }
             },
             "image": {
-                "api": {
-                    "bind_interface": "enp0s8"
-                },
-                "registry": {
-                    "bind_interface": "enp0s8"
-                },
                 "image_upload": true,
                 "upload_images": [
                     "cirros"
@@ -97,9 +60,6 @@
                 "network": {
                     "public_interface": "enp0s8",
                     "service_type": "neutron"
-                },
-                "config": {
-                    "ram_allocation_ratio": 5.0
                 }
             }
         }

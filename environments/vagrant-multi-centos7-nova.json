@@ -8,49 +8,20 @@
     "default_attributes": {
     },
     "override_attributes": {
-        "yum": {
-            "repo": {
-                "baseurl": "https://repos.fedorapeople.org/repos/openstack/openstack-kilo/epel-7"
-            },
-            "epel": {
-                "mirrorlist": "http://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=$basearch",
-                "gpgkey": "http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7"
-            }
-        },
-        "mysql": {
-            "allow_remote_root": true,
-            "root_network_acl": ["%"]
-        },
         "openstack": {
+            "yum": {
+                "rdo_delorean_enabled": true
+            },
             "mq": {
                 "user": "admin"
             },
-            "yum": {
-                "uri": "https://repos.fedorapeople.org/repos/openstack/openstack-kilo/epel-7"
-            },
-            "identity": {
-                "bind_interface": "enp0s8"
-            },
             "endpoints": {
-                "bind-host": "10.0.1.60",
-                "host": "10.0.1.60",
-                "mq": {
-                    "host": "10.0.1.60"
-                },
-                "db": {
-                    "host": "10.0.1.60"
-                },
+                "bind-interface": "enp0s8",
                 "compute-vnc-bind":{
                     "host": "0.0.0.0"
                 }
             },
             "image": {
-                "api": {
-                    "bind_interface": "enp0s8"
-                },
-                "registry": {
-                    "bind_interface": "enp0s8"
-                },
                 "image_upload": true,
                 "upload_images": [
                     "cirros",
@@ -59,7 +30,7 @@
                 ],
                 "upload_image": {
                     "cirros": "http://download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img",
-                    "ubuntu-trusty": "https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img",
+                    "ubuntu-trusty": "http://uec-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img",
                     "centos-7": "http://cloud.centos.org/centos/7/devel/CentOS-7-x86_64-GenericCloud.qcow2"
                 }
             },
@@ -70,9 +41,6 @@
                 }
             },
             "compute": {
-                "libvirt": {
-                    "virt_type": "qemu"
-                },
                 "network": {
                     "public_interface": "enp0s3",
                     "service_type": "nova",
@@ -81,6 +49,9 @@
                 "enabled_apis": "ec2,osapi_compute",
                 "config": {
                     "ram_allocation_ratio": 5.0
+                },
+                "libvirt": {
+                    "virt_type": "qemu"
                 },
                 "networks": [
                     {

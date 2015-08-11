@@ -24,12 +24,12 @@
                 "upload_images": [
                     "cirros",
                     "ubuntu-trusty",
-                    "fedora"
+                    "centos-7"
                 ],
                 "upload_image": {
                     "cirros": "http://download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img",
                     "ubuntu-trusty": "http://uec-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img",
-                    "fedora": "http://download.fedoraproject.org/pub/fedora/linux/releases/21/Cloud/Images/x86_64/Fedora-Cloud-Base-20141203-21.x86_64.qcow2"
+                    "centos-7": "http://cloud.centos.org/centos/7/devel/CentOS-7-x86_64-GenericCloud.qcow2"
                 }
             },
             "block-storage": {
