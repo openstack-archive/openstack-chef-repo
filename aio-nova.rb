@@ -14,7 +14,8 @@ controller_config = <<-ENDCONFIG
     v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
-  config.vm.network "private_network", ip: "192.168.100.60"
+  config.vm.network "public_network",
+    bridge: '<put your interface device name here>'
 ENDCONFIG
 
 env = 'vagrant-aio-nova'
