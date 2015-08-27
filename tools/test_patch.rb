@@ -17,7 +17,7 @@ end
 
 # rubocop:disable LineLength
 
-def run(command, verbose = true) # rubocop:disable Metrics/MethodLength
+def run(command, verbose = true)
   puts "## Running command: [#{Dir.pwd}] $ #{command}"
   live_stream = STDOUT
   live_stream = nil unless verbose
@@ -48,7 +48,7 @@ def get_patch_info(user, patch) # rubocop:disable Metrics/MethodLength
   else
     patch_info = run("ssh -p 29418 #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
   end
-  /^\s*project: openstack\/(?<patch_project>.*)$/i =~ patch_info
+  %r{^\s*project: openstack\/(?<patch_project>.*)$}i =~ patch_info
   /^\s*ref: (?<patch_ref>.*)$/i =~ patch_info
   abort "Error! Patch: #{patch} not valid" if patch_project.nil?
   patch_cookbook = patch_project.gsub('cookbook-', '')

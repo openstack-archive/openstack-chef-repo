@@ -5,7 +5,7 @@ that you can still build a cluster from the ground up with any changes we push u
 
 This framework also gives us an opportunity to show different Reference Architectures and a sane example on how to start with OpenStack and Chef.
 
-With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Kilo release, this supports deploying to Ubuntu 14.04 and CentOS 7.1 for all-in-one with nova-network.  Support for all-in-one with Neutron, and multi-node support, is a work in progress.
+With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Liberty release, this supports deploying to Ubuntu 14.04 and CentOS 7.1 for all-in-one with nova-network.  Support for all-in-one with Neutron, and multi-node support, is a work in progress.
 
 Support for CentOS 6.5 and Ubuntu 12.04 with Icehouse is available with the stable/icehouse branch of this project.
 
