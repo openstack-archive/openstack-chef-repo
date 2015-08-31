@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Ma Wen Cheng <wenchma@cn.ibm.com>
+Code-Review+2: Samuel Cassiba <sam@cassiba.com>
+Workflow+1: Samuel Cassiba <sam@cassiba.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 31 Aug 2015 21:49:05 +0000
+Reviewed-on: https://review.openstack.org/217905
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/kilo
