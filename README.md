@@ -36,11 +36,14 @@ via: `apt-get install linux-image-generic-lts-utopic`. This will install at leas
 * All-in-One
   * nova-network
   * Neutron
+  * Bare-Metal
 * Multi-Node
   * nova-network
   * Neutron
 
 For each deployment model, there is a corresponding readme file in the doc/ directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
+
+If you would like to use the bare-metal click [here](docs/aio-bare-metal.md) for the documentation. 
 
 ## Rake Deploy Commands
 
