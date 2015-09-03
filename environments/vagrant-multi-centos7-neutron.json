@@ -9,9 +9,6 @@
     },
     "override_attributes": {
         "openstack": {
-            "yum": {
-                "rdo_delorean_enabled": true
-            },
             "endpoints": {
                 "bind_interface": "enp0s8",
                 "compute-vnc-bind": {
