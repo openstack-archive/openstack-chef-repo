@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Code-Review+2: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Workflow+1: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Sun, 06 Sep 2015 00:27:22 +0000
+Reviewed-on: https://review.openstack.org/220305
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/kilo
