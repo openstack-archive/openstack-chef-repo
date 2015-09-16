@@ -1,0 +1,90 @@
+{
+  "name": "baremetal-aio-neutron",
+  "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the Vagrantfile-aio-neutron vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using neutron for the networking component, and the openvswitch neutron plugin",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "apache": {
+      "listen_addresses": [
+        "<EXTERNAL WEB IP ADDRESS>"
+      ],
+      "listen_ports": [
+        "80",
+        "443"
+      ]
+    },
+    "mysql": {
+      "allow_remote_root": true,
+      "root_network_acl": [
+        "%"
+      ]
+    },
+    "openstack": {
+      "mq": {
+        "user": "admin"
+      },
+      "endpoints": {
+        "bind-host": "<EXTERNAL WEB IP ADDRESS>",
+        "host": "<EXTERNAL WEB IP ADDRESS>"
+      },
+      "network": {
+        "service_plugins": [
+          "neutron.services.l3_router.l3_router_plugin.L3RouterPlugin"
+        ],
+        "dhcp": {
+          "enable_isolated_metadata": "True"
+        },
+        "openvswitch": {
+          "tunnel_id_ranges": "1:1000",
+          "enable_tunneling": "True",
+          "tunnel_type": "gre",
+          "tenant_network_type": "gre"
+        },
+        "api": {
+          "bind_interface": "eth1"
+        },
+        "quota": {
+          "floatingip": "50"
+        },
+        "l3": {
+          "external_network_bridge_interface": "eth1"
+        }
+      },
+      "block-storage": {
+        "enable_v1_api": "True",
+        "volume": {
+          "create_volume_group": true,
+          "default_volume_type": "lvm"
+        }
+      },
+      "image": {
+        "image_upload": true,
+        "upload_images": [
+          "cirros",
+          "ubuntu-trusty",
+          "centos-7"
+        ],
+        "upload_image": {
+          "cirros": "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img",
+          "ubuntu-trusty": "https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img",
+          "centos-7": "http://cloud.centos.org/centos/7/devel/CentOS-7-x86_64-GenericCloud.qcow2"
+        }
+      },
+      "compute": {
+        "network": {
+          "service_type": "neutron"
+        },
+        "config": {
+          "ram_allocation_ratio": 5.0
+        },
+        "libvirt": {
+          "cpu_mode": "host-passthrough"
+        }
+      }
+    }
+  }
+}
