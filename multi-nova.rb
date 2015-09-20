@@ -34,7 +34,7 @@ machine 'controller' do
   converge true
 end
 
-machine_batch do
+resource_name :machine_batch do
   [%w(compute1 61), %w(compute2 62), %w(compute3 63)].each do |name, ip_suff|
     machine name do
       add_machine_options vagrant_config: <<-ENDCONFIG
