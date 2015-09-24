@@ -103,6 +103,7 @@ end
 def _run_basic_queries # rubocop:disable Metrics/MethodLength
   _run_commands('basic test queries', {
     'curl' => ['-v http://localhost', '-kv https://localhost'],
+    'sudo netstat' => ['-nlp'],
     'nova-manage' => ['version', 'db version'],
     'nova' => %w(--version service-list hypervisor-list net-list image-list),
     'glance-manage' => %w(db_version),
@@ -153,11 +154,14 @@ task :integration => [:create_key, :berks_vendor] do
   sh %(sudo mkdir /etc/chef && sudo cp .chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret)
   _run_env_queries
 
+  # Workaround for https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/1499199
+  sh %(sudo apt-get purge -y libvirt0)
+
   # Three passes to make sure of cookbooks idempotency
   for i in 1..3
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
-    sh %(sudo chef-client --force-formatter -z -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
+    sh %(sudo chef-client --force-logger -z -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume

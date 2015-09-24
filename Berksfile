@@ -4,7 +4,7 @@ source 'https://supermarket.chef.io'
    dashboard database data-processing identity image
    integration-test network object-storage ops-database
    ops-messaging orchestration telemetry}.each do |cookbook|
-  if ENV['REPO_DEV'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
+  if ENV['ZUUL_CHANGES'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
   else
     cookbook "openstack-#{cookbook}", github: "openstack/cookbook-openstack-#{cookbook}"

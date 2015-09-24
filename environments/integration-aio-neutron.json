@@ -15,9 +15,6 @@
             "network": {
                 "dhcp": {
                     "enable_isolated_metadata": "True"
-                },
-                "l3":{
-                    "external_network_bridge_interface": "eth0"
                 }
             },
             "block-storage": {
