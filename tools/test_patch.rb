@@ -161,7 +161,7 @@ LONGDESC
     Dir.chdir(dir_name) do
       if options[:patches] && !options[:skip]
         user = get_gerrit_user(options[:username])
-        options[:patches].split(' ').each do |patch|
+        options[:patches].split(',').each do |patch|
           patch_info = get_patch_info(user, patch)
           add_patch(patch_info)
         end
@@ -169,7 +169,7 @@ LONGDESC
 
       run('git clone --depth 1 git@github.com:openstack/openstack-chef-repo.git') unless options[:skip]
       Dir.chdir('openstack-chef-repo') do
-        ENV['REPO_DEV'] = options[:patches]
+        ENV['ZUUL_CHANGES'] = options[:patches]
         run('chef exec rake berks_vendor') unless options[:skip]
 
         (1..(options[:idempotent] ? 2 : 1)).each do |pass|
