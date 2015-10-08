@@ -11,7 +11,7 @@ Support for CentOS 6.5 and Ubuntu 12.04 with Icehouse is available with the stab
 
 ## Prereqs
 
-- [ChefDK](https://downloads.chef.io/chef-dk/) 0.3.6 or later
+- [ChefDK](https://downloads.chef.io/chef-dk/) 0.9.0 or later
 - [Vagrant](https://www.vagrantup.com/downloads.html) 1.7.2 or later with [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or some other provider
 
 ## Initial Setup Steps
