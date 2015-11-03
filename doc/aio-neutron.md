@@ -10,7 +10,9 @@ Changes need to be made to the multi-nova.rb and the environments\vagrant-multi-
 
 Should be empty. With OVS which is what we support at the moment, OVS requires you not to have an IP associated with the NIC. If you do have DHCP enabled and the machine gains an IP you should delete it via something like: `sudo ip addr del 172.16.100.17/24 dev eth1` where `172.16.100.17` was the DHCP leased address.
 
-### Device interface
+The device interface must be is specified by name in the aio-neutron.rb file.
+There is one place to change, look for `bridge: [....]`.  If your interface is not in the list, add it.
+This is because of OVS needing to slurp up an adapter for internet access.
 
 The device interface must be is specified by name in the multi-neutron.rb file.
 There one place to change, look for `<put your interface device name here>`, this is because of OVS and it needing to slurp up an adapter for internet access.

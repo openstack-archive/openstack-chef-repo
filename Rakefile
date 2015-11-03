@@ -1,3 +1,6 @@
+current_dir = File.dirname(__FILE__)
+client_opts = "--force-formatter -z --config #{current_dir}/.chef/knife.rb"
+
 task default: ["test"]
 
 desc "Default gate tests to run"
@@ -18,7 +21,7 @@ end
 
 desc "Destroy machines"
 task :destroy_machines do
-  run_command('chef-client --force-formatter -z destroy_all.rb')
+  run_command("chef-client #{client_opts} destroy_all.rb")
 end
 
 desc "Vendor your cookbooks/"
@@ -36,22 +39,22 @@ end
 
 desc "All-in-One Neutron build"
 task :aio_neutron => :create_key do
-  run_command('chef-client --force-formatter -z vagrant_linux.rb aio-neutron.rb')
+  run_command("chef-client #{client_opts} vagrant_linux.rb aio-neutron.rb")
 end
 
 desc "All-in-One Nova-networking build"
 task :aio_nova => :create_key do
-  run_command('chef-client --force-formatter -z vagrant_linux.rb aio-nova.rb')
+  run_command("chef-client #{client_opts} vagrant_linux.rb aio-nova.rb")
 end
 
 desc "Multi-Neutron build"
 task :multi_neutron => :create_key do
-  run_command('chef-client --force-formatter -z vagrant_linux.rb multi-neutron.rb')
+  run_command("chef-client #{client_opts} vagrant_linux.rb multi-neutron.rb")
 end
 
 desc "Multi-Nova-networking build"
 task :multi_nova => :create_key do
-  run_command('chef-client --force-formatter -z vagrant_linux.rb multi-nova.rb')
+  run_command("chef-client #{client_opts} vagrant_linux.rb multi-nova.rb")
 end
 
 desc "Blow everything away"
@@ -157,7 +160,7 @@ task :integration => [:create_key, :berks_vendor] do
   for i in 1..3
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
-    sh %(sudo chef-client --force-formatter -z -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
+    sh %(sudo chef-client #{client_opts} -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume
