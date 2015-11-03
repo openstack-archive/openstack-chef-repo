@@ -9,8 +9,8 @@ Changes need to be made to the aio-neutron.rb file.
 ### Device interface
 
 The device interface must be is specified by name in the aio-neutron.rb file.
-There is one place to change, look for `<put your interface device name here>`,
-this is because of OVS needing to slurp up an adapter for internet access.
+There is one place to change, look for `bridge: [....]`.  If your interface is not in the list, add it.
+This is because of OVS needing to slurp up an adapter for internet access.
 
 Note: To see a list of virtualbox network interface names use:
     `$ vboxmanage list bridgedifs`

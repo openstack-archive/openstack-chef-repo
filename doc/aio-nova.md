@@ -9,7 +9,7 @@ Changes need to be made to the aio-nova.rb file.
 ### Device interface
 
 The device interface must be is specified by name in the aio-nova.rb file.
-There is one place to change, look for `<put your interface device name here>`.
+There is one place to change, look for `bridge: [....]`.  If your interface is not in the list, add it.
 This is for an extra network adapter to your network, this is good practise for the
 more advance setups.
 

@@ -15,7 +15,15 @@ controller_config = <<-ENDCONFIG
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
   config.vm.network "public_network",
-    bridge: '<put your interface device name here>'
+    bridge: ["en0: USB Ethernet",
+             "en1: USB Ethernet",
+             "en2: USB Ethernet",
+             "en3: USB Ethernet",
+             "en4: USB Ethernet",
+             "en0: Wi-Fi (AirPort)",
+             "en1: Wi-Fi (AirPort)",
+             "en2: Wi-Fi (AirPort)",
+             "Intel(R) Centrino(R) Advanced-N 6205"]
 ENDCONFIG
 
 env = 'vagrant-aio-nova'
