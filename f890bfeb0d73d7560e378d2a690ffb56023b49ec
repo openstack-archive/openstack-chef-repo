@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Workflow+1: JJ Asghar <jj@getchef.com>
+Code-Review+2: Samuel Cassiba <sam@cassiba.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 06 Nov 2015 18:50:06 +0000
+Reviewed-on: https://review.openstack.org/241392
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
