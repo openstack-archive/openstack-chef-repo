@@ -1,18 +1,34 @@
 source 'https://supermarket.chef.io'
 
-%w{bare-metal block-storage common compute
-   dashboard database data-processing identity image
-   integration-test network object-storage ops-database
-   ops-messaging orchestration telemetry}.each do |cookbook|
+%w(
+    bare-metal
+    database
+    data-processing
+    integration-test
+    object-storage
+    orchestration
+    telemetry
+    block-storage
+    common
+    compute
+    dashboard
+    identity
+    image
+    network
+    ops-database
+    ops-messaging
+  ).each do |cookbook|
   if ENV['ZUUL_CHANGES'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
   else
     cookbook "openstack-#{cookbook}", github: "openstack/cookbook-openstack-#{cookbook}"
   end
 end
-cookbook "openstack_client", github: "openstack/cookbook-openstack-client"
 
-cookbook 'apache2', '3.1.0'
+# use the current master branch until the new apache listen logic has been
+# released
+cookbook 'apache2',
+  github: "svanzoest-cookbooks/apache2"
 cookbook 'apt', '2.8.2'
 cookbook 'aws', '2.1.1'
 cookbook 'build-essential', '2.1.3'
@@ -32,3 +48,4 @@ cookbook 'yum', '3.5.4'
 cookbook 'selinux', '0.9.0'
 cookbook 'yum-epel', '0.6.0'
 cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
+cookbook 'locale', '1.0.2'

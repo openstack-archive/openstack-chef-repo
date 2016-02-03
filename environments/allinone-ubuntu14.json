@@ -1,0 +1,43 @@
+{
+  "name": "allinone-ubuntu14",
+  "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the vagrantfile-allinone vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using neutron for the networking component, and the openvswitch neutron plugin",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "apache": {
+      "listen" : {}
+    }
+  },
+  "override_attributes": {
+    "openstack": {
+      "mq": {
+        "user": "admin"
+      },
+      "network":{
+        "conf": {
+          "DEFAULT": {
+            "service_plugins": "router"
+          }
+        }
+      },
+      "image": {
+        "image_upload": true,
+        "upload_images": [
+          "cirros"
+          ],
+        "upload_image": {
+          "cirros": "https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
+        }
+      },
+      "compute": {
+        "conf": {
+          "libvirt": {
+            "virt_type": "qemu"
+          }
+        }
+      }
+    }
+  }
+}

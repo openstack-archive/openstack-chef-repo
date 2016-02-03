@@ -9,8 +9,8 @@ controller_config = <<-ENDCONFIG
   config.vm.network "forwarded_port", guest: 8774, host: 8774
   config.vm.network "forwarded_port", guest: 35357, host: 35357
   config.vm.provider "virtualbox" do |v|
-    v.memory = 8096
-    v.cpus = 2
+    v.memory = 8192
+    v.cpus = 4
     v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
@@ -26,14 +26,12 @@ controller_config = <<-ENDCONFIG
              "Intel(R) Centrino(R) Advanced-N 6205"]
 ENDCONFIG
 
-env = 'vagrant-aio-nova'
-env = 'vagrant-aio-centos7-nova' if ENV['REPO_OS'].to_s.include?('centos')
+env = 'allinone-ubuntu14'
+env = 'allinone-centos7' if ENV['REPO_OS'].to_s.include?('centos')
 
 machine 'controller' do
   add_machine_options vagrant_config: controller_config
-  role 'allinone-compute'
-  role 'os-image-upload'
-  recipe 'openstack-integration-test::setup'
+  role 'allinone'
   chef_environment env
   file('/etc/chef/openstack_data_bag_secret',
        "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")

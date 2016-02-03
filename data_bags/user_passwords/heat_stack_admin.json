@@ -1,9 +1,0 @@
-{
-  "id": "heat_stack_admin",
-  "heat_stack_admin": {
-    "encrypted_data": "GHmi2aJPWAXp4UyiennthLH/Kn5GLUAWQHsA3n1pLZU=\n",
-    "iv": "ifhyjNj74PFd1+vkGiMpdA==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
-  }
-}

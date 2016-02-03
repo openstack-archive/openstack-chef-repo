@@ -37,25 +37,15 @@ task :create_key do
   end
 end
 
-desc "All-in-One Neutron build"
-task :aio_neutron => :create_key do
-  run_command("chef-client #{client_opts} vagrant_linux.rb aio-neutron.rb")
+desc "All-in-One build"
+task :allinone => :create_key do
+  run_command("chef-client #{client_opts} vagrant_linux.rb allinone.rb")
 end
 
-desc "All-in-One Nova-networking build"
-task :aio_nova => :create_key do
-  run_command("chef-client #{client_opts} vagrant_linux.rb aio-nova.rb")
-end
-
-desc "Multi-Neutron build"
-task :multi_neutron => :create_key do
-  run_command("chef-client #{client_opts} vagrant_linux.rb multi-neutron.rb")
-end
-
-desc "Multi-Nova-networking build"
-task :multi_nova => :create_key do
-  run_command("chef-client #{client_opts} vagrant_linux.rb multi-nova.rb")
-end
+#desc "Multi-Neutron build"
+#task :multi_neutron => :create_key do
+#  run_command("chef-client #{client_opts} vagrant_linux.rb multi-neutron.rb")
+#end
 
 desc "Blow everything away"
 task clean: [:destroy_all]
@@ -115,8 +105,6 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
     'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
     'cinder-manage' => ['version list', 'db version'],
     'cinder' => %w(--version list),
-    'heat-manage' => ['db_version', 'service list'],
-    'heat' => %w(--version stack-list),
     'rabbitmqctl' => %w(cluster_status),
     'ifconfig' => [''],
     'neutron' => %w(agent-list ext-list net-list port-list subnet-list quota-list),
@@ -153,9 +141,15 @@ def _setup_cinder_volume # rubocop:disable Metrics/MethodLength
   )
 end
 
+# Helper for setting up tempest and upload the default cirros image. Tempest
+# itself is not yet used for integration tests.
+def _setup_tempest(client_opts)
+    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'recipe[openstack-integration-test::setup]')
+end
+
 def _dump_logs
   paths = []
-  %w(nova neutron keystone cinder glance heat).each do |project|
+  %w(nova neutron keystone cinder glance).each do |project|
     paths << "-r \"\" /etc/#{project}/*"
     paths << "-r \"\" /var/log/#{project}/*"
   end
@@ -179,16 +173,14 @@ task :integration => [:create_key, :berks_vendor] do
   for i in 1..3
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
-    sh %(sudo chef-client #{client_opts} -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
+    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'role[allinone]')
+    _setup_tempest(client_opts)
     _dump_logs
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume
     _run_nova_tests
   end
-  # Run the tempest formal tests, setup with the openstack-integration-test cookbook
-  Dir.chdir('/opt/tempest') do
-    sh %(sudo ./run_tests.sh)
-  end
+  # TODO (jklare) utilise tempest to run tests against openstack
   # TODO (MRV) gather logs
 end

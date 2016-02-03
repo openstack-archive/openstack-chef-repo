@@ -7,8 +7,6 @@ This framework also gives us an opportunity to show different Reference Architec
 
 With the `master` branch of the cookbooks, which is currently tied to the base OpenStack Liberty release, this supports deploying to Ubuntu 14.04 and CentOS 7.1 for all-in-one with nova-network.  Support for all-in-one with Neutron, and multi-node support, is a work in progress.
 
-Support for CentOS 6.5 and Ubuntu 12.04 with Icehouse is available with the stable/icehouse branch of this project.
-
 ## Prereqs
 
 - [ChefDK](https://downloads.chef.io/chef-dk/) 0.9.0 or later
@@ -34,16 +32,9 @@ via: `apt-get install linux-image-generic-lts-utopic`. This will install at leas
 ## Supported Deployments
 
 * All-in-One
-  * nova-network
-  * Neutron
-  * Bare-Metal
-* Multi-Node
-  * nova-network
   * Neutron
 
 For each deployment model, there is a corresponding readme file in the doc/ directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
-
-If you would like to use the bare-metal click [here](docs/aio-bare-metal.md) for the documentation. 
 
 ## Rake Deploy Commands
 
@@ -52,10 +43,7 @@ These commands will spin up various OpenStack cluster configurations, the simple
 For CentOS, set the environment variable REPO_OS=centos7
 
 ```bash
-$ chef exec rake aio_nova       # All-in-one controller with nova-network
-$ chef exec rake aio_neutron    # All-in-one controller with Neutron
-$ chef exec rake multi_nova     # Multi-node controller with nova-network and 3 compute nodes
-$ chef exec rake multi_neutron  # Multi-node controller with Neutron and 3 compute nodes
+$ chef exec rake allinone       # All-in-one controller with neutron-network
  ```
 
 ### Access the Controller
@@ -184,22 +172,19 @@ user_passwords
 
 # Show the list of data bag items
 $ chef exec knife data bag show db_passwords -z
-ceilometer
 cinder
 dash
 glance
-heat
 horizon
-ironic
 keystone
 neutron
 nova
 
 # Show contents of data bag item
-$ chef exec knife data bag show db_passwords ceilometer -z
+$ chef exec knife data bag show db_passwords nova -z
 Encrypted data bag detected, decrypting with provided secret.
-ceilometer: mypass
-id:         ceilometer
+nova: mypass
+id:   nova
 
 # Update contents of data bag item
 # set EDITOR env var to your editor. For PowerShell, I used nano
@@ -218,12 +203,6 @@ and referenced by .chef/knife.rb.
 
 ## Known Issues and Workarounds
 
-### Gemfile support
-
-The ChefDK provides all the required level of gems this testing suite needs, but there exists a Gemfile-Provisioning file that can be used as well.
-You will need to replace the Gemfile with the Gemfile-Provisioning before running your gem bundling.
-Note: please ignore the Gemfile, as it is needed only to pass the existing gates with older levels of gems.
-
 ### Windows Platform
 
 When using this on a Windows platform, here are some tweaks to make this work:
@@ -232,11 +211,10 @@ When using this on a Windows platform, here are some tweaks to make this work:
 
 ## TODOs
 
-- Better instructions for multi-node network setup
-- Better support for aio_neutron and multi-node tests
+- Support for multi node test
 - Support for floating IPs
+- Better instructions for multi-node network setup
 - Split out the `multi-neutron-network-node` cluster also so the network node is it's own machine
-- Support for swift multi node test
 - Easier debugging. Maybe a script to pull the logs from the controller.
 
 # License #

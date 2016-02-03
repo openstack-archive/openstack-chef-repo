@@ -4,7 +4,7 @@ Note: Default operating system is Ubuntu. If you would like CentOS, set env var 
 
 ## Networking setup
 
-Changes need to be made to the aio-neutron.rb file.
+Changes need to be made to the allinone.rb file.
 
 ### Device interface
 
