@@ -8,9 +8,13 @@ Changes need to be made to the allinone.rb file.
 
 ### Device interface
 
-The device interface must be is specified by name in the aio-neutron.rb file.
-There is one place to change, look for `bridge: [....]`.  If your interface is not in the list, add it.
-This is because of OVS needing to slurp up an adapter for internet access.
+OVS needs to bridge in an adaptor for internet access. An attempt
+has been made to work out of the box, however it is quite probable
+you'll need to specify the bridge to use. You can set the environment
+variable `OS_BRIDGE` before running the vagrant command to set it. 
+
+For example on my Ubuntu laptop I run `export OS_BRIDGE=eth0` before
+running the rake commands.
 
 Note: To see a list of virtualbox network interface names use:
     `$ vboxmanage list bridgedifs`
