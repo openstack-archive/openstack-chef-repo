@@ -6,6 +6,9 @@
   "json_class": "Chef::Environment",
   "chef_type": "environment",
   "default_attributes": {
+    "apt": {
+      "compile_time_update" : true
+    },
     "apache": {
       "listen" : {}
     }

@@ -87,7 +87,8 @@ def _run_env_queries # rubocop:disable Metrics/MethodLength
     'uname' => ['-a'],
     'pwd' => [''],
     'env' => [''],
-    'ifconfig' => [''] },
+    'ifconfig' => [''],
+    'cat' => ['/etc/apt/sources.list']},
     false
   )
 end
