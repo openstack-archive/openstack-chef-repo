@@ -18,7 +18,7 @@
       "mq": {
         "user": "admin"
       },
-      "network":{
+      "network": {
         "conf": {
           "DEFAULT": {
             "service_plugins": "router"
