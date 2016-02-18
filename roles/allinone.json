@@ -8,7 +8,6 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[locale]",
     "recipe[apt]",
     "recipe[yum]",
     "recipe[openstack-common]",
