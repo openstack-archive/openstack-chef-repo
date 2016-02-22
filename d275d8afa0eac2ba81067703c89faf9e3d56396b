@@ -1,0 +1,10 @@
+Code-Review+1: Ma Wen Cheng <wenchma@cn.ibm.com>
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Code-Review+1: Gerard Braad <me@gbraad.nl>
+Workflow+1: Jan Klare <j.klare@cloudbau.de>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 22 Feb 2016 16:21:13 +0000
+Reviewed-on: https://review.openstack.org/281062
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
