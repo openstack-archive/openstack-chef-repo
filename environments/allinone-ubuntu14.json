@@ -8,9 +8,6 @@
   "default_attributes": {
     "apt": {
       "compile_time_update" : true
-    },
-    "apache": {
-      "listen" : {}
     }
   },
   "override_attributes": {
