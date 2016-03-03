@@ -167,9 +167,6 @@ task :integration => [:create_key, :berks_vendor] do
   sh %(sudo mkdir /etc/chef && sudo cp .chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret)
   _run_env_queries
 
-  # Workaround for https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/1499199
-  sh %(sudo apt-get purge -y libvirt0)
-
   # Three passes to make sure of cookbooks idempotency
   for i in 1..3
     puts "####### Pass #{i}"
