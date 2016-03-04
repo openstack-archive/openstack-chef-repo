@@ -5,11 +5,6 @@
   },
   "json_class": "Chef::Environment",
   "chef_type": "environment",
-  "default_attributes": {
-    "apache": {
-      "listen" : {}
-    }
-  },
   "override_attributes": {
     "openstack": {
       "yum": {
