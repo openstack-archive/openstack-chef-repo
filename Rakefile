@@ -1,5 +1,5 @@
 current_dir = File.dirname(__FILE__)
-client_opts = "--force-formatter -z --config #{current_dir}/.chef/knife.rb"
+client_opts = "--force-formatter --no-color -z --config #{current_dir}/.chef/knife.rb"
 
 task default: ["test"]
 
