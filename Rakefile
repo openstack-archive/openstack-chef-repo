@@ -106,6 +106,8 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
     'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
     'cinder-manage' => ['version list', 'db version'],
     'cinder' => %w(--version list),
+    'heat-manage' => ['db_version', 'service list'],
+    'heat' => %w(--version stack-list),
     'rabbitmqctl' => %w(cluster_status),
     'ifconfig' => [''],
     'neutron' => %w(agent-list ext-list net-list port-list subnet-list quota-list),
@@ -150,7 +152,7 @@ end
 
 def _dump_logs
   paths = []
-  %w(nova neutron keystone cinder glance).each do |project|
+  %w(nova neutron keystone cinder glance heat).each do |project|
     paths << "-r \"\" /etc/#{project}/*"
     paths << "-r \"\" /var/log/#{project}/*"
   end

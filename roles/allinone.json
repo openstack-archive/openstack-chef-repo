@@ -51,6 +51,11 @@
     "recipe[openstack-block-storage::volume]",
     "recipe[openstack-block-storage::backup]",
     "recipe[openstack-block-storage::identity_registration]",
+    "recipe[openstack-orchestration::engine]",
+    "recipe[openstack-orchestration::api]",
+    "recipe[openstack-orchestration::api-cfn]",
+    "recipe[openstack-orchestration::api-cloudwatch]",
+    "recipe[openstack-orchestration::identity_registration]",
     "recipe[openstack-common::client]",
     "recipe[openstack-dashboard::server]"
   ],
