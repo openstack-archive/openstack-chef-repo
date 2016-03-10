@@ -1,5 +1,18 @@
 require 'chef/provisioning'
 
+default_bridge = '["en0: USB Ethernet","en0: Wi-Fi (AirPort)",'
+default_bridge += '["en1: USB Ethernet","en1: Wi-Fi (AirPort)",'
+default_bridge += '["en2: USB Ethernet","en2: Wi-Fi (AirPort)",'
+default_bridge += '["en3: USB Ethernet","en4: USB Ethernet"'
+default_bridge += '"eth0","wlan0",'
+default_bridge += '"Intel(R) Centrino(R) Advanced-N 6205"]'
+
+if ENV['OS_BRIDGE']
+  bridge = "\"#{ENV['OS_BRIDGE']}\""
+else
+  bridge = default_bridge
+end
+
 controller_config = <<-ENDCONFIG
   config.vm.network "forwarded_port", guest: 443, host: 9443
   config.vm.network "forwarded_port", guest: 4002, host: 4002
@@ -15,15 +28,7 @@ controller_config = <<-ENDCONFIG
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
   config.vm.network "public_network",
-    bridge: ["en0: USB Ethernet",
-             "en1: USB Ethernet",
-             "en2: USB Ethernet",
-             "en3: USB Ethernet",
-             "en4: USB Ethernet",
-             "en0: Wi-Fi (AirPort)",
-             "en1: Wi-Fi (AirPort)",
-             "en2: Wi-Fi (AirPort)",
-             "Intel(R) Centrino(R) Advanced-N 6205"]
+    bridge: #{bridge}
 ENDCONFIG
 
 env = 'allinone-ubuntu14'
