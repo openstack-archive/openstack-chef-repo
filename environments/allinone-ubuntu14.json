@@ -6,12 +6,18 @@
   "json_class": "Chef::Environment",
   "chef_type": "environment",
   "default_attributes": {
+    "apache": {
+      "listen": []
+    },
     "apt": {
       "compile_time_update" : true
     }
   },
   "override_attributes": {
     "openstack": {
+      "dashboard": {
+        "server_hostname": "localhost"
+      },
       "mq": {
         "user": "admin"
       },
