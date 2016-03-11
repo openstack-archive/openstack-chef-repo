@@ -81,38 +81,67 @@ def _run_commands(desc, commands, openstack=true)
   puts "## Finished #{desc} tests"
 end
 
+# use the correct environment depending on platform
+if File.exist?('/etc/lsb-release')
+  @platform = 'ubuntu14'
+elsif File.exist?('/etc/redhat-release')
+  @platform = 'centos7'
+end
+
 # Helper for looking at the starting environment
 def _run_env_queries # rubocop:disable Metrics/MethodLength
-  _run_commands('basic env queries', {
-    'uname' => ['-a'],
-    'pwd' => [''],
-    'env' => [''],
-    'ifconfig' => [''],
-    'cat' => ['/etc/apt/sources.list']},
-    false
-  )
+    _run_commands('basic common env queries', {
+      'uname' => ['-a'],
+      'pwd' => [''],
+      'env' => ['']},
+      false
+    )
+  case @platform
+  when 'ubuntu14'
+    _run_commands('basic debian env queries', {
+      'ifconfig' => [''],
+      'cat' => ['/etc/apt/sources.list']},
+      false
+    )
+  when 'centos7'
+    _run_commands('basic rhel env queries', {
+      '/usr/sbin/ip' => ['addr'],
+      'cat' => ['/etc/yum.repos.d/*']},
+      false
+    )
+  end
 end
 
 # Helper for setting up basic query tests
 def _run_basic_queries # rubocop:disable Metrics/MethodLength
-  _run_commands('basic test queries', {
-    'curl' => ['-v http://localhost', '-kv https://localhost'],
-    'sudo netstat' => ['-nlp'],
-    'nova-manage' => ['version', 'db version'],
-    'nova' => %w(--version service-list hypervisor-list net-list image-list),
-    'glance-manage' => %w(db_version),
-    'glance' => %w(--version image-list),
-    'keystone-manage' => %w(db_version),
-    'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
-    'cinder-manage' => ['version list', 'db version'],
-    'cinder' => %w(--version list),
-    'heat-manage' => ['db_version', 'service list'],
-    'heat' => %w(--version stack-list),
-    'rabbitmqctl' => %w(cluster_status),
-    'ifconfig' => [''],
-    'neutron' => %w(agent-list ext-list net-list port-list subnet-list quota-list),
-    'ovs-vsctl' => %w(show) }
-  )
+  _run_commands('basic common test queries', {
+      'curl' => ['-v http://localhost', '-kv https://localhost'],
+      'sudo netstat' => ['-nlp'],
+      'nova-manage' => ['version', 'db version'],
+      'nova' => %w(--version service-list hypervisor-list net-list image-list),
+      'glance-manage' => %w(db_version),
+      'glance' => %w(--version image-list),
+      'keystone-manage' => %w(db_version),
+      'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
+      'cinder-manage' => ['version list', 'db version'],
+      'cinder' => %w(--version list),
+      'heat-manage' => ['db_version', 'service list'],
+      'heat' => %w(--version stack-list),
+      'neutron' => %w(agent-list ext-list net-list port-list subnet-list quota-list),
+      'ovs-vsctl' => %w(show) }
+    )
+  case @platform
+  when 'ubuntu14'
+    _run_commands('basic debian test queries', {
+      'rabbitmqctl' => %w(cluster_status),
+      'ifconfig' => ['']}
+    )
+  when 'centos7'
+    _run_commands('basic rhel test queries', {
+      '/usr/sbin/rabbitmqctl' => %w(cluster_status),
+      '/usr/sbin/ip' => ['addr']}
+    )
+  end
 end
 
 # Helper for setting up basic nova tests
@@ -147,15 +176,15 @@ end
 # Helper for setting up tempest and upload the default cirros image. Tempest
 # itself is not yet used for integration tests.
 def _setup_tempest(client_opts)
-    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'recipe[openstack-integration-test::setup]' || true)
+  sh %(sudo chef-client #{client_opts} -E allinone-#{@platform} -r 'recipe[openstack-integration-test::setup]')
 end
 
 def _save_logs(prefix, log_dir)
   sh %(sleep 25)
   %w(nova neutron keystone cinder glance heat).each do |project|
     sh %(mkdir -p #{log_dir}/#{prefix}/#{project})
-    sh %(sudo cp -r /etc/#{project} #{log_dir}/#{prefix}/#{project}/etc)
-    sh %(sudo cp -r /var/log/#{project} #{log_dir}/#{prefix}/#{project}/log)
+    sh %(sudo cp -r /etc/#{project} #{log_dir}/#{prefix}/#{project}/etc || true)
+    sh %(sudo cp -r /var/log/#{project} #{log_dir}/#{prefix}/#{project}/log || true)
   end
 end
 
@@ -168,16 +197,23 @@ task :integration => [:create_key, :berks_vendor] do
 
   # Three passes to make sure of cookbooks idempotency
   for i in 1..3
+    begin
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
-    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'role[allinone]' || true)
+    sh %(sudo chef-client #{client_opts} -E allinone-#{@platform} -r 'role[allinone]')
     _setup_tempest(client_opts)
-    _save_logs("pass#{i}", log_dir)
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume
     _run_nova_tests
+
+    rescue => e
+      raise "####### Pass #{i} failed with #{e.message}"
+    ensure
+      # make sure logs are saved, pass or fail
+      _save_logs("pass#{i}", log_dir)
+      sh %(sudo chown -R $USER #{log_dir})
+    end
   end
-  sh %(sudo chown -R $USER #{log_dir})
   # TODO (jklare) utilise tempest to run tests against openstack
 end
