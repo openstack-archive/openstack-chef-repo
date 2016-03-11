@@ -153,17 +153,13 @@ def _setup_cinder_volume # rubocop:disable Metrics/MethodLength
   )
 end
 
-def _dump_logs
-  paths = []
+def _save_logs(prefix)
+  sh %(sleep 25)
   %w(nova neutron keystone cinder glance heat).each do |project|
-    paths << "-r \"\" /etc/#{project}/*"
-    paths << "-r \"\" /var/log/#{project}/*"
+    sh %(mkdir -p logs/#{prefix}/#{project})
+    sh %(sudo cp -r /etc/#{project} logs/#{prefix}/#{project}/etc)
+    sh %(sudo cp -r /var/log/#{project} logs/#{prefix}/#{project}/log)
   end
-
-  _run_commands('Dump Logs', {
-    'sleep' => ['25'],
-    'grep' => paths }
-  )
 end
 
 desc "Integration test on Infra"
@@ -176,16 +172,12 @@ task :integration => [:create_key, :berks_vendor] do
   for i in 1..3
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
-    sh %(sudo chef-client #{client_opts} -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]')
-    _dump_logs
+    sh %(sudo chef-client #{client_opts} -E integration-aio-neutron -r 'role[allinone-compute]','role[os-image-upload]','recipe[openstack-integration-test::setup]' || true)
+    _save_logs("pass#{i}")
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume
     _run_nova_tests
   end
-  # Run the tempest formal tests, setup with the openstack-integration-test cookbook
-  Dir.chdir('/opt/tempest') do
-    sh %(sudo ./run_tests.sh)
-  end
-  # TODO (MRV) gather logs
+  sh %(sudo chown -R $USER logs)
 end
