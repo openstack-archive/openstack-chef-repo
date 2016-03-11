@@ -147,20 +147,16 @@ end
 # Helper for setting up tempest and upload the default cirros image. Tempest
 # itself is not yet used for integration tests.
 def _setup_tempest(client_opts)
-    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'recipe[openstack-integration-test::setup]')
+    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'recipe[openstack-integration-test::setup]' || true)
 end
 
-def _dump_logs
-  paths = []
+def _save_logs(prefix)
+  sh %(sleep 25)
   %w(nova neutron keystone cinder glance heat).each do |project|
-    paths << "-r \"\" /etc/#{project}/*"
-    paths << "-r \"\" /var/log/#{project}/*"
+    sh %(mkdir -p logs/#{prefix}/#{project})
+    sh %(sudo cp -r /etc/#{project} logs/#{prefix}/#{project}/etc)
+    sh %(sudo cp -r /var/log/#{project} logs/#{prefix}/#{project}/log)
   end
-
-  _run_commands('Dump Logs', {
-    'sleep' => ['25'],
-    'grep' => paths }
-  )
 end
 
 desc "Integration test on Infra"
@@ -173,14 +169,14 @@ task :integration => [:create_key, :berks_vendor] do
   for i in 1..3
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
-    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'role[allinone]')
+    sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'role[allinone]' || true)
     _setup_tempest(client_opts)
-    _dump_logs
+    _save_logs("pass#{i}")
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume
     _run_nova_tests
   end
+  sh %(sudo chown -R $USER logs)
   # TODO (jklare) utilise tempest to run tests against openstack
-  # TODO (MRV) gather logs
 end
