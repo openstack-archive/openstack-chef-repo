@@ -7,9 +7,7 @@ source 'https://supermarket.chef.io'
   if ENV['ZUUL_CHANGES'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
   else
-    cookbook "openstack-#{cookbook}",
-      github: "openstack/cookbook-openstack-#{cookbook}",
-      branch: 'stable/liberty'
+    cookbook "openstack-#{cookbook}", github: "openstack/cookbook-openstack-#{cookbook}"
   end
 end
 cookbook "openstack_client", github: "openstack/cookbook-openstack-client"
