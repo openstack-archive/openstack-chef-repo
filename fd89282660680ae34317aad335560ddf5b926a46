@@ -1,0 +1,9 @@
+Code-Review+1: Jens Rosenboom <j.rosenboom@x-ion.de>
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Workflow+1: Samuel Cassiba <sam@cassiba.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 21 Mar 2016 16:31:27 +0000
+Reviewed-on: https://review.openstack.org/293335
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/liberty
