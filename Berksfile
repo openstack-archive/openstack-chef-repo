@@ -25,10 +25,7 @@ source 'https://supermarket.chef.io'
   end
 end
 
-# use the current master branch until the new apache listen logic has been
-# released
-cookbook 'apache2',
-  github: "svanzoest-cookbooks/apache2"
+cookbook 'apache2', '3.2.0'
 cookbook 'apt', '2.8.2'
 cookbook 'aws', '2.1.1'
 cookbook 'build-essential', '2.1.3'
