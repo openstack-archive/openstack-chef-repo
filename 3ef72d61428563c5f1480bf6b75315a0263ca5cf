@@ -1,0 +1,8 @@
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Workflow+1: Jan Klare <j.klare@cloudbau.de>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 30 Mar 2016 08:13:00 +0000
+Reviewed-on: https://review.openstack.org/298951
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
