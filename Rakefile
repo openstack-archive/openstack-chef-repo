@@ -150,17 +150,18 @@ def _setup_tempest(client_opts)
     sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'recipe[openstack-integration-test::setup]' || true)
 end
 
-def _save_logs(prefix)
+def _save_logs(prefix, log_dir)
   sh %(sleep 25)
   %w(nova neutron keystone cinder glance heat).each do |project|
-    sh %(mkdir -p logs/#{prefix}/#{project})
-    sh %(sudo cp -r /etc/#{project} logs/#{prefix}/#{project}/etc)
-    sh %(sudo cp -r /var/log/#{project} logs/#{prefix}/#{project}/log)
+    sh %(mkdir -p #{log_dir}/#{prefix}/#{project})
+    sh %(sudo cp -r /etc/#{project} #{log_dir}/#{prefix}/#{project}/etc)
+    sh %(sudo cp -r /var/log/#{project} #{log_dir}/#{prefix}/#{project}/log)
   end
 end
 
 desc "Integration test on Infra"
 task :integration => [:create_key, :berks_vendor] do
+  log_dir = ENV['WORKSPACE']+'/logs'
   # This is a workaround for allowing chef-client to run in local mode
   sh %(sudo mkdir /etc/chef && sudo cp .chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret)
   _run_env_queries
@@ -171,12 +172,12 @@ task :integration => [:create_key, :berks_vendor] do
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
     sh %(sudo chef-client #{client_opts} -E allinone-ubuntu14 -r 'role[allinone]' || true)
     _setup_tempest(client_opts)
-    _save_logs("pass#{i}")
+    _save_logs("pass#{i}", log_dir)
     _setup_local_network if i == 1
     _run_basic_queries
     _setup_cinder_volume
     _run_nova_tests
   end
-  sh %(sudo chown -R $USER logs)
+  sh %(sudo chown -R $USER #{log_dir})
   # TODO (jklare) utilise tempest to run tests against openstack
 end
