@@ -110,7 +110,7 @@ class MyCLI < Thor
   desc 'test', 'Spin up test repo with optional patches'
   long_desc <<-LONGDESC
       This will run the test suite.  There are options to include one or more patches using the gerrit review number.
-      The test will run in a new directory called test-<env>-<os>-<patch>, where aio_nova is the default environment,
+      The test will run in a new directory called test-<env>-<os>-<patch>, where allinone is the default environment,
       ubuntu14 is the default os platform and master (no patches) is the default for patch.
 
       For patches, the tool will try to find your gerrit review name using the "git config -l".  If the tool
@@ -119,19 +119,19 @@ class MyCLI < Thor
       Examples:
 
       "$ chef exec ruby test_patch test"\n
-      This will run the aio_nova against the master branch.
+      This will run the allinone against the master branch.
 
       "$ chef exec ruby test_patch test -t"\n
-      This will run the aio_nova against the master branch and run the tempest suite.
+      This will run the allinone against the master branch and run the tempest suite.
 
       "$ chef exec ruby test_patch test -p 161495 -u kramvan"\n
-      This will run the aio_nova against the master branch including the 161495 patch set.
+      This will run the allinone against the master branch including the 161495 patch set.
 
       "$ chef exec ruby test_patch test -p 161495,123456 -u kramvan"\n
-      This will run the aio_nova against the master branch including patches 161495 and 123456.
+      This will run the allinone against the master branch including patches 161495 and 123456.
 
       "$ chef exec ruby test_patch test -p 161495 -i"\n
-      This will run the aio_nova against the master branch including the 161495 patch set and
+      This will run the allinone against the master branch including the 161495 patch set and
       run the converge a second time to help check for idempotentcy. Also, in this case the
       gerrit username was automatically found.
 
@@ -141,7 +141,7 @@ class MyCLI < Thor
 
 LONGDESC
   option :patches, aliases: :p, default: nil, banner: ' Gerrit patch numbers: xxx,zzz, defaults to no patches just use master branch.'
-  option :env, aliases: :e, default: 'aio_nova', banner: ' Test environment to run.'
+  option :env, aliases: :e, default: 'allinone', banner: ' Test environment to run.'
   option :os, aliases: :o, default: 'ubuntu14', banner: ' OS to use, ubuntu14 or centos7.'
   option :idempotent, aliases: :i, default: false, type: :boolean, banner: ' Run converge a second time to help check for idempotentcy.'
   option :query, aliases: :q, default: true, type: :boolean, banner: ' Run basic test queries after converge completes.'
