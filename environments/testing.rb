@@ -43,7 +43,7 @@ override_attributes(
       'identity_service_chef_role' => 'os-identity',
       'nova_setup_chef_role' => 'os-compute-api',
       'rabbit_server_chef_role' => 'os-ops-messaging',
-      'ratelimit' => {  # Disable ratelimiting so Tempest doesn't have issues.
+      'ratelimit' => { # Disable ratelimiting so Tempest doesn't have issues.
         'api' => {
           'enabled' => false
         },

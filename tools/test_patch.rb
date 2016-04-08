@@ -21,7 +21,7 @@ def run(command, verbose = true)
   puts "## Running command: [#{Dir.pwd}] $ #{command}"
   live_stream = STDOUT
   live_stream = nil unless verbose
-  runner = Mixlib::ShellOut.new(command,  live_stream: live_stream, timeout: 1800).run_command
+  runner = Mixlib::ShellOut.new(command, live_stream: live_stream, timeout: 1800).run_command
   runner.error!
   runner.stdout
 end
@@ -99,8 +99,8 @@ end
 
 def get_test_dir(env, os, patches)
   patch = 'master'
-  patch = patches.gsub(' ', '-') unless patches.to_s.empty?
-  dir_name =   "test-#{env}-#{os}-#{patch}"
+  patch = patches.tr(' ', '-') unless patches.to_s.empty?
+  dir_name = "test-#{env}-#{os}-#{patch}"
   puts "## Repo dir: #{dir_name}"
   dir_name
 end
