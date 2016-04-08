@@ -201,8 +201,10 @@ task :integration => [:create_key, :berks_vendor] do
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
     sh %(sudo chef-client #{client_opts} -E allinone-#{@platform} -r 'role[allinone]')
-    _setup_tempest(client_opts)
-    _setup_local_network if i == 1
+    if i == 1
+      _setup_tempest(client_opts)
+      _setup_local_network
+    end
     _run_basic_queries
     _setup_cinder_volume
     _run_nova_tests
