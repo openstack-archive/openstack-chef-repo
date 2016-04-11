@@ -82,9 +82,9 @@ def _run_commands(desc, commands, openstack=true)
 end
 
 # use the correct environment depending on platform
-if File.exist?('/etc/lsb-release')
+if File.exist?('/usr/bin/apt-get')
   @platform = 'ubuntu14'
-elsif File.exist?('/etc/redhat-release')
+elsif File.exist?('/usr/bin/yum')
   @platform = 'centos7'
 end
 
