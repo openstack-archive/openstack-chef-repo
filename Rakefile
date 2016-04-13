@@ -181,7 +181,7 @@ end
 
 def _save_logs(prefix, log_dir)
   sh %(sleep 25)
-  %w(nova neutron keystone cinder glance heat apache2 rabbitmq mysql openvswitch).each do |project|
+  %w(nova neutron keystone cinder glance heat apache2 rabbitmq mysql openvswitch mariadb).each do |project|
     sh %(mkdir -p #{log_dir}/#{prefix}/#{project})
     sh %(sudo cp -r /etc/#{project} #{log_dir}/#{prefix}/#{project}/etc || true)
     sh %(sudo cp -r /var/log/#{project} #{log_dir}/#{prefix}/#{project}/log || true)
