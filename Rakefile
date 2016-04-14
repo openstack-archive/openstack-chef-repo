@@ -78,7 +78,7 @@ def _run_commands(desc, commands, openstack=true)
       end
     end
   end
-  puts "## Finished #{desc} tests"
+  puts "## Finished #{desc}"
 end
 
 # use the correct environment depending on platform
@@ -118,7 +118,7 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
       'curl' => ['-v http://localhost', '-kv https://localhost'],
       'sudo netstat' => ['-nlp'],
       'nova-manage' => ['version', 'db version'],
-      'nova' => %w(--version service-list hypervisor-list net-list image-list),
+      'nova' => %w(--version service-list hypervisor-list image-list flavor-list),
       'glance-manage' => %w(db_version),
       'glance' => %w(--version image-list),
       'keystone-manage' => %w(db_version),
@@ -145,35 +145,34 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
 end
 
 # Helper for setting up basic nova tests
-def _run_nova_tests # rubocop:disable Metrics/MethodLength
-  uuid = `sudo bash -c '. /root/openrc && cinder list | grep test_volume | cut -d " " -f 2'`
- _run_commands('nova boot tests post', {
-    'sleep' => ['10'],
+def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
+  _run_commands('cinder storage volume create', {
+    'cinder' => ['list', "create --display_name test_volume_#{pass} 1"],
+    'sleep' => ['10'] }
+  )
+ _run_commands('cinder storate volume query', {
     'cinder' => ['list'] }
   )
-  _run_commands('nova boot tests pre', {
+  uuid = `sudo bash -c ". /root/openrc && cinder list | grep test_volume_#{pass} | cut -d ' ' -f 2"`
+  _run_commands('nova server create', {
     'nova' => ['list', "boot test --image cirros --flavor 1 --block-device-mapping vdb=#{uuid.chomp!}:::1"],
-    'sleep' => ['25'] }
+    'sleep' => ['40'] }
   )
-  _run_commands('nova boot tests post', {
+  _run_commands('nova server cleanup', {
     'nova' => ['list', 'show test', 'delete test'],
     'sleep' => ['25'],
     'cinder' => ['list'] }
+  )
+ _run_commands('nova server query', {
+    'nova' => ['list'] }
   )
 end
 
 # Helper for setting up neutron local network
 def _setup_local_network # rubocop:disable Metrics/MethodLength
   _run_commands('neutron local network setup', {
-    'neutron' => ['net-create local_net --provider:network_type local',
+    'neutron' => ['net-create local_net --provider:network_type local --shared',
                   'subnet-create local_net --name local_subnet 192.168.1.0/24'] }
-  )
-end
-
-# Helper for setting up cinder storage volume
-def _setup_cinder_volume # rubocop:disable Metrics/MethodLength
-  _run_commands('cinder storage volume setup', {
-    'cinder' => ['create --display_name test_volume 1'] }
   )
 end
 
@@ -210,8 +209,7 @@ task :integration => [:create_key, :berks_vendor] do
       _setup_local_network
     end
     _run_basic_queries
-    _setup_cinder_volume
-    _run_nova_tests
+    _run_nova_tests(i)
 
     rescue => e
       raise "####### Pass #{i} failed with #{e.message}"
@@ -221,5 +219,8 @@ task :integration => [:create_key, :berks_vendor] do
       sh %(sudo chown -R $USER #{log_dir})
     end
   end
-  # TODO (jklare) utilise tempest to run tests against openstack
+  # Run the tempest formal tests, setup with the openstack-integration-test cookbook
+   Dir.chdir('/opt/tempest') do
+     sh %(sudo -H ./run_tempest.sh --smoke --serial)
+   end
 end

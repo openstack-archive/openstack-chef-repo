@@ -115,7 +115,7 @@ $ cd vms
 $ vagrant ssh controller
 $ sudo su -
 root@controller:~ cd /opt/tempest
-root@controller:/opt/tempest$ ./run_tests.sh -V
+root@controller:/opt/tempest$ ./run_tempest.sh -V --smoke --serial
 
 [-- snip --]
 
