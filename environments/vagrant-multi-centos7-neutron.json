@@ -8,6 +8,11 @@
     "default_attributes": {
     },
     "override_attributes": {
+        "mariadb": {
+            "mysqld": {
+                "lc_messages_dir": "/usr/share/mariadb"
+            }
+        },
         "openstack": {
             "yum": {
                 "rdo_delorean_enabled": true
