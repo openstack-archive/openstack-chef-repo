@@ -147,6 +147,10 @@ end
 # Helper for setting up basic nova tests
 def _run_nova_tests # rubocop:disable Metrics/MethodLength
   uuid = `sudo bash -c '. /root/openrc && cinder list | grep test_volume | cut -d " " -f 2'`
+ _run_commands('nova boot tests post', {
+    'sleep' => ['10'],
+    'cinder' => ['list'] }
+  )
   _run_commands('nova boot tests pre', {
     'nova' => ['list', "boot test --image cirros --flavor 1 --block-device-mapping vdb=#{uuid.chomp!}:::1"],
     'sleep' => ['25'] }
