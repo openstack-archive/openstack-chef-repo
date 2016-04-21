@@ -1,10 +1,10 @@
 require 'chef/provisioning'
 
-default_bridge = '["en0: USB Ethernet","en0: Wi-Fi (AirPort)",'
-default_bridge += '"en1: USB Ethernet","en1: Wi-Fi (AirPort)",'
-default_bridge += '"en2: USB Ethernet","en2: Wi-Fi (AirPort)",'
-default_bridge += '"en3: USB Ethernet","en4: USB Ethernet",'
-default_bridge += '"eth0","wlan0",'
+default_bridge = '["en0: USB Ethernet","en1: USB Ethernet",'
+default_bridge += '"en2: USB Ethernet","en3: USB Ethernet",'
+default_bridge += '"en4: USB Ethernet","eth0","wlan0",'
+default_bridge += '"en0: Wi-Fi (AirPort)","en1: Wi-Fi (AirPort)",'
+default_bridge += '"en2: Wi-Fi (AirPort)",'
 default_bridge += '"Intel(R) Centrino(R) Advanced-N 6205"]'
 
 if ENV['OS_BRIDGE']
