@@ -1,0 +1,8 @@
+Code-Review+2: Samuel Cassiba <sam@cassiba.com>
+Workflow+1: Jan Klare <j.klare@cloudbau.de>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 21 Apr 2016 15:36:06 +0000
+Reviewed-on: https://review.openstack.org/306623
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
