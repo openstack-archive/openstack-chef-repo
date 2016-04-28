@@ -1,0 +1,9 @@
+Code-Review+2: Samuel Cassiba <sam@cassiba.com>
+Code-Review+2: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Workflow+1: Zhiwei Chen <zhiwchen@cn.ibm.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 28 Apr 2016 01:13:32 +0000
+Reviewed-on: https://review.openstack.org/303639
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
