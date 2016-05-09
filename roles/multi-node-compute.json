@@ -1,0 +1,25 @@
+{
+  "name": "multi-node-compute",
+  "description": "This will deploy a compute node for a scenarios with just compute and controller nodes",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[apt]",
+    "recipe[yum]",
+    "recipe[openstack-common]",
+    "recipe[openstack-compute::compute]",
+    "recipe[openstack-network::ml2_core_plugin]",
+    "recipe[openstack-network::ml2_openvswitch]",
+    "recipe[openstack-network]",
+    "recipe[openstack-network::openvswitch]",
+    "recipe[openstack-network::_bridge_config_example]",
+    "recipe[openstack-network::plugin_config]",
+    "recipe[openstack-network::openvswitch_agent]"
+  ],
+  "env_run_lists": {
+  }
+}

@@ -42,10 +42,10 @@ task :allinone => :create_key do
   run_command("chef-client #{client_opts} vagrant_linux.rb allinone.rb")
 end
 
-#desc "Multi-Neutron build"
-#task :multi_neutron => :create_key do
-#  run_command("chef-client #{client_opts} vagrant_linux.rb multi-neutron.rb")
-#end
+desc "Multi-Node build"
+task :multi_node => :create_key do
+  run_command("chef-client #{client_opts} vagrant_linux.rb multi-node.rb")
+end
 
 desc "Blow everything away"
 task clean: [:destroy_all]

@@ -33,6 +33,8 @@ via: `apt-get install linux-image-generic-lts-utopic`. This will install at leas
 
 * All-in-One
   * Neutron
+* Multi-Node
+  * Neutron
 
 For each deployment model, there is a corresponding readme file in the doc/ directory.  Please review that for specific details and additional setup that might be required before deploying the cloud.
 
@@ -43,7 +45,10 @@ These commands will spin up various OpenStack cluster configurations, the simple
 For CentOS, set the environment variable REPO_OS=centos7
 
 ```bash
-$ chef exec rake allinone       # All-in-one controller with neutron-network
+# All-in-one controller with neutron-network
+$ chef exec rake allinone
+# Multi-Node Setup with neutron-network (1 controller + 2 compute nodes)
+$ chef exec rake multi_node
  ```
 
 ### Access the Controller
@@ -51,6 +56,16 @@ $ chef exec rake allinone       # All-in-one controller with neutron-network
 ```bash
 $ cd vms
 $ vagrant ssh controller
+$ sudo su -
+```
+
+### Access the Compute nodes
+
+```bash
+$ cd vms
+$ vagrant ssh compute1
+# OR
+$ vagrant ssh compute2
 $ sudo su -
 ```
 
@@ -211,7 +226,6 @@ When using this on a Windows platform, here are some tweaks to make this work:
 
 ## TODOs
 
-- Support for multi node test
 - Support for floating IPs
 - Better instructions for multi-node network setup
 - Split out the `multi-neutron-network-node` cluster also so the network node is it's own machine
