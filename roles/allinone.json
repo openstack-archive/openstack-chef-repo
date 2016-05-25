@@ -55,6 +55,13 @@
     "recipe[openstack-orchestration::api-cfn]",
     "recipe[openstack-orchestration::api-cloudwatch]",
     "recipe[openstack-orchestration::identity_registration]",
+    "recipe[openstack-telemetry::api]",
+    "recipe[openstack-telemetry::agent-central]",
+    "recipe[openstack-telemetry::agent-compute]",
+    "recipe[openstack-telemetry::agent-notification]",
+    "recipe[openstack-telemetry::collector]",
+    "recipe[openstack-telemetry::identity_registration]",
+    "recipe[openstack-telemetry::client]",
     "recipe[openstack-image::image_upload]",
     "recipe[openstack-common::client]",
     "recipe[openstack-dashboard::server]"

@@ -144,6 +144,14 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
   end
 end
 
+# Helper for setting up basic ceilometer tests
+def _run_ceilometer_tests(pass) # rubocop:disable Metrics/MethodLength
+  _run_commands('ceilometer api query', {
+    'ceilometer' => ['meter-list', 'resource-list', 'sample-list']
+    }
+  )
+end
+
 # Helper for setting up basic nova tests
 def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
   _run_commands('cinder storage volume create', {
@@ -184,7 +192,7 @@ end
 
 def _save_logs(prefix, log_dir)
   sh %(sleep 25)
-  %w(nova neutron keystone cinder glance heat apache2 rabbitmq mysql openvswitch mariadb).each do |project|
+  %w(nova neutron keystone cinder glance heat apache2 rabbitmq mysql openvswitch mariadb ceilometer).each do |project|
     sh %(mkdir -p #{log_dir}/#{prefix}/#{project})
     sh %(sudo cp -r /etc/#{project} #{log_dir}/#{prefix}/#{project}/etc || true)
     sh %(sudo cp -r /var/log/#{project} #{log_dir}/#{prefix}/#{project}/log || true)
@@ -210,6 +218,7 @@ task :integration => [:create_key, :berks_vendor] do
     end
     _run_basic_queries
     _run_nova_tests(i)
+    _run_ceilometer_tests(i)
 
     rescue => e
       raise "####### Pass #{i} failed with #{e.message}"

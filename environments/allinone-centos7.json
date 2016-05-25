@@ -12,6 +12,13 @@
       }
     },
     "openstack": {
+      "telemetry": {
+        "conf": {
+          "DEFAULT": {
+            "meter_dispatchers": "database"
+          }
+        }
+      },
       "yum": {
         "rdo_delorean_enabled": true,
         "gpgcheck": false
