@@ -12,6 +12,7 @@ source 'https://supermarket.chef.io'
     network
     ops-database
     ops-messaging
+    telemetry
   ).each do |cookbook|
   if ENV['ZUUL_CHANGES'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"

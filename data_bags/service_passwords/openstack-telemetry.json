@@ -1,0 +1,9 @@
+{
+  "id": "openstack-telemetry",
+  "openstack-telemetry": {
+    "encrypted_data": "guhT/TkxmrFfOptB0miQDnOEY7YmYgZHBvmhZHxLMmg=\n",
+    "iv": "5UrdKn9Q5PPgKDAJ2IHcGg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}
