@@ -173,6 +173,10 @@ $ chef exec rake clean
 
 See the doc/tools.md for more information.
 
+## The provisioning cookbook
+
+See site-cookbooks/provisioning/README.md for more information
+
 ## Databags
 
 Some basic information about the use of databags within this repo.

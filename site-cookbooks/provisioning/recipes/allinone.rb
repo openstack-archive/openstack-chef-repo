@@ -39,6 +39,6 @@ machine 'controller' do
   role 'allinone'
   chef_environment env
   file('/etc/chef/openstack_data_bag_secret',
-       "#{File.dirname(__FILE__)}/.chef/encrypted_data_bag_secret")
+       "#{File.dirname(__FILE__)}/../../../../../encrypted_data_bag_secret")
   converge true
 end
