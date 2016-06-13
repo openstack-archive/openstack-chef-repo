@@ -1,13 +1,8 @@
 source 'https://supermarket.chef.io'
 
 %w(
-    bare-metal
-    database
-    data-processing
     integration-test
-    object-storage
     orchestration
-    telemetry
     block-storage
     common
     compute
@@ -21,7 +16,9 @@ source 'https://supermarket.chef.io'
   if ENV['ZUUL_CHANGES'] && Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
   else
-    cookbook "openstack-#{cookbook}", github: "openstack/cookbook-openstack-#{cookbook}"
+    cookbook "openstack-#{cookbook}",
+    github: "openstack/cookbook-openstack-#{cookbook}",
+    branch: "stable/mitaka"
   end
 end
 
