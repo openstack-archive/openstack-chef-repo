@@ -1,0 +1,8 @@
+Code-Review+2: Mark Vanderwiel <vanderwl@us.ibm.com>
+Workflow+1: Samuel Cassiba <s@cassiba.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 20 Jun 2016 20:29:16 +0000
+Reviewed-on: https://review.openstack.org/320981
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
