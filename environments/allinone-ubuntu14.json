@@ -15,6 +15,16 @@
   },
   "override_attributes": {
     "openstack": {
+      "telemetry": {
+        "platform": {
+          "client_packages": ["python-ceilometerclient"]
+        },
+        "conf": {
+          "DEFAULT": {
+            "meter_dispatchers": "database"
+          }
+        }
+      },
       "dashboard": {
         "server_hostname": "localhost"
       },

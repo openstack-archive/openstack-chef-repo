@@ -1,0 +1,9 @@
+{
+  "id": "gnocchi",
+  "gnocchi": {
+    "encrypted_data": "EpFQEmW+m7zb/d45soGzyPzFeB2znpdjZl2zK2Vb2cc=\n",
+    "iv": "Z+u8/jm52OTyFYZewO+auQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}
