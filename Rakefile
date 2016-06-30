@@ -39,12 +39,12 @@ end
 
 desc "All-in-One build"
 task :allinone => :create_key do
-  run_command("chef-client #{client_opts} vagrant_linux.rb allinone.rb")
+  run_command("chef-client #{client_opts} -o 'provisioning::vagrant_linux,provisioning::allinone'")
 end
 
 desc "Multi-Node build"
 task :multi_node => :create_key do
-  run_command("chef-client #{client_opts} vagrant_linux.rb multi-node.rb")
+  run_command("chef-client #{client_opts} -o 'provisioning::vagrant_linux,provisioning::multi-node'")
 end
 
 desc "Blow everything away"
