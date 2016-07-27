@@ -19,10 +19,6 @@
           }
         }
       },
-      "yum": {
-        "rdo_delorean_enabled": true,
-        "gpgcheck": false
-      },
       "mq": {
         "user": "admin"
       },

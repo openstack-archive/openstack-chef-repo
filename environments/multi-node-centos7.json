@@ -80,10 +80,6 @@
       "dashboard": {
         "server_hostname": "localhost"
       },
-      "yum": {
-        "rdo_delorean_enabled": true,
-        "gpgcheck": false
-      },
       "mq": {
         "user": "admin"
       },
@@ -98,7 +94,7 @@
             }
           }
         },
-        "tun_network_bridge_interface": "eth1",
+        "tun_network_bridge_interface": "enp0s8",
         "conf": {
           "DEFAULT": {
             "service_plugins": "router"

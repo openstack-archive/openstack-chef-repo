@@ -1,5 +1,5 @@
 {
-  "name": "multi-node-ubuntu14",
+  "name": "multi-node-ubuntu16",
   "cookbook_versions": {
   },
   "json_class": "Chef::Environment",
@@ -97,7 +97,7 @@
             }
           }
         },
-        "tun_network_bridge_interface": "eth1",
+        "tun_network_bridge_interface": "enp0s8",
         "conf": {
           "DEFAULT": {
             "service_plugins": "router"
