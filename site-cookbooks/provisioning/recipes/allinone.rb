@@ -7,11 +7,11 @@ default_bridge += '"en0: Wi-Fi (AirPort)","en1: Wi-Fi (AirPort)",'
 default_bridge += '"en2: Wi-Fi (AirPort)",'
 default_bridge += '"Intel(R) Centrino(R) Advanced-N 6205"]'
 
-if ENV['OS_BRIDGE']
-  bridge = "\"#{ENV['OS_BRIDGE']}\""
-else
-  bridge = default_bridge
-end
+bridge = if ENV['OS_BRIDGE']
+           "\"#{ENV['OS_BRIDGE']}\""
+         else
+           default_bridge
+         end
 
 controller_config = <<-ENDCONFIG
   config.vm.network "forwarded_port", guest: 443, host: 9443

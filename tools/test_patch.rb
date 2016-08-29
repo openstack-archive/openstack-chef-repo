@@ -43,7 +43,7 @@ end
 
 def get_patch_info(user, patch) # rubocop:disable Metrics/MethodLength
   puts "## Gathering information for patch: #{patch} with user: #{user}"
-  if "#{user}" == 'jenkins'
+  if user == 'jenkins'
     patch_info = run("ssh -p 29418 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
   else
     patch_info = run("ssh -p 29418 #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)

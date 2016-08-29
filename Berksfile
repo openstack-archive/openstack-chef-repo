@@ -1,11 +1,7 @@
 source 'https://supermarket.chef.io'
 
 %w(
-    bare-metal
-    database
-    data-processing
     integration-test
-    object-storage
     orchestration
     telemetry
     block-storage
