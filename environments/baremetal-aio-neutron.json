@@ -45,13 +45,13 @@
           "tenant_network_type": "gre"
         },
         "api": {
-          "bind_interface": "eth1"
+          "bind_interface": "enp0s8"
         },
         "quota": {
           "floatingip": "50"
         },
         "l3": {
-          "external_network_bridge_interface": "eth1"
+          "external_network_bridge_interface": "enp0s8"
         }
       },
       "block-storage": {

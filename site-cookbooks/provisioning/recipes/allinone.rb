@@ -27,11 +27,12 @@ controller_config = <<-ENDCONFIG
     v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
+  config.vm.network "private_network", :type => 'dhcp', :adapter => 2
   config.vm.network "public_network",
     bridge: #{bridge}
 ENDCONFIG
 
-env = 'allinone-ubuntu14'
+env = 'allinone-ubuntu16'
 env = 'allinone-centos7' if ENV['REPO_OS'].to_s.include?('centos')
 
 machine 'controller' do

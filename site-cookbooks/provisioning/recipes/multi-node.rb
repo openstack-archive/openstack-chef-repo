@@ -8,7 +8,7 @@ controller_config = <<-ENDCONFIG
   config.vm.network "forwarded_port", guest: 8774, host: 8774 # compute-api
   config.vm.network "forwarded_port", guest: 35357, host: 35357
   config.vm.provider "virtualbox" do |v|
-    v.memory = 4096
+    v.memory = 6144
     v.cpus = 2
     v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
     v.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
@@ -18,7 +18,7 @@ controller_config = <<-ENDCONFIG
   config.vm.network "private_network", ip: "192.168.101.60"
 ENDCONFIG
 
-env = 'multi-node-ubuntu14'
+env = 'multi-node-ubuntu16'
 env = 'multi-node-centos7' if ENV['REPO_OS'].to_s.include?('centos')
 
 # create controller-node with config defined above
@@ -35,7 +35,7 @@ end
   # config for compute-node vagrant box
   compute_config = <<-ENDCONFIG
   config.vm.provider "virtualbox" do |v|
-    v.memory = 4048
+    v.memory = 2048
     v.cpus = 2
     v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
     v.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]

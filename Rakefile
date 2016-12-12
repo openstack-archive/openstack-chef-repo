@@ -21,7 +21,7 @@ end
 
 desc "Destroy machines"
 task :destroy_machines do
-  run_command("chef-client #{client_opts} destroy_all.rb")
+  run_command("chef-client #{client_opts} -o 'provisioning::destroy_all'")
 end
 
 desc "Vendor your cookbooks/"
@@ -83,7 +83,7 @@ end
 
 # use the correct environment depending on platform
 if File.exist?('/usr/bin/apt-get')
-  @platform = 'ubuntu14'
+  @platform = 'ubuntu16'
 elsif File.exist?('/usr/bin/yum')
   @platform = 'centos7'
 end
@@ -97,7 +97,7 @@ def _run_env_queries # rubocop:disable Metrics/MethodLength
       false
     )
   case @platform
-  when 'ubuntu14'
+  when 'ubuntu16'
     _run_commands('basic debian env queries', {
       'ifconfig' => [''],
       'cat' => ['/etc/apt/sources.list']},
@@ -118,11 +118,11 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
       'curl' => ['-v http://localhost', '-kv https://localhost'],
       'sudo netstat' => ['-nlp'],
       'nova-manage' => ['version', 'db version'],
-      'nova' => %w(--version service-list hypervisor-list image-list flavor-list),
+      'nova' => %w(--version service-list hypervisor-list flavor-list),
       'glance-manage' => %w(db_version),
       'glance' => %w(--version image-list),
       'keystone-manage' => %w(db_version),
-      'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
+      'openstack' => ['--version', 'user list', 'endpoint list', 'role list', 'service list', 'project list'],
       'cinder-manage' => ['version list', 'db version'],
       'cinder' => %w(--version list),
       'heat-manage' => ['db_version', 'service list'],
@@ -131,7 +131,7 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
       'ovs-vsctl' => %w(show) }
     )
   case @platform
-  when 'ubuntu14'
+  when 'ubuntu16'
     _run_commands('basic debian test queries', {
       'rabbitmqctl' => %w(cluster_status),
       'ifconfig' => ['']}
@@ -155,32 +155,30 @@ end
 # Helper for setting up basic nova tests
 def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
   _run_commands('cinder storage volume create', {
-    'cinder' => ['list', "create --display_name test_volume_#{pass} 1"],
+    'openstack' => ['volume list', "volume create --description test_volume_#{pass} 1"],
     'sleep' => ['10'] }
   )
  _run_commands('cinder storate volume query', {
-    'cinder' => ['list'] }
+    'openstack' => ['volume list'] }
   )
-  uuid = `sudo bash -c ". /root/openrc && cinder list | grep test_volume_#{pass} | cut -d ' ' -f 2"`
+  uuid = `sudo bash -c ". /root/openrc && openstack volume list | grep test_volume_#{pass} | cut -d ' ' -f 2"`
   _run_commands('nova server create', {
-    'nova' => ['list', "boot test --image cirros --flavor 1 --block-device-mapping vdb=#{uuid.chomp!}:::1"],
+    'openstack' => ['server list', "server create --image cirros --flavor 1 --block-device-mapping vdb=#{uuid.chomp!}:::1 test"],
     'sleep' => ['40'] }
   )
   _run_commands('nova server cleanup', {
-    'nova' => ['list', 'show test', 'delete test'],
-    'sleep' => ['25'],
-    'cinder' => ['list'] }
+    'openstack' => ['server list', 'server show test', 'server delete test'],
+    'sleep' => ['25']}
   )
  _run_commands('nova server query', {
-    'nova' => ['list'] }
+    'openstack' => ['volume list', 'server list'] }
   )
 end
 
 # Helper for setting up neutron local network
 def _setup_local_network # rubocop:disable Metrics/MethodLength
   _run_commands('neutron local network setup', {
-    'neutron' => ['net-create local_net --provider:network_type local --shared',
-                  'subnet-create local_net --name local_subnet 192.168.1.0/24'] }
+    'openstack' => ['network create --share local_net'] }
   )
 end
 
@@ -225,7 +223,8 @@ task :integration => [:create_key, :berks_vendor] do
     ensure
       # make sure logs are saved, pass or fail
       _save_logs("pass#{i}", log_dir)
-      sh %(sudo chown -R $USER #{log_dir})
+      sh %(sudo chown -R $USER #{log_dir}/pass#{i})
+      sh %(sudo chmod -R go+rx #{log_dir}/pass#{i})
     end
   end
   # Run the tempest formal tests, setup with the openstack-integration-test cookbook

@@ -2,7 +2,7 @@
 
 This cookbook is used for serving chef-provisioning recipes for provisioning
 OpenStack with Chef. It is intended to be referenced by chef-client in
-local-mode a la ChefDK.
+local-mode a la chef-provisioning.
 
 # recipes
 
@@ -14,3 +14,6 @@ local-mode a la ChefDK.
 
 ## provisioning::multi-node
 * provisions an OpenStack Controller with Compute nodes
+
+## provisioning::destroy_all
+* destroys all the things! (really, all the running nodes)

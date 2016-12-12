@@ -10,6 +10,7 @@
   "run_list": [
     "recipe[apt]",
     "recipe[yum]",
+    "recipe[build-essential]",
     "recipe[openstack-common]",
     "recipe[openstack-compute::compute]",
     "recipe[openstack-network::ml2_core_plugin]",
