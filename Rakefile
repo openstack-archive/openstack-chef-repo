@@ -155,15 +155,15 @@ end
 # Helper for setting up basic nova tests
 def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
   _run_commands('cinder storage volume create', {
-    'openstack' => ['volume list', "volume create --description test_volume_#{pass} 1"],
+    'openstack' => ['volume list', "volume create --description test_volume_#{pass} --size 1 test_volume_#{pass}"],
     'sleep' => ['10'] }
   )
- _run_commands('cinder storate volume query', {
+ _run_commands('cinder storage volume query', {
     'openstack' => ['volume list'] }
   )
-  uuid = `sudo bash -c ". /root/openrc && openstack volume list | grep test_volume_#{pass} | cut -d ' ' -f 2"`
+  uuid = `sudo bash -c ". /root/openrc && openstack volume show --format yaml test_volume_#{pass} | grep "^id:" | cut -d ':' -f 2"`
   _run_commands('nova server create', {
-    'openstack' => ['server list', "server create --image cirros --flavor 1 --block-device-mapping vdb=#{uuid.chomp!}:::1 test"],
+    'openstack' => ['server list', "server create --image cirros --flavor m1.nano --block-device-mapping vdb=#{uuid.strip}:::1 test"],
     'sleep' => ['40'] }
   )
   _run_commands('nova server cleanup', {
@@ -176,9 +176,18 @@ def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
 end
 
 # Helper for setting up neutron local network
+# due to https://bugs.launchpad.net/nova/+bug/1616240
+# we temporarily need to install/update oslo-privsep explicitly for ubuntu
 def _setup_local_network # rubocop:disable Metrics/MethodLength
+  case @platform
+  when 'ubuntu16'
+    _run_commands('install oslo.privsep for ubuntu', {
+      'sudo pip' => ['install oslo-privsep'],
+      'sudo systemctl' => ['restart neutron-*', 'restart nova-*']},
+    )
+  end
   _run_commands('neutron local network setup', {
-    'openstack' => ['network create --share local_net'] }
+    'openstack' => ['network create --share local_net', 'subnet create --network local_net --subnet-range 192.168.180.0/24 local_subnet'] }
   )
 end
 
@@ -190,7 +199,7 @@ end
 
 def _save_logs(prefix, log_dir)
   sh %(sleep 25)
-  %w(nova neutron keystone cinder glance heat apache2 rabbitmq mysql openvswitch mariadb ceilometer).each do |project|
+  %w(nova neutron keystone cinder glance heat apache2 rabbitmq mysql-default openvswitch mariadb ceilometer).each do |project|
     sh %(mkdir -p #{log_dir}/#{prefix}/#{project})
     sh %(sudo cp -rL /etc/#{project} #{log_dir}/#{prefix}/#{project}/etc || true)
     sh %(sudo cp -rL /var/log/#{project} #{log_dir}/#{prefix}/#{project}/log || true)
