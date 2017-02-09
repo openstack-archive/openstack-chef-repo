@@ -163,11 +163,11 @@ def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
   )
   uuid = `sudo bash -c ". /root/openrc && openstack volume show --format yaml test_volume_#{pass} | grep "^id:" | cut -d ':' -f 2"`
   _run_commands('nova server create', {
-    'openstack' => ['server list', "server create --image cirros --flavor m1.nano --block-device-mapping vdb=#{uuid.strip}:::1 test"],
+    'openstack' => ['server list', "server create --image cirros --flavor m1.nano --block-device-mapping vdb=#{uuid.strip}:::1 test#{pass}"],
     'sleep' => ['40'] }
   )
   _run_commands('nova server cleanup', {
-    'openstack' => ['server list', 'server show test', 'server delete test'],
+    'openstack' => ['server list', "server show test#{pass}", "server delete test#{pass}"],
     'sleep' => ['25']}
   )
  _run_commands('nova server query', {
@@ -210,7 +210,7 @@ desc "Integration test on Infra"
 task :integration => [:create_key, :berks_vendor] do
   log_dir = ENV['WORKSPACE']+'/logs'
   # This is a workaround for allowing chef-client to run in local mode
-  sh %(sudo mkdir /etc/chef && sudo cp .chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret)
+  sh %(sudo mkdir -p /etc/chef && sudo cp .chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret)
   _run_env_queries
 
   # Three passes to make sure of cookbooks idempotency
