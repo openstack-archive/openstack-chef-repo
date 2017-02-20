@@ -64,7 +64,8 @@
     "recipe[openstack-telemetry::collector]",
     "recipe[openstack-telemetry::identity_registration]",
     "recipe[openstack-image::image_upload]",
-    "recipe[openstack-dashboard::server]"
+    "recipe[openstack-dashboard::horizon]",
+    "recipe[openstack-dashboard::neutron-lbaas-dashboard]"
   ],
   "env_run_lists": {
   }
