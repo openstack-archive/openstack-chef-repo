@@ -1,0 +1,8 @@
+Code-Review+2: Jan Klare <j.klare@cloudbau.de>
+Workflow+1: Christoph Albers <c.albers@x-ion.de>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 20 Feb 2017 10:37:49 +0000
+Reviewed-on: https://review.openstack.org/431528
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
