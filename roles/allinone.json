@@ -41,6 +41,7 @@
     "recipe[openstack-compute::conductor]",
     "recipe[openstack-compute::api-os-compute]",
     "recipe[openstack-compute::api-metadata]",
+    "recipe[openstack-compute::placement_api]",
     "recipe[openstack-compute::scheduler]",
     "recipe[openstack-compute::nova-cert]",
     "recipe[openstack-compute::vncproxy]",
