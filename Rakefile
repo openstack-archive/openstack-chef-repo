@@ -238,6 +238,6 @@ task :integration => [:create_key, :berks_vendor] do
   end
   # Run the tempest formal tests, setup with the openstack-integration-test cookbook
    Dir.chdir('/opt/tempest') do
-     sh %(sudo -H ./run_tempest.sh --smoke --serial)
+     sh %(sudo -H /opt/tempest-venv/tempest.sh)
    end
 end
