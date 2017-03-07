@@ -15,6 +15,9 @@
   },
   "override_attributes": {
     "openstack": {
+      "apt": {
+        "update_apt_cache": true
+      },
       "telemetry": {
         "conf": {
           "DEFAULT": {

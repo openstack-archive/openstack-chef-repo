@@ -11,6 +11,9 @@
       }
     },
     "openstack": {
+      "yum": {
+        "update_yum_cache": true
+      },
       "sysctl": {
         "net.ipv4.ip_forward": 1
       },
@@ -57,7 +60,7 @@
         }
       },
       "bind_service": {
-        "mq": { "host": "0.0.0.0" },
+        "mq": { "host": "192.168.101.60" },
         "main": {
           "identity": { "host": "0.0.0.0" }
         },

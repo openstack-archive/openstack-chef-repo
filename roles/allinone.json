@@ -8,8 +8,6 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[apt]",
-    "recipe[yum]",
     "recipe[build-essential]",
     "recipe[openstack-common]",
     "recipe[openstack-common::logging]",
@@ -43,7 +41,6 @@
     "recipe[openstack-compute::api-metadata]",
     "recipe[openstack-compute::placement_api]",
     "recipe[openstack-compute::scheduler]",
-    "recipe[openstack-compute::nova-cert]",
     "recipe[openstack-compute::vncproxy]",
     "recipe[openstack-compute::compute]",
     "recipe[openstack-compute::identity_registration]",

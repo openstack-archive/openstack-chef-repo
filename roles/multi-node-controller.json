@@ -8,8 +8,6 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[apt]",
-    "recipe[yum]",
     "recipe[build-essential]",
     "recipe[openstack-common]",
     "recipe[openstack-common::logging]",
@@ -42,7 +40,6 @@
     "recipe[openstack-compute::api-os-compute]",
     "recipe[openstack-compute::api-metadata]",
     "recipe[openstack-compute::scheduler]",
-    "recipe[openstack-compute::nova-cert]",
     "recipe[openstack-compute::vncproxy]",
     "recipe[openstack-compute::identity_registration]",
     "recipe[openstack-block-storage::api]",
@@ -57,7 +54,8 @@
     "recipe[openstack-orchestration::api-cloudwatch]",
     "recipe[openstack-orchestration::identity_registration]",
     "recipe[openstack-image::image_upload]",
-    "recipe[openstack-dashboard::server]"
+    "recipe[openstack-dashboard::horizon]",
+    "recipe[openstack-dashboard::neutron-lbaas-dashboard]"
   ],
   "env_run_lists": {
   }
