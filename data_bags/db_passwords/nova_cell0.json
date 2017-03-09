@@ -1,0 +1,9 @@
+{
+  "id": "nova_cell0",
+  "nova_cell0": {
+    "encrypted_data": "HNKWBIqI97m4kKUzmJPMhFOs88674fiRoZJutZalsx4=\n",
+    "iv": "uZn6Fma8PxAJgyMnqEUk0A==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

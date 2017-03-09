@@ -122,24 +122,24 @@ def _run_basic_queries # rubocop:disable Metrics/MethodLength
       'glance-manage' => %w(db_version),
       'glance' => %w(--version image-list),
       'keystone-manage' => %w(db_version),
-      'openstack' => ['--version', 'user list', 'endpoint list', 'role list', 'service list', 'project list'],
+      'openstack' => ['--version', 'user list', 'endpoint list', 'role list',
+                      'service list', 'project list', 'volume list',
+                      'network agent list', 'extension list --network ',
+                      'network list', 'subnet list'],
       'cinder-manage' => ['version list', 'db version'],
-      'cinder' => %w(--version list),
-      'heat-manage' => ['db_version', 'service list'],
-      'heat' => %w(--version stack-list),
-      'neutron' => %w(agent-list ext-list net-list port-list subnet-list quota-list),
+      'neutron' => %w(port-list quota-list),
       'ovs-vsctl' => %w(show) }
     )
   case @platform
   when 'ubuntu16'
     _run_commands('basic debian test queries', {
       'rabbitmqctl' => %w(cluster_status),
-      'ifconfig' => ['']}
+      'ip' => ['addr', 'route', '-6 route']}
     )
   when 'centos7'
     _run_commands('basic rhel test queries', {
       '/usr/sbin/rabbitmqctl' => %w(cluster_status),
-      '/usr/sbin/ip' => ['addr']}
+      '/usr/sbin/ip' => ['addr', 'route', '-6 route']}
     )
   end
 end
@@ -162,12 +162,17 @@ def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
     'openstack' => ['volume list'] }
   )
   uuid = `sudo bash -c ". /root/openrc && openstack volume show --format yaml test_volume_#{pass} | grep "^id:" | cut -d ':' -f 2"`
+  # TODO(jr): As a workaround for https://launchpad.net/bugs/1677236 we have to delete the volume explicitly after deleting the server
   _run_commands('nova server create', {
-    'openstack' => ['server list', "server create --image cirros --flavor m1.nano --block-device-mapping vdb=#{uuid.strip}:::1 test#{pass}"],
+    'openstack' => ['server list', "server create --image cirros --flavor m1.nano --block-device-mapping vdb=#{uuid.strip} test#{pass}"],
     'sleep' => ['40'] }
   )
   _run_commands('nova server cleanup', {
     'openstack' => ['server list', "server show test#{pass}", "server delete test#{pass}"],
+    'sleep' => ['15'] }
+  )
+  _run_commands('cinder volume cleanup', {
+    'openstack' => ["volume delete test_volume_#{pass}"],
     'sleep' => ['25']}
   )
  _run_commands('nova server query', {
@@ -176,18 +181,22 @@ def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
 end
 
 # Helper for setting up neutron local network
-# due to https://bugs.launchpad.net/nova/+bug/1616240
-# we temporarily need to install/update oslo-privsep explicitly for ubuntu
 def _setup_local_network # rubocop:disable Metrics/MethodLength
-  case @platform
-  when 'ubuntu16'
-    _run_commands('install oslo.privsep for ubuntu', {
-      'sudo pip' => ['install oslo-privsep'],
-      'sudo systemctl' => ['restart neutron-*', 'restart nova-*']},
-    )
-  end
   _run_commands('neutron local network setup', {
     'openstack' => ['network create --share local_net', 'subnet create --network local_net --subnet-range 192.168.180.0/24 local_subnet'] }
+  )
+end
+
+# Helper for setting up nova cells
+def _setup_nova_cells # rubocop:disable Metrics/MethodLength
+  _run_commands('nova cells setup', {
+    'nova-manage cell_v2' => ['list_cells',
+                              'map_cell0 --database_connection mysql+pymysql://nova_cell0:mypass@127.0.0.1/nova_cell0?charset=utf8',
+                              'create_cell --verbose --name cell1',
+                              'discover_hosts',
+                              'list_cells'
+                             ],
+    'nova-manage' => ['db sync'] }
   )
 end
 
@@ -220,12 +229,13 @@ task :integration => [:create_key, :berks_vendor] do
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
     sh %(sudo chef-client #{client_opts} -E allinone-#{@platform} -r 'role[allinone]')
     if i == 1
+      _setup_nova_cells
       _setup_tempest(client_opts)
       _setup_local_network
     end
     _run_basic_queries
     _run_nova_tests(i)
-    _run_ceilometer_tests(i)
+    # _run_ceilometer_tests(i)
 
     rescue => e
       raise "####### Pass #{i} failed with #{e.message}"
