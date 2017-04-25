@@ -1,0 +1,11 @@
+Code-Review+1: Jens Rosenboom (frickler) <j.rosenboom@x-ion.de>
+Code-Review+2: Jan Klare <j.klare@cloudbau.de>
+Code-Review+2: Christoph Albers <c.albers@x-ion.de>
+Workflow+1: Christoph Albers <c.albers@x-ion.de>
+Workflow+1: Samuel Cassiba <s@cassiba.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 25 Apr 2017 13:53:01 +0000
+Reviewed-on: https://review.openstack.org/442521
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
