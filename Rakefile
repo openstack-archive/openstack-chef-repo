@@ -161,19 +161,14 @@ def _run_nova_tests(pass) # rubocop:disable Metrics/MethodLength
  _run_commands('cinder storage volume query', {
     'openstack' => ['volume list'] }
   )
-  uuid = `sudo bash -c ". /root/openrc && openstack volume show --format yaml test_volume_#{pass} | grep "^id:" | cut -d ':' -f 2"`
-  # TODO(jr): As a workaround for https://launchpad.net/bugs/1677236 we have to delete the volume explicitly after deleting the server
+  uuid = `sudo bash -c ". /root/openrc && openstack volume show --format value -c id test_volume_#{pass}"`
   _run_commands('nova server create', {
-    'openstack' => ['server list', "server create --image cirros --flavor m1.nano --block-device-mapping vdb=#{uuid.strip} test#{pass}"],
+    'openstack' => ['server list', "server create --image cirros --flavor m1.nano --block-device-mapping vdb=#{uuid.strip}:::1 test#{pass}"],
     'sleep' => ['40'] }
   )
   _run_commands('nova server cleanup', {
     'openstack' => ['server list', "server show test#{pass}", "server delete test#{pass}"],
     'sleep' => ['15'] }
-  )
-  _run_commands('cinder volume cleanup', {
-    'openstack' => ["volume delete test_volume_#{pass}"],
-    'sleep' => ['25']}
   )
  _run_commands('nova server query', {
     'openstack' => ['volume list', 'server list'] }
