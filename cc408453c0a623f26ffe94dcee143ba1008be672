@@ -1,0 +1,10 @@
+Code-Review+2: Jan Klare <j.klare@cloudbau.de>
+Code-Review+2: Christoph Albers <c.albers@x-ion.de>
+Workflow+1: Christoph Albers <c.albers@x-ion.de>
+Workflow+1: Samuel Cassiba <s@cassiba.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 29 May 2017 23:52:27 +0000
+Reviewed-on: https://review.openstack.org/468341
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/newton
