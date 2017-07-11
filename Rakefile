@@ -39,12 +39,12 @@ end
 
 desc "All-in-One build"
 task :allinone => :create_key do
-  run_command("chef-client #{client_opts} -o 'provisioning::vagrant_linux,provisioning::allinone'")
+  run_command("chef-client #{client_opts} -o 'provisioning::allinone'")
 end
 
-desc "Multi-Node build"
-task :multi_node => :create_key do
-  run_command("chef-client #{client_opts} -o 'provisioning::vagrant_linux,provisioning::multi-node'")
+desc "Multinode build"
+task :multinode => :create_key do
+  run_command("chef-client #{client_opts} -o 'provisioning::multinode'")
 end
 
 desc "Blow everything away"
@@ -164,19 +164,6 @@ def _setup_local_network # rubocop:disable Metrics/MethodLength
   )
 end
 
-# Helper for setting up nova cells
-def _setup_nova_cells # rubocop:disable Metrics/MethodLength
-  _run_commands('nova cells setup', {
-    'nova-manage cell_v2' => ['list_cells',
-                              'map_cell0 --database_connection mysql+pymysql://nova_cell0:mypass@127.0.0.1/nova_cell0?charset=utf8',
-                              'create_cell --verbose --name cell1',
-                              'discover_hosts',
-                              'list_cells'
-                             ],
-    'nova-manage' => ['db sync'] }
-  )
-end
-
 # Helper for setting up tempest and upload the default cirros image.
 def _setup_tempest(client_opts)
   sh %(sudo chef-client #{client_opts} -E integration-#{@platform} -r 'recipe[openstack-integration-test::setup]')
@@ -199,9 +186,9 @@ task :integration => [:create_key, :berks_vendor] do
   _run_env_queries
 
   # Install mysql2 gem to avoid hitting mirror issues
-  sh %(wget https://rubygems.org/downloads/mysql2-0.4.4.gem)
+  sh %(wget https://rubygems.org/downloads/mysql2-0.4.5.gem)
   sh %(sudo apt-get install -y libmysqlclient-dev)
-  sh %(chef exec gem install -N ./mysql2-0.4.4.gem)
+  sh %(chef exec gem install -N ./mysql2-0.4.5.gem)
 
   # Three passes to make sure of cookbooks idempotency
   for i in 1..3
@@ -210,7 +197,6 @@ task :integration => [:create_key, :berks_vendor] do
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
     sh %(sudo chef-client #{client_opts} -E integration-#{@platform} -r 'role[minimal]')
     if i == 1
-      _setup_nova_cells
       _setup_tempest(client_opts)
       _setup_local_network
     end

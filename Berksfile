@@ -23,4 +23,4 @@ source 'https://supermarket.chef.io'
 end
 
 cookbook 'openstackclient', github: 'cloudbau/cookbook-openstackclient'
-cookbook 'statsd', github: 'att-cloud/cookbook-statsd'
+cookbook 'statsd', github: 'librato/statsd-cookbook'

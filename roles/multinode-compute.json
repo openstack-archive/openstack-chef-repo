@@ -1,5 +1,5 @@
 {
-  "name": "multi-node-compute",
+  "name": "multinode-compute",
   "description": "This will deploy a compute node for a scenarios with just compute and controller nodes",
   "json_class": "Chef::Role",
   "default_attributes": {

@@ -1,21 +1,18 @@
 {
-  "name": "multi-node-ubuntu16",
+  "name": "multinode-centos7",
   "cookbook_versions": {
   },
   "json_class": "Chef::Environment",
   "chef_type": "environment",
-  "default_attributes": {
-    "apache": {
-      "listen": []
-    },
-    "apt": {
-      "compile_time_update" : true
-    }
-  },
   "override_attributes": {
+    "mariadb": {
+      "mysqld": {
+        "lc_messages_dir": "/usr/share/mariadb"
+      }
+    },
     "openstack": {
-      "apt": {
-        "update_apt_cache": true
+      "yum": {
+        "update_yum_cache": true
       },
       "sysctl": {
         "net.ipv4.ip_forward": 1
@@ -33,7 +30,8 @@
           "compute-novnc": { "host": "192.168.101.60" },
           "orchestration-api": { "host": "192.168.101.60" },
           "orchestration-api-cfn": { "host": "192.168.101.60" },
-          "orchestration-api-cloudwatch": { "host": "192.168.101.60" }
+          "orchestration-api-cloudwatch": { "host": "192.168.101.60" },
+          "placement-api": { "host": "192.168.101.60" }
         },
         "internal": {
           "identity": { "host": "192.168.101.60" },
@@ -46,7 +44,8 @@
           "compute-novnc": { "host": "192.168.101.60" },
           "orchestration-api": { "host": "192.168.101.60" },
           "orchestration-api-cfn": { "host": "192.168.101.60" },
-          "orchestration-api-cloudwatch": { "host": "192.168.101.60" }
+          "orchestration-api-cloudwatch": { "host": "192.168.101.60" },
+          "placement-api": { "host": "192.168.101.60" }
         },
         "public": {
           "identity": { "host": "192.168.101.60" },
@@ -59,11 +58,13 @@
           "compute-novnc": { "host": "192.168.101.60" },
           "orchestration-api": { "host": "192.168.101.60" },
           "orchestration-api-cfn": { "host": "192.168.101.60" },
-          "orchestration-api-cloudwatch": { "host": "192.168.101.60" }
+          "orchestration-api-cloudwatch": { "host": "192.168.101.60" },
+          "placement-api": { "host": "192.168.101.60" }
         }
       },
+      "bind_interface": "enp0s8",
       "bind_service": {
-        "mq": { "host": "0.0.0.0" },
+        "mq": { "host": "192.168.101.60" },
         "main": {
           "identity": { "host": "0.0.0.0" }
         },
@@ -80,7 +81,8 @@
           "compute-novnc": { "host": "0.0.0.0" },
           "orchestration-api": { "host": "0.0.0.0" },
           "orchestration-api-cfn": { "host": "0.0.0.0" },
-          "orchestration-api-cloudwatch": { "host": "0.0.0.0" }
+          "orchestration-api-cloudwatch": { "host": "0.0.0.0" },
+          "placement-api": { "host": "0.0.0.0" }
         }
       },
       "dashboard": {
@@ -89,7 +91,7 @@
       "mq": {
         "user": "admin"
       },
-      "network":{
+      "network": {
         "plugins": {
           "ml2": {
             "conf": {
@@ -108,17 +110,17 @@
           "oslo_messaging_rabbit": { "rabbit_host": "192.168.101.60" },
           "ml2": { "tenant_network_types": "vxlan" }
         }
-      },
-      "image": {
-        "image_upload": true
-      },
-      "compute": {
-        "conf": {
-          "libvirt": {
-            "virt_type": "qemu"
-          },
-          "oslo_messaging_rabbit": { "rabbit_host": "192.168.101.60" }
-        }
+      }
+    },
+    "image": {
+      "image_upload": true
+    },
+    "compute": {
+      "conf": {
+        "libvirt": {
+          "virt_type": "qemu"
+        },
+        "oslo_messaging_rabbit": { "rabbit_host": "192.168.101.60" }
       }
     }
   }
