@@ -1,9 +1,9 @@
-# Databags
+# Data Bags
 
-Some basic information about the use of databags within this repo.
+Some basic information about the use of data bags within this repo.
 
 ```
-# Show the list of databags
+# Show the list of data bags
 $ chef exec knife  data bag list -z
 db_passwords
 secrets
@@ -43,21 +43,23 @@ $ chef exec knife data bag edit secrets dispersion_auth_user -z
 | service_passwords are set to "mypass" |
 | user_passwords are set to "mypass" |
 
-## Encrypted data bag secret
+## Encrypted Data Bag Secret
 The default secret is stored here `.chef/encrypted_data_bag_secret`
 and referenced by `.chef/knife.rb`.
 
-## Creating "new data_bags"
+## Creating New Data Bags
 
-If you would like to create a new set of data_bags, first you need to update your `encrypted_data_bag_secret` with something like the following:
+If you would like to create a new set of data bags, first you need to update
+your `encrypted_data_bag_secret` with something like the following:
 
 ```
 openssl rand -base64 512 | tr -d '\r\n' > encrypted_data_bag_secret
 ```
 
-### Database passwords
+### Database Passwords
 
-Then you need to create new data_bags for each of the databases you'll want to use, such as:
+Then you need to create new data bags for each of the databases you'll want to
+use, such as:
 
 An example json:
 ```json
@@ -80,11 +82,18 @@ chef exec knife data bag create db_passwords neutron --secret-file .chef/encrypt
 chef exec knife data bag create db_passwords nova --secret-file .chef/encrypted_data_bag_secret
 ```
 
-### Swift secrets
+### Swift Secrets
 
-If you're using swift, you'll need to update the attributes from [data_bags/secrets](data_bags/secrets), and the changes are [here](https://github.com/openstack/cookbook-openstack-object-storage/blob/master/README.md#attributes).
+    NOTE: Swift is currently not supported with the OpenStack cookbooks, so these
+    directions may or may not work.  If you would like to help maintain it,
+    please get in contact with the maintainer team.
 
-These are for anything after Juno's release. If you're doing something before Juno, please check that attributes.rb
+If you're using swift, you'll need to update the attributes from
+[data_bags/secrets](data_bags/secrets), and the changes are
+[here](https://github.com/openstack/cookbook-openstack-object-storage/blob/master/README.md#attributes).
+
+These are for anything after Juno's release. If you're doing something before
+Juno, please check that attributes.rb
 
 ```json
 {
@@ -98,7 +107,7 @@ chef exec knife data bag create secrets swift_hash_path_prefix --secret-file .ch
 chef exec knife data bag create secrets swift_hash_path_suffix --secret-file .chef/encrypted_data_bag_secret
 ```
 
-You'll want to create a new authkey, and dispersion keys:
+You'll want to create a new auth key, and dispersion keys:
 
 ```
 chef exec knife data bag create secrets swift_authkey --secret-file .chef/encrypted_data_bag_secret
@@ -106,7 +115,7 @@ chef exec knife data bag create secrets dispersion_auth_user --secret-file .chef
 chef exec knife data bag create secrets dispersion_auth_key --secret-file .chef/encrypted_data_bag_secret
 ```
 
-### Neutron secrets
+### Neutron Secrets
 
 Next you'll want to update your neutron metadata secret:
 
@@ -114,7 +123,7 @@ Next you'll want to update your neutron metadata secret:
 chef exec knife data bag create secrets neutron_metadata_secret --secret-file .chef/encrypted_data_bag_secret
 ```
 
-### Keystone secrets
+### Keystone Secrets
 
 You'll want to update your keystone identity bootstrap token:
 
@@ -122,7 +131,7 @@ You'll want to update your keystone identity bootstrap token:
 chef exec knife data bag create secrets openstack_idenitity_bootstrap_token --secret-file .chef/encrypted_data_bag_secret
 ```
 
-### Service passwords
+### Service Passwords
 
 How to update the service passwords:
 
@@ -144,7 +153,7 @@ chef exec knife data bag create service_passwords openstack-orchestration --secr
 chef exec knife data bag create service_passwords rbd --secret-file .chef/encrypted_data_bag_secret
 ```
 
-### User passwords
+### User Passwords
 
 If you would like to change the user passwords from `mypass`:
 
