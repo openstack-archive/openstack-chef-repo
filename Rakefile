@@ -51,9 +51,12 @@ desc "Blow everything away"
 task clean: [:destroy_all]
 
 # CI tasks
+require 'cookstyle'
 require 'rubocop/rake_task'
 desc 'Run RuboCop'
-RuboCop::RakeTask.new(:rubocop)
+RuboCop::RakeTask.new do |task|
+  task.options << "--display-cop-names"
+end
 
 desc "Validate data bags, environments and roles"
 task :json_check do

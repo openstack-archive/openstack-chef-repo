@@ -15,8 +15,6 @@ def version
   '0.1.0'
 end
 
-# rubocop:disable LineLength
-
 def run(command, verbose = true)
   puts "## Running command: [#{Dir.pwd}] $ #{command}"
   live_stream = STDOUT
@@ -41,13 +39,13 @@ def get_gerrit_user(user)
   user
 end
 
-def get_patch_info(user, patch) # rubocop:disable Metrics/MethodLength
+def get_patch_info(user, patch)
   puts "## Gathering information for patch: #{patch} with user: #{user}"
-  if user == 'jenkins'
-    patch_info = run("ssh -p 29418 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
-  else
-    patch_info = run("ssh -p 29418 #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
-  end
+  patch_info = if user == 'jenkins'
+                 run("ssh -p 29418 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
+               else
+                 run("ssh -p 29418 #{user}@review.openstack.org gerrit query --current-patch-set #{patch}", false)
+               end
   %r{^\s*project: openstack\/(?<patch_project>.*)$}i =~ patch_info
   /^\s*ref: (?<patch_ref>.*)$/i =~ patch_info
   abort "Error! Patch: #{patch} not valid" if patch_project.nil?
@@ -75,7 +73,7 @@ def run_tempest
   end
 end
 
-def run_basic_queries # rubocop:disable Metrics/MethodLength
+def run_basic_queries
   puts '## Starting basic query tests'
   {
     'nova-manage' => ['version', 'db version'],
@@ -86,7 +84,7 @@ def run_basic_queries # rubocop:disable Metrics/MethodLength
     'keystone' => %w(--version user-list endpoint-list role-list service-list tenant-list),
     'cinder-manage' => ['version list', 'db version'],
     'cinder' => %w(--version list),
-    'rabbitmqctl' => %w(cluster_status)
+    'rabbitmqctl' => %w(cluster_status),
   }.each do |cli, commands|
     commands.each do |command|
       Dir.chdir('vms') do
@@ -149,7 +147,7 @@ LONGDESC
   option :keep, aliases: :k, default: false, type: :boolean, banner: ' Keep the environment, do not run \"rake destroy_machines\".'
   option :username, aliases: :u, banner: ' Gerrit user name used to fetch a patch if tool cannot automatically find it in git config.'
   option :skip, aliases: :s, banner: ' Skip all source changes, just run converge and tests again.  For development after manually tweaking a node.'
-  def test # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, CyclomaticComplexity, Metrics/PerceivedComplexity
+  def test
     puts "## Starting repo test version: #{version} environment: #{options[:env]} on os: #{options[:os]}"
     ENV['REPO_OS'] = options[:os]
 

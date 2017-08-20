@@ -11,9 +11,7 @@ env = 'allinone-centos7' if ENV['REPO_OS'].to_s.include?('centos')
 
 # make sure your ethernet interface matches preferred_interfaces, or override
 # with OS_BRIDGE
-
-# rubocop:disable LineLength
-preferred_interfaces = ['Ethernet', 'eth0', 'enp3s0', 'Wi-Fi',
+preferred_interfaces = ['Ethernet', 'eth0', 'enp3s0', 'enp30s0', 'Wi-Fi',
                         'Thunderbolt 1', 'Thunderbolt 2', 'Centrino']
 host_interfaces = `VBoxManage list bridgedifs | grep ^Name`
                   .gsub(/Name:\s+/, '').split("\n")
@@ -39,18 +37,19 @@ options = {
       ':forwarded_port, guest: 6080, host: 6080',
       ':forwarded_port, guest: 8773, host: 8773',
       ':forwarded_port, guest: 8774, host: 8774',
-      ':forwarded_port, guest: 35357, host: 35357'
-    ]
+      ':forwarded_port, guest: 35357, host: 35357',
+    ],
   },
   vagrant_config: <<-EOF
     config.vm.provision "chef_solo" do |chef|
-      chef.version = "12.21.3"
+      chef.version = "12.21.4"
       chef.channel = "stable"
     end
     config.vm.provider "virtualbox" do |v|
       v.memory = 8192
       v.cpus = 4
       v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+      v.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
     config.vm.define "controller" do |cont|

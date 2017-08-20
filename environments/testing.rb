@@ -8,36 +8,36 @@ override_attributes(
     'server_debian_password' => 'root',
     'server_repl_password' => 'root',
     'allow_remote_root' => true,
-    'root_network_acl' => '%'
+    'root_network_acl' => '%',
   },
   'openstack' => {
     'auth' => {
-      'validate_certs' => false
+      'validate_certs' => false,
     },
     'block-storage' => {
       'syslog' => {
-        'use' => false
+        'use' => false,
       },
       'api' => {
-        'ratelimit' => 'False'
+        'ratelimit' => 'False',
       },
       'debug' => true,
       'image_api_chef_role' => 'os-image',
       'identity_service_chef_role' => 'os-identity',
-      'rabbit_server_chef_role' => 'os-ops-messaging'
+      'rabbit_server_chef_role' => 'os-ops-messaging',
     },
     'compute' => {
       'syslog' => {
-        'use' => false
+        'use' => false,
       },
       'libvirt' => {
-        'bind_interface' => 'eth0'
+        'bind_interface' => 'eth0',
       },
       'novnc_proxy' => {
-        'bind_interface' => 'eth0'
+        'bind_interface' => 'eth0',
       },
       'xvpvnc_proxy' => {
-        'bind_interface' => 'eth0'
+        'bind_interface' => 'eth0',
       },
       'image_api_chef_role' => 'os-image',
       'identity_service_chef_role' => 'os-identity',
@@ -45,44 +45,44 @@ override_attributes(
       'rabbit_server_chef_role' => 'os-ops-messaging',
       'ratelimit' => { # Disable ratelimiting so Tempest doesn't have issues.
         'api' => {
-          'enabled' => false
+          'enabled' => false,
         },
         'volume' => {
-          'enabled' => false
-        }
+          'enabled' => false,
+        },
       },
       'network' => {
-        'fixed_range' => '10.0.0.0/8'
+        'fixed_range' => '10.0.0.0/8',
       },
       'networks' => [
-      ]
+      ],
     },
     'db' => {
       'bind_interface' => 'eth0',
       'compute' => {
-        'host' => '10.0.3.10'
+        'host' => '10.0.3.10',
       },
       'identity' => {
-        'host' => '10.0.3.10'
+        'host' => '10.0.3.10',
       },
       'image' => {
-        'host' => '10.0.3.10'
+        'host' => '10.0.3.10',
       },
       'network' => {
-        'host' => '10.0.3.10'
+        'host' => '10.0.3.10',
       },
       'volume' => {
-        'host' => '10.0.3.10'
+        'host' => '10.0.3.10',
       },
       'dashboard' => {
-        'host' => '10.0.3.10'
+        'host' => '10.0.3.10',
       },
       'telemetry' => {
-        'host' => '10.0.3.10'
+        'host' => '10.0.3.10',
       },
       'orchestration' => {
-        'host' => '10.0.3.10'
-      }
+        'host' => '10.0.3.10',
+      },
     },
     'developer_mode' => true,
     'endpoints' => {
@@ -90,92 +90,92 @@ override_attributes(
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '8774',
-        'path' => '/v2/%(tenant_id)s'
+        'path' => '/v2/%(tenant_id)s',
       },
       'compute-ec2-admin' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '8773',
-        'path' => '/services/Admin'
+        'path' => '/services/Admin',
       },
       'compute-ec2-api' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '8773',
-        'path' => '/services/Cloud'
+        'path' => '/services/Cloud',
       },
       'compute-xvpvnc' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '6081',
-        'path' => '/console'
+        'path' => '/console',
       },
       'compute-novnc' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '6080',
-        'path' => '/vnc_auto.html'
+        'path' => '/vnc_auto.html',
       },
       'image-api' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '9292',
-        'path' => '/v2'
+        'path' => '/v2',
       },
       'image-registry' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '9191',
-        'path' => '/v2'
+        'path' => '/v2',
       },
       'identity-api' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '5000',
-        'path' => '/v2.0'
+        'path' => '/v2.0',
       },
       'identity-admin' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '35357',
-        'path' => '/v2.0'
+        'path' => '/v2.0',
       },
       'volume-api' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '8776',
-        'path' => '/v1/%(tenant_id)s'
+        'path' => '/v1/%(tenant_id)s',
       },
       'telemetry-api' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '8777',
-        'path' => '/v1'
+        'path' => '/v1',
       },
       'network-api' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '9696',
-        'path' => '/v2'
+        'path' => '/v2',
       },
       'orchestration-api' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '8004',
-        'path' => '/v1/%(tenant_id)s'
+        'path' => '/v1/%(tenant_id)s',
       },
       'orchestration-api-cfn' => {
         'host' => '10.0.3.11',
         'scheme' => 'http',
         'port' => '8000',
-        'path' => '/v1'
-      }
+        'path' => '/v1',
+      },
     },
     'identity' => {
       'admin_user' => 'ksadmin',
       'bind_interface' => 'eth0',
       'catalog' => {
-        'backend' => 'templated'
+        'backend' => 'templated',
       },
       'debug' => true,
       'rabbit_server_chef_role' => 'os-ops-messaging',
@@ -186,11 +186,11 @@ override_attributes(
                     netadmin
                     sysadmin),
       'syslog' => {
-        'use' => false
+        'use' => false,
       },
       'tenants' => %w(admin service demo),
       'token' => {
-        'backend' => 'memcache'
+        'backend' => 'memcache',
       },
       'users' => {
         'ksadmin' => {
@@ -199,15 +199,15 @@ override_attributes(
           'roles' => {
             # Each key is the role name, each value is a list of tenants
             'admin' => [
-              'admin'
+              'admin',
             ],
             'keystone_admin' => [
-              'admin'
+              'admin',
             ],
             'keystone_service_admin' => [
-              'admin'
-            ]
-          }
+              'admin',
+            ],
+          },
         },
         'demo' => {
           'password' => 'demo',
@@ -215,51 +215,51 @@ override_attributes(
           'roles' => {
             # Each key is the role name, each value is a list of tenants
             'sysadmin' => [
-              'demo'
+              'demo',
             ],
             'netadmin' => [
-              'demo'
+              'demo',
             ],
             'member' => [
-              'demo'
-            ]
-          }
-        }
-      }
+              'demo',
+            ],
+          },
+        },
+      },
     },
     'image' => {
       'api' => {
-        'bind_interface' => 'eth0'
+        'bind_interface' => 'eth0',
       },
       'debug' => true,
       'identity_service_chef_role' => 'os-identity',
       'rabbit_server_chef_role' => 'os-ops-messaging',
       'registry' => {
-        'bind_interface' => 'eth0'
+        'bind_interface' => 'eth0',
       },
       'syslog' => {
-        'use' => false
+        'use' => false,
       },
       'upload_image' => {
-        'cirros' => 'http://hypnotoad/cirros-0.3.0-x86_64-disk.img'
+        'cirros' => 'http://hypnotoad/cirros-0.3.0-x86_64-disk.img',
       },
       'upload_images' => [
-        'cirros'
-      ]
+        'cirros',
+      ],
     },
     'memcached_servers' => [
-      '10.0.3.10:11211'
+      '10.0.3.10:11211',
     ],
     'mq' => {
       'bind_interface' => 'eth0',
       'host' => '10.0.3.10',
       'user' => 'guest',
-      'vhost' => '/nova'
-    }
+      'vhost' => '/nova',
+    },
   },
   'queue' => {
     'host' => '10.0.3.10',
     'user' => 'guest',
-    'vhost' => '/nova'
+    'vhost' => '/nova',
   }
 )

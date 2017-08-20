@@ -12,7 +12,9 @@
     },
     "openstack": {
       "yum": {
-        "update_yum_cache": true
+        "update_yum_cache": true,
+        "uri": "https://trunk.rdoproject.org/centos7-master/current-passed-ci/",
+        "gpgcheck": false
       },
       "sysctl": {
         "net.ipv4.ip_forward": 1
@@ -118,6 +120,7 @@
     "compute": {
       "conf": {
         "libvirt": {
+          "cpu_type": "none",
           "virt_type": "qemu"
         },
         "oslo_messaging_rabbit": { "rabbit_host": "192.168.101.60" }
