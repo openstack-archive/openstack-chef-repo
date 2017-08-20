@@ -12,6 +12,10 @@
       }
     },
     "openstack": {
+      "yum": {
+        "uri": "https://trunk.rdoproject.org/centos7-master/current-passed-ci/",
+        "gpgcheck": false
+      },
       "telemetry": {
         "conf": {
           "DEFAULT": {
@@ -19,6 +23,10 @@
           }
         }
       },
+      "dashboard": {
+        "server_hostname": "localhost"
+      },
+      "memcached_servers": [ "127.0.0.1:11211" ],
       "mq": {
         "user": "admin"
       },
@@ -35,6 +43,7 @@
       "compute": {
         "conf": {
           "libvirt": {
+            "cpu_mode": "none",
             "virt_type": "qemu"
           }
         }

@@ -11,8 +11,6 @@ env = 'multinode-centos7' if ENV['REPO_OS'].to_s.include?('centos')
 
 # make sure your ethernet interface matches preferred_interfaces, or override
 # with OS_BRIDGE
-
-# rubocop:disable LineLength
 preferred_interfaces = ['Ethernet', 'eth0', 'enp3s0', 'Wi-Fi',
                         'Thunderbolt 1', 'Thunderbolt 2', 'Centrino']
 host_interfaces = `VBoxManage list bridgedifs | grep ^Name`
@@ -42,12 +40,12 @@ controller_options = {
       ':forwarded_port, guest: 6080, host: 6080',
       ':forwarded_port, guest: 8773, host: 8773',
       ':forwarded_port, guest: 8774, host: 8774',
-      ':forwarded_port, guest: 35357, host: 35357'
-    ]
+      ':forwarded_port, guest: 35357, host: 35357',
+    ],
   },
   vagrant_config: <<-EOH
     config.vm.provision "chef_solo" do |chef|
-      chef.version = "12.21.3"
+      chef.version = "12.21.4"
       chef.channel = "stable"
     end
     config.vm.provider "virtualbox" do |v|
@@ -79,12 +77,12 @@ network_options = {
     'vm.box' => os,
     'vm.network' => [
       ':private_network, {ip: "192.168.100.70"}',
-      ':private_network, {ip: "192.168.101.70"}'
-    ]
+      ':private_network, {ip: "192.168.101.70"}',
+    ],
   },
   vagrant_config: <<-EOH
     config.vm.provision "chef_solo" do |chef|
-      chef.version = "12.21.3"
+      chef.version = "12.21.4"
       chef.channel = "stable"
     end
     config.vm.provider "virtualbox" do |v|
@@ -119,12 +117,12 @@ machine_batch do
         'vm.box' => os,
         'vm.network' => [
           ":private_network, {ip: '192.168.100.#{61 + number}'}",
-          ":private_network, {ip: '192.168.101.#{62 + number}'}"
-        ]
+          ":private_network, {ip: '192.168.101.#{62 + number}'}",
+        ],
       },
       vagrant_config: <<-EOH
         config.vm.provision "chef_solo" do |chef|
-          chef.version = "12.21.3"
+          chef.version = "12.21.4"
           chef.channel = "stable"
         end
         config.vm.provider "virtualbox" do |v|

@@ -45,6 +45,7 @@
       "compute": {
         "conf": {
           "libvirt": {
+            "cpu_type": "none",
             "virt_type": "qemu"
           }
         }
