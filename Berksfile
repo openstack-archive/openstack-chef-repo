@@ -22,5 +22,6 @@ source 'https://supermarket.chef.io'
 
 end
 
+cookbook 'openstack-dns', github: 'cloudbau/cookbook-openstack-dns'
 cookbook 'openstackclient', github: 'cloudbau/cookbook-openstackclient'
 cookbook 'statsd', github: 'librato/statsd-cookbook'

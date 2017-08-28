@@ -1,0 +1,9 @@
+{
+  "id": "openstack-dns",
+  "openstack-dns": {
+    "encrypted_data": "cAQ5NkN0QmxwaCJzjsSuCC8Jx0T8+QX0xzW+BA8SBs4=\n",
+    "iv": "YyNxLvFwWUOibDiNEqC2Fw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}
