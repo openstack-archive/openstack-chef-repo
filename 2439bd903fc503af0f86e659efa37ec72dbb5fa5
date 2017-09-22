@@ -1,0 +1,10 @@
+Code-Review+1: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Samuel Cassiba <s@cassiba.com>
+Workflow+1: Christoph Albers <c.albers@x-ion.de>
+Workflow+1: Samuel Cassiba <s@cassiba.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 22 Sep 2017 21:23:20 +0000
+Reviewed-on: https://review.openstack.org/503687
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
