@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    - name: run integration
+      shell:
+        cmd: chef exec rake integration
+        chdir: '{{ ansible_user_dir }}/src/git.openstack.org/openstack/openstack-chef-repo'
+      environment:
+        WORKSPACE: '{{ ansible_user_dir }}'
