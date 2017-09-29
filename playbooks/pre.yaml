@@ -1,0 +1,21 @@
+- hosts: all
+  roles:
+    - bindep
+  vars:
+    bindep_file: /home/zuul/src/git.openstack.org/openstack/openstack-chef-repo/bindep.txt
+
+- hosts: all
+  vars:
+    chefdk: chefdk_1.6.1-1_amd64.deb
+  tasks:
+  - name: Purge some packages
+    shell: apt-get -y purge libvirt0 libvirt-dev python-libvirt
+    become: yes
+  - name: Fetch chefdk package
+    get_url:
+      dest: /tmp/{{ chefdk }}
+      url: https://packages.chef.io/stable/ubuntu/16.04/{{ chefdk }}
+  - name: Install chefdk package
+    shell: dpkg -i /tmp/{{ chefdk }}
+    become: yes
+

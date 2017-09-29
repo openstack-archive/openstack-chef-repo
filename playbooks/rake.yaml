@@ -1,0 +1,8 @@
+- hosts: all
+  roles:
+    - revoke-sudo
+  tasks:
+    - name: run rake tests
+      shell:
+        cmd: chef exec rake
+        chdir: '{{ zuul.project.src_dir }}'
