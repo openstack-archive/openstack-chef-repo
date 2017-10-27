@@ -168,8 +168,8 @@ def _setup_local_network # rubocop:disable Metrics/MethodLength
 end
 
 # Helper for setting up tempest and upload the default cirros image.
-def _setup_tempest(client_opts)
-  sh %(sudo chef-client #{client_opts} -E integration-#{@platform} -r 'recipe[openstack-integration-test::setup]')
+def _setup_tempest(client_opts, log_dir)
+  sh %(sudo chef-client #{client_opts} -E integration-#{@platform} -r 'recipe[openstack-integration-test::setup]' > #{log_dir}/chef-client-setup-tempest.txt 2>&1 )
 end
 
 def _save_logs(prefix, log_dir)
@@ -184,6 +184,7 @@ end
 desc "Integration test on Infra"
 task :integration => [:create_key, :berks_vendor] do
   log_dir = ENV['WORKSPACE']+'/logs'
+  sh %(mkdir #{log_dir})
   # This is a workaround for allowing chef-client to run in local mode
   sh %(sudo mkdir -p /etc/chef && sudo cp .chef/encrypted_data_bag_secret /etc/chef/openstack_data_bag_secret)
   _run_env_queries
@@ -198,9 +199,9 @@ task :integration => [:create_key, :berks_vendor] do
     begin
     puts "####### Pass #{i}"
     # Kick off chef client in local mode, will converge OpenStack right on the gate job "in place"
-    sh %(sudo chef-client #{client_opts} -E integration-#{@platform} -r 'role[minimal]')
+    sh %(sudo chef-client #{client_opts} -E integration-#{@platform} -r 'role[minimal]' > #{log_dir}/chef-client-pass#{i}.txt 2>&1 )
     if i == 1
-      _setup_tempest(client_opts)
+      _setup_tempest(client_opts, log_dir)
       _setup_local_network
     end
     _run_basic_queries

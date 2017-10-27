@@ -1,0 +1,7 @@
+- hosts: all
+  tasks:
+    - name: Collect logs
+      synchronize:
+        dest: '{{ zuul.executor.log_root }}/{{ inventory_hostname }}'
+        mode: pull
+        src: '{{ ansible_user_dir }}/logs/'
