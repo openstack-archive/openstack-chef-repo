@@ -3,17 +3,17 @@
     parent: base
     description: Run rake tests with openstack-chef-repo
     required-projects: openstack/openstack-chef-repo
-    pre-run: playbooks/pre
-    run: playbooks/rake
+    pre-run: playbooks/pre.yaml
+    run: playbooks/rake.yaml
 
 - job:
     name: openstack-chef-repo-integration
     parent: base
     description: Run integration tests with openstack-chef-repo
     required-projects: openstack/openstack-chef-repo
-    pre-run: playbooks/pre
-    run: playbooks/integration
-    post-run: playbooks/post
+    pre-run: playbooks/pre.yaml
+    run: playbooks/integration.yaml
+    post-run: playbooks/post.yaml
     timeout: 3600
 
 - project-template:
