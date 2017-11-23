@@ -1,0 +1,9 @@
+Code-Review+1: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Jan Klare <j.klare@cloudbau.de>
+Workflow+1: Samuel Cassiba <s@cassiba.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 23 Nov 2017 20:07:19 +0000
+Reviewed-on: https://review.openstack.org/522620
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/ocata
