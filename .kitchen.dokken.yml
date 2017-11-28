@@ -1,8 +1,11 @@
 ---
 driver:
   name: dokken
-  privileged: true # because Docker and SystemD
-  chef_version: 12
+  privileged: true
+  chef_version: current
+  volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    - /sys/fs/selinux:/sys/fs/selinux:rw
 
 transport:
   name: dokken
@@ -15,39 +18,26 @@ verifier:
   name: inspec
 
 platforms:
-  # from environments/allinone-ubuntu16.json
   - name: ubuntu-16.04
     driver:
       image: dokken/ubuntu-16.04
       pid_one_command: /bin/systemd
-    attributes:
-      apache:
-        listen: []
-      openstack:
-        is_release: true
-        apt:
-          update_apt_cache: true
-        dashboard:
-          server_hostname: localhost
-        memcached_servers: ['127.0.0.1:11211']
-  # from environments/allinone-centos7.json
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+        - RUN /usr/bin/apt-get install apt-transport-https lsb-release procps net-tools sudo -y
   - name: centos-7
     platform: rhel
     driver:
       image: dokken/centos-7
       pid_one_command: /usr/lib/systemd/systemd
-    attributes:
-      openstack:
-        is_release: true
-      mariadb:
-        mysqld:
-          lc_messages_dir: '/usr/share/mariadb'
+      intermediate_instructions:
+        - RUN yum -y install which net-tools
 
 suites:
   - name: default
     run_list:
       # run_list taken from roles/allinone.json
-      - recipe[build-essential]
+      - recipe[selinux::disabled]
       - recipe[openstack-common]
       - recipe[openstack-common::logging]
       - recipe[openstack-common::sysctl]
@@ -105,10 +95,17 @@ suites:
     verifier:
       inspec_tests:
         - test/tempest/default
-  # from environments/allinone-ubuntu16.json, environments/allinone-centos7.json
+  # from environments/allinone.json
     attributes:
-      # Attributes copied from environments/integration-ubuntu16.json
+      # Attributes copied from environments/integration.json
+      apache:
+        listen: []
       openstack:
+        is_release: true
+        apt:
+          update_apt_cache: true
+        dashboard:
+          server_hostname: localhost
         telemetry:
           conf:
             DEFAULT:
@@ -116,6 +113,7 @@ suites:
         mq:
           user: admin
         network:
+          tun_network_bridge_interface: eth0
           conf:
             DEFAULT:
               service_plugins: router
@@ -124,6 +122,7 @@ suites:
         compute:
           conf:
             libvirt:
+              cpu_type: none
               virt_type: qemu
         secret:
           key_path: /opt/kitchen/encrypted_data_bag_secret
