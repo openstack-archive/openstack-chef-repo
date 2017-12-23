@@ -1,6 +1,6 @@
 {
-  "name": "integration-ubuntu16",
-  "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the vagrantfile-allinone vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using neutron for the networking component, and the openvswitch neutron plugin",
+  "name": "integration",
+  "description": "Chef environment file for building OpenStack in CI settings. Certain Tempest services are disabled in this scenario",
   "cookbook_versions": {
   },
   "json_class": "Chef::Environment",
@@ -8,13 +8,11 @@
   "default_attributes": {
     "apache": {
       "listen": []
-    },
-    "apt": {
-      "compile_time_update" : true
     }
   },
   "override_attributes": {
     "openstack": {
+      "is_release": true,
       "apt": {
         "update_apt_cache": true
       },
@@ -41,7 +39,7 @@
       "mq": {
         "user": "admin"
       },
-      "network":{
+      "network": {
         "conf": {
           "DEFAULT": {
             "service_plugins": "router"
@@ -54,6 +52,7 @@
       "compute": {
         "conf": {
           "libvirt": {
+            "cpu_type": "none",
             "virt_type": "qemu"
           }
         }
