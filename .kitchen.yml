@@ -1,3 +1,6 @@
+<%
+public_ip = "10.0.0.81"
+%>
 ---
 driver:
   name: vagrant
@@ -87,6 +90,9 @@ suites:
       - recipe[openstack-integration-test::create_network]
       - recipe[openstack-integration-test::setup]
       - recipe[openstack-integration-test::run_tempest]
+    driver_config:
+      network:
+      - ["private_network", {ip: <%= public_ip %>}]
     verifier:
       inspec_tests:
         - test/tempest/default
