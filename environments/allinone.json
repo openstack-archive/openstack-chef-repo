@@ -1,20 +1,20 @@
 {
-  "name": "allinone-centos7",
+  "name": "allinone",
   "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the vagrantfile-allinone vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using neutron for the networking component, and the openvswitch neutron plugin",
   "cookbook_versions": {
   },
   "json_class": "Chef::Environment",
   "chef_type": "environment",
+  "default_attributes": {
+    "apache": {
+      "listen": []
+    }
+  },
   "override_attributes": {
-    "mariadb": {
-      "mysqld": {
-        "lc_messages_dir": "/usr/share/mariadb"
-      }
-    },
     "openstack": {
-      "yum": {
-        "uri": "https://trunk.rdoproject.org/centos7-master/current-passed-ci/",
-        "gpgcheck": false
+      "is_release": true,
+      "apt": {
+        "update_apt_cache": "true"
       },
       "telemetry": {
         "conf": {
@@ -26,7 +26,6 @@
       "dashboard": {
         "server_hostname": "localhost"
       },
-      "memcached_servers": [ "127.0.0.1:11211" ],
       "mq": {
         "user": "admin"
       },
@@ -43,7 +42,7 @@
       "compute": {
         "conf": {
           "libvirt": {
-            "cpu_mode": "none",
+            "cpu_type": "none",
             "virt_type": "qemu"
           }
         }

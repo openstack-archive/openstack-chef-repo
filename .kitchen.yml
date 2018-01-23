@@ -4,6 +4,10 @@ driver:
   customize:
     memory: 12000
 
+client_rb:
+  treat_deprecation_warnings_as_errors: true
+  resource_cloning: false
+
 provisioner:
   name: chef_zero
   # You may wish to disable always updating cookbooks in CI or other testing
@@ -11,7 +15,7 @@ provisioner:
   # For example:
   #   always_update_cookbooks: <%= !ENV['CI'] %>
   always_update_cookbooks: true
-  require_chef_omnibus: 12
+  require_chef_omnibus: 13
   # Copy secret to /tmp/kitchen on test VM. Kitchen tries to gather secrets
   # before any recipes had a chance to run -> we cannot use a recipe to put the
   # secrets file in place.
@@ -21,31 +25,13 @@ verifier:
   name: inspec
 
 platforms:
-  # from environments/allinone-ubuntu16.json
   - name: ubuntu-16.04
-    attributes:
-      apache:
-        listen: []
-      apt:
-        compile_time_update: true
-      openstack:
-        apt:
-          update_apt_cache: true
-        dashboard:
-          server_hostname: localhost
-        memcached_servers: ['127.0.0.1:11211']
-  # from environments/allinone-centos7.json
-  - name: centos-7.3
-    attributes:
-      mariadb:
-        mysqld:
-          lc_messages_dir: '/usr/share/mariadb'
+  - name: centos-7.4
 
 suites:
   - name: default
     run_list:
       # run_list taken from roles/allinone.json
-      - recipe[build-essential]
       - recipe[openstack-common]
       - recipe[openstack-common::logging]
       - recipe[openstack-common::sysctl]
@@ -106,7 +92,15 @@ suites:
   # from environments/allinone-ubuntu16.json, environments/allinone-centos7.json
     attributes:
       # Attributes copied from environments/integration-ubuntu16.json
+      apache:
+        listen: []
       openstack:
+        is_release: true
+        apt:
+          update_apt_cache: true
+        dashboard:
+          server_hostname: localhost
+        memcached_servers: ['127.0.0.1:11211']
         telemetry:
           conf:
             DEFAULT:
@@ -122,6 +116,7 @@ suites:
         compute:
           conf:
             libvirt:
+              cpu_type: none
               virt_type: qemu
         secret:
           key_path: /tmp/kitchen/encrypted_data_bag_secret
