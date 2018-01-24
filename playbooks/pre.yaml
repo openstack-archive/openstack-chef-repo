@@ -6,8 +6,8 @@
 
 - hosts: all
   vars:
-    chefdk: chefdk_1.6.1-1_amd64.deb
-    chefdkrel: 1.6.1
+    chefdk: chefdk_2.3.4-1_amd64.deb
+    chefdkrel: 2.3.4
   tasks:
   - name: Fetch chefdk package
     get_url:
