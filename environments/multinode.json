@@ -1,5 +1,5 @@
 {
-  "name": "multinode-ubuntu16",
+  "name": "multinode",
   "cookbook_versions": {
   },
   "json_class": "Chef::Environment",
@@ -8,8 +8,10 @@
     "apache": {
       "listen": []
     },
-    "apt": {
-      "compile_time_update" : true
+    "yum": {
+      "epel": {
+        "enabled": false
+      }
     }
   },
   "override_attributes": {

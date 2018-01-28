@@ -22,6 +22,9 @@ provisioner:
     # Attributes copied from environments/multinode.json
     apache:
       listen: []
+    yum:
+      epel:
+        enabled: false
     openstack:
       is_release: true
       apt:
