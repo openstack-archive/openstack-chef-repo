@@ -100,6 +100,9 @@ suites:
       # Attributes copied from environments/integration.json
       apache:
         listen: []
+      yum:
+        epel:
+          enabled: false
       openstack:
         is_release: true
         apt:

@@ -8,6 +8,11 @@
   "default_attributes": {
     "apache": {
       "listen": []
+    },
+    "yum": {
+      "epel": {
+        "enabled": false
+      }
     }
   },
   "override_attributes": {
