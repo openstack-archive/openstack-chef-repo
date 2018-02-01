@@ -1,0 +1,8 @@
+Code-Review+2: Samuel Cassiba <s@cassiba.com>
+Workflow+1: Samuel Cassiba <s@cassiba.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 01 Feb 2018 05:03:39 +0000
+Reviewed-on: https://review.openstack.org/539791
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
