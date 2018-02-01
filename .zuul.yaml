@@ -28,6 +28,5 @@
         - openstack-chef-repo-integration
 
 - project:
-    name: openstack/openstack-chef-repo
     templates:
       - openstack-chef-repo-jobs
