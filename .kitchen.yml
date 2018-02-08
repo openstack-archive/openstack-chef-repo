@@ -15,7 +15,7 @@ provisioner:
   # For example:
   #   always_update_cookbooks: <%= !ENV['CI'] %>
   always_update_cookbooks: true
-  require_chef_omnibus: 13
+  require_chef_omnibus: '13.6.4' # workaround for chef/chef#6784
   # Copy secret to /tmp/kitchen on test VM. Kitchen tries to gather secrets
   # before any recipes had a chance to run -> we cannot use a recipe to put the
   # secrets file in place.
