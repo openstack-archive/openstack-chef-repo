@@ -1,6 +1,6 @@
 {
   "name": "minimal",
-  "description": "This will deploy a minimal set of services for Openstack Compute to function on a single box for integration testing.",
+  "description": "This will deploy a minimal set of services for Openstack Compute to function for integration testing.",
   "json_class": "Chef::Role",
   "default_attributes": {
   },
@@ -8,7 +8,6 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[build-essential]",
     "recipe[openstack-common]",
     "recipe[openstack-common::logging]",
     "recipe[openstack-common::sysctl]",
@@ -44,7 +43,10 @@
     "recipe[openstack-compute::vncproxy]",
     "recipe[openstack-compute::compute]",
     "recipe[openstack-compute::identity_registration]",
-    "recipe[openstack-image::image_upload]"
+    "recipe[openstack-image::image_upload]",
+    "recipe[openstack-integration-test::create_network]",
+    "recipe[openstack-integration-test::setup]",
+    "recipe[openstack-integration-test::run_tempest]"
   ],
   "env_run_lists": {
   }
