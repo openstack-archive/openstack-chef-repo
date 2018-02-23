@@ -4,7 +4,6 @@
 .bundle
 .vagrant
 berks-cookbooks/
-Berksfile.lock
 clients/
 cookbooks/
 Gemfile.lock
@@ -14,3 +13,4 @@ vms/
 .chef/validator.pem
 .chef/local-mode-cache/
 .project
+Berksfile.lock
