@@ -1,0 +1,9 @@
+Code-Review+2: Christoph Albers <c.albers@x-ion.de>
+Code-Review+2: Lance Albertson <lance@osuosl.org>
+Workflow+1: Lance Albertson <lance@osuosl.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 01 Mar 2018 19:11:35 +0000
+Reviewed-on: https://review.openstack.org/547510
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/stable/pike
