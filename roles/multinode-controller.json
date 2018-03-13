@@ -46,7 +46,6 @@
     "recipe[openstack-orchestration::engine]",
     "recipe[openstack-orchestration::api]",
     "recipe[openstack-orchestration::api-cfn]",
-    "recipe[openstack-orchestration::api-cloudwatch]",
     "recipe[openstack-orchestration::identity_registration]",
     "recipe[openstack-image::image_upload]",
     "recipe[openstack-dashboard::horizon]",

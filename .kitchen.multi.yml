@@ -13,7 +13,8 @@ provisioner:
   # For example:
   #   always_update_cookbooks: <%= !ENV['CI'] %>
   always_update_cookbooks: true
-  require_chef_omnibus: '13.6.4' # workaround for chef/chef#6784
+  product_name: chef
+  product_version: 13
   # Copy secret to /tmp/kitchen on test VM. Kitchen tries to gather secrets
   # before any recipes had a chance to run -> we cannot use a recipe to put the
   # secrets file in place.
@@ -31,9 +32,9 @@ provisioner:
         update_apt_cache: true
       bind_service:
         db:
-          host: '192.168.101.80'
+          host: '192.168.101.60'
         mq:
-          host: '192.168.101.80'
+          host: '192.168.101.60'
         main:
           identity:
             host: '0.0.0.0'
@@ -47,8 +48,6 @@ provisioner:
             host: '0.0.0.0'
           compute-metadata-api:
             host: '0.0.0.0'
-          compute-novnc:
-            host: '0.0.0.0'
           image_api:
             host: '0.0.0.0'
           image_registry:
@@ -58,8 +57,6 @@ provisioner:
           orchestration-api:
             host: '0.0.0.0'
           orchestration-api-cfn:
-            host: '0.0.0.0'
-          orchestration-api-cloudwatch:
             host: '0.0.0.0'
           placement-api:
             host: '0.0.0.0'
@@ -72,84 +69,72 @@ provisioner:
         server_hostname: controller.example.net
       endpoints:
         db:
-          host: '192.168.101.80'
+          host: '192.168.101.60'
         mq:
-          host: '192.168.101.80'
+          host: '192.168.101.60'
         admin:
           block-storage:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           compute-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           compute-metadata-api:
-            host: '192.168.101.80'
-          compute-novnc:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           identity:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           image_api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           image_registry:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           network:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           orchestration-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           orchestration-api-cfn:
-            host: '192.168.101.80'
-          orchestration-api-cloudwatch:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           placement-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
         internal:
           block-storage:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           compute-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           compute-metadata-api:
-            host: '192.168.101.80'
-          compute-novnc:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           identity:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           image_api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           image_registry:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           network:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           orchestration-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           orchestration-api-cfn:
-            host: '192.168.101.80'
-          orchestration-api-cloudwatch:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           placement-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
         public:
           block-storage:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           compute-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           compute-metadata-api:
-            host: '192.168.101.80'
-          compute-novnc:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           identity:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           image_api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           image_registry:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           network:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           orchestration-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           orchestration-api-cfn:
-            host: '192.168.101.80'
-          orchestration-api-cloudwatch:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
           placement-api:
-            host: '192.168.101.80'
+            host: '192.168.101.60'
       image:
         image_upload: true
       memcached_servers: ['127.0.0.1:11211']
@@ -168,7 +153,7 @@ provisioner:
                 vni_ranges: '65537:69999'
                 vxlan_group: '239.1.1.40'
         transport_url:
-          rabbit_host: '192.168.101.80'
+          rabbit_host: '192.168.101.60'
         tun_network_bridge_interface: 'eth2'
       secret:
         key_path: /tmp/kitchen/encrypted_data_bag_secret
@@ -187,29 +172,7 @@ platforms:
   - name: centos-7.4
 
 suites:
-  - name: network
-    customize:
-      cpus: 2
-      memory: 2048
-    driver:
-      network:
-        - ["private_network", {ip: "192.168.100.70"}]
-        - ["private_network", {ip: "192.168.101.70"}]
-    run_list:
-      - recipe[openstack-common]
-      - recipe[openstack-common::logging]
-      - recipe[openstack-common::sysctl]
-      - recipe[openstack-common::python]
-      - recipe[openstack-network::plugin_config]
-      - recipe[openstack-network::ml2_openvswitch]
-      - recipe[openstack-network]
-      - recipe[openstack-network::openvswitch]
-      - recipe[openstack-network::_bridge_config_example]
-      - recipe[openstack-network::l3_agent]
-      - recipe[openstack-network::dhcp_agent]
-      - recipe[openstack-network::metadata_agent]
-      - recipe[openstack-network::openvswitch_agent]
-  - name: compute
+  - name: compute1
     customize:
       cpus: 2
       memory: 2048
@@ -223,14 +186,28 @@ suites:
       - recipe[openstack-common::sysctl]
       - recipe[openstack-common::python]
       - recipe[openstack-compute::compute]
+  - name: compute2
+    customize:
+      cpus: 2
+      memory: 2048
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.100.62"}]
+        - ["private_network", {ip: "192.168.101.62"}]
+    run_list:
+      - recipe[openstack-common]
+      - recipe[openstack-common::logging]
+      - recipe[openstack-common::sysctl]
+      - recipe[openstack-common::python]
+      - recipe[openstack-compute::compute]
   - name: controller
     customize:
       cpus: 4
-      memory: 4096
+      memory: 8192
     driver:
       network:
-        - ["private_network", {ip: "192.168.100.80"}]
-        - ["private_network", {ip: "192.168.101.80"}]
+        - ["private_network", {ip: "192.168.100.60"}]
+        - ["private_network", {ip: "192.168.101.60"}]
     run_list:
       # run_list taken from roles/multinode-controller.json
       - recipe[openstack-common]
@@ -248,9 +225,15 @@ suites:
       - recipe[openstack-image::api]
       - recipe[openstack-image::registry]
       - recipe[openstack-image::identity_registration]
+      - recipe[openstack-network::plugin_config]
+      - recipe[openstack-network::ml2_openvswitch]
       - recipe[openstack-network]
-      - recipe[openstack-network::ml2_core_plugin]
       - recipe[openstack-network::openvswitch]
+      - recipe[openstack-network::_bridge_config_example]
+      - recipe[openstack-network::l3_agent]
+      - recipe[openstack-network::dhcp_agent]
+      - recipe[openstack-network::metadata_agent]
+      - recipe[openstack-network::openvswitch_agent]
       - recipe[openstack-compute::nova-setup]
       - recipe[openstack-compute::identity_registration]
       - recipe[openstack-compute::conductor]
@@ -271,7 +254,6 @@ suites:
       - recipe[openstack-orchestration::engine]
       - recipe[openstack-orchestration::api]
       - recipe[openstack-orchestration::api-cfn]
-      - recipe[openstack-orchestration::api-cloudwatch]
       - recipe[openstack-orchestration::identity_registration]
       - recipe[openstack-image::image_upload]
       - recipe[openstack-dashboard::horizon]

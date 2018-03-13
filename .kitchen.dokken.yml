@@ -2,7 +2,7 @@
 driver:
   name: dokken
   privileged: true
-  chef_version: '13.6.4' # workaround for chef/chef#6784
+  chef_version: 13
   volumes:
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
     - /sys/fs/selinux:/sys/fs/selinux:rw
@@ -84,7 +84,6 @@ suites:
       - recipe[openstack-orchestration::engine]
       - recipe[openstack-orchestration::api]
       - recipe[openstack-orchestration::api-cfn]
-      - recipe[openstack-orchestration::api-cloudwatch]
       - recipe[openstack-orchestration::identity_registration]
       - recipe[openstack-image::image_upload]
       - recipe[openstack-dashboard::horizon]
