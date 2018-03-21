@@ -20,15 +20,15 @@ Architectures and a sane example on how to start with OpenStack using Chef.
 
 With the `master` branch of the cookbooks, which is currently tied to the base
 OpenStack Ocata release, this supports deploying to Ubuntu 16.04 and CentOS 7
-in monolithic, or allinone, and non-HA multinode configurations with Neutron. The cookbooks support a fully
-HA configuration, but we do not test for that as there are far numerous paths to
+in monolithic, or allinone, and non-HA multinode configurations with Neutron.
+The cookbooks support a fully HA configuration, but we do not test for that as
+there are far numerous paths to
 HA.
 
 ## Prerequisites
 
-- [ChefDK](https://downloads.chef.io/chef-dk/) 1.0 or later for a relatively
-  recent Berkshelf
-- [Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or later with
+- [ChefDK](https://downloads.chef.io/chef-dk/) 2.0 or later
+- [Vagrant](https://www.vagrantup.com/downloads.html) 2.0 or later with
   [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or some other provider
 
 ### Getting the Code (this repo)
@@ -50,7 +50,7 @@ For each deployment model, there is a corresponding file in the doc/ directory.
 Please review that for specific details and additional setup that might be
 required before deploying the cloud.
 
-## Rake Deploy Commands
+## Kitchen Deploy Commands
 
 These commands will produce various OpenStack cluster configurations, the
 simplest being a monolithic Compute Controller with Neutron (allinone). These
@@ -58,41 +58,39 @@ deployments are not intended to be production-ready, and will need adaptation
 to your environment. This is intended for development and proof of concept
 deployments.
 
-For CentOS, set the environment variable REPO_OS=centos7. Ubuntu is the default.
+## Kitchen Test Scenarios
+
+### Initialize the ChefDK
+```bash
+$ eval "$(chef shell-init bash)"
+```
 
 ### Everything self-contained (allinone)
 ```bash
 # allinone with Neutron
-$ chef exec rake allinone
+$ kitchen test [centos|ubuntu]
 ```
 
 ### Access the machine
 
 ```bash
-$ cd vms
-$ vagrant ssh controller
+$ kitchen login [centos|ubuntu]
 $ sudo su -
 ```
 
 ### Multiple nodes (non-HA)
 ```bash
-# Multinode with Neutron (1 controller + 1 network + 2 compute nodes)
-$ chef exec rake multi_node
+# Multinode with Neutron (1 controller + 2 compute nodes)
+$ export KITCHEN_YAML=.kitchen.multi.yaml
+$ kitchen converge [centos|ubuntu|all]
+$ kitchen verify [centos|ubuntu|all]
+$ kitchen destroy [centos|ubuntu|all]
  ```
 
 ### Access the Controller
 
 ```bash
-$ cd vms
-$ vagrant ssh controller
-$ sudo su -
-```
-
-### Access the Network Node
-
-```bash
-$ cd vms
-$ vagrant ssh network
+$ kitchen login controller-[centos|ubuntu]
 $ sudo su -
 ```
 
@@ -100,9 +98,9 @@ $ sudo su -
 
 ```bash
 $ cd vms
-$ vagrant ssh compute1
+$ kitchen login compute1
 # OR
-$ vagrant ssh compute2
+$ kitchen login compute2
 $ sudo su -
 ```
 
