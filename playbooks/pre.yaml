@@ -6,13 +6,13 @@
 
 - hosts: all
   vars:
-    chefdk: chefdk_2.3.4-1_amd64.deb
-    chefdkrel: 2.3.4
+    release: 2.4.17
+    chefdk: chefdk_{{ release }}-1_amd64.deb
   tasks:
   - name: Fetch chefdk package
     get_url:
       dest: /tmp/{{ chefdk }}
-      url: https://packages.chef.io/files/stable/chefdk/{{ chefdkrel }}/ubuntu/16.04/{{ chefdk }}
+      url: https://packages.chef.io/files/stable/chefdk/{{ release }}/ubuntu/16.04/{{ chefdk }}
   - name: Install chefdk package
     shell: dpkg -i /tmp/{{ chefdk }}
     become: yes
