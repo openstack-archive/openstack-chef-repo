@@ -2,10 +2,11 @@
 driver:
   name: dokken
   privileged: true
-  chef_version: 13
+  chef_version: 14
   volumes:
-    - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    - /sys/fs/selinux:/sys/fs/selinux:rw
+    - /sys/fs/cgroup:/sys/fs/cgroup
+    - /lib/modules:/lib/modules:ro
+    - /run/openvswitch:/run/openvswitch
 
 transport:
   name: dokken
@@ -22,19 +23,31 @@ platforms:
     driver:
       image: dokken/ubuntu-16.04
       pid_one_command: /bin/systemd
-      intermediate_instructions:
-        - RUN /usr/bin/apt-get update
-        - RUN /usr/bin/apt-get install apt-transport-https lsb-release procps net-tools sudo -y
   - name: centos-7
     platform: rhel
     driver:
       image: dokken/centos-7
       pid_one_command: /usr/lib/systemd/systemd
-      intermediate_instructions:
-        - RUN yum -y install which net-tools
 
 suites:
   - name: default
+    driver:
+      ports:
+        - '80'
+        - '8080'
+        - '443'
+        - '3460'
+        - '3306'
+        - '5672'
+        - '5000'
+        - '35357'
+        - '8774'
+        - '8776'
+        - '9292'
+        - '9696'
+        - '8000'
+        - '8003'
+        - '8004'
     run_list:
       # run_list taken from roles/allinone.json
       - recipe[selinux::disabled]
