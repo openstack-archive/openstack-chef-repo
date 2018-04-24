@@ -5,6 +5,7 @@
     required-projects: openstack/openstack-chef-repo
     pre-run: playbooks/pre.yaml
     run: playbooks/rake.yaml
+    timeout: 2700
 
 - job:
     name: openstack-chef-repo-integration
