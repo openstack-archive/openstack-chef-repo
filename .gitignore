@@ -14,3 +14,4 @@ vms/
 .chef/validator.pem
 .chef/local-mode-cache/
 .project
+.tox
