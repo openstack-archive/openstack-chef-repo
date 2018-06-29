@@ -30,4 +30,5 @@
 
 - project:
     templates:
+      - build-openstack-sphinx-docs-python3
       - openstack-chef-repo-jobs
