@@ -4,7 +4,7 @@ client_opts = "--force-formatter --no-color -z --config #{current_dir}/.chef/kni
 task default: ['test']
 
 desc 'Default gate tests to run'
-task test: [:rubocop, :berks_vendor, :json_check]
+task test: %i(rubocop berks_vendor json_check)
 
 def run_command(command)
   if File.exist?('Gemfile.lock')
@@ -80,19 +80,22 @@ def _run_env_queries
   _run_commands('basic common env queries', {
                   'uname' => ['-a'],
                   'pwd' => [''],
-                  'env' => [''] },
-    false)
+                  'env' => [''],
+                },
+                false)
   case @platform
   when 'ubuntu16'
     _run_commands('basic debian env queries', {
                     'ifconfig' => [''],
-                    'cat' => ['/etc/apt/sources.list'] },
-      false)
+                    'cat' => ['/etc/apt/sources.list'],
+                  },
+                  false)
   when 'centos7'
     _run_commands('basic rhel env queries', {
                     '/usr/sbin/ip' => ['addr'],
-                    'cat' => ['/etc/yum.repos.d/*'] },
-    false)
+                    'cat' => ['/etc/yum.repos.d/*'],
+                  },
+                  false)
   end
 end
 
@@ -132,7 +135,7 @@ def _save_logs(prefix, log_dir)
 end
 
 desc 'Integration test on Infra'
-task integration: [:create_key, :berks_vendor] do
+task integration: %i(create_key berks_vendor) do
   log_dir = ENV['WORKSPACE'] + '/logs'
   sh %(mkdir #{log_dir})
   # This is a workaround for allowing chef-client to run in local mode
