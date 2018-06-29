@@ -1,0 +1,8 @@
+Code-Review+2: Samuel Cassiba <s@cassiba.com>
+Workflow+1: Christoph Albers <c.albers@x-ion.de>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 29 Jun 2018 09:45:26 +0000
+Reviewed-on: https://review.openstack.org/578761
+Project: openstack/openstack-chef-repo
+Branch: refs/heads/master
