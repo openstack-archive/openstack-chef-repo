@@ -1,10 +1,10 @@
 - job:
-    name: openstack-chef-repo-rake
+    name: openstack-chef-repo-delivery
     parent: base
-    description: Run rake tests with openstack-chef-repo
+    description: Run Chef Delivery tests with openstack-chef-repo
     required-projects: openstack/openstack-chef-repo
     pre-run: playbooks/pre.yaml
-    run: playbooks/rake.yaml
+    run: playbooks/delivery.yaml
     timeout: 2700
 
 - job:
@@ -21,11 +21,11 @@
     name: openstack-chef-repo-jobs
     check:
       jobs:
-        - openstack-chef-repo-rake
+        - openstack-chef-repo-delivery
         - openstack-chef-repo-integration
     gate:
       jobs:
-        - openstack-chef-repo-rake
+        - openstack-chef-repo-delivery
         - openstack-chef-repo-integration
 
 - project:
