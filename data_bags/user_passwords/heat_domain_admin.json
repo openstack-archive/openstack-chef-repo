@@ -1,9 +1,10 @@
 {
   "id": "heat_domain_admin",
   "heat_domain_admin": {
-    "encrypted_data": "SZTU7h+6bN4LkDPJsID3lbMTrSI/HVjIWWK297vHdko=\n",
-    "iv": "1jT5GMYireHkFEV0C3AhMw==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "IKsB83OypkqYkR89/Rfw4lCi3FjA72FWGw==\n",
+    "iv": "MTk0WWG+Yk85Z1C7\n",
+    "auth_tag": "+W4IH3x9+ZFCTl+ZTJF7LQ==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }

@@ -1,12 +1,6 @@
 {
   "name": "multinode-controller",
   "description": "This will deploy a controller node for a scenarios with just compute and controller nodes",
-  "json_class": "Chef::Role",
-  "default_attributes": {
-  },
-  "override_attributes": {
-  },
-  "chef_type": "role",
   "run_list": [
     "recipe[build-essential]",
     "recipe[openstack-common]",
@@ -50,8 +44,5 @@
     "recipe[openstack-image::image_upload]",
     "recipe[openstack-dashboard::horizon]",
     "recipe[openstack-dashboard::neutron-lbaas-dashboard]"
-  ],
-  "env_run_lists": {
-  }
+  ]
 }
-

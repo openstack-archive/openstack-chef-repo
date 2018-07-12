@@ -1,12 +1,10 @@
 {
   "name": "multinode",
-  "cookbook_versions": {
-  },
-  "json_class": "Chef::Environment",
-  "chef_type": "environment",
   "default_attributes": {
     "apache": {
-      "listen": []
+      "listen": [
+
+      ]
     },
     "yum": {
       "epel": {
@@ -26,68 +24,166 @@
         "net.ipv4.ip_forward": 1
       },
       "endpoints": {
-        "db": { "host": "192.168.101.60" },
-        "mq": { "host": "192.168.101.60" },
+        "db": {
+          "host": "192.168.101.60"
+        },
+        "mq": {
+          "host": "192.168.101.60"
+        },
         "admin": {
-          "identity": { "host": "192.168.101.60" },
-          "network": { "host": "192.168.101.60" },
-          "image_api": { "host": "192.168.101.60" },
-          "image_registry": { "host": "192.168.101.60" },
-          "block-storage": { "host": "192.168.101.60" },
-          "compute-api": { "host": "192.168.101.60" },
-          "compute-metadata-api": { "host": "192.168.101.60" },
-          "compute-novnc": { "host": "192.168.101.60" },
-          "orchestration-api": { "host": "192.168.101.60" },
-          "orchestration-api-cfn": { "host": "192.168.101.60" },
-          "placement-api": { "host": "192.168.101.60" }
+          "identity": {
+            "host": "192.168.101.60"
+          },
+          "network": {
+            "host": "192.168.101.60"
+          },
+          "image_api": {
+            "host": "192.168.101.60"
+          },
+          "image_registry": {
+            "host": "192.168.101.60"
+          },
+          "block-storage": {
+            "host": "192.168.101.60"
+          },
+          "compute-api": {
+            "host": "192.168.101.60"
+          },
+          "compute-metadata-api": {
+            "host": "192.168.101.60"
+          },
+          "compute-novnc": {
+            "host": "192.168.101.60"
+          },
+          "orchestration-api": {
+            "host": "192.168.101.60"
+          },
+          "orchestration-api-cfn": {
+            "host": "192.168.101.60"
+          },
+          "placement-api": {
+            "host": "192.168.101.60"
+          }
         },
         "internal": {
-          "identity": { "host": "192.168.101.60" },
-          "network": { "host": "192.168.101.60" },
-          "image_api": { "host": "192.168.101.60" },
-          "image_registry": { "host": "192.168.101.60" },
-          "block-storage": { "host": "192.168.101.60" },
-          "compute-api": { "host": "192.168.101.60" },
-          "compute-metadata-api": { "host": "192.168.101.60" },
-          "compute-novnc": { "host": "192.168.101.60" },
-          "orchestration-api": { "host": "192.168.101.60" },
-          "orchestration-api-cfn": { "host": "192.168.101.60" },
-          "placement-api": { "host": "192.168.101.60" }
+          "identity": {
+            "host": "192.168.101.60"
+          },
+          "network": {
+            "host": "192.168.101.60"
+          },
+          "image_api": {
+            "host": "192.168.101.60"
+          },
+          "image_registry": {
+            "host": "192.168.101.60"
+          },
+          "block-storage": {
+            "host": "192.168.101.60"
+          },
+          "compute-api": {
+            "host": "192.168.101.60"
+          },
+          "compute-metadata-api": {
+            "host": "192.168.101.60"
+          },
+          "compute-novnc": {
+            "host": "192.168.101.60"
+          },
+          "orchestration-api": {
+            "host": "192.168.101.60"
+          },
+          "orchestration-api-cfn": {
+            "host": "192.168.101.60"
+          },
+          "placement-api": {
+            "host": "192.168.101.60"
+          }
         },
         "public": {
-          "identity": { "host": "192.168.101.60" },
-          "network": { "host": "192.168.101.60" },
-          "image_api": { "host": "192.168.101.60" },
-          "image_registry": { "host": "192.168.101.60" },
-          "block-storage": { "host": "192.168.101.60" },
-          "compute-api": { "host": "192.168.101.60" },
-          "compute-metadata-api": { "host": "192.168.101.60" },
-          "compute-novnc": { "host": "192.168.101.60" },
-          "orchestration-api": { "host": "192.168.101.60" },
-          "orchestration-api-cfn": { "host": "192.168.101.60" },
-          "placement-api": { "host": "192.168.101.60" }
+          "identity": {
+            "host": "192.168.101.60"
+          },
+          "network": {
+            "host": "192.168.101.60"
+          },
+          "image_api": {
+            "host": "192.168.101.60"
+          },
+          "image_registry": {
+            "host": "192.168.101.60"
+          },
+          "block-storage": {
+            "host": "192.168.101.60"
+          },
+          "compute-api": {
+            "host": "192.168.101.60"
+          },
+          "compute-metadata-api": {
+            "host": "192.168.101.60"
+          },
+          "compute-novnc": {
+            "host": "192.168.101.60"
+          },
+          "orchestration-api": {
+            "host": "192.168.101.60"
+          },
+          "orchestration-api-cfn": {
+            "host": "192.168.101.60"
+          },
+          "placement-api": {
+            "host": "192.168.101.60"
+          }
         }
       },
       "bind_service": {
-        "db": { "host": "192.168.101.60" },
-        "mq": { "host": "192.168.101.60" },
+        "db": {
+          "host": "192.168.101.60"
+        },
+        "mq": {
+          "host": "192.168.101.60"
+        },
         "main": {
-          "identity": { "host": "0.0.0.0" }
+          "identity": {
+            "host": "0.0.0.0"
+          }
         },
         "admin": {
-          "identity": { "host": "0.0.0.0" }
+          "identity": {
+            "host": "0.0.0.0"
+          }
         },
         "all": {
-          "network": { "host": "0.0.0.0" },
-          "image_api": { "host": "0.0.0.0" },
-          "image_registry": { "host": "0.0.0.0" },
-          "block-storage": { "host": "0.0.0.0" },
-          "compute-api": { "host": "0.0.0.0" },
-          "compute-metadata-api": { "host": "0.0.0.0" },
-          "compute-novnc": { "host": "0.0.0.0" },
-          "orchestration-api": { "host": "0.0.0.0" },
-          "orchestration-api-cfn": { "host": "0.0.0.0" },
-          "placement-api": { "host": "0.0.0.0" }
+          "network": {
+            "host": "0.0.0.0"
+          },
+          "image_api": {
+            "host": "0.0.0.0"
+          },
+          "image_registry": {
+            "host": "0.0.0.0"
+          },
+          "block-storage": {
+            "host": "0.0.0.0"
+          },
+          "compute-api": {
+            "host": "0.0.0.0"
+          },
+          "compute-metadata-api": {
+            "host": "0.0.0.0"
+          },
+          "compute-novnc": {
+            "host": "0.0.0.0"
+          },
+          "orchestration-api": {
+            "host": "0.0.0.0"
+          },
+          "orchestration-api-cfn": {
+            "host": "0.0.0.0"
+          },
+          "placement-api": {
+            "host": "0.0.0.0"
+          }
         }
       },
       "dashboard": {
@@ -101,7 +197,7 @@
           "ml2_openvswitch": {
             "conf": {
               "ml2_type_vxlan": {
-                "vni_ranges":  "65537:69999",
+                "vni_ranges": "65537:69999",
                 "vxlan_group": "239.1.1.40"
               }
             }
@@ -112,8 +208,12 @@
           "DEFAULT": {
             "service_plugins": "router"
           },
-          "transport_url": { "rabbit_host": "192.168.101.60" },
-          "ml2": { "tenant_network_types": "vxlan" }
+          "transport_url": {
+            "rabbit_host": "192.168.101.60"
+          },
+          "ml2": {
+            "tenant_network_types": "vxlan"
+          }
         }
       },
       "image": {
@@ -125,7 +225,9 @@
             "cpu_type": "none",
             "virt_type": "qemu"
           },
-          "transport_url": { "rabbit_host": "192.168.101.60" }
+          "transport_url": {
+            "rabbit_host": "192.168.101.60"
+          }
         }
       }
     }

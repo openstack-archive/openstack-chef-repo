@@ -1,9 +1,10 @@
 {
   "id": "nova",
   "nova": {
-    "encrypted_data": "HNKWBIqI97m4kKUzmJPMhFOs88674fiRoZJutZalsx4=\n",
-    "iv": "uZn6Fma8PxAJgyMnqEUk0A==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "MIFXMvRR5B2c7eVZEB5NgSTij0cnCQiI3w==\n",
+    "iv": "AlH0YzOhOQTSOM5z\n",
+    "auth_tag": "fMDkg7q+SvsBQ72Hezp/kg==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }

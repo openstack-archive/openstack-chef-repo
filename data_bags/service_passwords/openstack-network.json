@@ -1,9 +1,10 @@
 {
   "id": "openstack-network",
   "openstack-network": {
-    "encrypted_data": "6PRSDau1ejZO4sPg4Veat9+IVwNQuymSngdlzbdE1dg=\n",
-    "iv": "rRd3JGflP2YKY98m4/VbmQ==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "pMz/lN8yVtGPxx4k4pz3WevMBVDSmyZQ+Q==\n",
+    "iv": "T6r9Z1f9DEdteOYx\n",
+    "auth_tag": "goz/UtgFspuvVWYqkhCt+Q==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }

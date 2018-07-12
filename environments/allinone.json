@@ -1,13 +1,11 @@
 {
   "name": "allinone",
   "description": "Environment used in testing the upstream cookbooks and reference Chef repository with vagrant. To be used with the vagrantfile-allinone vagrantfile. Defines the necessary attributes for a working all-in-one openstack deployment, using neutron for the networking component, and the openvswitch neutron plugin",
-  "cookbook_versions": {
-  },
-  "json_class": "Chef::Environment",
-  "chef_type": "environment",
   "default_attributes": {
     "apache": {
-      "listen": []
+      "listen": [
+
+      ]
     },
     "yum": {
       "epel": {

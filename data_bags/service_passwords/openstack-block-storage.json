@@ -1,9 +1,10 @@
 {
   "id": "openstack-block-storage",
   "openstack-block-storage": {
-    "encrypted_data": "YdF234b5aNc1WeOGwpp1cr6fTSNTSABzD82YmUpyur0=\n",
-    "iv": "mBXAd1QNCtT25s+PfcQiQQ==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "s2yk+YVL4l7s65EOhLjYnrQBsLVCTVvs+g==\n",
+    "iv": "6NTjfnI0Wk554zoy\n",
+    "auth_tag": "HQyedh4UeMmuG2FbzFGA8w==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }
