@@ -8,6 +8,7 @@ source 'https://supermarket.chef.io'
   common
   compute
   dashboard
+  dns
   identity
   image
   network
