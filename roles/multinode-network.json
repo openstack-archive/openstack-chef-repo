@@ -1,12 +1,6 @@
 {
   "name": "multinode-network",
   "description": "This will deploy a controller node for a scenarios with just compute and controller nodes",
-  "json_class": "Chef::Role",
-  "default_attributes": {
-  },
-  "override_attributes": {
-  },
-  "chef_type": "role",
   "run_list": [
     "recipe[build-essential]",
     "recipe[openstack-common]",
@@ -17,8 +11,5 @@
     "recipe[openstack-network::dhcp_agent]",
     "recipe[openstack-network::metadata_agent]",
     "recipe[openstack-network::openvswitch_agent]"
-  ],
-  "env_run_lists": {
-  }
+  ]
 }
-

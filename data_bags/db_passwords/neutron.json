@@ -1,9 +1,10 @@
 {
   "id": "neutron",
   "neutron": {
-    "encrypted_data": "edZRMU5X79BDYryGz1Hl31Xm5pj5zPLvtTLEfFVxJIQ=\n",
-    "iv": "REvGeth2ZknDbbX7B1GVzQ==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "EaNzE0hWsOOKRUh1ODZafzJcKlcMiqtmDA==\n",
+    "iv": "mr9ad3WFuUjbtYeu\n",
+    "auth_tag": "rakN7H8CqWc6lyz7L98idA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }

@@ -1,13 +1,11 @@
 {
   "name": "integration",
   "description": "Chef environment file for building OpenStack in CI settings. Certain Tempest services are disabled in this scenario",
-  "cookbook_versions": {
-  },
-  "json_class": "Chef::Environment",
-  "chef_type": "environment",
   "default_attributes": {
     "apache": {
-      "listen": []
+      "listen": [
+
+      ]
     },
     "yum": {
       "epel": {
@@ -40,7 +38,9 @@
       "dashboard": {
         "server_hostname": "localhost"
       },
-      "memcached_servers": [ "127.0.0.1:11211" ],
+      "memcached_servers": [
+        "127.0.0.1:11211"
+      ],
       "mq": {
         "user": "admin"
       },

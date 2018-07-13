@@ -1,9 +1,10 @@
 {
   "id": "openstack-orchestration",
   "openstack-orchestration": {
-    "encrypted_data": "0HpyFflTF4UHGDtq3koSMGkLOZ7XAKrp0fw2D0rKSt0=\n",
-    "iv": "xRgADbFNtnNdPrRHGdI1vg==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "AONHb8jlwFnR6wYYUPs2UW9z8YPbPJRYSg==\n",
+    "iv": "38Q/5TBLSllprHIr\n",
+    "auth_tag": "pp7lNVqpAPTwyZTVicB/dA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }

@@ -1,9 +1,10 @@
 {
   "id": "designate",
   "designate": {
-    "encrypted_data": "xi4j48o5eQ2looCkeVgPl64DFUPR82XlzymgNDESo2o=\n",
-    "iv": "WqlxhMdS6OojDRzPBL7NXw==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "rq7N+DifbtXHQiC8s0x8Z0jm5JodjtBJzg==\n",
+    "iv": "E5z9mnkCS0WG9f6W\n",
+    "auth_tag": "Q7nnYiGaRRfGEgHTznN10A==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }

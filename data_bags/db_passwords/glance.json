@@ -1,9 +1,10 @@
 {
   "id": "glance",
   "glance": {
-    "encrypted_data": "cKEvY45RhENrlXhmJmB10L9JRCUGHo4Adug57T/YXQU=\n",
-    "iv": "iLGiFduEUtD/XMoETLujBQ==\n",
-    "version": 1,
-    "cipher": "aes-256-cbc"
+    "encrypted_data": "lYZcqw2GLqLDglm9ONo0xk+CYhDocWLXAw==\n",
+    "iv": "uZLZMCwhJrc6R+6l\n",
+    "auth_tag": "JrQJQWBQDOa32p3bmAHK7Q==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
   }
 }
