@@ -6,7 +6,7 @@
 
 - hosts: all
   vars:
-    release: 2.4.17
+    release: 2.5.3
     chefdk: chefdk_{{ release }}-1_amd64.deb
   tasks:
   - name: Fetch chefdk package
