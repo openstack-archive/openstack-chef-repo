@@ -15,3 +15,5 @@ vms/
 .chef/local-mode-cache/
 .project
 .tox
+doc/build
+*.egg-info

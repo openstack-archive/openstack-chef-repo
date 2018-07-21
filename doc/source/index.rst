@@ -1,5 +1,5 @@
-Welcome to the Chef OpenStack Guide!
-=====================================
+Chef OpenStack Documentation
+============================
 
 The Chef cookbooks for OpenStack automate the building, operation and
 consumption of OpenStack cloud deployments.

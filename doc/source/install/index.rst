@@ -1,5 +1,5 @@
-Chef Openstack Install Guide
-============================
+Install Guide
+=============
 
 .. toctree::
    :maxdepth: 2
