@@ -18,9 +18,9 @@ source 'https://supermarket.chef.io'
   if Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
   else
-    cookbook "openstack-#{cookbook}", git: "https://git.openstack.org/openstack/cookbook-openstack-#{cookbook}"
+    cookbook "openstack-#{cookbook}", git: "https://git.openstack.org/openstack/cookbook-openstack-#{cookbook}", branch: 'stable/queens'
   end
 end
 
-cookbook 'openstackclient', git: 'https://git.openstack.org/openstack/cookbook-openstackclient'
+cookbook 'openstackclient', git: 'https://git.openstack.org/openstack/cookbook-openstackclient', branch: 'stable/queens'
 cookbook 'statsd', github: 'librato/statsd-cookbook'
