@@ -33,5 +33,5 @@ Unmaintained Cookbooks
 * `Object Storage <https://git.openstack.org/cgit/openstack/cookbook-openstack-object-storage/>`_ (*Swift*)
 * `Bare Metal <https://git.openstack.org/cgit/openstack/cookbook-openstack-bare-metal/>`_ (*Ironic*)
 * `Data Processing <https://git.openstack.org/cgit/openstack/cookbook-openstack-data-processing/>`_ (*Sahara*)
-* `Application Catalog <https://git.openstack.org/cgit/opentack/cookbook-openstack-application-catalog/>`_ (*Murano*)
+* `Application Catalog <https://git.openstack.org/cgit/openstack/cookbook-openstack-application-catalog/>`_ (*Murano*)
 * `Database as a Service <https://git.openstack.org/cgit/openstack/cookbook-openstack-database/>`_ (*Trove*)
