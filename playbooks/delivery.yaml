@@ -1,8 +1,0 @@
-- hosts: all
-  roles:
-    - revoke-sudo
-  tasks:
-    - name: run delivery local
-      shell:
-        cmd: chef exec delivery local all
-        chdir: '{{ zuul.project.src_dir }}'
